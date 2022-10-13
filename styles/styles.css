@@ -1,0 +1,101 @@
+/* prettier-ignore */
+:root {
+  --fg:#ffffff;
+  --bg:#000000;
+  --gray-100: #F2F2F2;
+  --gray-200: #E0E0E0;
+  --gray-300: #9D9D9D;
+  --gray-400: #828282;
+  --gray-500: #454545;
+  --gray-600: #333333;
+  --gray-700: #121212;
+  --accent:#7BEF87;
+  --breadboard-tile-size: calc(100vw / 4);
+  --font-mono: 'Azeret Mono', monospace;
+  --w-0: 0px;
+  --w-1: 0.25rem;
+  --w-2: 0.5rem;
+  --w-3: 0.75rem;
+  --w-4: 1rem;
+  --w-5: 1.25rem;
+  --w-6: 1.5rem;
+  --w-7: 1.75rem;
+  --w-8: 2rem;
+  --w-9: 2.25rem;
+  --w-10: 2.5rem;
+  --w-11: 2.75rem;
+  --w-12: 3rem;
+  --w-px: 1px;
+  --h-0: 0px;
+  --h-1: 0.25rem;
+  --h-2: 0.5rem;
+  --h-3: 0.75rem;
+  --h-4: 1rem;
+  --h-5: 1.25rem;
+  --h-6: 1.5rem;
+  --h-7: 1.75rem;
+  --h-8: 2rem;
+  --h-9: 2.25rem;
+  --h-10: 2.5rem;
+  --h-11: 2.75rem;
+  --h-12: 3rem;
+  --h-px: 1px;
+  --text-3xl: 1.75rem;
+  --line-height-xs: 1.1;
+  --line-height-sm: 1.375;
+  --rounded-3xl: 1.25rem;
+  --rounded-4xl: 2.5rem;
+  --dock-item-size: 6rem;
+}
+
+/* @TODO: Add breakpoints system */
+@media only screen and (min-width: 900px) {
+  :root {
+    --breadboard-tile-size: calc(100vw / 20);
+    --dock-item-size: 8rem;
+  }
+}
+@media only screen and (min-width: 1000px) {
+  :root {
+    --dock-item-size: 10rem;
+  }
+}
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+body {
+  font-family: font-body-55, sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: font-title-regular, sans-serif;
+}
+pre,
+code {
+  font-family: var(--font-mono);
+}
+
+::selection {
+  color: var(--accent);
+  text-shadow: 2px 1px 5px var(--accent);
+}
+
+/* @TODO: where to keep Vue transition animations */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
