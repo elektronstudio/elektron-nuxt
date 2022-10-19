@@ -2,7 +2,6 @@
 // Page data
 const { lang } = useLang();
 const { data: frontpage, error: frontpageError } = await useFrontPage();
-
 const muted = ref<boolean | undefined>(true);
 
 const handleMute = () => {
@@ -25,8 +24,6 @@ const {
   urgency,
   error,
 } = await useUpcomingEvent();
-
-console.log(event1.value);
 
 // TODO Add this filter to project/event loader
 // const upcomingEventSoon = computed(() => {
@@ -79,7 +76,7 @@ console.log(event1.value);
       </Transition>
       <EventPreview
         v-if="dialogState && event1"
-        :key="event1.slug"
+        :key="event1.projectLink"
         :event="event1"
         :dialog-state="dialogState"
         :is-event="false"

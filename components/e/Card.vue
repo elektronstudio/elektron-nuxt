@@ -1,31 +1,15 @@
 <script setup lang="ts">
-import EImage from "./EImage.vue";
-
-type Size = {
-  url: string;
-  width: number;
-  height: number;
-};
-
-type Image = {
-  sizes: Size[];
-  alt?: string;
-};
+import { MediaItem } from "~~/types";
 
 type Props = {
-  thumbnail?: Image;
+  media?: MediaItem;
 };
 
-const { thumbnail } = defineProps<Props>();
+const { media } = defineProps<Props>();
 </script>
 <template>
   <article class="ECard">
-    <EImage
-      v-if="thumbnail"
-      :alt="thumbnail?.alt"
-      :sizes="thumbnail.sizes"
-      class="thumbnail"
-    />
+    <EImage v-if="media" :media="media" class="thumbnail" />
     <section class="content">
       <header v-if="$slots.header">
         <slot name="header" />

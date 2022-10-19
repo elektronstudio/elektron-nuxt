@@ -1,24 +1,16 @@
 <script setup lang="ts">
-import EBox from "./EBox.vue";
-import EImage from "./EImage.vue";
-
-type Size = {
-  url: string;
-  width: number;
-  height: number;
-};
+import { MediaItem } from "~~/types";
 
 type Props = {
-  sizes: Size[];
-  alt?: string;
+  media: MediaItem;
 };
 
-const { sizes, alt = "" } = defineProps<Props>();
+const { media } = defineProps<Props>();
 </script>
 
 <template>
   <EBox class="EImageCard" layout="columns1">
-    <EImage :sizes="sizes" :alt="alt" />
+    <EImage :media="media" />
   </EBox>
 </template>
 

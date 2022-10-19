@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { formatMarkdown } from "../utils";
-
 type Card = {
   id: number;
   __component:
@@ -11,7 +9,9 @@ type Card = {
     | "content.image-card"
     | "content.external-link";
   title: string;
+  titles: [string, string];
   content: string;
+  contents: [string, string];
   name?: string;
   url?: string;
   layout?: "columns1" | "columns2" | "columns3" | "columns4";
@@ -30,6 +30,7 @@ type Props = {
   cards: Card[];
 };
 
+const { lang } = useLang();
 const { cards } = defineProps<Props>();
 </script>
 
@@ -40,13 +41,13 @@ const { cards } = defineProps<Props>();
         v-if="item.__component === 'content.title'"
         el="h2"
         size="lg"
-        :title="item.title"
+        :title="item.titles[lang]"
       />
       <EAboutPageCard
         v-else-if="item.__component === 'content.about-card'"
         :layout="item.layout"
-        :title="item.title"
-        :content="formatMarkdown(item.content)"
+        :title="item.titles[lang]"
+        :content="item.contents[lang]"
       />
       <RouterLink
         v-else-if="
@@ -64,21 +65,13 @@ const { cards } = defineProps<Props>();
       />
       <ETeamCard
         v-else-if="item.__component === 'content.person-card'"
-        :thumbnail="
-          item?.image?.data
-            ? {
-                sizes: Object.values(item.image.data.attributes.formats),
-                alt: item.image.data.attributes.alternativeText,
-              }
-            : undefined
-        "
+        :media="item?.image"
         :name="item.name"
-        :content="formatMarkdown(item.content)"
+        :content="item.content"
       />
       <EImageCard
         v-else-if="item.__component === 'content.image-card'"
-        :sizes="Object.values(item.image.data.attributes.formats)"
-        :alt="item.image.data.attributes.alternativeText"
+        :media="item.image"
       />
     </template>
   </section>

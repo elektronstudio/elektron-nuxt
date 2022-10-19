@@ -3,7 +3,6 @@ import { merge, has, isArray, head, forEach, isObject } from "lodash-es";
 import { compareAsc } from "date-fns";
 
 // Events
-
 export const useEvents = (params: Strapi4RequestParams = {}) => {
   return useFind(
     "events",
@@ -58,7 +57,7 @@ export const useUpcomingEvent = async () => {
       return urgency.value === "soon" || urgency.value === "now";
     })[0];
   });
-  // T-471 Avoid duplication of useDatetime()
+  // TODO Avoid duplication of useDatetime()
   const formattedStartAtDistance = computed(() =>
     data.value?.start_at
       ? useFormattedDistance(new Date(data.value.start_at))
@@ -352,7 +351,7 @@ const processLocalizations = (item) => {
 };
 
 const proccessMarkdown = (item) => {
-  item.titles = item.titles.map(parseMarkdown);
+  // item.titles = item.titles.map(parseMarkdown);
   item.intros = item.intros.map(parseMarkdown);
   item.detailss = item.detailss.map(parseMarkdown);
   item.contents = item.contents.map(parseMarkdown);
@@ -360,16 +359,15 @@ const proccessMarkdown = (item) => {
 };
 
 const processEventFienta = (event) => {
-  // T-472 Add [event,event.project] support
+  // TODO Add [event,event.project] support
   return { ...event, ...getTicketableStatus([event]) };
 };
-
-// https://github.com/ComfortablyCoding/strapi-plugin-transformer/blob/master/server/services/transform-service.js
 
 const processEventVideostreams = (event) => {
   return { ...event, videostreams: getVideostreams(event.streamkey) };
 };
 
+// https://github.com/ComfortablyCoding/strapi-plugin-transformer/blob/master/server/services/transform-service.js
 export const parseStrapi = (data) => {
   if (has(data, "attributes")) {
     return parseStrapi(removeObjectKey(data, "attributes"));
