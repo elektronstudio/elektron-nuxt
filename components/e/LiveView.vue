@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import { Draggable, breakpoints } from "../utils";
 import { useIdle } from "@vueuse/core";
 import { computed } from "vue";
-import EBreadBoard from "./EBreadBoard.vue";
-import EDraggablesDock from "./EDraggablesDock.vue";
-import EDraggableMobile from "./EDraggableMobile.vue";
+import { breakpoints, Draggable } from "../utils";
 import DraggableContent from "./DraggableContent.vue";
-import EDraggable from "./EDraggable.vue";
+import EBreadBoard from "./EBreadBoard.vue";
 import EButton from "./EButton.vue";
-import IconArrowLeft from "~icons/radix-icons/arrow-left";
+import EDraggable from "./EDraggable.vue";
+import EDraggableMobile from "./EDraggableMobile.vue";
+import EDraggablesDock from "./EDraggablesDock.vue";
 
 type Props = {
   draggablesState: Draggable[];
@@ -29,7 +28,7 @@ const { idle } = useIdle(3000); // 3 seconds idle
 <template>
   <EBreadBoard :class="{ idle: idle }">
     <EButton class="backToEvent" size="xs" color="transparent" el="a">
-      <IconArrowLeft />
+      <Icon name="radix-icons:arrow-left" />
       Back to event
     </EButton>
     <template v-if="mobile">

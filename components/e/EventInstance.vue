@@ -1,7 +1,6 @@
 <!-- @TODO consider renaming -->
 <script setup lang="ts">
 import EButton from "./EButton.vue";
-import IconArrowRight from "~icons/radix-icons/arrow-right";
 
 type Props = {
   title?: string;
@@ -31,7 +30,7 @@ const { startAt, ticketUrl, layout = "horizontal" } = defineProps<Props>();
         target="_blank"
         :href="ticketUrl"
       >
-        <IconArrowRight />
+        <Icon name="radix-icons:arrow-right" />
         OSTA PILET
       </EButton>
     </section>

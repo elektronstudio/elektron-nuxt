@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { Event, l } from "@/utils";
-import IconArrowRight from "~icons/radix-icons/arrow-right";
+const { lang } = useLang()
 
+// @TODO: Type this
 type Props = {
-  event: Event;
+  event: any;
 };
 
 const { event } = defineProps<Props>();
@@ -12,8 +12,8 @@ const { event } = defineProps<Props>();
 <template>
   <router-link :to="event.route">
     <EButton size="xs" el="a" color="transparent">
-      <IconArrowRight />
-      {{ l("Read more", "Loe lähemalt") }}
+      <Icon name="radix-icons:arrow-right" />
+      {{ ["Read more", "Loe lähemalt"][lang] }}
     </EButton>
   </router-link>
   <EButton
@@ -24,7 +24,7 @@ const { event } = defineProps<Props>();
     target="_blank"
     :href="event.ticketUrl"
   >
-    <IconArrowRight />
-    {{ l("Get a ticket", "Osta pilet") }}
+   <Icon name="radix-icons:arrow-right" />
+    {{ ["Get a ticket", "Osta pilet"][lang] }}
   </EButton>
 </template>

@@ -1,18 +1,11 @@
 <script setup lang="ts">
 // TODO: Move to elektro
 
-import { computed, Ref, ref, watch, watchEffect } from "vue";
-import IconMuted from "~icons/radix-icons/speaker-off";
-import IconUnmuted from "~icons/radix-icons/speaker-loud";
-import IconEnterFullscreen from "~icons/radix-icons/enter-full-screen";
-import IconExitFullscreen from "~icons/radix-icons/exit-full-screen";
-import IconViewers from "~icons/radix-icons/eye-open";
+import { computed, ref, watch } from "vue";
 // Radix does not have PIP icons so we have to borrow them from Phospor set
-import IconEnterPip from "~icons/ph/picture-in-picture";
-import IconExitPip from "~icons/ph/picture-in-picture-fill";
+import { plausible, stats, statsSynced, useMessage, usePip } from "@/utils";
 import { debouncedWatch, useFullscreen } from "@vueuse/core";
 import { breakpoints, useVideostream } from "elektro";
-import { plausible, usePip, stats, statsSynced, useMessage } from "@/utils";
 
 const { sendMessage } = useMessage();
 const mobile = breakpoints.smaller("large");
@@ -121,7 +114,7 @@ const trackedEnterFullscreen = () => {
         opacity: 0.5;
       "
     >
-      <IconViewers v-if="viewersSynced" />
+      <Icon name="radix-icons:eye-open" v-if="viewersSynced" />
       <!-- <input style="background: black" v-model="sync" /> -->
       <div>{{ viewersSynced }}</div>
       <slot />
@@ -133,13 +126,13 @@ const trackedEnterFullscreen = () => {
         color="transparent"
         @click="handleInitialUnmute()"
       >
-        <IconMuted />
+        <Icon name="radix-icons:speaker-off" />
         Click to unmute
       </EButton>
       <template v-else>
         <EButton size="xs" color="transparent" @click="handleMuted">
-          <IconMuted v-if="volume == 0" />
-          <IconUnmuted v-else />
+          <Icon name="radix-icons:speaker-off" v-if="volume == 0" />
+          <Icon name="radix-icons:speaker-loud" v-else />
         </EButton>
         <EFormRange v-model="volume" :max="1" step="any" />
       </template>
@@ -149,7 +142,7 @@ const trackedEnterFullscreen = () => {
         color="transparent"
         @click="trackedEnterPip"
       >
-        <IconEnterPip />
+        <Icon name="ph:picture-in-picture" />
       </EButton>
       <EButton
         v-if="status === 'playing' && isPipAvailable && isPip"
@@ -157,7 +150,7 @@ const trackedEnterFullscreen = () => {
         color="transparent"
         @click="exitPip"
       >
-        <IconExitPip />
+        <Icon name="icons/ph/picture-in-picture-fill" />
       </EButton>
 
       <EButton
@@ -166,7 +159,7 @@ const trackedEnterFullscreen = () => {
         color="transparent"
         @click="trackedEnterFullscreen"
       >
-        <IconEnterFullscreen />
+        <Icon name="radix-icons:enter-full-screen" />
       </EButton>
       <EButton
         v-if="isFullscreen"
@@ -174,7 +167,7 @@ const trackedEnterFullscreen = () => {
         color="transparent"
         @click="exitFullscreen"
       >
-        <IconExitFullscreen />
+        <Icon name="radix-icons:exit-full-screen" />
       </EButton>
     </div>
   </div>

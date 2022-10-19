@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import EDraggableTitlebar from "./EDraggableTitlebar.vue";
-import ETitlebarButton from "./ETitlebarButton.vue";
-
 type Props = {
   title?: string;
 };

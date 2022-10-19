@@ -1,10 +1,7 @@
-<!-- @TODO: Move to Elektro -->
 <script setup lang="ts">
-import { l } from "@/utils";
-import IconCross1 from "~icons/radix-icons/cross-1";
-import EventButtons from "./EventButtons.vue";
-import IconArrowRight from "~icons/radix-icons/arrow-right";
-import { computed, ref } from "vue";
+import { MediaItem } from "~~/types";
+
+const { lang } = useLang();
 
 type Props = {
   event: any;
@@ -16,11 +13,11 @@ const { event, isEvent } = defineProps<Props>();
 // @TODO: Consider using more solid comparison for pinned event
 const label = computed(() => {
   if (isEvent && event?.value?.urgency === "soon") {
-    return l("tulemas", "tulemas");
+    return ["tulemas", "tulemas"][lang.value];
   } else if (isEvent && event?.value?.urgency === "now") {
-    return l("live", "live");
+    return ["live", "live"][lang.value];
   } else {
-    return l("new", "uus");
+    return ["new", "uus"][lang.value];
   }
 });
 const emit = defineEmits<{
@@ -40,22 +37,22 @@ const emit = defineEmits<{
         <ETitle v-if="isEvent && event.formattedDistance" el="h6" size="sm">
           {{ event.formattedDistance }}
         </ETitle>
-        <ETitle el="h3" v-html="event.title" />
-        <EContent :content="event.intro" el="div" />
+        <ETitle el="h3" v-html="event.titles[lang]" />
+        <EContent :content="event.intros[lang]" el="div" />
       </header>
       <footer>
         <EventButtons v-if="isEvent" :event="event" />
         <template v-else>
-          <router-link :to="`/projects/${event.slug}`">
+          <NuxtLink :to="event.projectLink">
             <EButton size="xs" el="a" color="transparent">
-              <IconArrowRight />
-              {{ l("View project", "Vaata projekti") }}
+              <Icon name="radix-icons:arrow-right" />
+              {{ ["View project", "Vaata projekti"][lang] }}
             </EButton>
-          </router-link>
+          </NuxtLink>
         </template>
       </footer>
     </aside>
-    <EImage v-if="event.images?.[0]" :sizes="event.images[0].sizes" />
+    <EImage v-if="event.thumbnail" :media="(event.thumbnail as MediaItem)" />
   </EDialog>
 </template>
 

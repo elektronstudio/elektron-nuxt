@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { Draggable, useLive, breakpoints } from "elektro";
-import { ref } from "vue";
 import DraggableContent from "@/components/DraggableContent.vue";
-import IconArrowLeft from "~icons/radix-icons/arrow-left";
 import { computed } from "@vue/reactivity";
+import { breakpoints, Draggable, useLive } from "elektro";
+import { ref } from "vue";
 import { l } from "../utils";
 
 type Props = {
@@ -31,7 +30,7 @@ const draggableMaximised = computed(
 <template>
   <EBreadBoard>
     <RouterLink v-if="event" :to="event.route" class="backToEvent">
-      <IconArrowLeft />
+      <Icon name="radix-icons:arrow-left" />
       {{ l("Back to event", "Tagasi sündmuse juurde") }}
     </RouterLink>
     <template v-if="mobile">

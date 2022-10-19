@@ -1,40 +1,40 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref } from "vue";
 // import NavLive from './NavLive.vue'
 
-const { lang } = useLang()
+const { lang } = useLang();
 
 const navItems = [
   {
-    label: ['Schedule', 'Kava'],
-    path: '/schedule',
+    label: ["Schedule", "Kava"],
+    path: "/schedule",
   },
   {
-    label: ['Projects', 'Projektid'],
-    path: '/projects',
+    label: ["Projects", "Projektid"],
+    path: "/projects",
   },
   {
-    label: ['WTF elektron', 'Meist'],
-    path: '/about',
+    label: ["WTF elektron", "Meist"],
+    path: "/about",
   },
   {
-    label: ['Podcast', 'Podcast'],
-    path: '/podcast',
+    label: ["Podcast", "Podcast"],
+    path: "/podcast",
   },
-]
+];
 
-const navState = ref(false)
-const menuItemsLength = computed(() => (navItems ? navItems.length + 1 : 0))
+const navState = ref(false);
+const menuItemsLength = computed(() => (navItems ? navItems.length + 1 : 0));
 </script>
 
 <template>
   <Transition appear>
     <header v-if="!$route.fullPath.endsWith('/live')" class="Nav">
-      <RouterLink to="/" class="menuItem homeButton" @click="navState = false">
+      <NuxtLink to="/" class="menuItem homeButton" @click="navState = false">
         <ELogo el="span" />
-      </RouterLink>
+      </NuxtLink>
       <nav class="menu" :class="{ navActive: navState }">
-        <RouterLink
+        <NuxtLink
           v-for="item in navItems"
           class="menuItem"
           :key="item.path"
@@ -42,7 +42,7 @@ const menuItemsLength = computed(() => (navItems ? navItems.length + 1 : 0))
           @click="navState = false"
         >
           {{ item.label[lang] }}
-        </RouterLink>
+        </NuxtLink>
         <!-- @TODO: Consider using client-side mediaQuery component -->
         <Lang class="menuItem languageSwitcher largeScreen" />
       </nav>
@@ -159,7 +159,7 @@ const menuItemsLength = computed(() => (navItems ? navItems.length + 1 : 0))
   .toggleNav:hover,
   .menuItem.router-link-active,
   .menuItem:hover {
-    border-image: url('/images/bg-texture-xs.gif') 1;
+    border-image: url("/images/bg-texture-xs.gif") 1;
     z-index: 2;
   }
   .languageSwitcher {
