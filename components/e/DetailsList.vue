@@ -12,8 +12,8 @@ const { details } = defineProps<Props>();
 <template>
   <ul class="EDetailsList">
     <li v-for="detail in details">
-      <span>{{ detail.detail }}:</span>
-      <span>{{ detail.value }}</span>
+      <span>{{ detail[0] }}</span>
+      <span>{{ detail[1] }}</span>
     </li>
   </ul>
 </template>

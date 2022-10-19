@@ -1,20 +1,7 @@
 <script setup lang="ts">
-import { EImage } from "elektro";
-
-type Size = {
-  url: string;
-  width: number;
-  height: number;
-};
-
-type Image = {
-  sizes: Size[];
-  alt?: string;
-  caption?: string;
-};
-
+import { MediaItem } from "~~/types";
 type Props = {
-  images: Image[];
+  images: MediaItem[];
 };
 
 const { images } = defineProps<Props>();
@@ -23,7 +10,7 @@ const { images } = defineProps<Props>();
 <template>
   <section class="ImageSlider">
     <figure v-for="image in images">
-      <EImage :sizes="image.sizes" :alt="image.alt" />
+      <EImage :media="image" />
     </figure>
   </section>
 </template>

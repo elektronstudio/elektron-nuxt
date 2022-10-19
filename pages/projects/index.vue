@@ -38,7 +38,7 @@ const { lang } = useLang();
 
     <div v-if="pastProjects.length > 0" class="projects">
       <template v-for="project in pastProjects">
-        <NuxtLink v-if="!project.archived" :to="project.route">
+        <NuxtLink :to="'/projects/' + project.slug">
           <ProductionCard
             :title="project.titles[lang]"
             :media="project.thumbnail"
