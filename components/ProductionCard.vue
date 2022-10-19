@@ -1,32 +1,28 @@
 <!-- @TODO: Should this be added to components page -->
 <script setup lang="ts">
-import { ECard, ETitle } from "elektro";
-
-type Size = {
-  url: string;
-  width: number;
-  height: number;
-};
+import { MediaItem } from "~~/types";
 
 type Props = {
   title: string;
   author?: string;
-  thumbnail?: any;
+  media?: MediaItem;
   nextEvent?: any;
 };
 
-const { title, author, thumbnail, nextEvent } = defineProps<Props>();
+const { title, author, media, nextEvent } = defineProps<Props>();
 </script>
 <template>
-  <ECard :thumbnail="thumbnail">
+  <ECard :media="media">
     <template #header>
-      <ETitle el="h3" size="lg" v-html="title" />
+      <ETitle el="h3" size="lg">
+        {{ title }}
+      </ETitle>
       <h6 v-if="author" v-html="author" />
     </template>
     <template #footer>
       <p v-if="nextEvent">Järgmine etendus:</p>
-      <time v-if="nextEvent" :datetime="nextEvent.startAt">
-        {{ nextEvent.startAt }}
+      <time v-if="nextEvent" :datetime="nextEvent">
+        {{ nextEvent }}
       </time>
     </template>
   </ECard>

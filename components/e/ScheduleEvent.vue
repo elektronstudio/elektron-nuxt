@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import EContent from "./EContent.vue";
-import ETitle from "./ETitle.vue";
-import EBox from "./EBox.vue";
-
 type Props = {
   title?: string;
   path: string;
