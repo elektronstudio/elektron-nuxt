@@ -1,22 +1,34 @@
-<!-- @TODO: Move to Elektro -->
 <script setup lang="ts">
-type Props = {
-  thumbnail?: string;
-  title: string;
-  description: string;
-  audio: string;
-};
+import { PodcastEpisode } from "~~/composables/podcast";
+import { formatDatetime } from "~~/composables/datetime";
 
-const { thumbnail, title, description, audio } = defineProps<Props>();
+interface Props {
+  episode: PodcastEpisode;
+}
+const { episode } = defineProps<Props>();
+// const { theme } = useTheme();
+const { lang } = useLang();
+console.log(episode);
 </script>
 
 <template>
   <div class="PodcastItem">
-    <img v-if="thumbnail" :src="thumbnail" class="thumbnail" />
+    <img
+      v-if="episode.itunes.image"
+      :src="episode.itunes.image"
+      class="thumbnail"
+    />
     <div class="content">
-      <ETitle el="h3" v-html="title" />
-      <EContent :content="description" />
-      <audio class="audio" controls :src="audio" />
+      <ETitle el="h3">
+        {{ episode.title }}
+      </ETitle>
+      <ETitle el="h5" size="sm">
+        {{ formatDatetime(new Date(episode.isoDate)) }}
+      </ETitle>
+      <EContent>
+        <div v-html="episode['content:encoded']" />
+      </EContent>
+      <audio class="audio" controls :src="episode.enclosure.url" />
     </div>
   </div>
 </template>

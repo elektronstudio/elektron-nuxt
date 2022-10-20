@@ -25,6 +25,10 @@ const { el = "article", size = "md", content } = defineProps<Props>();
 .EContent > :deep(*:not(:last-child)) {
   margin-bottom: var(--m-6);
 }
+/* TODO: Temp fix until we can properly pass html content */
+.EContent > :deep(div > *:not(:last-child)) {
+  margin-bottom: var(--m-6);
+}
 .EContent :deep(p) {
   font-size: var(--text-base);
   line-height: var(--line-height-sm);
