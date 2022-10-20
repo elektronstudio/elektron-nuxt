@@ -19,16 +19,19 @@ const { lang } = useLang();
             {{ ["Projects", "Projektid"][lang] }}
           </EButton>
         </NuxtLink>
-        <ETitle v-if="project.authors" el="h6">
+        <ETitle el="h2" size="lg">
+          {{ project.titles[lang] }}
+        </ETitle>
+        <ETitle v-if="project.authors" el="h5" size="xs">
           {{ project.authors }}
         </ETitle>
-        <ETitle el="h2" size="lg" :title="project.titles[lang]" />
       </div>
 
       <EContent v-if="project.intros[lang]" class="Description" size="lg">
         <div v-html="project.intros[lang]" />
       </EContent>
     </header>
+
     <ImageSlider v-if="project.images" :images="project.images" />
     <main>
       <EBox class="MainContent">
@@ -42,7 +45,9 @@ const { lang } = useLang();
       </EBox>
       <EBox v-if="project.events" class="SideContent" el="aside">
         <template v-if="project.events">
-          <ETitle el="h3" size="lg" :title="['Events', 'Üritused'][lang]" />
+          <ETitle el="h3" size="lg">
+            {{ ["Events", "Üritused"][lang] }}
+          </ETitle>
 
           <EventCard
             v-for="event in project.events"
@@ -100,6 +105,9 @@ const { lang } = useLang();
 
 .Page.SingleProduction header .title {
   grid-area: title;
+}
+.Page.SingleProduction header .title h2 {
+  margin-bottom: var(--m-3);
 }
 
 .Page.SingleProduction header h4 {

@@ -353,6 +353,7 @@ const processLocalizations = (item) => {
 
 const proccessMarkdown = (item) => {
   // item.titles = item.titles.map(parseMarkdown);
+  item.descriptions = item.descriptions.map(parseMarkdown);
   item.intros = item.intros.map(parseMarkdown);
   item.detailss = item.detailss.map(parseMarkdown);
   item.contents = item.contents.map(parseMarkdown);
