@@ -48,6 +48,13 @@ export const useEventBySlug = (
   );
 };
 
+export const _useUpcomingEvent = async () => {
+  return await useEvents({
+    filters: { end_at: { $gt: today() } },
+    sort: ["start_at:asc"],
+  });
+};
+
 export const useUpcomingEvent = async () => {
   const { data: upcomingEvents, error } = await useEvents({
     filters: { end_at: { $gt: today() } },

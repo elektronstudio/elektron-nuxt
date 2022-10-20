@@ -2,6 +2,7 @@ import { computed } from "vue";
 import { useNow } from "@vueuse/core";
 import {
   differenceInMinutes,
+  differenceInSeconds,
   format,
   formatDistanceStrict,
   formatISO,
@@ -46,14 +47,40 @@ export const useFormattedDistance = (datetime: Date | string) => {
 type Urgency = "past" | "now" | "soon" | "future" | "permanent";
 
 // TODO: Support string dates
+export const _useUrgency = (
+  fromDateTime: Date,
+  toDateTime: Date | null,
+  _now: Date,
+) => {
+  const soonMinutes = 3 * 60;
+  const started = differenceInSeconds(fromDateTime, _now);
+  const ended = differenceInSeconds(toDateTime, _now);
+  let urgency = "";
+
+  console.log(started, ended);
+
+  if (toDateTime === null) {
+    urgency = "permanent";
+  } else if (started <= 0 && ended >= 0) {
+    urgency = "now";
+  } else if (started >= 0 && started <= soonMinutes) {
+    urgency = "soon";
+  } else if (started >= 0 && started > soonMinutes) {
+    urgency = "future";
+  } else {
+    urgency = "past";
+  }
+  return urgency as Urgency;
+};
+
 export const useUrgency = (fromDateTime: Date, toDateTime: Date | null) => {
   return computed<Urgency>(() => {
     const soonMinutes = 3 * 60;
-    const started = differenceInMinutes(fromDateTime, now.value);
-    const ended = differenceInMinutes(toDateTime, now.value);
+    const started = differenceInSeconds(fromDateTime, now.value);
+    const ended = differenceInSeconds(toDateTime, now.value);
     if (toDateTime === null) {
       return "permanent";
-    } else if (started < 0 && ended >= 0) {
+    } else if (started <= 0 && ended >= 0) {
       return "now";
     } else if (started >= 0 && started <= soonMinutes) {
       return "soon";

@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
-// import NavLive from './NavLive.vue'
-
 const { lang } = useLang();
 
 const navItems = [
@@ -48,7 +45,7 @@ const menuItemsLength = computed(() => (navItems ? navItems.length + 1 : 0));
       </nav>
       <span class="menuItem spacer"></span>
       <Lang class="menuItem languageSwitcher smallScreen" />
-      <!-- <NavLive class="menuItem" /> -->
+      <NavLive class="menuItem" />
       <button class="toggleNav" @click="navState = !navState">
         <Icon name="radix-icons:hamburger-menu" />
       </button>

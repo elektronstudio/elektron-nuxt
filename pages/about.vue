@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const { data, error } = await useAboutPage();
-console.log(data.value);
 </script>
 
 <template>

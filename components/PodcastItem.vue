@@ -8,7 +8,6 @@ interface Props {
 const { episode } = defineProps<Props>();
 // const { theme } = useTheme();
 const { lang } = useLang();
-console.log(episode);
 </script>
 
 <template>

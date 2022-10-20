@@ -58,23 +58,20 @@ const { lang } = useLang();
           <Icon name="radix-icons:arrow-right" />
           <!-- {{ buttonText }} -->
         </EButton>
-        <router-link
+        <NuxtLink
           v-else-if="event.userHasLiveAccess && event.liveRoute"
           :to="event.liveRoute"
-          v-slot="{ href, navigate }"
         >
           <EButton
             size="sm"
             el="a"
             :color="event.urgency === 'now' ? 'accent' : 'transparent'"
-            :href="href"
-            @click="navigate"
           >
             <Icon name="radix-icons:arrow-right" />
 
             <!-- {{ buttonText }} -->
           </EButton>
-        </router-link>
+        </NuxtLink>
         <EButton
           v-else-if="event.userCanBuyTicket"
           size="sm"
