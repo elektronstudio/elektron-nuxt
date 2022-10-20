@@ -17,7 +17,7 @@ const { lang } = useLang();
     >
       <EScheduleEvent :description="project.intro" :path="''">
         <template #title>
-          <RouterLink :to="project.route">
+          <NuxtLink :to="project.route">
             <ETitle
               el="h2"
               size="lg"
@@ -31,7 +31,7 @@ const { lang } = useLang();
               class="projectTitle"
             />
             <!-- <pre>{{ project.upcomingEvents[0] }}</pre> -->
-          </RouterLink>
+          </NuxtLink>
         </template>
         <EventCard
           v-if="project.upcomingEvents"

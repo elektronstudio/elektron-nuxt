@@ -1,30 +1,41 @@
 <script setup lang="ts">
-const { lang } = useLang()
+import { Event } from "~~/types";
 
 // @TODO: Type this
 type Props = {
-  event: any;
+  event: Event;
 };
 
 const { event } = defineProps<Props>();
+const { urgency } = useDatetime(event.start_at, event.end_at);
+const { lang } = useLang();
 </script>
 
 <template>
-  <router-link :to="event.route">
-    <EButton size="xs" el="a" color="transparent">
-      <Icon name="radix-icons:arrow-right" />
-      {{ ["Read more", "Loe lähemalt"][lang] }}
+  <NuxtLink
+    v-if="event.status === 'FREE' || event.status === 'HAS_TICKET'"
+    :to="event.eventLiveLink"
+  >
+    <EButton el="a" size="xs" :color="urgency === 'past' ? 'gray' : 'accent'">
+      {{
+        urgency === "past"
+          ? ["Revisit event", "Meenuta üritust"][lang]
+          : ["Watch event", "Vaata üritust"][lang]
+      }}
     </EButton>
-  </router-link>
+  </NuxtLink>
+  <p v-if="event.status === 'HAS_TICKET'">
+    {{ ["You have a ticket", "Sul on ürituse pilet"][lang] }}
+  </p>
+
   <EButton
-    v-if="event.userCanBuyTicket"
+    v-if="event.status === 'REQUIRES_TICKET'"
+    v-for="ticketLink in event.ticketLinks"
+    :href="ticketLink"
+    target="_blank"
     el="a"
     size="xs"
     color="accent"
-    target="_blank"
-    :href="event.ticketUrl"
-  >
-   <Icon name="radix-icons:arrow-right" />
-    {{ ["Get a ticket", "Osta pilet"][lang] }}
+    >{{ ["Get a ticket", "Osta pilet"][lang] }}
   </EButton>
 </template>

@@ -1,8 +1,11 @@
 <script setup lang="ts">
+import { Project } from "~~/types";
+
 const route = useRoute();
 const slug = route.params.project_slug;
 
 const { data: project, error } = await useProjectBySlug(slug as string);
+// const project = data.value as Project;
 const { lang } = useLang();
 </script>
 
@@ -10,30 +13,21 @@ const { lang } = useLang();
   <article v-if="project" class="Page SingleProduction">
     <header>
       <div class="title">
-        <router-link custom to="/projects" v-slot="{ href, navigate }">
-          <EButton
-            size="xs"
-            el="a"
-            color="transparent"
-            :href="href"
-            @click="navigate"
-          >
+        <NuxtLink to="/projects">
+          <EButton size="xs" el="a" color="transparent">
             <Icon name="radix-icons:arrow-left" />
             {{ ["Projects", "Projektid"][lang] }}
           </EButton>
-        </router-link>
+        </NuxtLink>
         <ETitle v-if="project.authors" el="h6">
           {{ project.authors }}
         </ETitle>
-        <ETitle el="h2" size="lg" :title="project.title" />
+        <ETitle el="h2" size="lg" :title="project.titles[lang]" />
       </div>
 
-      <EContent
-        v-if="project.intros[lang]"
-        class="Description"
-        size="lg"
-        :content="project.intros[lang]"
-      />
+      <EContent v-if="project.intros[lang]" class="Description" size="lg">
+        <div v-html="project.intros[lang]" />
+      </EContent>
     </header>
     <ImageSlider v-if="project.images" :images="project.images" />
     <main>
@@ -42,25 +36,23 @@ const { lang } = useLang();
           v-if="project.detailss[lang]"
           :details="parseDetails(project.detailss[lang])"
         />
-        <EContent :content="project.description" />
+        <EContent el="div">
+          <div v-html="project.descriptions[lang]" />
+        </EContent>
       </EBox>
-      <EBox
-        v-if="project.upcomingEvents || project.press || project.pastEvents"
-        class="SideContent"
-        el="aside"
-      >
-        <!-- <template v-if="project.upcomingEvents">
-          <ETitle el="h3" size="lg" :title="l('Events', 'Üritused')" />
+      <EBox v-if="project.events" class="SideContent" el="aside">
+        <template v-if="project.events">
+          <ETitle el="h3" size="lg" :title="['Events', 'Üritused'][lang]" />
 
           <EventCard
-            v-for="event in project.upcomingEvents"
+            v-for="event in project.events"
             :event="event"
             :project-thumbnail="project.thumbnail"
             layout="vertical"
           />
-        </template> -->
+        </template>
 
-        <template v-if="project.pastEvents">
+        <!-- <template v-if="project.pastEvents">
           <ETitle
             el="h3"
             size="lg"
@@ -72,7 +64,7 @@ const { lang } = useLang();
             :project-thumbnail="project.thumbnail"
             layout="vertical"
           />
-        </template>
+        </template> -->
         <!-- @TODO: Add press -->
         <!-- <template v-if="press">
           <ETitle el="h3" size="lg">Press</ETitle>

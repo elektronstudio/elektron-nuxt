@@ -49,7 +49,7 @@ const { cards } = defineProps<Props>();
         :title="item.titles[lang]"
         :content="item.contents[lang]"
       />
-      <RouterLink
+      <NuxtLink
         v-else-if="
           item.__component === 'content.related-page' &&
           item.page?.data?.attributes.slug
@@ -57,7 +57,7 @@ const { cards } = defineProps<Props>();
         :to="item.page?.data?.attributes.slug"
       >
         <ERelatedPageCard :title="item.title" />
-      </RouterLink>
+      </NuxtLink>
       <EExternallinkCard
         v-else-if="item.__component === 'content.external-link'"
         :title="item.title"

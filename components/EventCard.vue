@@ -1,32 +1,31 @@
 <script setup lang="ts">
-import { Event, Image, l } from "@/utils";
+import { MediaItem, Event } from "~~/types";
 import EventButtons from "./EventButtons.vue";
 
 type Props = {
   event: Event;
-  projectThumbnail?: Image;
+  thumbnail?: MediaItem;
   layout?: "vertical" | "horizontal";
 };
 
-const { event, projectThumbnail, layout = "horizontal" } = defineProps<Props>();
+const { event, thumbnail, layout = "horizontal" } = defineProps<Props>();
 </script>
 
 <template>
   <article class="EventCard" :class="layout">
     <figure>
-      <EImage v-if="event.thumbnail" :sizes="event.thumbnail.sizes" />
-      <EImage v-if="projectThumbnail" :sizes="projectThumbnail?.sizes" />
+      <EImage v-if="thumbnail" :media="thumbnail" />
     </figure>
     <div class="content">
       <header>
         <time v-if="event.start_at" :datetime="event.start_at">
-          {{ event.formattedFromDatetime }}
+          {{ event.start_at }}
         </time>
-        <router-link :to="event.route">
+        <NuxtLink :to="event.eventLink">
           <ETitle el="h4" size="xs" class="eventTitle">
             {{ event.title }}
           </ETitle>
-        </router-link>
+        </NuxtLink>
       </header>
       <section>
         <EventButtons :event="event" />
@@ -41,10 +40,6 @@ const { event, projectThumbnail, layout = "horizontal" } = defineProps<Props>();
   padding: var(--p-3) 0;
   border-top: 1px solid var(--gray-500);
 }
-.EventCard:last-child {
-  /* border-bottom: 1px solid var(--gray-500); */
-}
-
 .EventCard figure {
   flex-shrink: 0;
   width: 4rem;
