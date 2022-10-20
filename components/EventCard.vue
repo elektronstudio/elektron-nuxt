@@ -1,20 +1,19 @@
 <script setup lang="ts">
-import { MediaItem, Event } from "~~/types";
+import { Event } from "~~/types";
 import EventButtons from "./EventButtons.vue";
 
 type Props = {
   event: Event;
-  thumbnail?: MediaItem;
   layout?: "vertical" | "horizontal";
 };
 
-const { event, thumbnail, layout = "horizontal" } = defineProps<Props>();
+const { event, layout = "horizontal" } = defineProps<Props>();
 </script>
 
 <template>
   <article class="EventCard" :class="layout">
     <figure>
-      <EImage v-if="thumbnail" :media="thumbnail" />
+      <EImage v-if="event.thumbnail" :media="event.thumbnail" />
     </figure>
     <div class="content">
       <header>
