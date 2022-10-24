@@ -25,7 +25,7 @@ const draggableMaximised = computed(
 
 <template>
   <EBreadBoard>
-    <NuxtLink v-if="event" :to="event.route" class="backToEvent">
+    <NuxtLink v-if="event" :to="event.eventLink" class="backToEvent">
       <Icon name="radix-icons:arrow-left" />
       {{ ["Back to event", "Tagasi sündmuse juurde"][lang] }}
     </NuxtLink>

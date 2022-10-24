@@ -21,7 +21,7 @@ const { idle } = useIdle(5000);
 </script>
 
 <template>
-  <div class="relative flex items-center bg-black" ref="videoWrapper">
+  <div class="VideoStream" ref="videoWrapper">
     <video
       ref="video"
       :muted="muted"
@@ -30,7 +30,6 @@ const { idle } = useIdle(5000);
       playsinline
       crossorigin="anonymous"
       loop
-      class="w-full"
     />
 
     <div class="controls">
@@ -61,6 +60,10 @@ const { idle } = useIdle(5000);
   display: flex;
   align-items: center;
   background-color: black;
+}
+
+.VideoStream video {
+  width: 100%;
 }
 
 .controls {
