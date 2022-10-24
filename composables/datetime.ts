@@ -75,16 +75,16 @@ export const _useUrgency = (
 
 export const useUrgency = (fromDateTime: Date, toDateTime: Date | null) => {
   return computed<Urgency>(() => {
-    const soonMinutes = 3 * 60;
+    const soonSeconds = 3 * 60 * 60;
     const started = differenceInSeconds(fromDateTime, now.value);
     const ended = differenceInSeconds(toDateTime, now.value);
     if (toDateTime === null) {
       return "permanent";
     } else if (started <= 0 && ended >= 0) {
       return "now";
-    } else if (started >= 0 && started <= soonMinutes) {
+    } else if (started >= 0 && started <= soonSeconds) {
       return "soon";
-    } else if (started >= 0 && started > soonMinutes) {
+    } else if (started >= 0 && started > soonSeconds) {
       return "future";
     } else {
       return "past";
