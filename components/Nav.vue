@@ -20,6 +20,7 @@ const navItems = [
   },
 ];
 
+const { theme, changeTheme } = useTheme();
 const navState = ref(false);
 const menuItemsLength = computed(() => (navItems ? navItems.length + 1 : 0));
 </script>
@@ -46,6 +47,17 @@ const menuItemsLength = computed(() => (navItems ? navItems.length + 1 : 0));
       <span class="menuItem spacer"></span>
       <Lang class="menuItem languageSwitcher smallScreen" />
       <NavLive class="menuItem" />
+      <button
+        class="menuItem"
+        @click="
+          () => {
+            changeTheme();
+            menu = false;
+          }
+        "
+      >
+        <Icon :name="['radix-icons:moon', 'radix-icons:sun'][theme]" />
+      </button>
       <button class="toggleNav" @click="navState = !navState">
         <Icon name="radix-icons:hamburger-menu" />
       </button>

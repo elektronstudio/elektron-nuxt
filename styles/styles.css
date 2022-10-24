@@ -48,6 +48,11 @@
   --dock-item-size: 6rem;
 }
 
+.light {
+  --bg: #ffffff;
+  --fg: #000000;
+}
+
 /* @TODO: Add breakpoints system */
 @media only screen and (min-width: 900px) {
   :root {
