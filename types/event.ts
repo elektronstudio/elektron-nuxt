@@ -1,4 +1,3 @@
-import { Urgency } from ".";
 import { MediaItem } from "./media";
 
 export type Event = {
@@ -20,6 +19,7 @@ export type Event = {
   authors: string;
   thumbnail: MediaItem;
   projectLink: string;
+  projectTitle: string;
   eventLink: string;
   eventLiveLink: string;
   eventExperimentLink: string;
