@@ -50,7 +50,7 @@ const {
     <div class="videoWrapper" :class="{ dialogActive: dialogState }">
       <Transition>
         <ETitle v-if="!dialogState" size="lg" class="about">
-          {{ frontpage?.descriptions[lang] }}
+          <div v-html="frontpage?.descriptions[lang]" />
         </ETitle>
       </Transition>
       <video
@@ -115,7 +115,7 @@ const {
 }
 @media only screen and (min-width: 600px) {
   .about {
-    width: 33vw;
+    width: 50vw;
   }
 }
 .video {
