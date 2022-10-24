@@ -16,6 +16,15 @@ const {
   scrollToBottom,
 } = useChat(channel);
 
+const { data: chatMessagesHistory } = await useChatHistory(channel);
+const messages = computed(() => [
+  ...(chatMessagesHistory.value || []),
+  ...chatMessages.value,
+]);
+onMounted(() => {
+  scrollToBottom();
+});
+
 const newMessagesString = computed(() => {
   if (newChatMessagesCount.value > 1) {
     return ["new messages", "uut sõnumit"][lang.value];
@@ -29,10 +38,10 @@ const newMessagesString = computed(() => {
   <div class="EChat">
     <div class="messagesWrapper">
       <div class="messages" ref="scrollable">
-        <template v-for="message in chatMessages">
+        <template v-for="message in messages">
           <div v-if="message.value" class="message">
-            <p v-if="message.userName" class="username">
-              {{ message.userName }}
+            <p v-if="message.username" class="username">
+              {{ message.username }}
             </p>
             <p>{{ message.value }}</p>
           </div>
