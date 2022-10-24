@@ -19,6 +19,7 @@ export type Event = {
   authors: string;
   thumbnail: MediaItem;
   projectLink: string;
+  projects: Project[] | null;
   eventLink: string;
   eventLiveLink: string;
   eventExperimentLink: string;
@@ -37,3 +38,26 @@ export type Videostream = {
   streamkey: string;
   url: string;
 };
+
+interface Project {
+  id: number;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  locale: string;
+  slug: string;
+  pinned: boolean;
+  archived: boolean;
+  description: string;
+  intro: string;
+  authors: string;
+  details: string;
+  thumbnail: MediaItem;
+  projectLink: string;
+  titles: string[];
+  intros: string[];
+  descriptions: string[];
+  detailss: string[];
+  contents: string[];
+}

@@ -267,9 +267,7 @@ const processEvent = (event) => {
   event.eventExperimentLink = project
     ? `/projects/${project.slug}/${event.slug}/experiment`
     : "/";
-  if (event.projects) {
-    event.projects = event.projects.map(processProject);
-  }
+  event.projects = event.projects ? event.projects.map(processProject) : null;
   event = processLocalizations(event);
   event = proccessMarkdown(event);
   event = processEventFienta(event);

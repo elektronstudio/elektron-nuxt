@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { Event } from "~~/types";
-
 const route = useRoute();
 const slug = route.params.event_slug;
 

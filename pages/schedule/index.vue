@@ -11,41 +11,11 @@ const { lang } = useLang();
 
 <template>
   <main class="Page Schedule">
-    <template
-      v-if="upcomingProjects?.length > 0"
-      v-for="project in upcomingProjects"
-    >
-      <EScheduleEvent :description="project.intro" :path="''">
-        <template #title>
-          <NuxtLink :to="project.route">
-            <ETitle
-              el="h2"
-              size="lg"
-              :title="
-                l(
-                  project.title,
-                  project.localizations.data[0].attributes.title ||
-                    project.title,
-                )
-              "
-              class="projectTitle"
-            />
-            <!-- <pre>{{ project.upcomingEvents[0] }}</pre> -->
-          </NuxtLink>
-        </template>
-        <EventCard
-          v-if="project.upcomingEvents"
-          v-for="event in project.upcomingEvents"
-          layout="horizontal"
-          :project-thumbnail="project.thumbnail"
-          :event="event"
-        />
-      </EScheduleEvent>
-    </template>
-    <section v-else>
-      <!-- TODO: Differentiate between data not -->
-      <!-- yet loaded and data fetching failed  -->
-    </section>
+    <ScheduleItem
+      v-if="upcomingEvents?.length > 0"
+      v-for="event in upcomingEvents"
+      :event="event"
+    />
   </main>
 </template>
 

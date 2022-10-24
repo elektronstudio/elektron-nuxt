@@ -3,9 +3,21 @@ type Props = {
   el?: "article" | "section" | string;
   size?: "sm" | "md" | "lg";
   content?: string;
+  nolinks?: boolean;
+  breakall?: boolean;
 };
 
-const { el = "article", size = "md", content } = defineProps<Props>();
+const {
+  el = "article",
+  size = "md",
+  content,
+  nolinks = false,
+  breakall = false,
+} = defineProps<Props>();
+
+const html = computed(() => {
+  return nolinks ? content.replace(/<a[^>]*>(.*?)<\/a>/gi, "$1") : content;
+});
 </script>
 
 <template>
@@ -14,7 +26,7 @@ const { el = "article", size = "md", content } = defineProps<Props>();
     :is="el"
     :class="size"
     class="EContent"
-    v-html="content"
+    v-html="html"
   />
   <component v-else :is="el" :class="size" class="EContent">
     <slot />

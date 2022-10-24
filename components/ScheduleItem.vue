@@ -4,25 +4,32 @@ import EventButtons from "./EventButtons.vue";
 
 type Props = {
   event: Event;
-  layout?: "vertical" | "horizontal";
 };
 
-const { event, layout = "horizontal" } = defineProps<Props>();
+const { event } = defineProps<Props>();
+const { lang } = useLang();
 </script>
 
 <template>
-  <article class="EventCard" :class="layout">
+  <article class="ScheduleItem">
     <figure>
       <EImage v-if="event.thumbnail" :media="event.thumbnail" />
     </figure>
     <div class="content">
       <header>
         <EventDatetime :event="event" />
+        <ETitle v-if="event.authors" size="xs" el="h5">
+          {{ event.authors }}
+        </ETitle>
         <NuxtLink :to="event.eventLink">
           <ETitle el="h4" size="xs" class="eventTitle">
+            <span v-if="event.projects">
+              {{ event.projects?.[0].titles[lang] }} /
+            </span>
             {{ event.title }}
           </ETitle>
         </NuxtLink>
+        <EContent nolinks :content="event.intros[lang]" />
       </header>
       <section>
         <EventButtons :event="event" />
@@ -32,12 +39,18 @@ const { event, layout = "horizontal" } = defineProps<Props>();
 </template>
 
 <style scoped>
-.EventCard {
+.ScheduleItem {
   display: flex;
   padding: var(--p-3) 0;
   border-top: 1px solid var(--gray-500);
+  gap: var(--gap-3);
 }
-.EventCard figure {
+
+.ScheduleItem .EventDatetime,
+.ScheduleItem :deep(.EventDatetime) {
+  margin-bottom: var(--m-3);
+}
+.ScheduleItem figure {
   flex-shrink: 0;
   width: 4rem;
   height: 4rem;
@@ -45,33 +58,29 @@ const { event, layout = "horizontal" } = defineProps<Props>();
   background-color: var(--gray-500);
   overflow: hidden;
 }
-.EventCard figure img {
+.ScheduleItem figure img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.EventCard .content {
+.ScheduleItem .content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
-.EventCard header {
+.ScheduleItem header {
   display: flex;
   flex-direction: column;
 }
-.EventCard,
-.EventCard.vertical .content {
-  gap: var(--gap-3);
+.ScheduleItem header .ETitle > span {
+  color: var(--gray-300);
 }
-.EventCard.vertical section > *:first-child {
-  order: 2;
-}
-.EventCard section {
+.ScheduleItem section {
   display: flex;
   gap: var(--gap-3);
   flex-shrink: 0;
 }
-.EventCard time {
+.ScheduleItem time {
   color: var(--gray-300);
 }
 .eventTitle {
@@ -79,19 +88,19 @@ const { event, layout = "horizontal" } = defineProps<Props>();
 }
 /* @TODO: Add breakpoints system */
 @media only screen and (max-width: 599px) {
-  .EventCard section {
+  .ScheduleItem section {
     margin-top: var(--m-3);
   }
 }
 
 @media only screen and (min-width: 600px) {
-  .EventCard.horizontal .content {
+  .ScheduleItem .content {
     flex-grow: 1;
     flex-direction: row;
     justify-content: space-between;
   }
 
-  .EventCard section {
+  .ScheduleItem section {
     flex-direction: row;
     align-items: flex-start;
   }
