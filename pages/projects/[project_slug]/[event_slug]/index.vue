@@ -6,18 +6,6 @@ const slug = route.params.event_slug;
 
 const { data: event, error } = await useEventBySlug(slug as string);
 const { lang } = useLang();
-
-// const buttonText = computed(() => {
-//   if (event.value.urgency === "now") {
-//     return l("Live!", "Live!");
-//   } else if (event.value.urgency === "soon") {
-//     return `${l("Event starts in: ", "Üritus algab: ")} ${
-//       event.value.formattedDistance
-//     }`;
-//   } else {
-//     return l("View event", "Vaata üritust");
-//   }
-// });
 </script>
 
 <template>
@@ -36,52 +24,8 @@ const { lang } = useLang();
       <EContent v-if="event.intros" class="Description" size="lg">
         <div v-html="event.intros[lang]" />
       </EContent>
-      <!-- TODO: EVent live buttons -->
-      <div
-        v-if="
-          event.live &&
-          (event.ticketUrl ||
-            event.liveRoute ||
-            event.live_url ||
-            event.userHasLiveAccess)
-        "
-        class="buttons"
-      >
-        <!-- @TODO: event.liveRout needs to use router-link -->
-        <EButton
-          v-if="event.userHasLiveAccess && event.live_url"
-          size="sm"
-          el="a"
-          :color="event.urgency === 'now' ? 'accent' : 'transparent'"
-          :href="event.live_url"
-        >
-          <Icon name="radix-icons:arrow-right" />
-          <!-- {{ buttonText }} -->
-        </EButton>
-        <NuxtLink
-          v-else-if="event.userHasLiveAccess && event.liveRoute"
-          :to="event.liveRoute"
-        >
-          <EButton
-            size="sm"
-            el="a"
-            :color="event.urgency === 'now' ? 'accent' : 'transparent'"
-          >
-            <Icon name="radix-icons:arrow-right" />
-
-            <!-- {{ buttonText }} -->
-          </EButton>
-        </NuxtLink>
-        <EButton
-          v-else-if="event.userCanBuyTicket"
-          size="sm"
-          el="a"
-          color="accent"
-          :href="event.ticketUrl"
-        >
-          <Icon name="radix-icons:arrow-right" />
-          {{ ["Get ticket", "Osta pilet"][lang] }}
-        </EButton>
+      <div class="buttons">
+        <EventButtons :event="event" />
       </div>
     </header>
     <ImageSlider v-if="event.images" :images="event.images" />

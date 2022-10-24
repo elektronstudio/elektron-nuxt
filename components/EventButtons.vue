@@ -4,10 +4,14 @@ import { Event } from "~~/types";
 // @TODO: Type this
 type Props = {
   event: Event;
+  size?: "xs" | "sm" | "md" | "lg";
 };
 
-const { event } = defineProps<Props>();
+const { event, size = "xs" } = defineProps<Props>();
 const { urgency } = useDatetime(event.start_at, event.end_at);
+const formattedStartAtDistance = event.start_at
+  ? useFormattedDistance(event.start_at)
+  : null;
 const { lang } = useLang();
 </script>
 
@@ -16,26 +20,33 @@ const { lang } = useLang();
     v-if="event.status === 'FREE' || event.status === 'HAS_TICKET'"
     :to="event.eventLiveLink"
   >
-    <EButton el="a" size="xs" :color="urgency === 'past' ? 'gray' : 'accent'">
+    <EButton v-if="urgency === 'now'" el="a" :size="size" color="accent">
+      {{ ["Live now!", "Vaata laivis!"][lang] }}
+    </EButton>
+    <EButton v-else-if="urgency === 'future'" el="a" :size="size" color="gray">
       {{
-        urgency === "past"
-          ? ["Revisit event", "Meenuta üritust"][lang]
-          : ["Watch event", "Vaata üritust"][lang]
+        `${
+          ["Event starts in: ", "Üritus algab: "][lang]
+        } ${formattedStartAtDistance}`
       }}
     </EButton>
+    <EButton v-else-if="urgency === 'past'" el="a" :size="size" color="gray">
+      {{ ["Revisit event", "Meenuta üritust"][lang] }}
+    </EButton>
   </NuxtLink>
-  <p v-if="event.status === 'HAS_TICKET'">
+  <!-- <p v-if="event.status === 'HAS_TICKET'">
     {{ ["You have a ticket", "Sul on ürituse pilet"][lang] }}
-  </p>
-
+  </p> -->
   <EButton
-    v-if="event.status === 'REQUIRES_TICKET'"
+    v-else-if="event.status === 'REQUIRES_TICKET'"
     v-for="ticketLink in event.ticketLinks"
     :href="ticketLink"
     target="_blank"
     el="a"
-    size="xs"
+    :size="size"
     color="accent"
-    >{{ ["Get a ticket", "Osta pilet"][lang] }}
+  >
+    <Icon name="radix-icons:arrow-right" />
+    {{ ["Get a ticket", "Osta pilet"][lang] }}
   </EButton>
 </template>

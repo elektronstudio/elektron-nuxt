@@ -8,6 +8,7 @@ import {
   formatISO,
   isThisYear,
 } from "date-fns";
+import { Urgency } from "~~/types";
 
 const now = useNow({ interval: 1000 });
 
@@ -44,8 +45,6 @@ export const useFormattedDistance = (datetime: Date | string) => {
   });
 };
 
-type Urgency = "past" | "now" | "soon" | "future" | "permanent";
-
 // TODO: Support string dates
 export const _useUrgency = (
   fromDateTime: Date,
@@ -56,8 +55,6 @@ export const _useUrgency = (
   const started = differenceInSeconds(fromDateTime, _now);
   const ended = differenceInSeconds(toDateTime, _now);
   let urgency = "";
-
-  console.log(started, ended);
 
   if (toDateTime === null) {
     urgency = "permanent";

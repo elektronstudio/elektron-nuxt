@@ -1,3 +1,4 @@
+import { Urgency } from ".";
 import { MediaItem } from "./media";
 
 export type Event = {
