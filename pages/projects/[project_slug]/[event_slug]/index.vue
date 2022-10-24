@@ -15,7 +15,7 @@ const { lang } = useLang();
         <NuxtLink v-if="event.projectLink" :to="event.projectLink">
           <EButton size="xs" el="a" color="transparent">
             <Icon name="radix-icons:arrow-left" />
-            {{ event.projectTitle }}
+            {{ event.projects[0].titles[lang] }}
           </EButton>
         </NuxtLink>
         <ETitle el="h2" size="lg" :title="event.title" />
