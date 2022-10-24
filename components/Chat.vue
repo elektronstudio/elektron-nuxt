@@ -1,28 +1,34 @@
 <script setup lang="ts">
-import { scrollToBottom } from "elektro";
-import { userId, userName, useChat } from "@/utils";
-
 type Props = {
   channel: string;
-  newMessagesString: string;
 };
 
-const { channel, newMessagesString = "new message" } = defineProps<Props>();
+const { channel } = defineProps<Props>();
+const { lang } = useLang();
 
 const {
   chatMessages,
   newChatMessage,
-  onNewChatMessage,
-  scrollRef,
-  textareaRef,
-  newMessagesCount,
-} = useChat(channel, userId, userName);
+  sendChatMessage,
+  scrollable,
+  textarea,
+  newChatMessagesCount,
+  scrollToBottom,
+} = useChat(channel);
+
+const newMessagesString = computed(() => {
+  if (newChatMessagesCount.value > 1) {
+    return ["new messages", "uut sõnumit"][lang.value];
+  } else {
+    return ["new message", "uus sõnum"][lang.value];
+  }
+});
 </script>
 
 <template>
   <div class="EChat">
     <div class="messagesWrapper">
-      <div class="messages" ref="scrollRef">
+      <div class="messages" ref="scrollable">
         <template v-for="message in chatMessages">
           <div v-if="message.value" class="message">
             <p v-if="message.userName" class="username">
@@ -34,12 +40,12 @@ const {
       </div>
       <EButton
         class="newMessages"
-        v-if="newMessagesCount > 0"
+        v-if="newChatMessagesCount > 0"
         size="xs"
         color="accent"
-        @click="scrollToBottom(scrollRef)"
+        @click="scrollToBottom()"
       >
-        {{ newMessagesCount }} {{ newMessagesString }}
+        {{ newChatMessagesCount }} {{ newMessagesString }}
       </EButton>
     </div>
     <div class="messageBox">
@@ -47,10 +53,10 @@ const {
       <textarea
         class="chatTextarea"
         v-model="newChatMessage"
-        ref="textareaRef"
+        ref="textarea"
         resize="none"
       />
-      <EButton size="xs" color="accent" @click="onNewChatMessage">
+      <EButton size="xs" color="accent" @click="sendChatMessage">
         Saada
       </EButton>
     </div>

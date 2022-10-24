@@ -1,10 +1,6 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from "vue";
-import { useWindow } from "../lib/window";
 import { useDraggable } from "@vueuse/core";
-import EDraggableTitlebar from "./EDraggableTitlebar.vue";
-import { desktop, Draggable } from "../utils";
-import ETitlebarButton from "./ETitlebarButton.vue";
+import { Draggable } from "~~/types/draggables";
 
 type Props = {
   draggable: Draggable;
@@ -92,7 +88,7 @@ function findCoordinates(el: Element, done: () => void) {
   // @TODO: Find a better solution for this
   // Consider using refs for selectors
   const $draggableDocked = document.querySelector(
-    `.EDraggablesDock .EDraggableTitlebar[data-id="${props.draggable.draggableId}"]`,
+    `.DraggablesDock .EDraggableTitlebar[data-id="${props.draggable.draggableId}"]`,
   );
   const draggableDockedRect = $draggableDocked?.getBoundingClientRect();
   finalAnimation.value = draggableDockedRect;

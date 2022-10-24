@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import DraggableContent from "@/components/DraggableContent.vue";
-import { computed } from "@vue/reactivity";
-import { breakpoints, Draggable, useLive } from "elektro";
-import { ref } from "vue";
-import { l } from "../utils";
+import { Draggable } from "~~/types/draggables";
 
 type Props = {
   data: Draggable[];
@@ -12,7 +8,7 @@ type Props = {
 };
 
 const { data, event } = defineProps<Props>();
-
+const { lang } = useLang();
 const draggablesState = ref<Draggable[]>(data);
 
 const { updateDraggablesDesktop, updateDraggablesMobile } = useLive({
@@ -31,7 +27,7 @@ const draggableMaximised = computed(
   <EBreadBoard>
     <NuxtLink v-if="event" :to="event.route" class="backToEvent">
       <Icon name="radix-icons:arrow-left" />
-      {{ l("Back to event", "Tagasi sündmuse juurde") }}
+      {{ ["Back to event", "Tagasi sündmuse juurde"][lang] }}
     </NuxtLink>
     <template v-if="mobile">
       <template
@@ -68,14 +64,14 @@ const draggableMaximised = computed(
       </template>
     </template>
 
-    <EDraggablesDock
+    <DraggablesDock
       v-if="mobile"
       :draggable-maximised="draggableMaximised"
       :draggables="draggablesState"
       :mobile="mobile"
       @update-draggables="updateDraggablesMobile"
     />
-    <EDraggablesDock
+    <DraggablesDock
       v-else
       :draggable-maximised="draggableMaximised"
       :draggables="draggablesState"

@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { Draggable } from "../utils";
-import EDraggableTitlebar from "./EDraggableTitlebar.vue";
+import { Draggable } from "~~/types/draggables";
 
 type Props = {
   draggable: Draggable;

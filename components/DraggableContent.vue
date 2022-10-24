@@ -1,11 +1,4 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import { newMessages } from "elektro";
-import { l, userId, userName } from "@/utils";
-import Videostream from "./Videostream.vue";
-import Chat from "./Chat.vue";
-import Controls from "./Controls.vue";
-
 export type ContentType =
   | "chat"
   | "text"
@@ -20,31 +13,13 @@ type Props = {
 };
 
 const { contentType, data } = defineProps<Props>();
-const newMessagesString = computed(() => {
-  if (newMessages.value > 1) {
-    return l("new messages", "uut sõnumit");
-  } else {
-    return l("new message", "uus sõnum");
-  }
-});
 </script>
 <template>
   <!-- Chat draggable -->
-  <Chat
-    v-if="contentType === 'chat'"
-    :channel="data.channel"
-    :userId="userId"
-    :userName="userName"
-    :new-messages-string="newMessagesString"
-  />
+  <Chat v-if="contentType === 'chat'" :channel="data.channel" />
 
   <!-- Video draggable -->
-  <Videostream
-    v-else-if="data && contentType === 'video'"
-    :streamurl="data.streamurl"
-    :streamkey="data.streamkey"
-    :viewers="data.viewers"
-  />
+  <Videostream v-else-if="data && contentType === 'video'" :url="data.url" />
 
   <!-- Event draggable -->
   <EStack

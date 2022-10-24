@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { Draggable, newMessages } from "../utils";
-import EDraggableTitlebar from "./EDraggableTitlebar.vue";
-import EChatBadge from "./EChatBadge.vue";
-import { computed } from "vue";
+import { Draggable } from "~~/types/draggables";
 
 type Props = {
   draggables: Draggable[];
@@ -28,11 +25,12 @@ const dockItems = computed(() => {
 const topOrder = computed(() => {
   return draggables.reduce((n, b) => (n.order > b.order ? n : b));
 });
+const newMessages = useNewMessages();
 </script>
 
 <template>
   <TransitionGroup
-    class="EDraggablesDock"
+    class="DraggablesDock"
     :class="{ draggableMaximised: draggableMaximised }"
     name="dock"
     tag="nav"
@@ -62,21 +60,21 @@ const topOrder = computed(() => {
 </template>
 
 <style scoped>
-.EDraggablesDock {
+.DraggablesDock {
   display: flex;
   flex-flow: wrap;
   flex-direction: column-reverse;
   width: 100%;
   z-index: 1000;
 }
-.EDraggablesDock {
+.DraggablesDock {
   transform: translateY(0%);
   transition: transform 0.3s ease-in-out;
 }
 
 /* @TODO: Add breakpoints system */
 @media only screen and (max-width: 599px) {
-  .EDraggablesDock > * {
+  .DraggablesDock > * {
     width: 100%;
     /* @TODO: add two column layout */
     /* flex: 0 0 100%; */
@@ -90,7 +88,7 @@ const topOrder = computed(() => {
   }
 }
 @media only screen and (min-width: 900px) {
-  .EDraggablesDock {
+  .DraggablesDock {
     flex-flow: nowrap;
     justify-content: flex-start;
     overflow-x: auto;
@@ -100,7 +98,7 @@ const topOrder = computed(() => {
     padding-left: var(--breadboard-tile-size);
     padding-right: var(--gap-3);
   }
-  .EDraggablesDock > * {
+  .DraggablesDock > * {
     display: inline-flex;
     margin-right: var(--m-3);
     width: var(--dock-item-size);
@@ -109,10 +107,10 @@ const topOrder = computed(() => {
     border-bottom: 0;
     cursor: pointer;
   }
-  .EDraggablesDock .isTop {
+  .DraggablesDock .isTop {
     background-color: var(--gray-600);
   }
-  .idle .EDraggablesDock {
+  .idle .DraggablesDock {
     transform: translateY(100%);
   }
 }
@@ -138,7 +136,7 @@ const topOrder = computed(() => {
     width: 0;
     translate: scale(1);
   }
-  .EDraggablesDock {
+  .DraggablesDock {
     padding-left: var(--breadboard-tile-size);
   }
 }
