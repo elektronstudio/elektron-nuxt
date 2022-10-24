@@ -48,16 +48,14 @@ const menuItemsLength = computed(() => (navItems ? navItems.length + 1 : 0));
       <Lang class="menuItem languageSwitcher smallScreen" />
       <NavLive class="menuItem" />
       <button
-        class="menuItem"
+        class="menuItem themeSwitcher"
         @click="
           () => {
             changeTheme();
             menu = false;
           }
         "
-      >
-        <Icon :name="['radix-icons:moon', 'radix-icons:sun'][theme]" />
-      </button>
+      />
       <button class="toggleNav" @click="navState = !navState">
         <Icon name="radix-icons:hamburger-menu" />
       </button>
@@ -127,6 +125,11 @@ const menuItemsLength = computed(() => (navItems ? navItems.length + 1 : 0));
   flex-grow: 1;
   margin-left: calc(var(--border-DEFAULT) * -1);
   pointer-events: none;
+}
+
+.themeSwitcher {
+  width: 1.4rem;
+  background-color: var(--fg);
 }
 
 /* @TODO: Add breakpoints system */
