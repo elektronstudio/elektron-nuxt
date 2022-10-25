@@ -109,7 +109,6 @@ export function useChat(
   watch(
     newChatMessagesCount,
     (newValue) => {
-      console.log(newValue);
       newMessages.value = newValue;
     },
     { immediate: true },
