@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted, Ref } from "vue";
+import { Ref } from "vue";
 
 export type ContentType = "chat" | "text" | "image" | "video" | "event";
 

@@ -7,26 +7,14 @@ import {
 } from "@vueuse/core";
 import { differenceInSeconds } from "date-fns";
 import { Ref } from "vue";
-import { Message } from "~~/types";
+import { Message, DraggableChatUser } from "~~/types";
 
 const route = useRoute();
 const userId = useUserId();
 const userName = useUserName();
 const userMessage = useUserMessage();
 const userPosition = useUserPosition();
-// const draggableChatState = useDraggableChatState();
-const { ws, sendMessage } = useMessages();
-
-type DraggableChatUser = {
-  userId: string;
-  userName: string;
-  x: number;
-  y: number;
-  chat: string;
-  datetime: Date;
-  idle?: number | undefined;
-  opacity?: number | undefined;
-};
+const { messages, sendMessage } = useMessages();
 
 const UPDATE_RATE_BASE = 1000;
 const UPDATE_RATE_PER_USER = 200;
@@ -42,28 +30,29 @@ function useDraggableChat(
   userName: Ref<string>,
 ) {
   const users = ref<DraggableChatUser[]>([]);
-  console.log(ws);
-  // ws.value.addEventListener("message", ({ data }) => {
-  //   const message = safeJsonParse(data);
-  //   if (message.channel === channel && message.type === "DRAGGABLECHAT") {
-  //     const user = {
-  //       userId: message.userId,
-  //       userName: message.userName,
-  //       x: message.value.x,
-  //       y: message.value.y,
-  //       chat: message.value.chat,
-  //       datetime: message.datetime,
-  //     };
-  //     const existingUserIndex = users.value?.findIndex((u) => {
-  //       return u.userId === user.userId;
-  //     });
-  //     if (users.value && existingUserIndex > -1) {
-  //       users.value[existingUserIndex] = user;
-  //     } else {
-  //       users.value.push(user);
-  //     }
-  //   }
-  // });
+  watch(messages.value, async (newValue) => {
+    // Latest message
+    const message = newValue[newValue.length - 1];
+    console.log(message);
+    if (message.channel === channel && message.type === "DRAGGABLECHAT") {
+      const user = {
+        userId: message.userId,
+        userName: message.userName,
+        x: message.value.x,
+        y: message.value.y,
+        chat: message.value.chat,
+        datetime: message.datetime,
+      };
+      const existingUserIndex = users.value?.findIndex((u) => {
+        return u.userId === user.userId;
+      });
+      if (users.value && existingUserIndex > -1) {
+        users.value[existingUserIndex] = user;
+      } else {
+        users.value.push(user);
+      }
+    }
+  });
 
   const userRef = ref<HTMLElement | null>(null);
 

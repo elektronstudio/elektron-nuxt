@@ -11,6 +11,7 @@ export const useMessages = () => {
     });
     websocket.value.addEventListener("message", ({ data }) => {
       const message = JSON.parse(data);
+      console.log(message);
       messages.value.push(message);
     });
     ws.value = websocket;
