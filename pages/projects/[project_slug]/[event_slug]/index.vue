@@ -68,6 +68,10 @@ const { lang } = useLang();
   grid-area: title;
 }
 
+.Page.SingleProduction header .title h2 {
+  margin-bottom: var(--m-3);
+}
+
 .Page.SingleProduction header h4 {
   grid-area: subtitle;
   align-self: end;
