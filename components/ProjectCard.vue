@@ -1,4 +1,3 @@
-<!-- @TODO: Should this be added to components page -->
 <script setup lang="ts">
 import { MediaItem } from "~~/types";
 
@@ -12,7 +11,7 @@ type Props = {
 const { title, author, media, nextEvent } = defineProps<Props>();
 </script>
 <template>
-  <ECard :media="media">
+  <ECard :media="media" class="ProjectCard">
     <template #header>
       <ETitle el="h3" size="lg">
         {{ title }}
@@ -21,26 +20,30 @@ const { title, author, media, nextEvent } = defineProps<Props>();
     </template>
     <template #footer>
       <p v-if="nextEvent">Järgmine etendus:</p>
-      <time v-if="nextEvent" :datetime="nextEvent">
+      <!-- <time v-if="nextEvent" :datetime="nextEvent">
         {{ nextEvent }}
-      </time>
+      </time> -->
+      <EventDatetime v-if="nextEvent" :event="nextEvent" />
     </template>
   </ECard>
 </template>
 <style scoped>
-.ECard footer,
-.ECard header h6 {
+.ProjectCard footer,
+.ProjectCard header h6 {
   font-size: var(--text-xs);
   font-family: var(--font-mono);
   text-transform: uppercase;
 }
-.ECard header h3 {
+.ProjectCard header h3 {
   margin-bottom: var(--m-2);
 }
-.ECard footer {
+.ProjectCard footer {
   justify-content: space-between;
 }
-.ECard footer p {
+.ProjectCard footer p {
   margin-right: 0.6em;
+}
+.ProjectCard :deep(.EventDatetime) {
+  color: var(--fg);
 }
 </style>

@@ -14,18 +14,18 @@ const { lang } = useLang();
 
 <template>
   <div class="Page">
-    <ETitle size="lg" v-if="currentProjects.length > 0">{{
-      ["Projects", "Projektid"][lang]
-    }}</ETitle>
+    <ETitle size="lg" v-if="currentProjects.length > 0">
+      {{ ["Projects", "Projektid"][lang] }}
+    </ETitle>
     <br />
     <div v-if="currentProjects.length > 0" class="projects">
       <template v-for="project in currentProjects">
         <NuxtLink v-if="!project.archived" :to="'/projects/' + project.slug">
           <!-- TODO: Format this, and show only future dates, needs order by event time -->
-          <ProductionCard
+          <ProjectCard
             :title="project.titles[lang]"
             :media="project.thumbnail"
-            :next-event="project.events?.length && project.events[0].start_at"
+            :next-event="project.events?.length && project.events[0]"
           />
         </NuxtLink>
       </template>
@@ -38,7 +38,7 @@ const { lang } = useLang();
     <div v-if="pastProjects.length > 0" class="projects">
       <template v-for="project in pastProjects">
         <NuxtLink :to="'/projects/' + project.slug">
-          <ProductionCard
+          <ProjectCard
             :title="project.titles[lang]"
             :media="project.thumbnail"
           />

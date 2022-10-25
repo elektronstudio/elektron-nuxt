@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import EContent from "./EContent.vue";
-import ETitle from "./ETitle.vue";
 type Props = {
   items: {
     title: string;
