@@ -50,7 +50,7 @@ const { lang } = useLang();
 
 <style scoped>
 .Page {
-  padding: var(--p-5);
+  padding: var(--p-4);
 }
 
 .projects {

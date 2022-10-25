@@ -87,6 +87,8 @@ const { cards } = defineProps<Props>();
 }
 .ContentBlocks > h2 {
   grid-column: 1 / -1;
+}
+.ContentBlocks > h2:not(:first-child) {
   margin-top: var(--m-8);
 }
 /* @TODO: Add breakpoints system */
