@@ -33,7 +33,7 @@ export type Event = {
   videostreams?: Videostream[];
 };
 
-export type Videostream = {
+type Videostream = {
   ingest: string;
   streamkey: string;
   url: string;

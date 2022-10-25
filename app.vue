@@ -16,4 +16,7 @@ const { idle } = useIdle(3000); // 3 seconds idle
     /> -->
     <NuxtPage />
   </NuxtLayout>
+  <UserInfo />
+  <EWindowBorder />
+  <DraggableChat />
 </template>

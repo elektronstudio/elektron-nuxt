@@ -1,30 +1,20 @@
 <script setup lang="ts">
-import { computed, Ref, ref, watch, watchEffect } from "vue";
 import {
   debouncedWatch,
-  throttledWatch,
   useDraggable,
-  useWindowSize,
-  useMagicKeys,
   useNow,
+  useWindowSize,
 } from "@vueuse/core";
-import { safeJsonParse } from "elektro";
-import type { Message } from "elektro";
-import {
-  userId,
-  userName,
-  userMessage,
-  userPosition,
-  draggableChatState,
-  remap,
-  useMessage,
-} from "@/utils";
-import { useRouter, useRoute } from "vue-router";
 import { differenceInSeconds } from "date-fns";
-const router = useRouter();
-const route = useRoute();
+import { Ref } from "vue";
+import { Message } from "~~/types";
 
-const { ws, sendMessage } = useMessage();
+const route = useRoute();
+const userId = useUserId();
+const userName = useUserName();
+const userMessage = useUserMessage();
+const userPosition = useUserPosition();
+const { ws, sendMessage } = useMessages();
 
 type DraggableChatUser = {
   userId: string;
@@ -51,28 +41,28 @@ function useDraggableChat(
   userName: Ref<string>,
 ) {
   const users = ref<DraggableChatUser[]>([]);
-
-  ws.addEventListener("message", ({ data }) => {
-    const message = safeJsonParse(data);
-    if (message.channel === channel && message.type === "DRAGGABLECHAT") {
-      const user = {
-        userId: message.userId,
-        userName: message.userName,
-        x: message.value.x,
-        y: message.value.y,
-        chat: message.value.chat,
-        datetime: message.datetime,
-      };
-      const existingUserIndex = users.value?.findIndex((u) => {
-        return u.userId === user.userId;
-      });
-      if (users.value && existingUserIndex > -1) {
-        users.value[existingUserIndex] = user;
-      } else {
-        users.value.push(user);
-      }
-    }
-  });
+  console.log(ws);
+  // ws.value.addEventListener("message", ({ data }) => {
+  //   const message = safeJsonParse(data);
+  //   if (message.channel === channel && message.type === "DRAGGABLECHAT") {
+  //     const user = {
+  //       userId: message.userId,
+  //       userName: message.userName,
+  //       x: message.value.x,
+  //       y: message.value.y,
+  //       chat: message.value.chat,
+  //       datetime: message.datetime,
+  //     };
+  //     const existingUserIndex = users.value?.findIndex((u) => {
+  //       return u.userId === user.userId;
+  //     });
+  //     if (users.value && existingUserIndex > -1) {
+  //       users.value[existingUserIndex] = user;
+  //     } else {
+  //       users.value.push(user);
+  //     }
+  //   }
+  // });
 
   const userRef = ref<HTMLElement | null>(null);
 
@@ -129,7 +119,7 @@ function useDraggableChat(
           chat: userMessage.value,
         },
       };
-      sendMessage(message);
+      sendMessage.value(message);
     },
     {
       immediate: true,
@@ -161,6 +151,7 @@ function useDraggableChat(
 
 const { debounce, userRef, userStyle, otherUsers, otherUserStyle, chat } =
   useDraggableChat("draggablechat", userId, userName);
+const draggableChatState = useDraggableChatState();
 </script>
 
 <template>

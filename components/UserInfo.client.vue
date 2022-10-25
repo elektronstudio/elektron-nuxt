@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { l, userName, userMessage, draggableChatState } from "@/utils";
-import { ref } from "vue";
+const { lang } = useLang();
+const userName = useUserName();
+const userMessage = useUserMessage();
+const draggableChatState = useDraggableChatState();
 </script>
 
 <template>
@@ -8,7 +10,7 @@ import { ref } from "vue";
     <EDialog
       v-if="draggableChatState"
       class="UserInfo"
-      :title="l('Chat', 'Chat')"
+      :title="['Chat', 'Chat'][lang]"
       :dialog-state="draggableChatState"
       @close-dialog="draggableChatState = false"
     >

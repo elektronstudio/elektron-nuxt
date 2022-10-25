@@ -43,3 +43,11 @@ export const stringify = (obj: object, _ = undefined, space = 2) =>
 
 export const truncate = (str, length = 100) =>
   str.length <= length ? str : str.slice(0, length) + "...";
+
+export function safeJsonParse(str: any) {
+  try {
+    return JSON.parse(str);
+  } catch (err) {
+    return null;
+  }
+}

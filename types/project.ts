@@ -43,7 +43,7 @@ export interface Localization {
   details: string;
 }
 
-export interface Videostream {
+interface Videostream {
   ingest: string;
   streamkey: string;
   url: string;
