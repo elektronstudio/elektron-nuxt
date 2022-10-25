@@ -33,7 +33,6 @@ function useDraggableChat(
   watch(messages.value, async (newValue) => {
     // Latest message
     const message = newValue[newValue.length - 1];
-    console.log(message);
     if (message.channel === channel && message.type === "DRAGGABLECHAT") {
       const user = {
         userId: message.userId,
@@ -96,8 +95,9 @@ function useDraggableChat(
   );
 
   debouncedWatch(
-    [x, y, userMessage],
+    [x, y, userMessage.value],
     () => {
+      console.log(userMessage.value);
       const message: Message = {
         channel,
         type: "DRAGGABLECHAT",
