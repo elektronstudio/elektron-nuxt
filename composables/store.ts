@@ -1,3 +1,3 @@
-import { useStorage } from "@vueuse/core";
+import { ref } from "vue";
 
-export const useNewMessages = () => useStorage<number>("new_messages", 0);
+export const newMessages = ref<number>(0);

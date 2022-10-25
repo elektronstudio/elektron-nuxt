@@ -25,7 +25,6 @@ const dockItems = computed(() => {
 const topOrder = computed(() => {
   return draggables.reduce((n, b) => (n.order > b.order ? n : b));
 });
-const newMessages = useNewMessages();
 </script>
 
 <template>

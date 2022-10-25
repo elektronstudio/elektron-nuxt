@@ -22,7 +22,6 @@ export function useChat(
   } = options;
   const scrollable = ref<HTMLElement | null>(null);
   const textarea = ref<HTMLInputElement | HTMLTextAreaElement | null>(null);
-  const newMessages = useNewMessages();
   const { messages, sendMessage } = useMessages();
   const scrollData = useScroll(scrollable);
   const { focused: focus } = useFocus(textarea, { initialValue: true });
@@ -110,6 +109,7 @@ export function useChat(
   watch(
     newChatMessagesCount,
     (newValue) => {
+      console.log(newValue);
       newMessages.value = newValue;
     },
     { immediate: true },
