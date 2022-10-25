@@ -46,7 +46,6 @@ const menuItemsLength = computed(() => (navItems ? navItems.length + 1 : 0));
       </nav>
       <span class="menuItem spacer"></span>
       <Lang class="menuItem languageSwitcher smallScreen" />
-      <NavLive class="menuItem" />
       <button
         class="menuItem themeSwitcher"
         @click="
@@ -56,6 +55,7 @@ const menuItemsLength = computed(() => (navItems ? navItems.length + 1 : 0));
           }
         "
       />
+      <NavLive class="menuItem" />
       <button class="toggleNav" @click="navState = !navState">
         <Icon name="radix-icons:hamburger-menu" />
       </button>

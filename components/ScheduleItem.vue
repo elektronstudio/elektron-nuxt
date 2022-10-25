@@ -23,8 +23,8 @@ const { lang } = useLang();
         </ETitle>
         <NuxtLink :to="event.eventLink">
           <ETitle el="h4" size="xs" class="eventTitle">
-            <span v-if="event.projects">
-              {{ event.projects?.[0].titles[lang] }} /
+            <span v-if="event.projects?.[0]">
+              {{ event.projects[0].titles[lang] }} /
             </span>
             {{ event.title }}
           </ETitle>

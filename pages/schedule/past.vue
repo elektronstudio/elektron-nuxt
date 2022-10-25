@@ -3,24 +3,28 @@ definePageMeta({
   title: "Some Page",
 });
 
+const today = new Date().toISOString().split("T")[0];
+
 const { data: upcomingEvents, error } = await useEvents({
-  filters: { end_at: { $gt: today() } },
+  sort: ["start_at:desc"],
+  filters: { start_at: { $lt: today } },
 });
+
 const { lang } = useLang();
 </script>
 
 <template>
   <ErrorCard v-if="error" />
-  <ScheduleWrapper v-else key="future">
+  <ScheduleWrapper v-else key="past">
     <aside>
-      <NuxtLink to="/schedule/past">
+      <NuxtLink to="/schedule">
         <EButton size="xs" el="a" color="transparent">
           <Icon name="radix-icons:arrow-left" />
-          {{ ["See the past events", "Vaata toimunud sündmusi"][lang] }}
+          {{ ["Upcoming events", "Tulevased sündmused"][lang] }}
         </EButton>
       </NuxtLink>
       <ETitle>
-        {{ ["Upcoming events", "Tulevased sündmused"][lang] }}
+        {{ ["Past events", "Toimunud sündmused"][lang] }}
       </ETitle>
     </aside>
     <section>
