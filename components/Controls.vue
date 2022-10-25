@@ -7,8 +7,8 @@ type Props = {
 const { controls: defaultControls } = defineProps<Props>();
 
 const { sendMessage } = useMessages();
-const userId = useUserId();
-const userName = useUserName();
+// const userId = useUserId();
+// const userName = useUserName();
 
 const controls = ref([]);
 

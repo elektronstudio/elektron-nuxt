@@ -10,10 +10,10 @@ import { Ref } from "vue";
 import { Message, DraggableChatUser } from "~~/types";
 
 const route = useRoute();
-const userId = useUserId();
-const userName = useUserName();
-const userMessage = useUserMessage();
-const userPosition = useUserPosition();
+// const userId = useUserId();
+// const userName = useUserName();
+// const userMessage = useUserMessage();
+// const userPosition = useUserPosition();
 const { messages, sendMessage } = useMessages();
 
 const UPDATE_RATE_BASE = 1000;
@@ -97,7 +97,6 @@ function useDraggableChat(
   debouncedWatch(
     [x, y, userMessage.value],
     () => {
-      console.log(userMessage.value);
       const message: Message = {
         channel,
         type: "DRAGGABLECHAT",
@@ -151,7 +150,6 @@ const { debounce, userRef, userStyle, otherUsers, otherUserStyle, chat } =
       chatActive: draggableChatState,
     }"
   >
-    {{ draggableChatState }}
     <div
       v-if="draggableChatState"
       :chat="{

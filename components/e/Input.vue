@@ -49,7 +49,7 @@ const inputValue = computed({
   />
 </template>
 
-<style scoped>
+<style>
 .EInput {
   display: flex;
   flex-direction: column;

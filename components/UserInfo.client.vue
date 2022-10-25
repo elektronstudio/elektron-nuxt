@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import { userName, userMessage } from "~~/composables/user";
 const { lang } = useLang();
-const userName = useUserName();
-const userMessage = useUserMessage();
+// const userName = useUserName();
+// const userMessage = useUserMessage();
 // const draggableChatState = useDraggableChatState();
 
 const handleClose = () => {
@@ -23,9 +24,9 @@ const handleToggle = () => {
       @close-dialog="handleClose"
     >
       <p style="font-size: 0.8em">Your name</p>
-      <EInput v-model="userName" />
+      <input v-model="userName" />
       <p style="font-size: 0.8em; margin-top: 0.5em">Your message</p>
-      <EInput v-model="userMessage" />
+      <input v-model="userMessage" />
     </EDialog>
   </Transition>
   <EDraggableTitlebar :title="userName" class="userTab" @click="handleToggle">
