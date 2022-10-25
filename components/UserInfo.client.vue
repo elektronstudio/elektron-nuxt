@@ -2,7 +2,15 @@
 const { lang } = useLang();
 const userName = useUserName();
 const userMessage = useUserMessage();
-const draggableChatState = useDraggableChatState();
+// const draggableChatState = useDraggableChatState();
+
+const handleClose = () => {
+  draggableChatState.value = false;
+};
+
+const handleToggle = () => {
+  draggableChatState.value = !draggableChatState.value;
+};
 </script>
 
 <template>
@@ -12,7 +20,7 @@ const draggableChatState = useDraggableChatState();
       class="UserInfo"
       :title="['Chat', 'Chat'][lang]"
       :dialog-state="draggableChatState"
-      @close-dialog="draggableChatState = false"
+      @close-dialog="handleClose"
     >
       <p style="font-size: 0.8em">Your name</p>
       <EInput v-model="userName" />
@@ -20,11 +28,7 @@ const draggableChatState = useDraggableChatState();
       <EInput v-model="userMessage" />
     </EDialog>
   </Transition>
-  <EDraggableTitlebar
-    :title="userName"
-    class="userTab"
-    @click="draggableChatState = !draggableChatState"
-  >
+  <EDraggableTitlebar :title="userName" class="userTab" @click="handleToggle">
     <span class="userIndicator" />
   </EDraggableTitlebar>
 </template>

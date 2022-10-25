@@ -14,6 +14,7 @@ const userId = useUserId();
 const userName = useUserName();
 const userMessage = useUserMessage();
 const userPosition = useUserPosition();
+// const draggableChatState = useDraggableChatState();
 const { ws, sendMessage } = useMessages();
 
 type DraggableChatUser = {
@@ -151,7 +152,6 @@ function useDraggableChat(
 
 const { debounce, userRef, userStyle, otherUsers, otherUserStyle, chat } =
   useDraggableChat("draggablechat", userId, userName);
-const draggableChatState = useDraggableChatState();
 </script>
 
 <template>
@@ -162,6 +162,7 @@ const draggableChatState = useDraggableChatState();
       chatActive: draggableChatState,
     }"
   >
+    {{ draggableChatState }}
     <div
       v-if="draggableChatState"
       :chat="{
