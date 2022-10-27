@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { Event } from "~~/types";
 
-// @TODO: Type this
 type Props = {
   event: Event;
   size?: "xs" | "sm" | "md" | "lg";
