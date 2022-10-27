@@ -79,7 +79,7 @@ const {
         :key="event1.projectLink"
         :event="event1"
         :dialog-state="dialogState"
-        :is-event="false"
+        :is-event="true"
         @close-dialog="dialogState = false"
       />
     </div>
