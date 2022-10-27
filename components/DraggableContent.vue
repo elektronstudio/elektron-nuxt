@@ -26,12 +26,10 @@ const { contentType, data } = defineProps<Props>();
     v-else-if="data && contentType === 'event'"
     style="padding: var(--p-5)"
   >
-    <!-- TODO Reuse existing back button UI -->
     <template v-if="data.event">
       <ETitle size="lg">Live event: {{ data.event.title }}</ETitle>
       <EContent v-html="data.event.intro" />
     </template>
-    <!-- TODO What about event.description? -->
   </EStack>
 
   <Controls v-else-if="data && contentType === 'controls'" :data="data" />

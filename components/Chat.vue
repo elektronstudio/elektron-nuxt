@@ -58,7 +58,6 @@ const newMessagesString = computed(() => {
       </EButton>
     </div>
     <div class="messageBox">
-      <!-- TODO: Make it work with ref -->
       <textarea
         class="chatTextarea"
         v-model="newChatMessage"
