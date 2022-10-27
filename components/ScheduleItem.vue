@@ -29,7 +29,7 @@ const { lang } = useLang();
             {{ event.title }}
           </ETitle>
         </NuxtLink>
-        <EContent nolinks :content="event.intros[lang]" />
+        <!-- <EContent nolinks :content="event.intros[lang]" /> -->
       </header>
       <section>
         <EventButtons :event="event" />
@@ -72,7 +72,9 @@ const { lang } = useLang();
   display: flex;
   flex-direction: column;
 }
-.ScheduleItem header .ETitle > span {
+
+.ScheduleItem header .ETitle > span,
+.ScheduleItem .EContent {
   color: var(--gray-300);
 }
 .ScheduleItem section {
@@ -85,24 +87,15 @@ const { lang } = useLang();
 }
 .eventTitle {
   color: var(--fg);
+  margin-bottom: var(--m-3);
 }
 /* @TODO: Add breakpoints system */
-@media only screen and (max-width: 599px) {
-  .ScheduleItem section {
-    margin-top: var(--m-3);
-  }
-}
 
 @media only screen and (min-width: 600px) {
   .ScheduleItem .content {
     flex-grow: 1;
     flex-direction: row;
     justify-content: space-between;
-  }
-
-  .ScheduleItem section {
-    flex-direction: row;
-    align-items: flex-start;
   }
 }
 </style>
