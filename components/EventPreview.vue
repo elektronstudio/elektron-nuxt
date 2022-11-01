@@ -40,9 +40,7 @@ const emit = defineEmits<{
         <ETitle el="h3">
           {{ event.titles[0] }}
         </ETitle>
-        <EContent el="div">
-          <div v-html="event.intros[lang]" />
-        </EContent>
+        <EContent :content="event.intros[lang]" />
       </header>
       <footer>
         <EventButtons v-if="isEvent" :event="event" />

@@ -20,9 +20,12 @@ const { lang } = useLang();
         <ETitle el="h2" size="lg" :title="event.title" />
         <h4 v-if="event.authors">{{ event.authors }}</h4>
       </div>
-      <EContent v-if="event.intros" class="Description" size="lg">
-        <div v-html="event.intros[lang]" />
-      </EContent>
+      <EContent
+        v-if="event.intros"
+        class="Description"
+        size="lg"
+        :content="event.intros[lang]"
+      />
       <div class="buttons">
         <EventButtons :event="event" />
       </div>
@@ -35,7 +38,7 @@ const { lang } = useLang();
           v-if="event.detailss[lang]"
           :details="parseDetails(event.detailss[lang])"
         />
-        <EContent v-html="event.descriptions[lang]" />
+        <EContent :content="event.descriptions[lang]" />
       </EBox>
     </main>
   </article>

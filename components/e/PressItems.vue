@@ -14,8 +14,10 @@ const { items } = defineProps<Props>();
   <section class="EPressItems">
     <a v-for="item in items" :href="item.link" target="_blank">
       <ETitle size="xs">{{ item.title }}</ETitle>
-      <EContent el="p">
-        <small>{{ item.description }}</small>
+      <EContent>
+        <p>
+          <small>{{ item.description }}</small>
+        </p>
       </EContent>
     </a>
   </section>

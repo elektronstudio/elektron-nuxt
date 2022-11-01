@@ -28,9 +28,12 @@ const { lang } = useLang();
         </ETitle>
       </div>
 
-      <EContent v-if="project.intros[lang]" class="Description" size="lg">
-        <div v-html="project.intros[lang]" />
-      </EContent>
+      <EContent
+        v-if="project.intros[lang]"
+        class="Description"
+        size="lg"
+        :content="project.intros[lang]"
+      />
     </header>
 
     <ImageSlider v-if="project.images" :images="project.images" />
@@ -40,9 +43,7 @@ const { lang } = useLang();
           v-if="project.detailss[lang]"
           :details="parseDetails(project.detailss[lang])"
         />
-        <EContent el="div">
-          <div v-html="project.descriptions[lang]" />
-        </EContent>
+        <EContent el="div" :content="project.descriptions[lang]" />
       </EBox>
       <EBox v-if="project.events" class="SideContent" el="aside">
         <template v-if="project.events">

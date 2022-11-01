@@ -1,6 +1,5 @@
 <script setup lang="ts">
 type Props = {
-  el?: "article" | "section" | string;
   size?: "sm" | "md" | "lg";
   content?: string;
   nolinks?: boolean;
@@ -8,7 +7,6 @@ type Props = {
 };
 
 const {
-  el = "article",
   size = "md",
   content,
   nolinks = false,
@@ -21,16 +19,10 @@ const html = computed(() => {
 </script>
 
 <template>
-  <component
-    v-if="content"
-    :is="el"
-    :class="size"
-    class="EContent"
-    v-html="html"
-  />
-  <component v-else :is="el" :class="size" class="EContent">
+  <article v-if="content" :class="size" class="EContent" v-html="html" />
+  <article v-else :class="size" class="EContent">
     <slot />
-  </component>
+  </article>
 </template>
 
 <style scoped>

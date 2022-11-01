@@ -10,7 +10,7 @@ const { title } = defineProps<Props>();
   <EBox color="accent" ratio="1 / 1" layout="columns1">
     <ETitle v-if="title" el="h3" size="lg" :title="title" />
     <a :href="url" target="_blank" :alt="`Read more on ${title}`">
-      <EContent>Read more</EContent>
+      Read more
     </a>
   </EBox>
 </template>

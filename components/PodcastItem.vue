@@ -24,9 +24,7 @@ const { lang } = useLang();
       <ETitle el="h5" size="sm">
         {{ formatDatetime(new Date(episode.isoDate)) }}
       </ETitle>
-      <EContent>
-        <div v-html="episode['content:encoded']" />
-      </EContent>
+      <EContent :content="episode['content:encoded']" />
       <audio class="audio" controls :src="episode.enclosure.url" />
     </div>
   </div>

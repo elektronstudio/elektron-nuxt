@@ -26,7 +26,7 @@ const episodes = computed(() =>
         v-if="podcastPage.intros"
         class="Description"
         size="lg"
-        v-html="podcastPage.intros[lang]"
+        :content="podcastPage.intros[lang]"
       />
     </header>
     <ImageSlider v-if="podcastPage.images" :images="podcastPage.images" />
@@ -36,7 +36,7 @@ const episodes = computed(() =>
           v-if="podcastPage.detailss[lang]"
           :details="parseDetails(podcastPage.detailss[lang])"
         />
-        <EContent v-html="podcastPage.descriptions[lang]" />
+        <EContent :content="podcastPage.descriptions[lang]" />
       </EBox>
       <EBox v-if="episodes" class="SideContent" el="aside">
         <ETitle el="h3" size="lg">Latest episodes</ETitle>
