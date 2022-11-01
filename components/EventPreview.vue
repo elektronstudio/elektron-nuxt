@@ -66,7 +66,7 @@ const emit = defineEmits<{
   width: 100%;
   max-width: 40rem;
 }
-.ELivePreview :deep(article) {
+.ELivePreview :deep(.wrapper) {
   position: relative;
   display: flex;
   flex-direction: column-reverse;
@@ -113,7 +113,7 @@ const emit = defineEmits<{
 }
 
 @media only screen and (min-width: 600px) {
-  .ELivePreview :deep(article) {
+  .ELivePreview :deep(.wrapper) {
     display: grid;
     grid-template-columns: 1fr 1fr;
   }

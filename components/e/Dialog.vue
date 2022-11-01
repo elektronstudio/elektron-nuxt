@@ -14,7 +14,7 @@ const emit = defineEmits<{
     <EDraggableTitlebar :title="title">
       <ETitlebarButton icon="cross" @click="emit('close-dialog')" />
     </EDraggableTitlebar>
-    <article>
+    <article class="wrapper">
       <slot />
     </article>
   </dialog>
