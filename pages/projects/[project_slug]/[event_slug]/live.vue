@@ -76,12 +76,68 @@ const data = computed(() => {
   // }
   return d as Draggable[];
 });
+
+const draggablesState = ref<Draggable[]>(data.value);
+
+const { updateDraggablesDesktop, updateDraggablesMobile } = useLive({
+  data: data.value,
+  draggablesState,
+});
+
+const mobile = breakpoints.smaller("large");
 </script>
 
 <template>
   <ErrorCard v-if="error" />
   <template v-else>
     <BackToEvent :event="event" />
-    <LiveView :data="data" :event="event" />
+    <EBreadBoard>
+      <template v-if="mobile">
+        <template
+          v-for="draggable in draggablesState"
+          :key="draggable.draggableId"
+        >
+          <EDraggableMobile
+            :draggable="draggable"
+            @update-draggables="updateDraggablesMobile"
+          >
+            <DraggableContent
+              v-if="draggable.contentType"
+              :content-type="draggable.contentType"
+              :data="draggable.data"
+            />
+          </EDraggableMobile>
+        </template>
+      </template>
+      <template v-else>
+        <template
+          v-for="draggable in draggablesState"
+          :key="draggable.draggableId"
+        >
+          <EDraggable
+            :draggable="draggable"
+            @update-draggables="updateDraggablesDesktop"
+          >
+            <DraggableContent
+              v-if="draggable.contentType"
+              :content-type="draggable.contentType"
+              :data="draggable.data"
+            />
+          </EDraggable>
+        </template>
+      </template>
+
+      <DraggablesDock
+        v-if="mobile"
+        :draggables="draggablesState"
+        :mobile="mobile"
+        @update-draggables="updateDraggablesMobile"
+      />
+      <DraggablesDock
+        v-else
+        :draggables="draggablesState"
+        @update-draggables="updateDraggablesDesktop"
+      />
+    </EBreadBoard>
   </template>
 </template>

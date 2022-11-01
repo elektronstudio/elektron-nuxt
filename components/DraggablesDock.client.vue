@@ -3,11 +3,10 @@ import { Draggable } from "~~/composables/draggables";
 
 type Props = {
   draggables: Draggable[];
-  draggableMaximised: boolean;
   mobile?: boolean;
 };
 
-const { draggables, draggableMaximised, mobile } = defineProps<Props>();
+const { draggables, mobile } = defineProps<Props>();
 
 const emit = defineEmits<{
   (e: "update-draggables", draggable: Draggable): void;
@@ -28,12 +27,7 @@ const topOrder = computed(() => {
 </script>
 
 <template>
-  <TransitionGroup
-    class="DraggablesDock"
-    :class="{ draggableMaximised: draggableMaximised }"
-    name="dock"
-    tag="nav"
-  >
+  <TransitionGroup class="DraggablesDock" name="dock" tag="nav">
     <EDraggableTitlebar
       v-for="draggable in dockItems"
       :title="draggable.title"
