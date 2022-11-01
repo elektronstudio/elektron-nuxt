@@ -80,5 +80,8 @@ const data = computed(() => {
 
 <template>
   <ErrorCard v-if="error" />
-  <LiveView v-else :data="data" :event="event" />
+  <template v-else>
+    <BackToEvent :event="event" />
+    <LiveView :data="data" :event="event" />
+  </template>
 </template>

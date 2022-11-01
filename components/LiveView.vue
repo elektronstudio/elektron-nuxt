@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import { Draggable } from "~~/composables/draggables";
+import { Event } from "~~/types";
 
 type Props = {
   data: Draggable[];
-  // @TODO Proper type
-  event: any;
+  event: Event;
 };
 
-const { data, event } = defineProps<Props>();
-const { lang } = useLang();
+const { data } = defineProps<Props>();
 const draggablesState = ref<Draggable[]>(data);
 
 const { updateDraggablesDesktop, updateDraggablesMobile } = useLive({
@@ -25,10 +24,6 @@ const draggableMaximised = computed(
 
 <template>
   <EBreadBoard>
-    <NuxtLink v-if="event" :to="event.eventLink" class="backToEvent">
-      <Icon name="radix-icons:arrow-left" />
-      {{ ["Back to event", "Tagasi sündmuse juurde"][lang] }}
-    </NuxtLink>
     <template v-if="mobile">
       <template
         v-for="draggable in draggablesState"
@@ -79,46 +74,3 @@ const draggableMaximised = computed(
     />
   </EBreadBoard>
 </template>
-
-<style scoped>
-.backToEvent {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  text-transform: uppercase;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-}
-.backToEvent svg {
-  margin-right: var(--m-1);
-  width: 1em;
-  height: 1em;
-}
-
-@media only screen and (max-width: 899px) {
-  .backToEvent {
-    width: 100%;
-    height: var(--h-6);
-    background-color: var(--bg);
-    border-bottom: 1px solid var(--gray-500);
-    padding-left: var(--p-2);
-    padding-right: var(--p-6);
-  }
-}
-@media only screen and (min-width: 900px) {
-  .backToEvent {
-    position: fixed;
-    top: var(--p-2);
-    left: var(--p-2);
-    opacity: 1;
-    transition: opacity 0.3s ease-in-out;
-    color: var(--gray-300);
-  }
-  .idle .backToEvent {
-    opacity: 0;
-  }
-}
-.EBreadBoard {
-  height: var(--app-height, 100vh);
-}
-</style>

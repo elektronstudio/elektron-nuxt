@@ -16,7 +16,6 @@ export type Draggable = {
   order: number;
   contentType?: ContentType;
   data?: any;
-  chatMessages?: number;
   hideTitleBarOnIdle?: boolean;
 };
 
