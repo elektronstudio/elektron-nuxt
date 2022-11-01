@@ -37,7 +37,7 @@ const { lang } = useLang();
     {{ ["You have a ticket", "Sul on ürituse pilet"][lang] }}
   </p> -->
   <EButton
-    v-else-if="event.status === 'REQUIRES_TICKET'"
+    v-else-if="event.status === 'REQUIRES_TICKET' && urgency === 'future'"
     v-for="ticketLink in event.ticketLinks"
     :href="ticketLink"
     target="_blank"
