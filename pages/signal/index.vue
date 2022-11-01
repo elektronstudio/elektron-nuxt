@@ -15,7 +15,7 @@ const episodes = computed(() =>
 
 <template>
   <ErrorCard v-if="podcastPageError || podcastError" />
-  <article v-else class="Page SingleProduction" v-if="podcastPage">
+  <article v-else class="Page SingleProduction">
     <header>
       <ETitle el="h1" size="lg">
         {{ podcastPage.titles[lang] }}
