@@ -41,20 +41,21 @@ const menuItemsLength = computed(() => (navItems ? navItems.length + 1 : 0));
         >
           {{ item.label[lang] }}
         </NuxtLink>
-        <!-- @TODO: Consider using client-side mediaQuery component -->
+        <!-- TODO: Consider using client-side mediaQuery component -->
         <Lang class="menuItem languageSwitcher largeScreen" />
       </nav>
       <span class="menuItem spacer"></span>
       <Lang class="menuItem languageSwitcher smallScreen" />
-      <button
+      <!-- TODO: theme switcher  -->
+      <!-- <button
         class="menuItem themeSwitcher"
         @click="
           () => {
             changeTheme();
-            menu = false;
+            navState = false;
           }
         "
-      />
+      /> -->
       <NavLive class="menuItem" />
       <button class="toggleNav" @click="navState = !navState">
         <Icon name="radix-icons:hamburger-menu" />
@@ -94,7 +95,7 @@ const menuItemsLength = computed(() => (navItems ? navItems.length + 1 : 0));
 }
 .languageSwitcher {
   margin-left: auto;
-  width: 4rem;
+  max-width: 4rem;
 }
 .languageSwitcher.smallScreen {
   margin-right: calc(var(--border-DEFAULT) * -1);
@@ -186,11 +187,14 @@ const menuItemsLength = computed(() => (navItems ? navItems.length + 1 : 0));
     transition: transform 0.2s ease;
   }
   .menu {
-    display: grid;
     flex-grow: 1;
-    --menu-items-count: v-bind(menuItemsLength);
-    grid-template-columns: repeat(var(--menu-items-count), 1fr);
+    display: flex;
+    flex-direction: row;
     margin-left: calc(var(--border-DEFAULT) * -1);
+  }
+  .menu > .menuItem {
+    flex-shrink: 0;
+    flex-grow: 1;
   }
   .menu > .menuItem:not(:first-child) {
     margin-left: calc(var(--border-DEFAULT) * -1);
@@ -198,7 +202,7 @@ const menuItemsLength = computed(() => (navItems ? navItems.length + 1 : 0));
   .languageSwitcher {
     margin-left: calc(var(--border-DEFAULT) * -1);
     margin-right: 0;
-    width: auto;
+    /* width: auto; */
   }
   .homeButton {
     min-width: 10rem;
