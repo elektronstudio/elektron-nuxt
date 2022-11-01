@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import ELabel from "./ELabel.vue";
-import { randomString } from "../utils/string";
-
 type ModelValue = string | number;
 
 type Props = {
@@ -40,7 +36,7 @@ const inputValue = computed({
     {{ label }}
   </ELabel>
   <textarea
-    className="ETextarea"
+    class="ETextarea"
     v-model="inputValue"
     :placeholder="placeholder"
     :name="name"

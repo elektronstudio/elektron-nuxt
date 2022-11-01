@@ -16,12 +16,9 @@ const onValidate = async () => {
 </script>
 
 <template>
-  <Stack
-    class="grid h-full place-content-center place-items-center p-8 text-center"
-  >
-    <Title>{{ ["Validate your ticket", "Piletikontroll"][lang] }}</Title>
-    <Content
-      class="max-w-[40ch]"
+  <div class="wrapper">
+    <ETitle>{{ ["Validate your ticket", "Piletikontroll"][lang] }}</ETitle>
+    <EContent
       :content="
         parseMarkdown(
           [
@@ -31,9 +28,27 @@ const onValidate = async () => {
         )
       "
     />
-    <Textarea v-model="code" placeholder="Code" class="w-[12ch]" />
-    <Button primary @click="onValidate">
+    <EFormTextarea v-model="code" placeholder="Code" class="w-[12ch]" />
+    <EButton color="accent" size="sm" @click="onValidate">
       {{ ["Submit ticket code", "Kontrolli pileti koodi"][lang] }}
-    </Button>
-  </Stack>
+    </EButton>
+  </div>
 </template>
+
+<style scoped>
+.wrapper {
+  display: grid;
+  place-content: center;
+  place-items: center;
+  height: 100%;
+  padding: var(--p-8);
+  text-align: center;
+}
+.ETitle {
+  margin-bottom: 1rem;
+}
+.EContent {
+  max-width: 40ch;
+  margin-bottom: 1rem;
+}
+</style>
