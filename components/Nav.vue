@@ -96,6 +96,7 @@ const menuItemsLength = computed(() => (navItems ? navItems.length + 1 : 0));
 .languageSwitcher {
   margin-left: auto;
   width: 4rem;
+  max-width: 4rem;
 }
 .languageSwitcher.smallScreen {
   margin-right: calc(var(--border-DEFAULT) * -1);
