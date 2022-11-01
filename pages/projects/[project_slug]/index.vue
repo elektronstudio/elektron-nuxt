@@ -10,7 +10,8 @@ const { lang } = useLang();
 </script>
 
 <template>
-  <article v-if="project" class="Page SingleProduction">
+  <ErrorCard v-if="error" />
+  <article v-else class="Page SingleProduction">
     <header>
       <div class="title">
         <NuxtLink to="/projects">

@@ -3,7 +3,8 @@ const { data, error } = await useAboutPage();
 </script>
 
 <template>
-  <main class="Page About" v-if="data.cards">
+  <ErrorCard v-if="error" />
+  <main class="Page About" v-else>
     <ContentBlocks :cards="data.cards" />
   </main>
 </template>

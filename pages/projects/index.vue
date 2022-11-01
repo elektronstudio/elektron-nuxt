@@ -13,7 +13,8 @@ const { lang } = useLang();
 </script>
 
 <template>
-  <div class="Page">
+  <ErrorCard v-if="currentError || pastError" />
+  <div v-else class="Page">
     <ETitle size="lg" v-if="currentProjects.length > 0">
       {{ ["Projects", "Projektid"][lang] }}
     </ETitle>

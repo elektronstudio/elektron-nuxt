@@ -46,7 +46,8 @@ const {
 // });
 </script>
 <template>
-  <div class="Page">
+  <ErrorCard v-if="frontpageError" />
+  <div v-else class="Page">
     <div class="videoWrapper" :class="{ dialogActive: dialogState }">
       <Transition>
         <ETitle v-if="!dialogState" size="lg" class="about">

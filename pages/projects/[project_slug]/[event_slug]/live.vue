@@ -79,5 +79,6 @@ const data = computed(() => {
 </script>
 
 <template>
-  <LiveView v-if="data" :data="data" :event="event" />
+  <ErrorCard v-if="error" />
+  <LiveView v-else :data="data" :event="event" />
 </template>
