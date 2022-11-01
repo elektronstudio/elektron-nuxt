@@ -50,7 +50,7 @@ const inputValue = computed({
 .ETextarea {
   display: flex;
   flex-direction: column;
-  margin-bottom: var(--p-3);
+  margin-bottom: var(--m-4);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   border: 1px solid var(--gray-300);

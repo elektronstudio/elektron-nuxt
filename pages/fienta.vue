@@ -45,10 +45,10 @@ const onValidate = async () => {
   text-align: center;
 }
 .ETitle {
-  margin-bottom: 1rem;
+  margin-bottom: var(--m-4);
 }
 .EContent {
   max-width: 40ch;
-  margin-bottom: 1rem;
+  margin-bottom: var(--m-4);
 }
 </style>
