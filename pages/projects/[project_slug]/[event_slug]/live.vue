@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Draggable } from "~~/types/draggables";
+import { Draggable } from "~~/composables/draggables";
 
 const route = useRoute();
 const slug = route.params.event_slug;

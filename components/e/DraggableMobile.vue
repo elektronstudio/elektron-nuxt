@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Draggable } from "~~/types/draggables";
+import { Draggable } from "~~/composables/draggables";
 
 type Props = {
   draggable: Draggable;
