@@ -23,6 +23,7 @@ export type Draggable = InitialDraggable & {
   updateXY: Function;
   getDocked: Function;
   setDocked: Function;
+  setDockedSilent: Function;
   getIndex: Function;
   getMaximised: Function;
   toggleMaximised: Function;
@@ -53,13 +54,12 @@ export const useDraggables = (initialDraggables: InitialDraggables) => {
     };
     const docked = ref(initialDraggables[key].docked || false);
     const maximised = ref(initialDraggables[key].maximised || false);
-    const setDocked = (state: boolean) => {
-      if (state !== undefined) {
-        docked.value = state;
-      } else {
-        docked.value = !docked.value;
-      }
+    const setDocked = () => {
+      docked.value = !docked.value;
       updateIndex();
+    };
+    const setDockedSilent = (state: boolean) => {
+      docked.value = state;
     };
     const toggleMaximised = () => {
       maximised.value = !maximised.value;
@@ -85,6 +85,7 @@ export const useDraggables = (initialDraggables: InitialDraggables) => {
       y,
       updateXY,
       setDocked,
+      setDockedSilent,
       getDocked,
       getTop,
       toggleMaximised,

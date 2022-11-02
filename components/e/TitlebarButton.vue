@@ -8,13 +8,13 @@ const iconMap = {
   size: "radix-icons:size",
   minus: "radix-icons:minus",
   plus: "radix-icons:plus",
-  cross: "radix-icons:cross-1",
+  cross: "radix-icons:cross-2",
 };
 </script>
 
 <template>
   <button class="ETitlebarButton">
-    <Icon :name="iconMap[icon ? icon : 'plus']"  />
+    <Icon :name="iconMap[icon ? icon : 'plus']" />
   </button>
 </template>
 

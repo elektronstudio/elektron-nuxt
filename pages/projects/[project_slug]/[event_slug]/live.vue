@@ -48,7 +48,7 @@ const mobile = breakpoints.smaller("large");
   <template v-else>
     <EBreadBoard>
       <BackToEvent :event="event" />
-      <template v-if="mobile && false">
+      <template v-if="mobile">
         <EDraggableMobile v-bind="draggables.video">
           <Videostream url="xxx" />
         </EDraggableMobile>
@@ -77,12 +77,6 @@ const mobile = breakpoints.smaller("large");
         </EDraggable>
       </template>
 
-      <!-- <DraggablesDock
-        v-if="mobile"
-        :draggables="draggablesState"
-        :mobile="mobile"
-        @update-draggables="updateDraggablesMobile"
-      /> -->
       <DraggablesDock :draggables="draggables" />
     </EBreadBoard>
   </template>
