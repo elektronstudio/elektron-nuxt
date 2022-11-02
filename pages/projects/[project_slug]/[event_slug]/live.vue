@@ -32,11 +32,18 @@ const draggables = useDraggables({
   about: {
     titles: ["About", "Info"],
     draggableId: "about",
-    contentType: "event",
     tilesWidth: 8,
     tilesHeight: 4,
     initialX: 2,
     initialY: 7,
+  },
+  controls: {
+    titles: ["Controls", "Controls"],
+    draggableId: "controls",
+    tilesWidth: 4,
+    tilesHeight: 2,
+    initialX: 11,
+    initialY: 8,
   },
 });
 
@@ -76,6 +83,9 @@ const mobile = breakpoints.smaller("large");
             <ETitle size="lg">Live event: {{ event.title }}</ETitle>
             <EContent :content="event.intro" />
           </EStack>
+        </EDraggable>
+        <EDraggable v-if="event.controls" v-bind="draggables.controls">
+          <Controls :controls="controls" />
         </EDraggable>
       </template>
 

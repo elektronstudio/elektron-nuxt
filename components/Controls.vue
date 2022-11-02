@@ -42,25 +42,34 @@ debouncedWatch(
 </script>
 
 <template>
-  <div>
-    <!-- <div v-for="(c, i) in controls" :key="i">
-      <Title small v-if="c.title">{{ c.title }}</Title>
-      <div class="tracking-wide text-gray-500">{{ c.description }}</div>
-      <Slider
+  <div class="Controls">
+    <div v-for="(c, i) in controls" :key="i">
+      <ETitle size="sm" v-if="c.title">{{ c.title }}</ETitle>
+      <EFormRange
         v-if="c.control === 'slider'"
-        type="range"
+        :label="c.description"
         v-model="c.value"
         :min="c.min"
         :max="c.max"
         :step="c.step"
-        class="w-full accent-green-400"
       />
-      <Textarea v-if="c.control === 'text'" v-model="c.value" />
-      <div v-if="c.labels" class="flex justify-between tracking-wide">
-        <div v-for="label in c.labels" :key="label" class="tracking-wide">
+      <EFormTextarea v-if="c.control === 'text'" v-model="c.value" />
+
+      <div v-if="c.labels" class="labels">
+        <div v-for="label in c.labels" :key="label">
           {{ label }}
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
+
+<style scoped>
+.Controls {
+  padding: var(--p-4);
+}
+.labels {
+  display: flex;
+  justify-content: space-between;
+}
+</style>

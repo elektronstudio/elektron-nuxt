@@ -124,5 +124,4 @@ export const stringToColor = (str) => {
   const s = Math.floor(y * 100);
   const l = 50;
   return interpolateTurbo(x);
-  return hsl(h, s, l);
 };
