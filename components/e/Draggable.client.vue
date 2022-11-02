@@ -2,19 +2,23 @@
 import { useDraggable } from "@vueuse/core";
 import { Ref } from "vue";
 
-interface Draggable {
+type ContentType = "chat" | "text" | "image" | "video" | "event";
+
+// TODO: How to import type here & make this dry
+type Draggable = {
+  titles: string[];
   draggableId: string;
-  titles: [string, string];
-  x: Ref<number>;
-  y: Ref<number>;
+  contentType?: ContentType;
+  initialX: number;
+  initialY: number;
   tilesWidth?: number;
   tilesHeight?: number;
+  maximisable?: boolean;
   docked?: boolean;
   maximised?: boolean;
-  maximisable?: boolean;
-  data?: any;
   hideTitleBarOnIdle?: boolean;
-  // New draggable functions
+  x: Ref<number>;
+  y: Ref<number>;
   updateXY: Function;
   getDocked: Function;
   setDocked: Function;
@@ -22,7 +26,8 @@ interface Draggable {
   getMaximised: Function;
   toggleMaximised: Function;
   updateIndex: Function;
-}
+  getTop: Function;
+};
 
 const {
   titles,
@@ -41,6 +46,7 @@ const {
   toggleMaximised,
   updateIndex,
 } = defineProps<Draggable>();
+
 const { lang } = useLang();
 
 const draggableRef = ref<HTMLElement | null>(null);

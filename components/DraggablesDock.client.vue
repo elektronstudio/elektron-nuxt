@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import { Draggables } from "~~/composables/draggables";
+
 type Props = {
-  // TODO: Typed draggables
-  draggables: any;
+  draggables: Draggables;
   mobile?: boolean;
 };
 
@@ -16,6 +17,14 @@ const { lang } = useLang();
 //     return draggables;
 //   }
 // });
+
+const handleClick = (d: any) => {
+  if (d.getDocked()) {
+    d.setDocked();
+  } else {
+    d.updateIndex();
+  }
+};
 </script>
 
 <template>
@@ -23,10 +32,9 @@ const { lang } = useLang();
     <EDraggableTitlebar
       v-for="d in draggables"
       :title="d.titles[lang]"
-      @click="d.updateIndex()"
+      @click="handleClick(d)"
       :data-id="d.draggableId"
       :key="d.draggableId"
-      :is-minimised="d.isMinimised"
       :class="{ isTop: d.getTop() }"
     >
       <Transition name="fade">

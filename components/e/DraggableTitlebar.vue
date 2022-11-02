@@ -1,14 +1,13 @@
 <script setup lang="ts">
 type Props = {
   title?: string;
-  isMinimised?: boolean;
 };
 
-const { title, isMinimised } = defineProps<Props>();
+const { title } = defineProps<Props>();
 </script>
 
 <template>
-  <div class="EDraggableTitlebar" :class="{ isMinimised: isMinimised }">
+  <div class="EDraggableTitlebar">
     <h6 v-if="title">{{ title }}</h6>
     <nav class="badgeSlot">
       <slot />

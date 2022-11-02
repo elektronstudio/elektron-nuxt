@@ -1,9 +1,49 @@
-export const useDraggables = (initialDraggables: any) => {
+import { Ref } from "vue";
+
+export type ContentType = "chat" | "text" | "image" | "video" | "event";
+
+export type InitialDraggable = {
+  titles: string[];
+  draggableId: string;
+  contentType?: ContentType;
+  initialX: number;
+  initialY: number;
+  tilesWidth?: number;
+  tilesHeight?: number;
+  maximisable?: boolean;
+  docked?: boolean;
+  maximised?: boolean;
+  hideTitleBarOnIdle?: boolean;
+};
+
+export type Draggable = InitialDraggable & {
+  // New draggable functions
+  x: Ref<number>;
+  y: Ref<number>;
+  updateXY: Function;
+  getDocked: Function;
+  setDocked: Function;
+  getIndex: Function;
+  getMaximised: Function;
+  toggleMaximised: Function;
+  updateIndex: Function;
+  getTop: Function;
+};
+
+export type InitialDraggables = {
+  [key: string]: InitialDraggable;
+};
+
+export type Draggables = {
+  [key: string]: Draggable;
+};
+
+export const useDraggables = (initialDraggables: InitialDraggables) => {
   const keys = Object.keys(initialDraggables);
   const indexes = ref(keys);
   const draggables = keys.map((key, index) => {
-    const x = ref(initialDraggables[key].x);
-    const y = ref(initialDraggables[key].y);
+    const x = ref(initialDraggables[key].initialX);
+    const y = ref(initialDraggables[key].initialY);
     const updateIndex = () =>
       (indexes.value = unique([...indexes.value, key].reverse()).reverse());
     const updateXY = ({ x: newX, y: newY }) => {
@@ -50,5 +90,7 @@ export const useDraggables = (initialDraggables: any) => {
     };
   });
 
-  return Object.fromEntries(keys.map((key, i) => [key, draggables[i]]));
+  return Object.fromEntries(
+    keys.map((key, i) => [key, draggables[i]]),
+  ) as Draggables;
 };
