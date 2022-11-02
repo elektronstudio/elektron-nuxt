@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import EDraggable from "~~/components/e/Draggable.client.vue";
-import EDraggableMobile from "~~/components/e/DraggableMobile.client.vue";
-
 const route = useRoute();
 const slug = route.params.event_slug as string;
 const { data: event, error } = await useEventBySlug(slug as string);
