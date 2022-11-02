@@ -1,56 +1,45 @@
 <script setup lang="ts">
-import { Draggable } from "~~/types/draggables";
+import { Draggables } from "~~/composables/draggables";
 
 type Props = {
-  draggables: Draggable[];
-  draggableMaximised: boolean;
+  draggables: Draggables;
   mobile?: boolean;
 };
 
-const { draggables, draggableMaximised, mobile } = defineProps<Props>();
+const { draggables, mobile } = defineProps<Props>();
+const { lang } = useLang();
 
-const emit = defineEmits<{
-  (e: "update-draggables", draggable: Draggable): void;
-}>();
+// const dockItems = computed(() => {
+//   if (mobile) {
+//     console.log("mobile");
+//     return draggables.filter((draggable) => draggable.isMinimised);
+//   } else {
+//     return draggables;
+//   }
+// });
 
-const dockItems = computed(() => {
-  if (mobile) {
-    console.log("mobile");
-    return draggables.filter((draggable) => draggable.isMinimised);
+const handleClick = (d: any) => {
+  if (d.getDocked()) {
+    d.setDocked();
   } else {
-    return draggables;
+    d.updateIndex();
   }
-});
-
-const topOrder = computed(() => {
-  return draggables.reduce((n, b) => (n.order > b.order ? n : b));
-});
+};
 </script>
 
 <template>
-  <TransitionGroup
-    class="DraggablesDock"
-    :class="{ draggableMaximised: draggableMaximised }"
-    name="dock"
-    tag="nav"
-  >
+  <TransitionGroup class="DraggablesDock" name="dock" tag="nav">
     <EDraggableTitlebar
-      v-for="draggable in dockItems"
-      :title="draggable.title"
-      @click="
-        emit('update-draggables', {
-          ...draggable,
-          isMinimised: false,
-        })
-      "
-      :data-id="draggable.draggableId"
-      :key="draggable.draggableId"
-      :is-minimised="draggable.isMinimised"
-      :class="{ isTop: draggable.draggableId === topOrder.draggableId }"
+      v-for="d in draggables"
+      :title="d.titles[lang]"
+      @click="handleClick(d)"
+      :data-id="d.draggableId"
+      :key="d.draggableId"
+      :class="{ isTop: d.getTop() }"
     >
       <Transition name="fade">
         <EChatBadge
-          v-if="draggable.contentType === 'chat' && newMessages > 0"
+          v-if="d.contentType === 'chat' && newMessages > 0"
           :new-messages="newMessages"
         />
       </Transition>

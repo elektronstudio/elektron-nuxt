@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { Draggable } from "~~/types/draggables";
-
 const route = useRoute();
-const slug = route.params.event_slug;
+const slug = route.params.event_slug as string;
 const { data: event, error } = await useEventBySlug(slug as string);
 const videostreams = getVideostreams(event.value.streamkey);
 
@@ -11,74 +9,84 @@ const stream = computed(() => {
   return videostreams?.[0];
 });
 
-const data = computed(() => {
-  if (!event) {
-    return null;
-  }
-  const d = [
-    {
-      title: "Stream",
-      draggableId: "videosteam",
-      contentType: "video",
-      gridPosX: 0,
-      gridPosY: 1,
-      tilesWidth: 15,
-      isMinimised: false,
-      isMaximised: false,
-      isMaximisable: true,
-      hideTitleBarOnIdle: true,
-      order: 0,
-      data: {
-        url: stream?.value?.url,
-      },
-    },
-    {
-      title: "Chat",
-      draggableId: "chat",
-      contentType: "chat",
-      gridPosX: 16,
-      gridPosY: 1,
-      tilesWidth: 4,
-      tilesHeight: 8,
-      order: 1,
-      data: {
-        channel: slug,
-      },
-    },
-    {
-      title: "About",
-      draggableId: "about",
-      contentType: "event",
-      tilesWidth: 8,
-      tilesHeight: 4,
-      gridPosX: 2,
-      gridPosY: 7,
-      order: 2,
-      data: {
-        event: event,
-      },
-    },
-  ];
-  // if (event.controls) {
-  //   d.push({
-  //     title: "Controls",
-  //     draggableId: "controls",
-  //     contentType: "controls",
-  //     tilesWidth: 9,
-  //     tilesHeight: 3,
-  //     gridPosX: 9,
-  //     gridPosY: 3,
-  //     order: 3,
-  //     data: {
-  //       event: event,
-  //     },
-  //   });
-  // }
-  return d as Draggable[];
+const draggables = useDraggables({
+  video: {
+    titles: ["Stream", "Striim"],
+    draggableId: "videosteam",
+    contentType: "video",
+    initialX: 0,
+    initialY: 1,
+    tilesWidth: 15,
+    maximisable: true,
+    hideTitleBarOnIdle: true,
+  },
+  chat: {
+    titles: ["Chat", "Chät"],
+    draggableId: "chat",
+    contentType: "chat",
+    initialX: 16,
+    initialY: 1,
+    tilesWidth: 4,
+    tilesHeight: 8,
+  },
+  about: {
+    titles: ["About", "Info"],
+    draggableId: "about",
+    contentType: "event",
+    tilesWidth: 8,
+    tilesHeight: 4,
+    initialX: 2,
+    initialY: 7,
+  },
 });
+
+const mobile = breakpoints.smaller("large");
 </script>
 
 <template>
   <ErrorCard v-if="error" />
-  <LiveView v-else :data="data" :event="event" />
+  <template v-else>
+    <BackToEvent :event="event" />
+    <EBreadBoard>
+      <!-- <template v-if="mobile && false">
+        <template
+          v-for="draggable in draggablesState"
+          :key="draggable.draggableId"
+        >
+          <EDraggableMobile
+            :draggable="draggable"
+            @update-draggables="updateDraggablesMobile"
+          >
+            <DraggableContent
+              v-if="draggable.contentType"
+              :content-type="draggable.contentType"
+              :data="draggable.data"
+            />
+          </EDraggableMobile>
+        </template>
+      </template> -->
+      <!-- <template> -->
+      <EDraggable v-bind="draggables.video">
+        <Videostream url="xxx" />
+      </EDraggable>
+      <EDraggable v-bind="draggables.chat">
+        <Chat :channel="slug" />
+      </EDraggable>
+      <EDraggable v-bind="draggables.about">
+        <EStack style="padding: var(--p-5)">
+          <ETitle size="lg">Live event: {{ event.title }}</ETitle>
+          <EContent :content="event.intro" />
+        </EStack>
+      </EDraggable>
+      <!-- </template> -->
+
+      <!-- <DraggablesDock
+        v-if="mobile"
+        :draggables="draggablesState"
+        :mobile="mobile"
+        @update-draggables="updateDraggablesMobile"
+      /> -->
+      <DraggablesDock :draggables="draggables" />
+    </EBreadBoard>
+  </template>
 </template>
