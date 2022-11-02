@@ -29,6 +29,7 @@ const { lang } = useLang();
             {{ event.title }}
           </ETitle>
         </NuxtLink>
+        {{ event.controls }}
         <!-- <EContent nolinks :content="event.intros[lang]" /> -->
       </header>
       <section>

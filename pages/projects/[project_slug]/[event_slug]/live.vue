@@ -40,6 +40,8 @@ const draggables = useDraggables({
   },
 });
 
+const controls = parseControls(event.value.controls);
+
 const mobile = breakpoints.smaller("large");
 </script>
 
