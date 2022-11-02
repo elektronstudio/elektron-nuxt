@@ -53,8 +53,12 @@ export const useDraggables = (initialDraggables: InitialDraggables) => {
     };
     const docked = ref(initialDraggables[key].docked || false);
     const maximised = ref(initialDraggables[key].maximised || false);
-    const setDocked = () => {
-      docked.value = !docked.value;
+    const setDocked = (state: boolean) => {
+      if (state !== undefined) {
+        docked.value = state;
+      } else {
+        docked.value = !docked.value;
+      }
       updateIndex();
     };
     const toggleMaximised = () => {

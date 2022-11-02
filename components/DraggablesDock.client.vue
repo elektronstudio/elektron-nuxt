@@ -37,6 +37,7 @@ const handleClick = (d: any) => {
       :key="d.draggableId"
       :class="{ isTop: d.getTop() }"
     >
+      {{ d.getIndex() }}
       <Transition name="fade">
         <EChatBadge
           v-if="d.contentType === 'chat' && newMessages > 0"
@@ -62,6 +63,11 @@ const handleClick = (d: any) => {
 
 /* @TODO: Add breakpoints system */
 @media only screen and (max-width: 599px) {
+  .DraggablesDock {
+    /* position: sticky; */
+    /* bottom: 0; */
+    margin-top: auto;
+  }
   .DraggablesDock > * {
     width: 100%;
     /* @TODO: add two column layout */

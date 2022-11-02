@@ -46,39 +46,36 @@ const mobile = breakpoints.smaller("large");
 <template>
   <ErrorCard v-if="error" />
   <template v-else>
-    <BackToEvent :event="event" />
     <EBreadBoard>
-      <!-- <template v-if="mobile && false">
-        <template
-          v-for="draggable in draggablesState"
-          :key="draggable.draggableId"
-        >
-          <EDraggableMobile
-            :draggable="draggable"
-            @update-draggables="updateDraggablesMobile"
-          >
-            <DraggableContent
-              v-if="draggable.contentType"
-              :content-type="draggable.contentType"
-              :data="draggable.data"
-            />
-          </EDraggableMobile>
-        </template>
-      </template> -->
-      <!-- <template> -->
-      <EDraggable v-bind="draggables.video">
-        <Videostream url="xxx" />
-      </EDraggable>
-      <EDraggable v-bind="draggables.chat">
-        <Chat :channel="slug" />
-      </EDraggable>
-      <EDraggable v-bind="draggables.about">
-        <EStack style="padding: var(--p-5)">
-          <ETitle size="lg">Live event: {{ event.title }}</ETitle>
-          <EContent :content="event.intro" />
-        </EStack>
-      </EDraggable>
-      <!-- </template> -->
+      <BackToEvent :event="event" />
+      <template v-if="mobile && false">
+        <EDraggableMobile v-bind="draggables.video">
+          <Videostream url="xxx" />
+        </EDraggableMobile>
+        <EDraggableMobile v-bind="draggables.chat">
+          <Chat :channel="slug" />
+        </EDraggableMobile>
+        <EDraggableMobile v-bind="draggables.about">
+          <EStack style="padding: var(--p-5)">
+            <ETitle size="lg">Live event: {{ event.title }}</ETitle>
+            <EContent :content="event.intro" />
+          </EStack>
+        </EDraggableMobile>
+      </template>
+      <template v-else>
+        <EDraggable v-bind="draggables.video">
+          <Videostream url="xxx" />
+        </EDraggable>
+        <EDraggable v-bind="draggables.chat">
+          <Chat :channel="slug" />
+        </EDraggable>
+        <EDraggable v-bind="draggables.about">
+          <EStack style="padding: var(--p-5)">
+            <ETitle size="lg">Live event: {{ event.title }}</ETitle>
+            <EContent :content="event.intro" />
+          </EStack>
+        </EDraggable>
+      </template>
 
       <!-- <DraggablesDock
         v-if="mobile"

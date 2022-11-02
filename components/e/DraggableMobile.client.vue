@@ -1,30 +1,61 @@
 <script setup lang="ts">
-import { Draggable } from "~~/composables/useLive
+import { Ref } from "vue";
 
-type Props = {
-  draggable: Draggable;
+type ContentType = "chat" | "text" | "image" | "video" | "event";
+
+// TODO: How to import type here & make this dry
+type Draggable = {
+  titles: string[];
+  draggableId: string;
+  contentType?: ContentType;
+  initialX: number;
+  initialY: number;
+  tilesWidth?: number;
+  tilesHeight?: number;
+  maximisable?: boolean;
+  docked?: boolean;
+  maximised?: boolean;
+  hideTitleBarOnIdle?: boolean;
+  x: Ref<number>;
+  y: Ref<number>;
+  updateXY: Function;
+  getDocked: Function;
+  setDocked: Function;
+  getIndex: Function;
+  getMaximised: Function;
+  toggleMaximised: Function;
+  updateIndex: Function;
+  getTop: Function;
 };
 
-const { draggable } = defineProps<Props>();
-const { tilesHeight, order } = draggable;
-
-const emit = defineEmits<{
-  (e: "update-draggables", draggable: Draggable): void;
-}>();
+const {
+  titles,
+  draggableId,
+  x,
+  y,
+  tilesWidth = 1,
+  tilesHeight,
+  maximisable = false,
+  hideTitleBarOnIdle,
+  updateXY,
+  getDocked,
+  setDocked,
+  getIndex,
+  getMaximised,
+  toggleMaximised,
+  updateIndex,
+} = defineProps<Draggable>();
+const { lang } = useLang();
 </script>
 
 <template>
   <Transition>
-    <div class="EDraggableMobile" v-show="!draggable.isMinimised">
-      <button
-        @click.stop="
-          emit('update-draggables', { ...draggable, isMinimised: true })
-        "
-      >
-        ⅹ
+    <div class="EDraggableMobile" v-show="!getDocked()">
+      <button @click.stop="">
+        <Icon name="radix-icons:cross-2" />
       </button>
       <div class="titleBar" ref="draggableRef">
-        <EDraggableTitlebar :title="draggable.title" />
+        <EDraggableTitlebar :title="titles[lang]" />
       </div>
       <article>
         <slot />
@@ -60,7 +91,7 @@ const emit = defineEmits<{
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  z-index: calc(v-bind(order) + 1);
+  /* z-index: calc(v-bind(order) + 1); */
 }
 .titleBar {
   z-index: 1;

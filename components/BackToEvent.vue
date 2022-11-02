@@ -21,6 +21,7 @@ const { event } = defineProps<Props>();
   z-index: 1;
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 }
 .backToEvent svg {
   margin-right: var(--m-1);

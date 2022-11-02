@@ -45,14 +45,16 @@ const {
   getMaximised,
   toggleMaximised,
   updateIndex,
+  getTop,
 } = defineProps<Draggable>();
 
 const { lang } = useLang();
 
 const draggableRef = ref<HTMLElement | null>(null);
+// const mobile = breakpoints.smaller("large");
 const { width: windowWidth } = useWindow();
-const tileDivider = computed(() => (desktop ? 20 : 10));
-const tileSize = ref(windowWidth.value / tileDivider.value);
+const tileDivider = 20;
+const tileSize = ref(windowWidth.value / tileDivider);
 const finalAnimation = ref<DOMRect | undefined>();
 
 const {
@@ -64,10 +66,10 @@ const {
   preventDefault: true,
   onEnd: () => {
     calculateCoordinates();
-    updateXY({
-      x: snappedX.value,
-      y: snappedY.value,
-    });
+    // updateXY({
+    //   x: snappedX.value,
+    //   y: snappedY.value,
+    // });
   },
 });
 
@@ -75,12 +77,12 @@ const snappedX = computed(() => Math.round(draggableX.value / tileSize.value));
 const snappedY = computed(() => Math.round(draggableY.value / tileSize.value));
 
 const calculateCoordinates = function () {
-  tileSize.value = windowWidth.value / tileDivider.value;
+  tileSize.value = windowWidth.value / tileDivider;
   const snappedX = Math.round(draggableX.value / tileSize.value);
   const snappedY = Math.round(draggableY.value / tileSize.value);
   draggableX.value =
-    snappedX + tilesWidth >= tileDivider.value
-      ? (tileDivider.value - tilesWidth) * tileSize.value
+    snappedX + tilesWidth >= tileDivider
+      ? (tileDivider - tilesWidth) * tileSize.value
       : snappedX >= 0
       ? tileSize.value * snappedX
       : 0;
@@ -90,6 +92,16 @@ const calculateCoordinates = function () {
 const handleResize = () => {
   calculateCoordinates();
 };
+
+watch(mobile, () => {
+  console.log(mobile.value);
+  if (mobile.value) {
+    console.log(!getTop());
+    setDocked(!getTop());
+  } else {
+    setDocked(false);
+  }
+});
 
 onMounted(() => {
   draggableX.value = tileSize.value * x.value;
@@ -176,49 +188,10 @@ function findCoordinates(el: Element, done: () => void) {
   background-color: var(--bg);
   display: flex;
   flex-direction: column;
-  z-index: calc(v-bind("getIndex()") + 1);
-  border: 1px solid transparent;
-}
-.EDraggable:hover {
-  border: 1px solid var(--gray-500);
 }
 .EDraggable.isDragging {
   z-index: 100;
 }
-.EDraggable.hideTitleBarOnIdle .titleBar {
-  position: absolute;
-  z-index: 1;
-  width: 100%;
-}
-.EDraggable.hideTitleBarOnIdle:hover :is(.titleBar, .topBarNav) {
-  opacity: 1;
-}
-.idle .EDraggable.maximised :is(.titleBar, .topBarNav),
-.EDraggable.hideTitleBarOnIdle :is(.titleBar, .topBarNav) {
-  opacity: 0;
-  transition: 0.3s ease-in-out;
-}
-
-.EDraggable.hideTitleBarOnIdle article {
-  padding-top: 0;
-}
-.EDraggable.v-enter-active {
-  animation: windowAnimation 0.5s ease-in-out reverse;
-}
-
-.EDraggable.v-leave-active {
-  animation: windowAnimation 0.5s ease-in-out forwards;
-}
-.EDraggable.v-enter-active *,
-.EDraggable.v-leave-active * {
-  display: none;
-}
-.EDraggable article {
-  flex-grow: 1;
-
-  overflow-y: auto;
-}
-
 .topBarNav {
   z-index: 2;
   position: absolute;
@@ -232,6 +205,15 @@ function findCoordinates(el: Element, done: () => void) {
   .EDraggable {
     top: auto !important;
     left: auto !important;
+    flex-grow: 1;
+  }
+  .EDraggable article {
+    position: absolute;
+    width: 100%;
+    height: 100% !important;
+    padding-top: var(--h-6);
+    flex-grow: 1;
+    overflow-y: auto;
   }
 }
 @media only screen and (min-width: 900px) {
@@ -240,6 +222,12 @@ function findCoordinates(el: Element, done: () => void) {
     width: calc(v-bind(tilesWidth) * var(--breadboard-tile-size));
     height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size));
     touch-action: none;
+    border: 1px solid transparent;
+    z-index: calc(v-bind("getIndex()") + 1);
+  }
+  .EDraggable article {
+    flex-grow: 1;
+    overflow-y: auto;
   }
   .EDraggable.noHeight {
     height: auto;
@@ -259,10 +247,28 @@ function findCoordinates(el: Element, done: () => void) {
   .EDraggable.maximised video {
     object-fit: contain;
   }
+  .EDraggable:hover {
+    border: 1px solid var(--gray-500);
+  }
+  .EDraggable.hideTitleBarOnIdle .titleBar {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+  }
+  .EDraggable.hideTitleBarOnIdle:hover :is(.titleBar, .topBarNav) {
+    opacity: 1;
+  }
+  .idle .EDraggable.maximised :is(.titleBar, .topBarNav),
+  .EDraggable.hideTitleBarOnIdle :is(.titleBar, .topBarNav) {
+    opacity: 0;
+    transition: 0.3s ease-in-out;
+  }
+
+  .EDraggable.hideTitleBarOnIdle article {
+    padding-top: 0;
+  }
   @keyframes windowAnimation {
     0% {
-      /* top: v-bind("`${y}px`");
-      left: v-bind("`${x}px`"); */
       width: calc(v-bind(tilesWidth) * var(--breadboard-tile-size));
       height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size));
     }
@@ -276,5 +282,17 @@ function findCoordinates(el: Element, done: () => void) {
       opacity: 0;
     }
   }
+}
+
+.EDraggable.v-enter-active {
+  animation: windowAnimation 0.5s ease-in-out reverse;
+}
+
+.EDraggable.v-leave-active {
+  animation: windowAnimation 0.5s ease-in-out forwards;
+}
+.EDraggable.v-enter-active *,
+.EDraggable.v-leave-active * {
+  display: none;
 }
 </style>
