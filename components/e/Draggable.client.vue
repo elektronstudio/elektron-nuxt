@@ -1,72 +1,84 @@
 <script setup lang="ts">
 import { useDraggable } from "@vueuse/core";
-import { Draggable } from "~~/composables/draggables";
+import { Ref } from "vue";
 
-type Props = {
-  draggable: Draggable;
-};
+interface Draggable {
+  draggableId: string;
+  titles: [string, string];
+  x: Ref<number>;
+  y: Ref<number>;
+  tilesWidth?: number;
+  tilesHeight?: number;
+  docked?: boolean;
+  maximised?: boolean;
+  maximisable?: boolean;
+  data?: any;
+  hideTitleBarOnIdle?: boolean;
+  // New draggable functions
+  updateXY: Function;
+  getDocked: Function;
+  setDocked: Function;
+  getIndex: Function;
+  getMaximised: Function;
+  toggleMaximised: Function;
+  updateIndex: Function;
+}
 
-const props = defineProps<Props>();
-// Note, following values are not reactive
 const {
+  titles,
+  draggableId,
+  x,
+  y,
   tilesWidth = 1,
   tilesHeight,
-  isMaximisable,
+  maximisable = false,
   hideTitleBarOnIdle,
-} = props.draggable;
-
-const emit = defineEmits<{
-  (e: "update-draggables", draggable: Draggable): void;
-}>();
+  updateXY,
+  getDocked,
+  setDocked,
+  getIndex,
+  getMaximised,
+  toggleMaximised,
+  updateIndex,
+} = defineProps<Draggable>();
+const { lang } = useLang();
 
 const draggableRef = ref<HTMLElement | null>(null);
 const { width: windowWidth } = useWindow();
 const tileDivider = computed(() => (desktop ? 20 : 10));
 const tileSize = ref(windowWidth.value / tileDivider.value);
-
-// @TODO: Simplify this
-// how to set default value 0 to nested prop
-const gridPosX = computed(() =>
-  props.draggable.gridPosX ? props.draggable.gridPosX : 0,
-);
-const gridPosY = computed(() =>
-  props.draggable.gridPosY ? props.draggable.gridPosY : 0,
-);
-
 const finalAnimation = ref<DOMRect | undefined>();
 
-const { x, y, style, isDragging } = useDraggable(draggableRef, {
+const {
+  x: draggableX,
+  y: draggableY,
+  style,
+  isDragging,
+} = useDraggable(draggableRef, {
   preventDefault: true,
   onEnd: () => {
     calculateCoordinates();
-
-    if (
-      gridPosX.value !== snappedX.value ||
-      gridPosY.value !== snappedY.value
-    ) {
-      emit("update-draggables", {
-        ...props.draggable,
-        gridPosX: snappedX.value,
-        gridPosY: snappedY.value,
-      });
-    }
+    updateXY({
+      x: snappedX.value,
+      y: snappedY.value,
+    });
   },
 });
 
-const snappedX = computed(() => Math.round(x.value / tileSize.value));
-const snappedY = computed(() => Math.round(y.value / tileSize.value));
+const snappedX = computed(() => Math.round(draggableX.value / tileSize.value));
+const snappedY = computed(() => Math.round(draggableY.value / tileSize.value));
 
 const calculateCoordinates = function () {
   tileSize.value = windowWidth.value / tileDivider.value;
-  const snappedX = Math.round(x.value / tileSize.value);
-  const snappedY = Math.round(y.value / tileSize.value);
-  x.value =
+  const snappedX = Math.round(draggableX.value / tileSize.value);
+  const snappedY = Math.round(draggableY.value / tileSize.value);
+  draggableX.value =
     snappedX + tilesWidth >= tileDivider.value
       ? (tileDivider.value - tilesWidth) * tileSize.value
       : snappedX >= 0
       ? tileSize.value * snappedX
       : 0;
-  y.value = snappedY >= 0 ? tileSize.value * snappedY : 0;
+  draggableY.value = snappedY >= 0 ? tileSize.value * snappedY : 0;
 };
 
 const handleResize = () => {
@@ -74,8 +86,8 @@ const handleResize = () => {
 };
 
 onMounted(() => {
-  x.value = tileSize.value * gridPosX.value;
-  y.value = tileSize.value * gridPosY.value;
+  draggableX.value = tileSize.value * x.value;
+  draggableY.value = tileSize.value * y.value;
 
   window.addEventListener("resize", handleResize);
 });
@@ -88,7 +100,7 @@ function findCoordinates(el: Element, done: () => void) {
   // @TODO: Find a better solution for this
   // Consider using refs for selectors
   const $draggableDocked = document.querySelector(
-    `.DraggablesDock .EDraggableTitlebar[data-id="${props.draggable.draggableId}"]`,
+    `.DraggablesDock .EDraggableTitlebar[data-id="${draggableId}"]`,
   );
   const draggableDockedRect = $draggableDocked?.getBoundingClientRect();
   finalAnimation.value = draggableDockedRect;
@@ -108,41 +120,23 @@ function findCoordinates(el: Element, done: () => void) {
       :class="{
         isDragging: isDragging,
         noHeight: !tilesHeight,
-        isMaximised: props.draggable.isMaximised,
+        maximised: getMaximised(),
         hideTitleBarOnIdle: hideTitleBarOnIdle,
       }"
-      v-show="!draggable.isMinimised"
-      @click.stop="
-        emit('update-draggables', {
-          ...draggable,
-        })
-      "
+      v-show="!getDocked()"
+      @click.stop="updateIndex()"
     >
       <nav class="topBarNav">
         <ETitlebarButton
-          v-if="isMaximisable"
+          v-if="maximisable"
           icon="size"
-          @click.stop="
-            emit('update-draggables', {
-              ...draggable,
-              isMaximised: !draggable.isMaximised,
-            })
-          "
+          @click.stop="toggleMaximised()"
         />
-        <ETitlebarButton
-          icon="minus"
-          @click.stop="
-            emit('update-draggables', {
-              ...draggable,
-              isMinimised: true,
-              isMaximised: false,
-            })
-          "
-        />
+        <ETitlebarButton icon="minus" @click.stop="setDocked()" />
       </nav>
       <div class="titleBar" ref="draggableRef">
         <EDraggableTitlebar
-          :title="props.draggable.title"
+          :title="titles[lang]"
           :style="{ cursor: isDragging ? 'grabbing' : 'grab' }"
         />
       </div>
@@ -176,7 +170,7 @@ function findCoordinates(el: Element, done: () => void) {
   background-color: var(--bg);
   display: flex;
   flex-direction: column;
-  z-index: calc(v-bind("props.draggable.order") + 1);
+  z-index: calc(v-bind("getIndex()") + 1);
   border: 1px solid transparent;
 }
 .EDraggable:hover {
@@ -193,7 +187,7 @@ function findCoordinates(el: Element, done: () => void) {
 .EDraggable.hideTitleBarOnIdle:hover :is(.titleBar, .topBarNav) {
   opacity: 1;
 }
-.idle .EDraggable.isMaximised :is(.titleBar, .topBarNav),
+.idle .EDraggable.maximised :is(.titleBar, .topBarNav),
 .EDraggable.hideTitleBarOnIdle :is(.titleBar, .topBarNav) {
   opacity: 0;
   transition: 0.3s ease-in-out;
@@ -244,19 +238,19 @@ function findCoordinates(el: Element, done: () => void) {
   .EDraggable.noHeight {
     height: auto;
   }
-  .EDraggable.isMaximised {
+  .EDraggable.maximised {
     width: 100%;
     height: 100%;
     top: 0 !important;
     left: 0 !important;
   }
-  .EDraggable.isMaximised article,
+  .EDraggable.maximised article,
   /* @TODO: How to select an Art only component */
-  .EDraggable.isMaximised article :deep(.videoStream),
-  .EDraggable.isMaximised :deep(video) {
+  .EDraggable.maximised article :deep(.videoStream),
+  .EDraggable.maximised :deep(video) {
     height: 100%;
   }
-  .EDraggable.isMaximised video {
+  .EDraggable.maximised video {
     object-fit: contain;
   }
   @keyframes windowAnimation {

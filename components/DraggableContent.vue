@@ -32,5 +32,5 @@ const { contentType, data } = defineProps<Props>();
     </template>
   </EStack>
 
-  <Controls v-else-if="data && contentType === 'controls'" :data="data" />
+  <!-- <Controls v-else-if="data && contentType === 'controls'" :data="data" /> -->
 </template>

@@ -1,50 +1,37 @@
 <script setup lang="ts">
-import { Draggable } from "~~/composables/draggables";
-
 type Props = {
-  draggables: Draggable[];
+  // TODO: Typed draggables
+  draggables: any;
   mobile?: boolean;
 };
 
 const { draggables, mobile } = defineProps<Props>();
+const { lang } = useLang();
 
-const emit = defineEmits<{
-  (e: "update-draggables", draggable: Draggable): void;
-}>();
-
-const dockItems = computed(() => {
-  if (mobile) {
-    console.log("mobile");
-    return draggables.filter((draggable) => draggable.isMinimised);
-  } else {
-    return draggables;
-  }
-});
-
-const topOrder = computed(() => {
-  return draggables.reduce((n, b) => (n.order > b.order ? n : b));
-});
+// const dockItems = computed(() => {
+//   if (mobile) {
+//     console.log("mobile");
+//     return draggables.filter((draggable) => draggable.isMinimised);
+//   } else {
+//     return draggables;
+//   }
+// });
 </script>
 
 <template>
   <TransitionGroup class="DraggablesDock" name="dock" tag="nav">
     <EDraggableTitlebar
-      v-for="draggable in dockItems"
-      :title="draggable.title"
-      @click="
-        emit('update-draggables', {
-          ...draggable,
-          isMinimised: false,
-        })
-      "
-      :data-id="draggable.draggableId"
-      :key="draggable.draggableId"
-      :is-minimised="draggable.isMinimised"
-      :class="{ isTop: draggable.draggableId === topOrder.draggableId }"
+      v-for="d in draggables"
+      :title="d.titles[lang]"
+      @click="d.updateIndex()"
+      :data-id="d.draggableId"
+      :key="d.draggableId"
+      :is-minimised="d.isMinimised"
+      :class="{ isTop: d.getTop() }"
     >
       <Transition name="fade">
         <EChatBadge
-          v-if="draggable.contentType === 'chat' && newMessages > 0"
+          v-if="d.contentType === 'chat' && newMessages > 0"
           :new-messages="newMessages"
         />
       </Transition>
