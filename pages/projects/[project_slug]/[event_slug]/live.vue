@@ -61,34 +61,21 @@ const mobile = breakpoints.smaller("large");
     <EBreadBoard>
       <BackToEvent :event="event" />
 
-      <component
-        :is="mobile ? EDraggableMobile : EDraggable"
-        v-bind="draggables.video"
-      >
+      <DraggableHoc v-bind="draggables.video">
         <Videostream url="xxx" />
-      </component>
-      <component
-        :is="mobile ? EDraggableMobile : EDraggable"
-        v-bind="draggables.chat"
-      >
+      </DraggableHoc>
+      <DraggableHoc v-bind="draggables.chat">
         <Chat :channel="slug" />
-      </component>
-      <component
-        :is="mobile ? EDraggableMobile : EDraggable"
-        v-bind="draggables.about"
-      >
+      </DraggableHoc>
+      <DraggableHoc v-bind="draggables.about">
         <EStack style="padding: var(--p-5)">
           <ETitle size="lg">Live event: {{ event.title }}</ETitle>
           <EContent :content="event.intro" />
         </EStack>
-      </component>
-      <component
-        :is="mobile ? EDraggableMobile : EDraggable"
-        v-if="event.controls"
-        v-bind="draggables.controls"
-      >
+      </DraggableHoc>
+      <DraggableHoc v-if="event.controls" v-bind="draggables.controls">
         <Controls :controls="controls" />
-      </component>
+      </DraggableHoc>
 
       <DraggablesDock :draggables="draggables" />
     </EBreadBoard>
