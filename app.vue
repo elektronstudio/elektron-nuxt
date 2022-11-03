@@ -9,8 +9,6 @@ const { idle } = useIdle(3000); // 3 seconds idle
 const route: any = useRoute();
 const siteName = "elektron.art";
 
-console.log(route.meta.title);
-
 const titleTemplate = (title = undefined) =>
   title ? `${title} – ${siteName}` : siteName;
 

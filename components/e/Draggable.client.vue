@@ -107,11 +107,9 @@ onUnmounted(() => {
 function findCoordinates(el: Element, done: () => void) {
   // @TODO: Find a better solution for this
   // Consider using refs for selectors
-  console.log(`.DraggablesDock .EDraggableTitlebar[data-id="${id}"]`);
   const $draggableDocked = document.querySelector(
     `.DraggablesDock .EDraggableTitlebar[data-id="${id}"]`,
   );
-  console.log($draggableDocked);
   const draggableDockedRect = $draggableDocked?.getBoundingClientRect();
   finalAnimation.value = draggableDockedRect;
 
