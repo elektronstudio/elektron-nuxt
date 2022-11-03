@@ -18,18 +18,17 @@ const { lang } = useLang();
     <div class="content">
       <header>
         <EventDatetime :event="event" />
-        <ETitle v-if="event.authors" size="xs" el="h5">
+        <ETitle v-if="event.authors" size="xs" el="h5" class="project">
           {{ event.authors }}
         </ETitle>
+        <!-- <ETitle v-if="event.projects?.[0]" size="xs" el="h5" class="project">
+          {{ event.projects[0].titles[lang] }}
+        </ETitle> -->
         <NuxtLink :to="event.eventLink">
           <ETitle el="h4" size="xs" class="eventTitle">
-            <span v-if="event.projects?.[0]">
-              {{ event.projects[0].titles[lang] }} /
-            </span>
             {{ event.title }}
           </ETitle>
         </NuxtLink>
-        {{ event.controls }}
         <!-- <EContent nolinks :content="event.intros[lang]" /> -->
       </header>
       <section>
@@ -53,8 +52,8 @@ const { lang } = useLang();
 }
 .ScheduleItem figure {
   flex-shrink: 0;
-  width: 4rem;
-  height: 4rem;
+  width: 8rem;
+  height: 8rem;
   border-radius: var(--rounded-md);
   background-color: var(--gray-500);
   overflow: hidden;
@@ -89,6 +88,10 @@ const { lang } = useLang();
 .eventTitle {
   color: var(--fg);
   margin-bottom: var(--m-3);
+}
+
+.project {
+  color: var(--gray-300);
 }
 /* @TODO: Add breakpoints system */
 

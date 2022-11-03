@@ -146,7 +146,7 @@ const { debounce, userRef, userStyle, otherUsers, otherUserStyle, chat } =
   <div
     class="DraggableChat"
     :class="{
-      livePage: route.name === 'projects-project_slug-event_slug-live',
+      livePage: route.fullPath.endsWith('/live'),
       chatActive: draggableChatState,
     }"
   >

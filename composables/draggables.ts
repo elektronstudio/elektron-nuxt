@@ -2,6 +2,7 @@ import { Ref } from "vue";
 
 export type ContentType = "chat" | "text" | "image" | "video" | "event";
 
+// TODO: remove draggableId in favor of key
 export type InitialDraggable = {
   titles: string[];
   draggableId: string;

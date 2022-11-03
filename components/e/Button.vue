@@ -2,7 +2,7 @@
 type Props = {
   size?: "xs" | "sm" | "md" | "lg";
   el?: "button" | "a";
-  color?: "accent" | "gray" | "transparent";
+  color?: "accent" | "gray" | "transparent" | "anime";
 };
 
 const { size = "md", el = "button" } = defineProps<Props>();
@@ -65,5 +65,12 @@ const { size = "md", el = "button" } = defineProps<Props>();
   background-color: transparent;
   border-color: transparent;
   color: var(--gray-300);
+  padding-left: 0;
+  padding-right: 0;
+}
+.EButton.anime {
+  border: none;
+  background-image: url("/_nuxt/images/bg-texture-xs.gif");
+  color: var(--bg);
 }
 </style>
