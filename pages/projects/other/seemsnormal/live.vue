@@ -48,41 +48,39 @@ const { theme } = useTheme();
 </script>
 <template>
   <ErrorCard v-if="error" />
-  <template v-else>
-    <EBreadBoard :wallpaper="wallpaper">
-      <BackToEvent :event="event" />
+  <EBreadBoard v-else :wallpaper="wallpaper">
+    <BackToEvent :event="event" />
 
-      <DraggableHoc v-bind="draggables.side1">
-        <div v-for="(track, i) in tracks.slice(0, 4)" class="mt-4">
-          <Title small>{{ i + 1 }}. {{ track.name }}</Title>
-          <audio
-            :src="track.url"
-            controls
-            :class="['invert', ''][theme]"
-            class="w-full"
-            controlsList="nodownload"
-          />
-        </div>
-      </DraggableHoc>
-      <DraggableHoc v-bind="draggables.side2">
-        <div v-for="(track, i) in tracks.slice(4, 9)" class="mt-4">
-          <Title small>{{ i + 1 }}. {{ track.name }}</Title>
-          <audio
-            :src="track.url"
-            controls
-            :class="['invert', ''][theme]"
-            class="w-full"
-            controlsList="nodownload"
-          />
-        </div>
-      </DraggableHoc>
-      <DraggableHoc v-bind="draggables.chat">
-        <Chat :channel="slug" />
-      </DraggableHoc>
+    <DraggableHoc v-bind="draggables.side1">
+      <div v-for="(track, i) in tracks.slice(0, 4)" class="mt-4">
+        <Title small>{{ i + 1 }}. {{ track.name }}</Title>
+        <audio
+          :src="track.url"
+          controls
+          :class="['invert', ''][theme]"
+          class="w-full"
+          controlsList="nodownload"
+        />
+      </div>
+    </DraggableHoc>
+    <DraggableHoc v-bind="draggables.side2">
+      <div v-for="(track, i) in tracks.slice(4, 9)" class="mt-4">
+        <Title small>{{ i + 1 }}. {{ track.name }}</Title>
+        <audio
+          :src="track.url"
+          controls
+          :class="['invert', ''][theme]"
+          class="w-full"
+          controlsList="nodownload"
+        />
+      </div>
+    </DraggableHoc>
+    <DraggableHoc v-bind="draggables.chat">
+      <Chat :channel="slug" />
+    </DraggableHoc>
 
-      <DraggablesDock :draggables="draggables" />
-    </EBreadBoard>
-  </template>
+    <DraggablesDock :draggables="draggables" />
+  </EBreadBoard>
 </template>
 
 <style scoped>
