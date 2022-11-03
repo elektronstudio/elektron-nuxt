@@ -20,7 +20,7 @@ const { size = "md", el = "button", disabled = false } = defineProps<Props>();
   </component>
 </template>
 
-<style scoped>
+<style>
 .EButton {
   background: none;
   display: inline-flex;
@@ -45,8 +45,7 @@ const { size = "md", el = "button", disabled = false } = defineProps<Props>();
   font-size: var(--text-xs);
   padding: var(--p-1);
 }
-
-.EButton :deep(svg) {
+.EButton svg {
   margin-right: var(--m-1);
   width: 1em;
   height: 1em;

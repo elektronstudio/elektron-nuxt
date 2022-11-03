@@ -16,11 +16,8 @@ const { lang } = useLang();
       <ETitle size="lg" style="margin-bottom: var(--m-3)">
         {{ ["Upcoming events", "Tulevased sündmused"][lang] }}
       </ETitle>
-      <NuxtLink to="/schedule/past">
-        <EButton size="xs" el="a" color="anime">
-          <Icon name="radix-icons:arrow-left" />
-          {{ ["See the past events", "Vaata toimunud sündmusi"][lang] }}
-        </EButton>
+      <NuxtLink to="/schedule/past" class="EButton xs anime">
+        {{ ["See the past events", "Vaata toimunud sündmusi"][lang] }}
       </NuxtLink>
     </aside>
     <section>
