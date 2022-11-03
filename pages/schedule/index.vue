@@ -13,15 +13,15 @@ const { lang } = useLang();
   <ErrorCard v-if="error" />
   <ScheduleWrapper v-else key="future">
     <aside>
+      <ETitle size="lg" style="margin-bottom: var(--m-3)">
+        {{ ["Upcoming events", "Tulevased sündmused"][lang] }}
+      </ETitle>
       <NuxtLink to="/schedule/past">
-        <EButton size="xs" el="a" color="transparent">
+        <EButton size="xs" el="a" color="anime">
           <Icon name="radix-icons:arrow-left" />
           {{ ["See the past events", "Vaata toimunud sündmusi"][lang] }}
         </EButton>
       </NuxtLink>
-      <ETitle size="lg">
-        {{ ["Upcoming events", "Tulevased sündmused"][lang] }}
-      </ETitle>
     </aside>
     <section>
       <ScheduleItem
