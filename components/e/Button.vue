@@ -81,7 +81,7 @@ const { size = "md", el = "button", disabled = false } = defineProps<Props>();
 }
 .EButton.anime {
   border: none;
-  background-image: url("/_nuxt/images/bg-texture-xs.gif");
+  background-image: url("/images/bg-texture-xs.gif");
   color: var(--bg);
 }
 </style>
