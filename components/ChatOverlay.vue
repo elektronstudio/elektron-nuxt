@@ -1,0 +1,44 @@
+<script setup lang="ts">
+import { differenceInMinutes } from "date-fns";
+
+type Props = {
+  messages: any[];
+};
+const { messages } = defineProps<Props>();
+const messageStyle = (message, i, l) => {
+  return {
+    left: message.x - 5 + "%",
+    top: message.y + "%",
+    opacity: 0.5 + i * 0.03,
+    filter: `blur(${10 - (i / l) * 10}px)`,
+  };
+};
+</script>
+
+<template>
+  <div class="ChatOverlay">
+    <div
+      v-for="(message, i) in messages"
+      class="ChatMessage md:font-base absolute font-title leading-tight text-neutral-200 md:text-3xl"
+      :style="messageStyle(message, i, messages.length)"
+    >
+      {{ message.value }}
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.ChatOverlay {
+  position: absolute;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  height: 100%;
+}
+.ChatMessage {
+  position: absolute;
+  font-family: font-title-regular, sans-serif;
+  letter-spacing: -1px;
+  font-size: var(--text-3xl);
+  color: #fff;
+}
+</style>
