@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// Page data
 const { lang } = useLang();
 const { data: frontpage, error: frontpageError } = await useFrontPage();
 const muted = ref<boolean | undefined>(true);

@@ -1,6 +1,11 @@
 <script setup lang="ts">
 const slug = "seemsnormal";
+
 const { data: event, error } = await useEventBySlug(slug as string);
+// TODO: Make this more dynamic
+useHead({
+  title: `${event.value.title} – elektron.art`,
+});
 
 const wallpaper =
   "https://elektron.fra1.cdn.digitaloceanspaces.com/assets/zahir_seems_normal_wallpaper.jpg";

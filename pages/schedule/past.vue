@@ -21,7 +21,7 @@ const { lang } = useLang();
           {{ ["Upcoming events", "Tulevased sündmused"][lang] }}
         </EButton>
       </NuxtLink>
-      <ETitle>
+      <ETitle size="lg">
         {{ ["Past events", "Toimunud sündmused"][lang] }}
       </ETitle>
     </aside>

@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import { Project } from "~~/types";
-
 const route = useRoute();
 const slug = route.params.project_slug;
 
 const { data: project, error } = await useProjectBySlug(slug as string);
+// TODO: Make this more dynamic
+useHead({
+  title: `${project.value.title} – elektron.art`,
+});
+
 // const project = data.value as Project;
 const { lang } = useLang();
 </script>

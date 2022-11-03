@@ -2,6 +2,11 @@
 const route = useRoute();
 const slug = route.params.event_slug as string;
 const { data: event, error } = await useEventBySlug(slug as string);
+// TODO: Make this more dynamic
+useHead({
+  title: `${event.value.title} – elektron.art`,
+});
+
 const videostreams = getVideostreams(event.value.streamkey);
 
 // TODO: support multiple videos

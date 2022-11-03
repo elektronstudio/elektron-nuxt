@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+  title: "Fienta",
+});
+
 const router = useRouter();
 const route = useRoute();
 const code = ref<string>((route.query.code as string) || "");

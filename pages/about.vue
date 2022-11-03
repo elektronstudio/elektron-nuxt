@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+  title: "About us",
+});
+
 const { data, error } = await useAboutPage();
 </script>
 

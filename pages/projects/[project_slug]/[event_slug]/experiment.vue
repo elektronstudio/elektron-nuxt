@@ -7,6 +7,11 @@ import { parseControls } from "~~/composables/controls";
 const route = useRoute();
 const slug = route.params.event_slug as string;
 const { data: event, error } = await useEventBySlug(slug);
+// TODO: Make this more dynamic
+useHead({
+  title: `${event.value.title} – elektron.art`,
+});
+
 const videostreams = getVideostreams(event.value.streamkey);
 
 const draggables = useDraggables({

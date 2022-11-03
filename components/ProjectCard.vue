@@ -13,9 +13,7 @@ const { title, author, media, nextEvent } = defineProps<Props>();
 <template>
   <ECard :media="media" class="ProjectCard">
     <template #header>
-      <ETitle el="h3" size="lg">
-        {{ title }}
-      </ETitle>
+      <h3 class="ETitle lg" v-html="title" />
       <h6 v-if="author" v-html="author" />
     </template>
     <template #footer>

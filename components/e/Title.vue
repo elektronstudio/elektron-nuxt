@@ -29,7 +29,7 @@ const { size = "md", el, title } = defineProps<Props>();
   </component>
 </template>
 
-<style scoped>
+<style>
 .ETitle {
   font-weight: normal;
   line-height: var(--line-height-5xl);

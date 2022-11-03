@@ -3,6 +3,7 @@ import { useIntervalFn } from "@vueuse/core";
 import { differenceInHours } from "date-fns";
 
 definePageMeta({
+  title: "Where are you",
   labTitle: "Where are you",
   labIntro: "Interactive hybrid installation in Baltoscandal 2022",
   labGroup: "Experiments",

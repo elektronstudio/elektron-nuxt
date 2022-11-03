@@ -59,6 +59,9 @@ const { lang } = useLang();
   grid-template-columns: 1fr;
   gap: var(--gap-4);
 }
+.projects:not(:last-child) {
+  margin-bottom: var(--m-12);
+}
 @media only screen and (min-width: 600px) {
   .projects {
     grid-template-columns: repeat(2, 1fr);
