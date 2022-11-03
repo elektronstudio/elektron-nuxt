@@ -10,6 +10,7 @@
   --gray-600: #333333;
   --gray-700: #121212;
   --accent:#7BEF87;
+  --error:#e10707;
   --breadboard-tile-size: calc(100vw / 4);
   --font-mono: 'Azeret Mono', monospace;
   --w-0: 0px;

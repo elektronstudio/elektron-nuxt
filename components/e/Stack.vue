@@ -15,20 +15,13 @@ const { layout = "vertical", cols = 2 } = defineProps<Props>();
 
 <style>
 .EStack {
-  display: grid;
-  gap: var(--gap-5); /* TODO: Gap as a prop? */
-  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }
 .EStack.vertical {
-  grid-auto-rows: min-content;
+  flex-direction: column;
 }
 .EStack.horizontal {
-  grid-auto-columns: auto;
-  grid-template-columns: repeat(v-bind("cols"), 1fr);
-}
-@media (max-width: 800px) {
-  .EStack.horizontal {
-    grid-template-columns: 1fr;
-  }
+  flex-direction: row;
 }
 </style>

@@ -3,13 +3,19 @@ type Props = {
   size?: "xs" | "sm" | "md" | "lg";
   el?: "button" | "a";
   color?: "accent" | "gray" | "transparent" | "anime";
+  disabled?: boolean;
 };
 
-const { size = "md", el = "button" } = defineProps<Props>();
+const { size = "md", el = "button", disabled = false } = defineProps<Props>();
 </script>
 
 <template>
-  <component :is="el" class="EButton" :class="`${size} ${color}`">
+  <component
+    :is="el"
+    class="EButton"
+    :class="`${size} ${color}`"
+    :disabled="disabled"
+  >
     <slot />
   </component>
 </template>
@@ -25,6 +31,12 @@ const { size = "md", el = "button" } = defineProps<Props>();
   text-transform: uppercase;
   border-radius: var(--rounded-DEFAULT);
   line-height: var(--line-height-5xl);
+}
+.EButton:disabled,
+.EButton[disabled] {
+  filter: brightness(0.8);
+  pointer-events: none;
+  cursor: not-allowed;
 }
 .EButton:hover {
   filter: brightness(0.8);
