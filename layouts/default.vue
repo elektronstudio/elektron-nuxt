@@ -2,6 +2,9 @@
   <main class="main">
     <Nav />
     <slot />
+    <UserInfo />
+    <EWindowBorder />
+    <DraggableChat />
   </main>
 </template>
 

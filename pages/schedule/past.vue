@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
-  title: "Some Page",
+  title: "Past events",
 });
 
 const { data: upcomingEvents, error } = await useEvents({
