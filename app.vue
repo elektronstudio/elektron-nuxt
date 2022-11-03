@@ -3,8 +3,14 @@ import "./styles/vars.css";
 import "./styles/reset.css";
 import "./styles/fonts.css";
 import "./styles/styles.css";
-import { useIdle } from "@vueuse/core";
+import { useCssVar, useIdle, useWindowSize } from "@vueuse/core";
 const { idle } = useIdle(3000); // 3 seconds idle
+
+const { height } = useWindowSize();
+const appHeight = useCssVar("--app-height");
+watch(height, (newHeight) => (appHeight.value = `${newHeight}px`), {
+  immediate: true,
+});
 </script>
 
 <template>

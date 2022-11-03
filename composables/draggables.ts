@@ -3,8 +3,7 @@ import { Ref } from "vue";
 export type ContentType = "chat" | "text" | "image" | "video" | "event";
 
 export type InitialDraggable = {
-  titles: string[];
-  draggableId: string;
+  titles?: string[];
   contentType?: ContentType;
   initialX: number;
   initialY: number;
@@ -18,11 +17,13 @@ export type InitialDraggable = {
 
 export type Draggable = InitialDraggable & {
   // New draggable functions
+  id: string;
   x: Ref<number>;
   y: Ref<number>;
   updateXY: Function;
   getDocked: Function;
   setDocked: Function;
+  setDockedSilent: Function;
   getIndex: Function;
   getMaximised: Function;
   toggleMaximised: Function;
@@ -57,6 +58,9 @@ export const useDraggables = (initialDraggables: InitialDraggables) => {
       docked.value = !docked.value;
       updateIndex();
     };
+    const setDockedSilent = (state: boolean) => {
+      docked.value = state;
+    };
     const toggleMaximised = () => {
       maximised.value = !maximised.value;
       updateIndex();
@@ -79,8 +83,10 @@ export const useDraggables = (initialDraggables: InitialDraggables) => {
       titles,
       x,
       y,
+      id: key,
       updateXY,
       setDocked,
+      setDockedSilent,
       getDocked,
       getTop,
       toggleMaximised,

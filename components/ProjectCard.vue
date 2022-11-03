@@ -19,7 +19,7 @@ const { title, author, media, nextEvent } = defineProps<Props>();
       <h6 v-if="author" v-html="author" />
     </template>
     <template #footer>
-      <p v-if="nextEvent">Järgmine etendus:</p>
+      <p v-if="nextEvent" class="next-event">Järgmine etendus:</p>
       <!-- <time v-if="nextEvent" :datetime="nextEvent">
         {{ nextEvent }}
       </time> -->
@@ -38,10 +38,13 @@ const { title, author, media, nextEvent } = defineProps<Props>();
   margin-bottom: var(--m-2);
 }
 .ProjectCard footer {
-  justify-content: space-between;
 }
 .ProjectCard footer p {
   margin-right: 0.6em;
+  text-transform: uppercase;
+  font-size: var(--text-xs);
+  line-height: var(--line-height-xs);
+  font-family: var(--font-mono);
 }
 .ProjectCard :deep(.EventDatetime) {
   color: var(--fg);

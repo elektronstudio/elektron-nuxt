@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const sizes = {
+  xxs: "h5",
   xs: "h4",
   sm: "h3",
   md: "h2",
@@ -32,6 +33,11 @@ const { size = "md", el, title } = defineProps<Props>();
 .ETitle {
   font-weight: normal;
   line-height: var(--line-height-5xl);
+}
+.ETitle.xxs {
+  font-family: font-body-55, sans-serif;
+  font-size: var(--text-base);
+  line-height: var(--line-height-sm);
 }
 .ETitle.xs {
   font-family: font-body-55, sans-serif;

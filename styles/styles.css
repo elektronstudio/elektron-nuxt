@@ -10,6 +10,7 @@
   --gray-600: #333333;
   --gray-700: #121212;
   --accent:#7BEF87;
+  --error:#e10707;
   --breadboard-tile-size: calc(100vw / 4);
   --font-mono: 'Azeret Mono', monospace;
   --w-0: 0px;
@@ -106,7 +107,7 @@ code {
 }
 
 /* TODO: Figure out how to handle input styles */
-input {
+/* input {
   margin-bottom: var(--p-3);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
@@ -131,4 +132,4 @@ input:disabled {
 }
 input:disabled::placeholder {
   color: var(--gray-500);
-}
+} */

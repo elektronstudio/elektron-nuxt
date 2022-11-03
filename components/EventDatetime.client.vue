@@ -12,7 +12,7 @@ const { formattedDatetimeFirst, formattedDatetimeSecond } = useDatetime(
 <template>
   <time class="EventDatetime">
     {{ formattedDatetimeFirst }}
-    <Icon v-if="formattedDatetimeSecond" name="radix-icons:chevron-right" />
+    <span v-if="formattedDatetimeSecond">&nbsp;–&nbsp;</span>
     {{ formattedDatetimeSecond }}
   </time>
 </template>
@@ -22,5 +22,9 @@ const { formattedDatetimeFirst, formattedDatetimeSecond } = useDatetime(
   display: flex;
   align-items: center;
   color: var(--gray-300);
+  font-size: var(--text-xs);
+  line-height: var(--line-height-xs);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
 }
 </style>

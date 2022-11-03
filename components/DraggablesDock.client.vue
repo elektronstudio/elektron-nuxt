@@ -3,20 +3,10 @@ import { Draggables } from "~~/composables/draggables";
 
 type Props = {
   draggables: Draggables;
-  mobile?: boolean;
 };
 
-const { draggables, mobile } = defineProps<Props>();
+const { draggables } = defineProps<Props>();
 const { lang } = useLang();
-
-// const dockItems = computed(() => {
-//   if (mobile) {
-//     console.log("mobile");
-//     return draggables.filter((draggable) => draggable.isMinimised);
-//   } else {
-//     return draggables;
-//   }
-// });
 
 const handleClick = (d: any) => {
   if (d.getDocked()) {
@@ -31,10 +21,11 @@ const handleClick = (d: any) => {
   <TransitionGroup class="DraggablesDock" name="dock" tag="nav">
     <EDraggableTitlebar
       v-for="d in draggables"
+      v-show="mobile ? d.getDocked() : true"
       :title="d.titles[lang]"
       @click="handleClick(d)"
-      :data-id="d.draggableId"
-      :key="d.draggableId"
+      :data-id="d.id"
+      :key="d.id"
       :class="{ isTop: d.getTop() }"
     >
       <Transition name="fade">
@@ -62,12 +53,11 @@ const handleClick = (d: any) => {
 
 /* @TODO: Add breakpoints system */
 @media only screen and (max-width: 599px) {
+  .DraggablesDock {
+    margin-top: auto;
+  }
   .DraggablesDock > * {
     width: 100%;
-    /* @TODO: add two column layout */
-    /* flex: 0 0 100%; */
-    /* flex: 0 0 50%; */
-    /* border: 1px solid var(--gray-500); */
   }
 }
 @media only screen and (max-width: 899px) {

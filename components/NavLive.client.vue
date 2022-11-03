@@ -79,7 +79,7 @@ const { lang } = useLang();
 .menuItem {
   display: inline-flex;
   height: var(--h-9);
-  padding: var(--p-1) var(--p-3);
+  padding: var(--p-1);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   line-height: 1;

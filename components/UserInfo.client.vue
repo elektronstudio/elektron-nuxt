@@ -24,9 +24,9 @@ const handleToggle = () => {
       @close-dialog="handleClose"
     >
       <p style="font-size: 0.8em">Your name</p>
-      <input v-model="userName" />
+      <EInput v-model="userName" />
       <p style="font-size: 0.8em; margin-top: 0.5em">Your message</p>
-      <input v-model="userMessage" />
+      <EInput v-model="userMessage" />
     </EDialog>
   </Transition>
   <EDraggableTitlebar :title="userName" class="userTab" @click="handleToggle">

@@ -1,9 +1,4 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import { randomString } from "../utils/string";
-import EInput from "./EInput.vue";
-import ELabel from "./ELabel.vue";
-
 type Props = {
   modelValue?: number;
   label?: string;
@@ -75,6 +70,7 @@ const backgroundSize = computed(
   width: 100%;
   display: flex;
   align-items: center;
+  height: 1rem;
 }
 .EFormRange .min {
   margin-right: var(--m-2);
@@ -90,8 +86,13 @@ input[type="range"] {
   background-color: var(--gray-300);
   background-image: linear-gradient(var(--accent), var(--accent));
   background-repeat: no-repeat;
+  /* padding: 0; */
+  /* margin: 0; */
 }
 
+/* input[type="range"]:hover { */
+
+/* } */
 /* Input Thumb */
 input[type="range"]::-webkit-slider-thumb {
   appearance: none;

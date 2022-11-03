@@ -28,7 +28,7 @@ const onValidate = async () => {
         )
       "
     />
-    <EFormTextarea v-model="code" placeholder="Code" class="w-[12ch]" />
+    <EFormTextarea v-model="code" placeholder="Code" />
     <EButton color="accent" size="sm" @click="onValidate">
       {{ ["Submit ticket code", "Kontrolli pileti koodi"][lang] }}
     </EButton>

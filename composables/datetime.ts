@@ -16,7 +16,7 @@ export const formatDate = (datetime: Date | string | null) => {
   return datetime
     ? format(
         new Date(datetime),
-        isThisYear(new Date(datetime)) ? "d. MMMM" : "d.MM.y",
+        isThisYear(new Date(datetime)) ? "d.MMM" : "d.MM.y",
       )
     : "";
 };
@@ -107,11 +107,9 @@ export const useDatetime = (
 
   const formattedDatetimeFirst = isSameDay
     ? `${formattedStartAtDate} ${formattedStartAtTime}-${formattedEndAtTime}`
-    : `${formattedStartAtDate} ${formattedStartAtTime}`;
+    : `${formattedStartAtDate}`;
 
-  const formattedDatetimeSecond = isSameDay
-    ? null
-    : `${formattedEndAtDate} ${formattedEndAtTime}`;
+  const formattedDatetimeSecond = isSameDay ? null : `${formattedEndAtDate}`;
 
   return {
     formattedStartAtDate,

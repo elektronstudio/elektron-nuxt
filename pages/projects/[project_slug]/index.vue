@@ -14,12 +14,12 @@ const { lang } = useLang();
   <article v-else class="Page SingleProduction">
     <header>
       <div class="title">
-        <NuxtLink to="/projects">
+        <!-- <NuxtLink to="/projects">
           <EButton size="xs" el="a" color="transparent">
             <Icon name="radix-icons:arrow-left" />
             {{ ["Projects", "Projektid"][lang] }}
           </EButton>
-        </NuxtLink>
+        </NuxtLink> -->
         <ETitle el="h2" size="lg">
           {{ project.titles[lang] }}
         </ETitle>

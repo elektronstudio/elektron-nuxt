@@ -11,8 +11,7 @@ const stream = computed(() => {
 
 const draggables = useDraggables({
   video: {
-    titles: ["Stream", "Striim"],
-    draggableId: "videosteam",
+    titles: ["Stream", "Stream"],
     contentType: "video",
     initialX: 0,
     initialY: 1,
@@ -21,8 +20,6 @@ const draggables = useDraggables({
     hideTitleBarOnIdle: true,
   },
   chat: {
-    titles: ["Chat", "Chät"],
-    draggableId: "chat",
     contentType: "chat",
     initialX: 16,
     initialY: 1,
@@ -30,15 +27,20 @@ const draggables = useDraggables({
     tilesHeight: 8,
   },
   about: {
-    titles: ["About", "Info"],
-    draggableId: "about",
-    contentType: "event",
     tilesWidth: 8,
     tilesHeight: 4,
     initialX: 2,
-    initialY: 7,
+    initialY: 6,
+  },
+  controls: {
+    tilesWidth: 4,
+    tilesHeight: 2,
+    initialX: 11,
+    initialY: 8,
   },
 });
+
+const controls = parseControls(event.value.controls);
 
 const mobile = breakpoints.smaller("large");
 </script>
@@ -46,46 +48,25 @@ const mobile = breakpoints.smaller("large");
 <template>
   <ErrorCard v-if="error" />
   <template v-else>
-    <BackToEvent :event="event" />
     <EBreadBoard>
-      <!-- <template v-if="mobile && false">
-        <template
-          v-for="draggable in draggablesState"
-          :key="draggable.draggableId"
-        >
-          <EDraggableMobile
-            :draggable="draggable"
-            @update-draggables="updateDraggablesMobile"
-          >
-            <DraggableContent
-              v-if="draggable.contentType"
-              :content-type="draggable.contentType"
-              :data="draggable.data"
-            />
-          </EDraggableMobile>
-        </template>
-      </template> -->
-      <!-- <template> -->
-      <EDraggable v-bind="draggables.video">
+      <BackToEvent :event="event" />
+
+      <DraggableHoc v-bind="draggables.video">
         <Videostream url="xxx" />
-      </EDraggable>
-      <EDraggable v-bind="draggables.chat">
+      </DraggableHoc>
+      <DraggableHoc v-bind="draggables.chat">
         <Chat :channel="slug" />
-      </EDraggable>
-      <EDraggable v-bind="draggables.about">
+      </DraggableHoc>
+      <DraggableHoc v-bind="draggables.about">
         <EStack style="padding: var(--p-5)">
           <ETitle size="lg">Live event: {{ event.title }}</ETitle>
           <EContent :content="event.intro" />
         </EStack>
-      </EDraggable>
-      <!-- </template> -->
+      </DraggableHoc>
+      <DraggableHoc v-if="event.controls" v-bind="draggables.controls">
+        <Controls :controls="controls" />
+      </DraggableHoc>
 
-      <!-- <DraggablesDock
-        v-if="mobile"
-        :draggables="draggablesState"
-        :mobile="mobile"
-        @update-draggables="updateDraggablesMobile"
-      /> -->
       <DraggablesDock :draggables="draggables" />
     </EBreadBoard>
   </template>

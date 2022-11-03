@@ -29,7 +29,7 @@ const { lang } = useLang();
         } ${formattedStartAtDistance}`
       }}
     </EButton>
-    <EButton v-else-if="urgency === 'past'" el="a" :size="size" color="gray">
+    <EButton v-else-if="urgency === 'past'" el="a" :size="size" color="anime">
       {{ ["Revisit event", "Meenuta üritust"][lang] }}
     </EButton>
   </NuxtLink>
