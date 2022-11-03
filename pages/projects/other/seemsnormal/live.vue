@@ -24,24 +24,18 @@ const tracks = [
 
 const draggables = useDraggables({
   side1: {
-    titles: ["Side1", "Side1"],
-    draggableId: "side1",
     initialX: 1,
     initialY: 1,
     tilesWidth: 4,
     tilesHeight: 6,
   },
   side2: {
-    titles: ["Side2", "Side2"],
-    draggableId: "side1",
     initialX: 6,
     initialY: 1,
     tilesWidth: 4,
     tilesHeight: 6,
   },
   chat: {
-    titles: ["Chat", "Chät"],
-    draggableId: "chat",
     contentType: "chat",
     initialX: 16,
     initialY: 1,

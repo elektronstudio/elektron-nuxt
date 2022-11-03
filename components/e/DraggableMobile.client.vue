@@ -6,7 +6,6 @@ type ContentType = "chat" | "text" | "image" | "video" | "event";
 // TODO: How to import type here & make this dry
 type Draggable = {
   titles: string[];
-  draggableId: string;
   contentType?: ContentType;
   initialX: number;
   initialY: number;

@@ -7,7 +7,6 @@ type ContentType = "chat" | "text" | "image" | "video" | "event";
 // TODO: How to import type here & make this dry
 type Draggable = {
   titles: string[];
-  draggableId: string;
   contentType?: ContentType;
   initialX: number;
   initialY: number;
@@ -17,6 +16,7 @@ type Draggable = {
   docked?: boolean;
   maximised?: boolean;
   hideTitleBarOnIdle?: boolean;
+  id: string;
   x: Ref<number>;
   y: Ref<number>;
   updateXY: Function;
@@ -31,9 +31,9 @@ type Draggable = {
 
 const {
   titles,
-  draggableId,
   x,
   y,
+  id,
   tilesWidth = 1,
   tilesHeight,
   maximisable = false,
@@ -73,8 +73,8 @@ const {
   },
 });
 
-const snappedX = computed(() => Math.round(draggableX.value / tileSize.value));
-const snappedY = computed(() => Math.round(draggableY.value / tileSize.value));
+// const snappedX = computed(() => Math.round(draggableX.value / tileSize.value));
+// const snappedY = computed(() => Math.round(draggableY.value / tileSize.value));
 
 const calculateCoordinates = function () {
   tileSize.value = windowWidth.value / tileDivider;
@@ -107,9 +107,11 @@ onUnmounted(() => {
 function findCoordinates(el: Element, done: () => void) {
   // @TODO: Find a better solution for this
   // Consider using refs for selectors
+  console.log(`.DraggablesDock .EDraggableTitlebar[data-id="${id}"]`);
   const $draggableDocked = document.querySelector(
-    `.DraggablesDock .EDraggableTitlebar[data-id="${draggableId}"]`,
+    `.DraggablesDock .EDraggableTitlebar[data-id="${id}"]`,
   );
+  console.log($draggableDocked);
   const draggableDockedRect = $draggableDocked?.getBoundingClientRect();
   finalAnimation.value = draggableDockedRect;
 

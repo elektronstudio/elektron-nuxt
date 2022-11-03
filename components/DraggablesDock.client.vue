@@ -24,8 +24,8 @@ const handleClick = (d: any) => {
       v-show="mobile ? d.getDocked() : true"
       :title="d.titles[lang]"
       @click="handleClick(d)"
-      :data-id="d.draggableId"
-      :key="d.draggableId"
+      :data-id="d.id"
+      :key="d.id"
       :class="{ isTop: d.getTop() }"
     >
       <Transition name="fade">

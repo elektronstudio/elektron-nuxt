@@ -11,8 +11,7 @@ const stream = computed(() => {
 
 const draggables = useDraggables({
   video: {
-    titles: ["Stream", "Striim"],
-    draggableId: "videosteam",
+    titles: ["Stream", "Stream"],
     contentType: "video",
     initialX: 0,
     initialY: 1,
@@ -21,8 +20,6 @@ const draggables = useDraggables({
     hideTitleBarOnIdle: true,
   },
   chat: {
-    titles: ["Chat", "Chät"],
-    draggableId: "chat",
     contentType: "chat",
     initialX: 16,
     initialY: 1,
@@ -30,16 +27,12 @@ const draggables = useDraggables({
     tilesHeight: 8,
   },
   about: {
-    titles: ["About", "Info"],
-    draggableId: "about",
     tilesWidth: 8,
     tilesHeight: 4,
     initialX: 2,
     initialY: 6,
   },
   controls: {
-    titles: ["Controls", "Controls"],
-    draggableId: "controls",
     tilesWidth: 4,
     tilesHeight: 2,
     initialX: 11,

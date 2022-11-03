@@ -2,10 +2,8 @@ import { Ref } from "vue";
 
 export type ContentType = "chat" | "text" | "image" | "video" | "event";
 
-// TODO: remove draggableId in favor of key
 export type InitialDraggable = {
-  titles: string[];
-  draggableId: string;
+  titles?: string[];
   contentType?: ContentType;
   initialX: number;
   initialY: number;
@@ -19,6 +17,7 @@ export type InitialDraggable = {
 
 export type Draggable = InitialDraggable & {
   // New draggable functions
+  id: string;
   x: Ref<number>;
   y: Ref<number>;
   updateXY: Function;
@@ -84,6 +83,7 @@ export const useDraggables = (initialDraggables: InitialDraggables) => {
       titles,
       x,
       y,
+      id: key,
       updateXY,
       setDocked,
       setDockedSilent,
