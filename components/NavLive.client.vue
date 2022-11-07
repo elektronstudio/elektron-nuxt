@@ -28,9 +28,6 @@ const { lang } = useLang();
 </template>
 
 <style scoped>
-.menuItem.NavLive {
-  display: inline;
-}
 .NavLive {
   display: inline;
   overflow: hidden;

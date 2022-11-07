@@ -15,5 +15,6 @@
   min-height: 100vh;
   height: 100vh;
   flex-direction: column;
+  padding-top: var(--h-9);
 }
 </style>

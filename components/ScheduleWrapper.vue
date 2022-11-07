@@ -1,5 +1,5 @@
 <template>
-  <main class="Page Schedule"><slot /></main>
+  <div class="Page Schedule"><slot /></div>
 </template>
 <style scoped>
 .Page.Schedule {

@@ -69,7 +69,7 @@ const navState = ref(false);
 
 <style scoped>
 .Nav {
-  position: sticky;
+  position: fixed;
   top: 0;
   width: 100%;
   z-index: 100; /* Changed from 100 */
