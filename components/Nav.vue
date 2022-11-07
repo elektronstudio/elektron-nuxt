@@ -18,6 +18,10 @@ const navItems = [
     label: ["Podcast", "Podcast"],
     path: "/podcast",
   },
+  {
+    label: ["Lab", "Lab"],
+    path: "https://lab.elektron.art/",
+  },
 ];
 
 const { theme, changeTheme } = useTheme();
