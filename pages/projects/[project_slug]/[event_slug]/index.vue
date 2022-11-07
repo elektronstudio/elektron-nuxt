@@ -22,7 +22,7 @@ const { lang } = useLang();
             {{ event.projects[0].titles[lang] }}
           </EButton>
         </NuxtLink> -->
-        <ETitle el="h2" size="lg" :title="event.title" />
+        <h2 class="ETitle lg">{{ event.titles[lang] }}</h2>
         <h4 v-if="event.authors">{{ event.authors }}</h4>
       </div>
       <EContent

@@ -23,9 +23,7 @@ const { lang } = useLang();
             {{ ["Projects", "Projektid"][lang] }}
           </EButton>
         </NuxtLink> -->
-        <ETitle el="h2" size="lg">
-          {{ project.titles[lang] }}
-        </ETitle>
+        <h2 class="ETitle lg">{{ project.titles[lang] }}</h2>
         <ETitle v-if="project.authors" el="h5" size="xs">
           {{ project.authors }}
         </ETitle>
