@@ -26,7 +26,6 @@ const navItems = [
 
 const { theme, changeTheme } = useTheme();
 const navState = ref(false);
-const menuItemsLength = computed(() => (navItems ? navItems.length + 1 : 0));
 </script>
 
 <template>
