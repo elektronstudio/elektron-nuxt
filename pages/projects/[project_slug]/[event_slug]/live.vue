@@ -9,11 +9,6 @@ useHead({
 
 const videostreams = getVideostreams(event.value.streamkey);
 
-// TODO: support multiple videos
-const stream = computed(() => {
-  return videostreams?.[0];
-});
-
 const draggables = useDraggables({
   video: {
     titles: ["Stream", "Stream"],
@@ -51,28 +46,25 @@ const mobile = breakpoints.smaller("large");
 </script>
 
 <template>
-  <ErrorCard v-if="error" />
-  <template v-else>
-    <EBreadBoard>
-      <BackToEvent :event="event" />
+  <EBreadBoard>
+    <BackToEvent :event="event" />
 
-      <DraggableHoc v-bind="draggables.video">
-        <Videostream url="xxx" />
-      </DraggableHoc>
-      <DraggableHoc v-bind="draggables.chat">
-        <Chat :channel="slug" />
-      </DraggableHoc>
-      <DraggableHoc v-bind="draggables.about">
-        <EStack style="padding: var(--p-5)">
-          <ETitle size="lg">Live event: {{ event.title }}</ETitle>
-          <EContent :content="event.intro" />
-        </EStack>
-      </DraggableHoc>
-      <DraggableHoc v-if="event.controls" v-bind="draggables.controls">
-        <Controls :controls="controls" />
-      </DraggableHoc>
+    <DraggableHoc v-bind="draggables.video" v-if="videostreams.length">
+      <Videostream :url="videostreams[0].url" />
+    </DraggableHoc>
+    <DraggableHoc v-bind="draggables.chat">
+      <Chat :channel="slug" />
+    </DraggableHoc>
+    <DraggableHoc v-bind="draggables.about">
+      <EStack style="padding: var(--p-5)">
+        <ETitle size="lg">Live event: {{ event.title }}</ETitle>
+        <EContent :content="event.intro" />
+      </EStack>
+    </DraggableHoc>
+    <DraggableHoc v-if="event.controls" v-bind="draggables.controls">
+      <Controls :controls="controls" />
+    </DraggableHoc>
 
-      <DraggablesDock :draggables="draggables" />
-    </EBreadBoard>
-  </template>
+    <DraggablesDock :draggables="draggables" />
+  </EBreadBoard>
 </template>
