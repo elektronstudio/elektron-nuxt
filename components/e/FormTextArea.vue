@@ -46,7 +46,7 @@ const inputValue = computed({
   />
 </template>
 
-<style scoped>
+<style>
 .ETextarea {
   display: flex;
   flex-direction: column;
