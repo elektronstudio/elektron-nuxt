@@ -30,6 +30,6 @@ const iconMap = {
   height: 1em;
 }
 .ETitlebarButton:hover {
-  background-color: var(--gray-300);
+  background-color: var(--gray-600);
 }
 </style>
