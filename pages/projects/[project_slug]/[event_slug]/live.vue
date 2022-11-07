@@ -2,7 +2,8 @@
 const route = useRoute();
 const slug = route.params.event_slug as string;
 const { data: event, error } = await useEventBySlug(slug as string);
-// TODO: Make this more dynamic
+console.log(event);
+
 useHead({
   title: `${event.value.title} – elektron.art`,
 });
@@ -41,8 +42,6 @@ const draggables = useDraggables({
 });
 
 const controls = parseControls(event.value.controls);
-
-const mobile = breakpoints.smaller("large");
 </script>
 
 <template>

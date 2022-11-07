@@ -7,6 +7,7 @@ type Props = {
   placeholder?: string;
   label?: string;
   disabled?: boolean;
+  id?: string;
 };
 
 const {
@@ -16,8 +17,6 @@ const {
   label,
   disabled,
 } = defineProps<Props>();
-
-const fieldId = randomString();
 
 const emit = defineEmits<{
   (e: "update:modelValue", value: ModelValue): void;
@@ -32,22 +31,19 @@ const inputValue = computed({
 </script>
 
 <template>
-  <ELabel v-if="label" :fieldId="fieldId" :disabled="disabled">
-    {{ label }}
-  </ELabel>
   <textarea
-    class="ETextarea"
+    class="ETextArea"
     v-model="inputValue"
     :placeholder="placeholder"
     :name="name"
-    :id="fieldId"
+    :id="id"
     :disabled="disabled"
     ref="textarea"
   />
 </template>
 
-<style>
-.ETextarea {
+<style scoped>
+.ETextArea {
   display: flex;
   flex-direction: column;
   margin-bottom: var(--m-4);

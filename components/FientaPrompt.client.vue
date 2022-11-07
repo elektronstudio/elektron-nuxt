@@ -20,23 +20,21 @@ const onValidate = async () => {
 </script>
 
 <template>
-  <div class="wrapper">
-    <ETitle>{{ ["Validate your ticket", "Piletikontroll"][lang] }}</ETitle>
-    <EContent
-      :content="
-        parseMarkdown(
-          [
-            `There is a **ticket code** in your Fienta email, just below big blue button. Copy-paste the code into the box below:`,
-            `Fienta piletil on piletikood emaili lõpus, sinise sisenemisnupu all. Kopeeri see kood siia:`,
-          ][lang],
-        )
-      "
-    />
-    <textarea class="ETextarea" v-model="code" placeholder="Code" />
-    <EButton color="accent" size="sm" @click="onValidate">
-      {{ ["Submit ticket code", "Kontrolli pileti koodi"][lang] }}
-    </EButton>
-  </div>
+  <ETitle>{{ ["Validate your ticket", "Piletikontroll"][lang] }}</ETitle>
+  <EContent
+    :content="
+      parseMarkdown(
+        [
+          `There is a **ticket code** in your Fienta email, just below big blue button. Copy-paste the code into the box below:`,
+          `Fienta piletil on piletikood emaili lõpus, sinise sisenemisnupu all. Kopeeri see kood siia:`,
+        ][lang],
+      )
+    "
+  />
+  <ETextArea class="ETextarea" v-model="code" placeholder="Code" />
+  <EButton color="accent" size="sm" @click="onValidate">
+    {{ ["Submit ticket code", "Kontrolli pileti koodi"][lang] }}
+  </EButton>
 </template>
 
 <style scoped>

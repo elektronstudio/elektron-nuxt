@@ -53,7 +53,7 @@ debouncedWatch(
         :max="c.max"
         :step="c.step"
       />
-      <EFormTextarea v-if="c.control === 'text'" v-model="c.value" />
+      <ETextArea v-if="c.control === 'text'" v-model="c.value" />
 
       <div v-if="c.labels" class="labels">
         <div v-for="label in c.labels" :key="label">
