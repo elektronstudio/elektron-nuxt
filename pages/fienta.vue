@@ -8,9 +8,22 @@ const route = useRoute();
 const code = ref<string>((route.query.code as string) || "");
 const { lang } = useLang();
 
+onMounted(async () => {
+  if (code.value) {
+    try {
+      const event = await validateTicket(code.value);
+      router.push(event.eventLiveLink);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+});
+
 const onValidate = async () => {
+  console.log(code.value);
   if (code.value) {
     const event = await validateTicket(code.value);
+    console.log(event);
     if (event?.eventLiveLink) {
       router.push(event.eventLiveLink);
     }
@@ -32,7 +45,7 @@ const onValidate = async () => {
         )
       "
     />
-    <EFormTextarea v-model="code" placeholder="Code" />
+    <textarea class="ETextarea" v-model="code" placeholder="Code" />
     <EButton color="accent" size="sm" @click="onValidate">
       {{ ["Submit ticket code", "Kontrolli pileti koodi"][lang] }}
     </EButton>
