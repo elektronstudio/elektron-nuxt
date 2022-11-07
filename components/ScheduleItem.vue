@@ -30,6 +30,8 @@ const { lang } = useLang();
           </ETitle>
         </NuxtLink>
         <!-- <EContent nolinks :content="event.intros[lang]" /> -->
+
+        {{ event.controls }}
       </header>
       <section>
         <EventButtons :event="event" v-if="event.streamkey" />

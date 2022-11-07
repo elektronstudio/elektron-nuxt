@@ -5,7 +5,7 @@ type Props = {
   controls: any;
 };
 const { controls: defaultControls } = defineProps<Props>();
-
+const { lang } = useLang();
 const { sendMessage } = useMessages();
 // const userId = useUserId();
 // const userName = useUserName();
@@ -34,6 +34,26 @@ debouncedWatch(
           };
           sendMessage.value(message);
         }
+        if (c.control === "button") {
+          console.log("button", c, controlsValue);
+          if (controlsValue !== 0) {
+            sendMessage.value({
+              channel: c.channel,
+              type: c.type,
+              value: 10,
+              userid: userId.value,
+              username: userName.value,
+            });
+            c.value = 0;
+            sendMessage.value({
+              channel: c.channel,
+              type: c.type,
+              value: 0,
+              userid: userId.value,
+              username: userName.value,
+            });
+          }
+        }
       }
     });
   },
@@ -45,21 +65,30 @@ debouncedWatch(
   <div class="Controls">
     <div v-for="(c, i) in controls" :key="i">
       <ETitle size="sm" v-if="c.title">{{ c.title }}</ETitle>
-      <EFormRange
-        v-if="c.control === 'slider'"
-        :label="c.description"
-        v-model="c.value"
-        :min="c.min"
-        :max="c.max"
-        :step="c.step"
-      />
-      <ETextArea v-if="c.control === 'text'" v-model="c.value" />
+      <template v-if="c.control === 'slider'">
+        <EFormRange
+          :label="c.description"
+          v-model="c.value"
+          :min="c.min"
+          :max="c.max"
+          :step="c.step"
+        />
 
-      <div v-if="c.labels" class="labels">
-        <div v-for="label in c.labels" :key="label">
-          {{ label }}
+        <div v-if="c.labels" class="labels">
+          <div v-for="label in c.labels" :key="label">
+            {{ label }}
+          </div>
         </div>
-      </div>
+      </template>
+      <ETextArea v-if="c.control === 'text'" v-model="c.value" />
+      <EButton
+        v-if="c.control === 'button'"
+        color="accent"
+        size="xs"
+        @click="c.value = 10"
+      >
+        {{ c.label }}
+      </EButton>
     </div>
   </div>
 </template>
@@ -71,5 +100,8 @@ debouncedWatch(
 .labels {
   display: flex;
   justify-content: space-between;
+}
+.ETitle {
+  margin-bottom: var(--m-2);
 }
 </style>

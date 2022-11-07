@@ -26,7 +26,7 @@ export const parseControls = (controlsConfig: string) => {
         return;
       }
       return {
-        control: chunk.control === "text" ? "text" : "slider",
+        control: chunk.control ? chunk.control : "slider",
         title: "",
         description: "",
         min: 0,
