@@ -26,11 +26,19 @@ const navItems = [
 
 const { theme, changeTheme } = useTheme();
 const navState = ref(false);
+const route = useRoute();
+console.log(route.fullPath);
 </script>
 
 <template>
   <Transition appear>
-    <header v-if="!$route.fullPath.endsWith('/live')" class="Nav">
+    <header
+      v-if="
+        !$route.fullPath.endsWith('/live') &&
+        !$route.fullPath.endsWith('/experiment/experiment/experiment')
+      "
+      class="Nav"
+    >
       <NuxtLink to="/" class="menuItem homeButton" @click="navState = false">
         <ELogo el="span" />
       </NuxtLink>
