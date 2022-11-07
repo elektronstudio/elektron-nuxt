@@ -26,8 +26,6 @@ const navItems = [
 
 const { theme, changeTheme } = useTheme();
 const navState = ref(false);
-const route = useRoute();
-console.log(route.fullPath);
 </script>
 
 <template>
