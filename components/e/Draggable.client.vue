@@ -123,7 +123,8 @@ function findCoordinates(el: Element, done: () => void) {
   <Transition @enter="findCoordinates" @leave="findCoordinates">
     <div
       class="EDraggable"
-      :style="style"
+      :style="`${style} width: calc(${tilesWidth} * var(--breadboard-tile-size));
+    height: calc(${tilesHeight} * var(--breadboard-tile-size));  z-index: calc(${getIndex()} + 1);`"
       style="touch-action: none"
       :class="{
         isDragging: isDragging,
@@ -219,11 +220,11 @@ function findCoordinates(el: Element, done: () => void) {
 @media only screen and (min-width: 900px) {
   .EDraggable {
     position: fixed;
-    width: calc(v-bind(tilesWidth) * var(--breadboard-tile-size));
-    height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size));
     touch-action: none;
     border: 1px solid transparent;
-    z-index: calc(v-bind("getIndex()") + 1);
+    /* width: calc(v-bind(tilesWidth) * var(--breadboard-tile-size));
+    height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size)); */
+    /* z-index: calc(v-bind("getIndex()") + 1); */
   }
   .EDraggable article {
     flex-grow: 1;
@@ -268,10 +269,6 @@ function findCoordinates(el: Element, done: () => void) {
     padding-top: 0;
   }
   @keyframes windowAnimation {
-    0% {
-      width: calc(v-bind(tilesWidth) * var(--breadboard-tile-size));
-      height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size));
-    }
     100% {
       top: v-bind("`${finalAnimation?.y ? finalAnimation.y : 0}px`");
       left: v-bind(
