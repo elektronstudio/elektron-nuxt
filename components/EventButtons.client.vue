@@ -67,5 +67,6 @@ const processEvent = processEventFienta(event);
 .hasTicket {
   font-size: var(--text-xs);
   color: var(--gray-300);
+  line-height: 1;
 }
 </style>

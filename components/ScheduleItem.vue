@@ -82,6 +82,7 @@ const { lang } = useLang();
 .ScheduleItem footer {
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   gap: var(--gap-1);
   flex-shrink: 0;
 }
