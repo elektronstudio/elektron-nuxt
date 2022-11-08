@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { useClipboard } from "@vueuse/core";
 import { format } from "date-fns";
-
 import { parseControls } from "~~/composables/controls";
+
+definePageMeta({
+  isLive: true,
+});
 
 const route = useRoute();
 const slug = route.params.event_slug as string;

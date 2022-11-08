@@ -2,6 +2,7 @@
 const route = useRoute();
 const router = useRouter();
 const slug = route.params.event_slug as string;
+
 const { data: event, error } = await useEventBySlug(slug as string);
 
 useHead({
