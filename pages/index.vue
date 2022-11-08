@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Urgency } from "~~/types";
+
 const { lang } = useLang();
 const { data: frontpage, error: frontpageError } = await useFrontPage();
 const muted = ref<boolean | undefined>(true);
@@ -17,12 +19,26 @@ const event1 = computed(() => {
   return frontpage.value?.events?.length ? frontpage.value.events[0] : null;
 });
 
-const {
-  data: event,
-  formattedStartAtDistance,
-  urgency,
-  error,
-} = await useUpcomingEvent();
+// @TODO: Move this to processing level
+const { urgency } = useDatetime(event1.value.start_at, event1.value.end_at);
+const urgencyLabel = computed(() => {
+  if (urgency.value === ("future" as Urgency)) {
+    return ["tulemas", "tulemas"];
+  } else if (urgency.value === ("soon" as Urgency)) {
+    return ["soon", "varsti"];
+  } else if (urgency.value === ("now" as Urgency)) {
+    return ["live", "live"];
+  } else {
+    return ["new", "uus"];
+  }
+});
+
+// const {
+//   data: event,
+//   formattedStartAtDistance,
+//   urgency,
+//   error,
+// } = await useUpcomingEvent();
 
 // TODO Add this filter to project/event loader
 // const upcomingEventSoon = computed(() => {
@@ -75,14 +91,14 @@ const {
             <Icon name="radix-icons:speaker-loud" v-else />
           </button>
         </Transition>
-        <EventPreview
+        <EDialog
           v-if="dialogState && event1"
-          :key="event1.projectLink"
-          :event="event1"
+          :title="urgencyLabel[lang]"
           :dialog-state="dialogState"
-          :is-event="true"
           @close-dialog="dialogState = false"
-        />
+        >
+          <EventPreview :event="event1" :is-event="true" />
+        </EDialog>
       </div>
     </div>
   </div>
@@ -101,7 +117,7 @@ const {
   overflow-y: auto;
   padding: var(--p-3);
 }
-.videoWrapper.dialogActive > *:not(.ELivePreview) {
+.videoWrapper.dialogActive > *:not(.EDialog) {
   filter: blur(8px);
   opacity: 0.6;
 }
@@ -154,5 +170,13 @@ const {
 .v-enter-from,
 .v-leave-to {
   opacity: 0;
+}
+
+.EDialog {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg);
+  width: 100%;
+  max-width: 40rem;
 }
 </style>

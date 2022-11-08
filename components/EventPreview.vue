@@ -5,33 +5,13 @@ const { lang } = useLang();
 
 type Props = {
   event: any;
-  dialogState: boolean;
   isEvent: boolean;
 };
 
 const { event, isEvent } = defineProps<Props>();
-// TODO: Consider using more solid comparison for pinned event
-const label = computed(() => {
-  if (isEvent && event?.value?.urgency === "soon") {
-    return ["tulemas", "tulemas"][lang.value];
-  } else if (isEvent && event?.value?.urgency === "now") {
-    return ["live", "live"][lang.value];
-  } else {
-    return ["new", "uus"][lang.value];
-  }
-});
-const emit = defineEmits<{
-  (e: "close-dialog"): void;
-}>();
 </script>
 <template>
-  <EDialog
-    v-if="event"
-    class="ELivePreview"
-    :title="label"
-    :dialog-state="dialogState"
-    @close-dialog="emit('close-dialog')"
-  >
+  <div class="ELivePreview">
     <aside>
       <EStack is="header">
         <EventDatetime :event="event" />
@@ -55,19 +35,11 @@ const emit = defineEmits<{
       </footer>
     </aside>
     <EImage v-if="event.thumbnail" :media="(event.thumbnail as MediaItem)" />
-  </EDialog>
+  </div>
 </template>
 
 <style scoped>
 .ELivePreview {
-  position: relative;
-  overflow: hidden;
-  background-color: var(--bg);
-  width: 100%;
-  max-width: 40rem;
-}
-
-.ELivePreview :deep(.wrapper) {
   position: relative;
   display: flex;
   flex-direction: column-reverse;
@@ -112,7 +84,7 @@ const emit = defineEmits<{
 }
 
 @media only screen and (min-width: 600px) {
-  .ELivePreview :deep(.wrapper) {
+  .ELivePreview {
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
