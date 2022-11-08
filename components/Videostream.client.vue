@@ -37,18 +37,18 @@ const { idle } = useIdle(5000);
         <slot />
       </div>
       <nav>
-        <EButton size="xs" color="transparent" @click="muted = !muted">
+        <button @click="muted = !muted">
           <Icon v-if="muted" name="radix-icons:speaker-off" />
           <Icon v-if="!muted" name="radix-icons:speaker-loud" />
-        </EButton>
-        <EButton size="xs" color="transparent" @click="togglePip">
+        </button>
+        <button @click="togglePip">
           <Icon v-if="isPip" name="ph:picture-in-picture" />
           <Icon v-if="!isPip" name="ph:picture-in-picture-fill" />
-        </EButton>
-        <EButton size="xs" color="transparent" @click="toggleFullscreen">
+        </button>
+        <button @click="toggleFullscreen">
           <Icon v-if="isFullscreen" name="radix-icons:enter-full-screen" />
           <Icon v-if="!isFullscreen" name="radix-icons:exit-full-screen" />
-        </EButton>
+        </button>
       </nav>
     </div>
   </div>
@@ -77,7 +77,14 @@ const { idle } = useIdle(5000);
   transition: 0.3s ease-in-out;
 }
 .controls nav {
-  gap: var(--gap-2);
+  display: flex;
+  gap: var(--gap-1);
+}
+.controls nav button {
+  width: 1rem;
+  height: 1rem;
+  color: var(--gray-300);
+  display: flex;
 }
 .controls .EButton svg {
   margin: 0;
