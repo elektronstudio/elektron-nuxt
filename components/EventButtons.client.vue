@@ -44,10 +44,8 @@ const processEvent = processEventFienta(event);
     </EButton>
   </NuxtLink>
   <EButton
-    v-else-if="
-      processEvent.status === 'REQUIRES_TICKET' && urgency === 'future'
-    "
-    v-for="ticketLink in event.ticketLinks"
+    v-else-if="processEvent.status === 'REQUIRES_TICKET' && urgency !== 'past'"
+    v-for="ticketLink in processEvent.ticketLinks"
     :href="ticketLink"
     target="_blank"
     el="a"
