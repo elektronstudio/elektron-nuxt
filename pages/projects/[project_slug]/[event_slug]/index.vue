@@ -110,9 +110,10 @@ const { lang } = useLang();
 
 .buttons {
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-end;
-  gap: var(--gap-5);
+  flex-direction: column;
+  align-items: flex-end;
+  /* justify-content: flex-end; */
+  gap: var(--gap-1);
   grid-area: buttons;
 }
 

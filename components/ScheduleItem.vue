@@ -45,6 +45,7 @@ const { lang } = useLang();
   padding: var(--p-3) 0;
   border-top: 1px solid var(--gray-500);
   gap: var(--gap-3);
+  color: var(--fg);
 }
 
 .ScheduleItem .EventDatetime,
@@ -81,9 +82,10 @@ const { lang } = useLang();
 .ScheduleItem footer {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-2);
+  gap: var(--gap-1);
   flex-shrink: 0;
 }
+
 .ScheduleItem time {
   color: var(--gray-300);
 }

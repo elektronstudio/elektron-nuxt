@@ -20,7 +20,7 @@ const processEvent = processEventFienta(event);
 </script>
 
 <template>
-  <p v-if="processEvent.status === 'HAS_TICKET'">
+  <p class="hasTicket" v-if="processEvent.status === 'HAS_TICKET'">
     {{ ["You have a ticket", "Sul on ürituse pilet"][lang] }}
   </p>
   <NuxtLink
@@ -35,7 +35,7 @@ const processEvent = processEventFienta(event);
     <EButton v-else-if="urgency === 'future'" el="a" :size="size" color="gray">
       {{
         `${
-          ["Event starts in: ", "Üritus algab: "][lang]
+          ["Event starts: ", "Üritus algab: "][lang]
         } ${formattedStartAtDistance}`
       }}
     </EButton>
@@ -56,3 +56,10 @@ const processEvent = processEventFienta(event);
     {{ ["Get a ticket", "Osta pilet"][lang] }}
   </EButton>
 </template>
+
+<style scoped>
+.hasTicket {
+  font-size: var(--text-xs);
+  color: var(--gray-300);
+}
+</style>

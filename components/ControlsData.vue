@@ -30,7 +30,7 @@ const formatControlData = (d) => ({
 
 <template>
   <EStack class="wrapper">
-    <EStack v-for="d in controlsData" style="gap: var(--p-4)">
+    <EStack v-for="d in controlsData" style="gap: var(--gap-4)">
       <ETitle size="sm">{{ d.control?.title || d.type }}</ETitle>
       <Data :data="formatControlData(d)" />
       <ControlsGraph :data="d" :username="username" />
@@ -68,7 +68,7 @@ const formatControlData = (d) => ({
 
 <style scoped>
 .wrapper {
-  gap: var(--p-4);
+  gap: var(--gapp-4);
   padding: var(--p-3);
 }
 

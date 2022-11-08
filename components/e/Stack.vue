@@ -2,21 +2,23 @@
 type Props = {
   layout?: "vertical" | "horizontal";
   cols?: number;
+  is?: string;
 };
 
-const { layout = "vertical", cols = 2 } = defineProps<Props>();
+const { layout = "vertical", cols = 2, is = "div" } = defineProps<Props>();
 </script>
 
 <template>
-  <div class="EStack" :class="layout">
+  <component :is="is" class="EStack" :class="layout">
     <slot />
-  </div>
+  </component>
 </template>
 
 <style>
 .EStack {
   display: flex;
   flex-wrap: wrap;
+  gap: var(--gap-4);
 }
 .EStack.vertical {
   flex-direction: column;

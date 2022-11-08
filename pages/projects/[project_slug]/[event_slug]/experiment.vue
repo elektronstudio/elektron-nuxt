@@ -76,79 +76,80 @@ const video = ref<HTMLVideoElement | null>(null);
 </script>
 
 <template>
-  <ErrorCard v-if="error" />
-  <EBreadBoard v-else>
-    <BackToEvent :event="event" />
-    <DraggableHoc v-bind="draggables.stream" v-if="videostreams.length">
-      <Videostream :url="videostreams[0].url" />
-      <ECode>{{ formatData(videostreams[0]) }}</ECode>
-    </DraggableHoc>
+  <div>
+    <EBreadBoard>
+      <BackToEvent :event="event" />
+      <DraggableHoc v-bind="draggables.stream" v-if="videostreams.length">
+        <Videostream :url="videostreams[0].url" />
+        <ECode>{{ formatData(videostreams[0]) }}</ECode>
+      </DraggableHoc>
 
-    <DraggableHoc v-bind="draggables.about">
-      <EStack style="padding: var(--p-5)">
-        <ETitle size="lg">
-          {{ event.titles[lang] }}
-        </ETitle>
-        <EventDatetime :event="event" />
-        <EContent :content="event?.descriptions[lang]" />
-      </EStack>
-    </DraggableHoc>
-
-    <DraggableHoc v-bind="draggables.chat">
-      <Chat :channel="slug" />
-    </DraggableHoc>
-
-    <DraggableHoc v-bind="draggables.data">
-      <ControlsData :messages="experimentMessages" :controls="controls" />
-    </DraggableHoc>
-
-    <DraggableHoc v-bind="draggables.rawdata">
-      <div class="rawdata">
-        <ECode class="h-full overflow-auto !text-gray-500">
-          {{ formatData(experimentMessages, true) }}
-        </ECode>
-        <EStack
-          layout="horizontal"
-          style="
-            padding: var(--p-3);
-            justify-content: space-between;
-            align-items: center;
-          "
-        >
-          <div style="display: flex; gap: var(--p-4)">
-            <EButton
-              color="accent"
-              @click="onCopyAndDownloadCsv"
-              size="xs"
-              :disabled="!experimentMessages.length"
-            >
-              Copy & download
-            </EButton>
-            <EButton
-              @click="onDownloadCsv"
-              size="xs"
-              :disabled="!experimentMessages.length"
-            >
-              Download
-            </EButton>
-          </div>
-
-          <button class="delete-button" @click="onClear">
-            <Icon
-              name="ph:trash"
-              :class="!experimentMessages.length ? 'text-red-900' : ''"
-            />
-          </button>
+      <DraggableHoc v-bind="draggables.about">
+        <EStack style="padding: var(--p-5)">
+          <ETitle size="lg">
+            {{ event.titles[lang] }}
+          </ETitle>
+          <EventDatetime :event="event" />
+          <EContent :content="event?.descriptions[lang]" />
         </EStack>
-      </div>
-    </DraggableHoc>
+      </DraggableHoc>
 
-    <DraggableHoc v-if="event.controls" v-bind="draggables.controls">
-      <Controls :controls="controls" />
-    </DraggableHoc>
+      <DraggableHoc v-bind="draggables.chat">
+        <Chat :channel="slug" />
+      </DraggableHoc>
 
-    <DraggablesDock :draggables="draggables" />
-  </EBreadBoard>
+      <DraggableHoc v-bind="draggables.data">
+        <ControlsData :messages="experimentMessages" :controls="controls" />
+      </DraggableHoc>
+
+      <DraggableHoc v-bind="draggables.rawdata">
+        <div class="rawdata">
+          <ECode class="h-full overflow-auto !text-gray-500">
+            {{ formatData(experimentMessages, true) }}
+          </ECode>
+          <EStack
+            layout="horizontal"
+            style="
+              padding: var(--p-3);
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <div style="display: flex; gap: var(--p-4)">
+              <EButton
+                color="accent"
+                @click="onCopyAndDownloadCsv"
+                size="xs"
+                :disabled="!experimentMessages.length"
+              >
+                Copy & download
+              </EButton>
+              <EButton
+                @click="onDownloadCsv"
+                size="xs"
+                :disabled="!experimentMessages.length"
+              >
+                Download
+              </EButton>
+            </div>
+
+            <button class="delete-button" @click="onClear">
+              <Icon
+                name="ph:trash"
+                :class="!experimentMessages.length ? 'text-red-900' : ''"
+              />
+            </button>
+          </EStack>
+        </div>
+      </DraggableHoc>
+
+      <DraggableHoc v-if="event.controls" v-bind="draggables.controls">
+        <Controls :controls="controls" />
+      </DraggableHoc>
+
+      <DraggablesDock :draggables="draggables" />
+    </EBreadBoard>
+  </div>
 </template>
 
 <style scoped>

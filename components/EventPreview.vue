@@ -33,15 +33,15 @@ const emit = defineEmits<{
     @close-dialog="emit('close-dialog')"
   >
     <aside>
-      <header>
-        <ETitle v-if="isEvent && event.formattedDistance" el="h6" size="sm">
-          {{ event.formattedDistance }}
-        </ETitle>
-        <ETitle el="h3">
-          {{ event.titles[0] }}
-        </ETitle>
+      <EStack is="header">
+        <EventDatetime :event="event" />
+        <NuxtLink :to="event.eventLink">
+          <ETitle el="h3">
+            {{ event.titles[0] }}
+          </ETitle>
+        </NuxtLink>
         <EContent :content="event.intros[lang]" />
-      </header>
+      </EStack>
       <footer>
         <EventButtons v-if="isEvent" :event="event" />
         <template v-else>
@@ -66,13 +66,11 @@ const emit = defineEmits<{
   width: 100%;
   max-width: 40rem;
 }
+
 .ELivePreview :deep(.wrapper) {
   position: relative;
   display: flex;
   flex-direction: column-reverse;
-}
-.ELivePreview .ETitle {
-  margin-bottom: var(--m-3);
 }
 .ELivePreview aside {
   display: flex;
@@ -85,6 +83,10 @@ const emit = defineEmits<{
   font-family: font-title-regular, sans-serif;
   font-size: var(--text-3xl);
 }
+.ELivePreview aside header a {
+  color: var(--fg);
+}
+
 .ELivePreview aside header p span {
   color: var(--gray-300);
   width: 42%;
@@ -94,7 +96,7 @@ const emit = defineEmits<{
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--gap-2);
+  gap: var(--gap-1);
 }
 .ELivePreview img {
   position: relative;

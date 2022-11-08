@@ -44,25 +44,27 @@ const controls = parseControls(event.value.controls);
 </script>
 
 <template>
-  <EBreadBoard>
-    <BackToEvent :event="event" />
+  <div>
+    <EBreadBoard>
+      <BackToEvent :event="event" />
 
-    <DraggableHoc v-bind="draggables.video" v-if="videostreams.length">
-      <Videostream :url="videostreams[0].url" />
-    </DraggableHoc>
-    <DraggableHoc v-bind="draggables.chat">
-      <Chat :channel="slug" />
-    </DraggableHoc>
-    <DraggableHoc v-bind="draggables.about">
-      <EStack style="padding: var(--p-5)">
-        <ETitle size="lg">Live event: {{ event.title }}</ETitle>
-        <EContent :content="event.intro" />
-      </EStack>
-    </DraggableHoc>
-    <DraggableHoc v-if="event.controls" v-bind="draggables.controls">
-      <Controls :controls="controls" />
-    </DraggableHoc>
+      <DraggableHoc v-bind="draggables.video" v-if="videostreams.length">
+        <Videostream :url="videostreams[0].url" />
+      </DraggableHoc>
+      <DraggableHoc v-bind="draggables.chat">
+        <Chat :channel="slug" />
+      </DraggableHoc>
+      <DraggableHoc v-bind="draggables.about">
+        <EStack style="padding: var(--p-5)">
+          <ETitle size="lg">Live event: {{ event.title }}</ETitle>
+          <EContent :content="event.intro" />
+        </EStack>
+      </DraggableHoc>
+      <DraggableHoc v-if="event.controls" v-bind="draggables.controls">
+        <Controls :controls="controls" />
+      </DraggableHoc>
 
-    <DraggablesDock :draggables="draggables" />
-  </EBreadBoard>
+      <DraggablesDock :draggables="draggables" />
+    </EBreadBoard>
+  </div>
 </template>
