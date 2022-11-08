@@ -23,7 +23,7 @@ const event1 = computed(() => {
 const { urgency } = useDatetime(event1.value.start_at, event1.value.end_at);
 const urgencyLabel = computed(() => {
   if (urgency.value === ("future" as Urgency)) {
-    return ["tulemas", "tulemas"];
+    return ["upcoming", "tulemas"];
   } else if (urgency.value === ("soon" as Urgency)) {
     return ["soon", "varsti"];
   } else if (urgency.value === ("now" as Urgency)) {

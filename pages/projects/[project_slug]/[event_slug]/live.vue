@@ -52,7 +52,7 @@ const dialogState = ref<boolean>(true);
 const { urgency } = useDatetime(event.value.start_at, event.value.end_at);
 const urgencyLabel = computed(() => {
   if (urgency.value === ("future" as Urgency)) {
-    return ["tulemas", "tulemas"];
+    return ["upcoming", "tulemas"];
   } else if (urgency.value === ("soon" as Urgency)) {
     return ["soon", "varsti"];
   } else if (urgency.value === ("now" as Urgency)) {
