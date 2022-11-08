@@ -21,9 +21,6 @@ const processEvent = processEventFienta(event);
 </script>
 
 <template>
-  <p class="hasTicket" v-if="processEvent.status === 'HAS_TICKET'">
-    {{ ["You have a ticket", "Sul on ürituse pilet"][lang] }}
-  </p>
   <NuxtLink
     v-if="
       processEvent.status === 'FREE' || processEvent.status === 'HAS_TICKET'
@@ -61,6 +58,9 @@ const processEvent = processEventFienta(event);
     <Icon name="radix-icons:arrow-right" />
     {{ ["Get a ticket", "Osta pilet"][lang] }}
   </EButton>
+  <p class="hasTicket" v-if="processEvent.status === 'HAS_TICKET'">
+    {{ ["You have a ticket", "Sul on ürituse pilet"][lang] }}
+  </p>
 </template>
 
 <style scoped>
