@@ -269,7 +269,6 @@ const processEvent = (event) => {
   event.projects = event.projects ? event.projects.map(processProject) : null;
   event = processLocalizations(event);
   event = proccessMarkdown(event);
-  event = processEventFienta(event);
   event = processEventVideostreams(event);
   return event;
 };
@@ -298,7 +297,6 @@ const processProjectEvent = (event, project) => {
     : "/";
   event = processLocalizations(event);
   event = proccessMarkdown(event);
-  event = processEventFienta(event);
   event = processEventVideostreams(event);
   return event;
 };
@@ -355,11 +353,6 @@ const proccessMarkdown = (item) => {
   item.detailss = item.detailss.map(parseMarkdown);
   item.contents = item.contents.map(parseMarkdown);
   return item;
-};
-
-const processEventFienta = (event) => {
-  // TODO Add [event,event.project] support
-  return { ...event, ...getTicketableStatus([event]) };
 };
 
 const processEventVideostreams = (event) => {

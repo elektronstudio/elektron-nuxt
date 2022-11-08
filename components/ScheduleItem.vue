@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Event } from "~~/types";
-import EventButtons from "./EventButtons.vue";
 
 type Props = {
   event: Event;
@@ -33,9 +32,9 @@ const { lang } = useLang();
 
         {{ event.controls }}
       </header>
-      <section>
+      <footer>
         <EventButtons :event="event" v-if="event.streamkey" />
-      </section>
+      </footer>
     </div>
   </article>
 </template>
@@ -79,9 +78,10 @@ const { lang } = useLang();
 .ScheduleItem .EContent {
   color: var(--gray-300);
 }
-.ScheduleItem section {
+.ScheduleItem footer {
   display: flex;
-  gap: var(--gap-3);
+  flex-direction: column;
+  gap: var(--gap-2);
   flex-shrink: 0;
 }
 .ScheduleItem time {

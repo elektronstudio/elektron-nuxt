@@ -92,7 +92,8 @@ const emit = defineEmits<{
 }
 .ELivePreview aside footer {
   display: flex;
-  gap: var(--gap-5);
+  flex-direction: column;
+  gap: var(--gap-2);
 }
 .ELivePreview img {
   position: relative;

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Event } from "~~/types";
-import EventButtons from "./EventButtons.vue";
 
 type Props = {
   event: Event;

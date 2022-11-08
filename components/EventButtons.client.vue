@@ -12,12 +12,22 @@ const formattedStartAtDistance = event.start_at
   ? useFormattedDistance(event.start_at)
   : null;
 const { lang } = useLang();
+const processEventFienta = (event) => {
+  // TODO Add [event,event.project] support
+  return { ...event, ...getTicketableStatus([event]) };
+};
+const processEvent = processEventFienta(event);
 </script>
 
 <template>
+  <p v-if="processEvent.status === 'HAS_TICKET'">
+    {{ ["You have a ticket", "Sul on ürituse pilet"][lang] }}
+  </p>
   <NuxtLink
-    v-if="event.status === 'FREE' || event.status === 'HAS_TICKET'"
-    :to="event.eventLiveLink"
+    v-if="
+      processEvent.status === 'FREE' || processEvent.status === 'HAS_TICKET'
+    "
+    :to="processEvent.eventLiveLink"
   >
     <EButton v-if="urgency === 'now'" el="a" :size="size" color="accent">
       {{ ["Live now!", "Vaata laivis!"][lang] }}
@@ -33,11 +43,10 @@ const { lang } = useLang();
       {{ ["Revisit event", "Meenuta üritust"][lang] }}
     </EButton>
   </NuxtLink>
-  <!-- <p v-if="event.status === 'HAS_TICKET'">
-    {{ ["You have a ticket", "Sul on ürituse pilet"][lang] }}
-  </p> -->
   <EButton
-    v-else-if="event.status === 'REQUIRES_TICKET' && urgency === 'future'"
+    v-else-if="
+      processEvent.status === 'REQUIRES_TICKET' && urgency === 'future'
+    "
     v-for="ticketLink in event.ticketLinks"
     :href="ticketLink"
     target="_blank"
