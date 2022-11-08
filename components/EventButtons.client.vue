@@ -34,7 +34,7 @@ const processEvent = processEventFienta(event);
       v-else-if="urgency === 'future' || urgency === 'soon'"
       el="a"
       :size="size"
-      color="gray"
+      color="anime"
     >
       {{
         `${
