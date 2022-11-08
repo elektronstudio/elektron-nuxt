@@ -10,7 +10,7 @@ type Props = {
 };
 
 const { event, isEvent } = defineProps<Props>();
-// @TODO: Consider using more solid comparison for pinned event
+// TODO: Consider using more solid comparison for pinned event
 const label = computed(() => {
   if (isEvent && event?.value?.urgency === "soon") {
     return ["tulemas", "tulemas"][lang.value];

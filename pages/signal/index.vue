@@ -47,7 +47,7 @@ const episodes = computed(() =>
 </template>
 
 <style scoped>
-/* @TODO: Templatize projects view */
+/* TODO: Templatize projects view */
 .Page.SingleProduction header,
 .Page.SingleProduction main {
   display: grid;
@@ -93,7 +93,7 @@ const episodes = computed(() =>
   margin-top: var(--m-8);
 }
 
-/* @TODO: Add breakpoints system */
+/* TODO: Add breakpoints system */
 @media only screen and (max-width: 599px) {
   .EContent.Description :deep(p) {
     font-size: var(--text-xl);

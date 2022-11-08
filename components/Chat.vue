@@ -77,7 +77,7 @@ const newMessagesString = computed(() => {
   flex-direction: column;
   padding: var(--p-2);
   background-color: var(--bg);
-  /* @TODO: Is this too much? */
+  /* TODO: Is this too much? */
   width: 100%;
   height: 100%;
 }

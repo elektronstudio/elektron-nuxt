@@ -72,7 +72,7 @@ const { lang } = useLang();
     width: 26rem;
   }
 }
-/* @TODO: how to inherit this from Nav */
+/* TODO: how to inherit this from Nav */
 .menuItem {
   display: inline-flex;
   height: var(--h-9);

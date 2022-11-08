@@ -54,7 +54,7 @@
   --fg: #000000;
 }
 
-/* @TODO: Add breakpoints system */
+/* TODO: Add breakpoints system */
 @media only screen and (min-width: 900px) {
   :root {
     --breadboard-tile-size: calc(100vw / 20);
@@ -95,7 +95,7 @@ code {
   text-shadow: 2px 1px 5px var(--accent);
 }
 
-/* @TODO: where to keep Vue transition animations */
+/* TODO: where to keep Vue transition animations */
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s ease-in-out;

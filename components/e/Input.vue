@@ -34,7 +34,7 @@ const inputValue = computed({
 </script>
 
 <template>
-  <!-- @TODO: Should we add preventDefault? or we do not use keyboard shortcuts in production -->
+  <!-- TODO: Should we add preventDefault? or we do not use keyboard shortcuts in production -->
   <ELabel v-if="label" :fieldId="fieldId" :disabled="disabled">
     {{ label }}
   </ELabel>

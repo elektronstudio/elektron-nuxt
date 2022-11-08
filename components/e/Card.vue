@@ -26,7 +26,7 @@ const { media } = defineProps<Props>();
   margin-bottom: var(--m-4);
 }
 
-/* @TODO: Add breakpoints system */
+/* TODO: Add breakpoints system */
 @media only screen and (max-width: 599px) {
   .ECard {
     display: grid;
@@ -70,7 +70,7 @@ const { media } = defineProps<Props>();
     left: 0;
     object-fit: cover;
     transform: scale(1);
-    /* @TODO: Add transitions vars */
+    /* TODO: Add transitions vars */
     transition: 0.2s ease-in-out;
   }
   .ECard .content {
@@ -85,7 +85,7 @@ const { media } = defineProps<Props>();
     opacity: var(--opacity-0);
     color: var(--fg);
     z-index: 1;
-    /* @TODO: Add transitions vars */
+    /* TODO: Add transitions vars */
     transition: opacity 0.2s ease-in-out;
   }
   .ECard:hover header,

@@ -1,4 +1,4 @@
-<!-- @TODO consider renaming -->
+<!-- TODO consider renaming -->
 <script setup lang="ts">
 import EButton from "./EButton.vue";
 
@@ -19,9 +19,9 @@ const { startAt, ticketUrl, layout = "horizontal" } = defineProps<Props>();
       <slot name="title" />
     </header>
     <section>
-      <!-- @TODO: Add system for calendar buttons -->
+      <!-- TODO: Add system for calendar buttons -->
       <!-- <EButton size="xs" el="a" color="transparent">+ Lisa kalendrisse</EButton> -->
-      <!-- @TODO: Add system or component for arrows -->
+      <!-- TODO: Add system or component for arrows -->
       <slot name="buttons" />
       <EButton
         el="a"
@@ -63,7 +63,7 @@ const { startAt, ticketUrl, layout = "horizontal" } = defineProps<Props>();
 .EEventInstance time {
   color: var(--fg);
 }
-/* @TODO: Add breakpoints system */
+/* TODO: Add breakpoints system */
 @media only screen and (max-width: 599px) {
   .EEventInstance section {
     margin-top: var(--m-3);

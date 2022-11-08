@@ -76,7 +76,7 @@ const { event, layout = "horizontal" } = defineProps<Props>();
 .eventTitle {
   color: var(--fg);
 }
-/* @TODO: Add breakpoints system */
+/* TODO: Add breakpoints system */
 @media only screen and (max-width: 599px) {
   .EventCard section {
     margin-top: var(--m-3);

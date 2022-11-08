@@ -97,7 +97,7 @@ const { lang } = useLang();
 .project {
   color: var(--gray-300);
 }
-/* @TODO: Add breakpoints system */
+/* TODO: Add breakpoints system */
 
 @media only screen and (min-width: 600px) {
   .ScheduleItem .content {

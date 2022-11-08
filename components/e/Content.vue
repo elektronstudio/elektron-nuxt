@@ -51,7 +51,7 @@ const html = computed(() => {
 }
 .EContent :deep(a):hover {
   border-bottom: none;
-  /* @TODO: how to deal with lighter variants for colors, opacity not ideal. Works with dark and light tones tho. */
+  /* TODO: how to deal with lighter variants for colors, opacity not ideal. Works with dark and light tones tho. */
   opacity: var(--opacity-60);
 }
 .EContent :deep(blockquote) {

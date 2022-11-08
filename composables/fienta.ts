@@ -62,7 +62,7 @@ async function getTicketable(fienta_id: string): Promise<Ticketable | null> {
   //const fientaQuery = (fienta_id: string) =>
   //`_where[_or][0][fienta_id]=${fienta_id}&_where[_or][1][festival.fienta_id]=${fienta_id}`;
 
-  //@TODO: Ticketable
+  //TODO: Ticketable
   const { data: events } = await useEvents({
     filters: {
       fienta_id: { $eq: fienta_id },

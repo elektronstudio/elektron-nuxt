@@ -1,4 +1,4 @@
-<!-- @TODO: better component naming -->
+<!-- TODO: better component naming -->
 <script setup lang="ts">
 type Props = {
   el?: "div" | "article" | "section" | "aside" | string;
@@ -12,7 +12,7 @@ type Props = {
     | "2 / 1"
     | "auto";
   layout?: "columns1" | "columns2" | "columns3" | "columns4";
-  // @TODO: Rethink how to pass colors to components
+  // TODO: Rethink how to pass colors to components
   color?: "accent" | "gray";
 };
 
@@ -49,14 +49,14 @@ const { el = "div", color, ratio = "auto", layout } = defineProps<Props>();
   color: var(--bg);
 }
 
-/* @TODO: Add breakpoints system */
+/* TODO: Add breakpoints system */
 @media only screen and (min-width: 600px) {
   .EBox.columns3,
   .EBox.columns4 {
     grid-column: span 2;
   }
 }
-/* @TODO: Add breakpoints system */
+/* TODO: Add breakpoints system */
 @media only screen and (min-width: 1240px) {
   .EBox.columns2 {
     grid-column: span 2;

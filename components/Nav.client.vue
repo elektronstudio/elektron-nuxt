@@ -143,7 +143,7 @@ const navState = ref(false);
   background-color: var(--fg);
 }
 
-/* @TODO: Add breakpoints system */
+/* TODO: Add breakpoints system */
 @media only screen and (max-width: 599px) {
   .menu.navActive {
     display: flex;

@@ -1,4 +1,4 @@
-// @TODO: Move to config
+// TODO: Move to config
 const ingestRawUrl = "rtmp://streaming.elektron.art/raw";
 const ingestTranscodeUrl = "rtmp://live-eu1.icareus.com:1935/suitelive";
 

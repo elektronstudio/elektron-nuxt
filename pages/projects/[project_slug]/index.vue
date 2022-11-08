@@ -73,7 +73,7 @@ const { lang } = useLang();
             layout="vertical"
           />
         </template> -->
-        <!-- @TODO: Add press -->
+        <!-- TODO: Add press -->
         <!-- <template v-if="press">
           <ETitle el="h3" size="lg">Press</ETitle>
           <EPressItems :items="press" />
@@ -146,7 +146,7 @@ const { lang } = useLang();
   gap: var(--gap-5);
 }
 
-/* @TODO: Add breakpoints system */
+/* TODO: Add breakpoints system */
 @media only screen and (max-width: 599px) {
   .EContent.Description :deep(p) {
     font-size: var(--text-xl);

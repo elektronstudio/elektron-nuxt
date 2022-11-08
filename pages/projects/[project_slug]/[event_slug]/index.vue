@@ -38,7 +38,7 @@ const { lang } = useLang();
     <ImageSlider v-if="event.images" :images="event.images" />
     <main>
       <EBox class="MainContent">
-        <!-- @TODO: Add metadata -->
+        <!-- TODO: Add metadata -->
         <EDetailsList
           v-if="event.detailss[lang]"
           :details="parseDetails(event.detailss[lang])"
@@ -117,7 +117,7 @@ const { lang } = useLang();
   grid-area: buttons;
 }
 
-/* @TODO: Add breakpoints system */
+/* TODO: Add breakpoints system */
 @media only screen and (max-width: 599px) {
   .EContent.Description :deep(p) {
     font-size: var(--text-xl);

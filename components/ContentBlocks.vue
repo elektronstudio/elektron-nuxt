@@ -91,7 +91,7 @@ const { cards } = defineProps<Props>();
 .ContentBlocks > h2:not(:first-child) {
   margin-top: var(--m-8);
 }
-/* @TODO: Add breakpoints system */
+/* TODO: Add breakpoints system */
 @media only screen and (min-width: 600px) {
   .ContentBlocks {
     display: grid;
@@ -99,7 +99,7 @@ const { cards } = defineProps<Props>();
     grid-template-columns: repeat(2, 1fr);
   }
 }
-/* @TODO: Add breakpoints system */
+/* TODO: Add breakpoints system */
 @media only screen and (min-width: 1240px) {
   .ContentBlocks {
     grid-template-columns: repeat(4, 1fr);

@@ -99,7 +99,7 @@ onUnmounted(() => {
 });
 
 function findCoordinates(el: Element, done: () => void) {
-  // @TODO: Find a better solution for this
+  // TODO: Find a better solution for this
   // Consider using refs for selectors
   const $draggableDocked = document.querySelector(
     `.DraggablesDock .EDraggableTitlebar[data-id="${id}"]`,
@@ -195,7 +195,7 @@ function findCoordinates(el: Element, done: () => void) {
   display: flex;
 }
 
-/* @TODO: Add breakpoints system */
+/* TODO: Add breakpoints system */
 @media only screen and (max-width: 899px) {
   .EDraggable {
     top: auto !important;
@@ -234,7 +234,7 @@ function findCoordinates(el: Element, done: () => void) {
     left: 0 !important;
   }
   .EDraggable.maximised article,
-  /* @TODO: How to select an Art only component */
+  /* TODO: How to select an Art only component */
   .EDraggable.maximised article :deep(.videoStream),
   .EDraggable.maximised :deep(video) {
     height: 100%;

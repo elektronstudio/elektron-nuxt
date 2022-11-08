@@ -9,7 +9,7 @@ type Props = {
 
 const { title, start_at, ticketUrl } = defineProps<Props>();
 
-// @TODO: use countdown hook
+// TODO: use countdown hook
 const countDown = start_at;
 </script>
 <template>

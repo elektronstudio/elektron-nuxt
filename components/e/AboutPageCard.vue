@@ -8,7 +8,7 @@ type Props = {
 const { layout, title, content } = defineProps<Props>();
 </script>
 <template>
-  <!-- @TODO: minimum aspect ratio is probably needed -->
+  <!-- TODO: minimum aspect ratio is probably needed -->
   <EBox :class="layout">
     <ETitle v-if="title" el="h3" size="lg" :title="title" />
     <EContent v-if="content" :content="content" />

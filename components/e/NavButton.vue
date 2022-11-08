@@ -22,7 +22,7 @@ const { variant = "transparent" } = defineProps<Props>();
   text-transform: uppercase;
   color: var(--gray-300);
 }
-/* @TODO: sync with icon system */
+/* TODO: sync with icon system */
 .ENavButton.outline {
   border: var(--border-DEFAULT) solid var(--gray-500);
 }

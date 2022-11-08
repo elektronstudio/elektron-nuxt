@@ -7,7 +7,7 @@ const handleMute = () => {
   muted.value = !muted.value;
 };
 
-// @TODO: Get this value from Strapi
+// TODO: Get this value from Strapi
 const pinnedEvent = "ruumiantropoloogiad";
 
 const dialogState = ref<boolean>(true);
@@ -93,7 +93,7 @@ const {
   position: relative;
 }
 .videoWrapper {
-  /* @TODO: Add global navbutton size variable for consistency */
+  /* TODO: Add global navbutton size variable for consistency */
   height: calc(var(--app-height, 100vh) - var(--h-9) * 2);
   overflow-y: auto;
   display: grid;
@@ -109,7 +109,7 @@ const {
   position: absolute;
   top: 0;
   left: 0;
-  /* @TODO: Add global gutter variables system for consistency */
+  /* TODO: Add global gutter variables system for consistency */
   padding: var(--p-3);
   z-index: 1;
   color: var(--gray-300);

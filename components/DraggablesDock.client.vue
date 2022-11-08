@@ -51,7 +51,7 @@ const handleClick = (d: any) => {
   transition: transform 0.3s ease-in-out;
 }
 
-/* @TODO: Add breakpoints system */
+/* TODO: Add breakpoints system */
 @media only screen and (max-width: 599px) {
   .DraggablesDock {
     margin-top: auto;
