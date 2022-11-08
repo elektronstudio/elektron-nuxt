@@ -35,7 +35,6 @@ debouncedWatch(
           sendMessage.value(message);
         }
         if (c.control === "button") {
-          console.log("button", c, controlsValue);
           if (controlsValue !== 0) {
             sendMessage.value({
               channel: c.channel,

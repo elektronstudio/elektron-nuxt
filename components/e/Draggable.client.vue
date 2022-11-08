@@ -84,7 +84,6 @@ const calculateCoordinates = function () {
 
 const handleResize = () => {
   tileSize.value = windowWidth.value / tileDivider;
-  console.log(tileSize.value, x.value);
   draggableX.value = tileSize.value * x.value;
   draggableY.value = tileSize.value * y.value;
 };
