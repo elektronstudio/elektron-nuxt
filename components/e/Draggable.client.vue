@@ -157,27 +157,6 @@ function findCoordinates(el: Element, done: () => void) {
 </template>
 
 <style scoped>
-@keyframes windowAnimation {
-  0% {
-    width: 100%;
-    height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size));
-    top: 0;
-    left: 50%;
-    transform: translate(-50%);
-  }
-  75% {
-    opacity: 1;
-  }
-  100% {
-    width: 0;
-    height: var(--h-6);
-    top: calc(100vh - var(--h-6));
-    left: 50%;
-    transform: translate(-50%);
-    opacity: 0;
-  }
-}
-
 .EDraggable {
   position: relative;
   background-color: var(--bg);
@@ -215,10 +194,7 @@ function findCoordinates(el: Element, done: () => void) {
   .EDraggable {
     position: fixed;
     touch-action: none;
-    border: 1px solid transparent;
-    /* width: calc(v-bind(tilesWidth) * var(--breadboard-tile-size));
-    height: calc(v-bind(tilesHeight) * var(--breadboard-tile-size)); */
-    /* z-index: calc(v-bind("getIndex()") + 1); */
+    border: 1px solid var(--gray-600);
   }
   .EDraggable article {
     flex-grow: 1;
