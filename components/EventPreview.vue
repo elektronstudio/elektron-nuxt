@@ -79,14 +79,9 @@ const emit = defineEmits<{
   padding: var(--p-3);
   color: var(--gray-300);
 }
-.ELivePreview aside header {
-  font-family: font-title-regular, sans-serif;
-  font-size: var(--text-3xl);
-}
 .ELivePreview aside header a {
   color: var(--fg);
 }
-
 .ELivePreview aside header p span {
   color: var(--gray-300);
   width: 42%;

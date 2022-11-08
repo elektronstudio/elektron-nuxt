@@ -32,7 +32,12 @@ const processEvent = processEventFienta(event);
     <EButton v-if="urgency === 'now'" el="a" :size="size" color="accent">
       {{ ["Live now!", "Vaata laivis!"][lang] }}
     </EButton>
-    <EButton v-else-if="urgency === 'future'" el="a" :size="size" color="gray">
+    <EButton
+      v-else-if="urgency === 'future' || urgency === 'soon'"
+      el="a"
+      :size="size"
+      color="gray"
+    >
       {{
         `${
           ["Event starts: ", "Üritus algab: "][lang]
