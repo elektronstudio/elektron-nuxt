@@ -30,14 +30,14 @@ const draggables = useDraggables({
   about: {
     tilesWidth: 8,
     tilesHeight: 4,
-    initialX: 2,
+    initialX: 1,
     initialY: 6,
   },
   controls: {
     tilesWidth: 4,
     tilesHeight: 2,
-    initialX: 11,
-    initialY: 8,
+    initialX: 10,
+    initialY: 6,
   },
 });
 
