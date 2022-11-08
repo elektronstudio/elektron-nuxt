@@ -45,43 +45,45 @@ const {
 // });
 </script>
 <template>
-  <ErrorCard v-if="frontpageError" />
-  <div v-else class="Page">
-    <div class="videoWrapper" :class="{ dialogActive: dialogState }">
-      <Transition>
-        <ETitle v-if="!dialogState" size="lg" class="about">
-          <div v-html="frontpage?.descriptions[lang]" />
-        </ETitle>
-      </Transition>
-      <video
-        v-if="frontpage"
-        class="video"
-        :src="frontpage.background.url"
-        :muted="muted"
-        autoplay
-        playsinline
-        webkit-playsinline
-        preload="auto"
-        loop
-      />
-      <Transition>
-        <button
-          v-if="!dialogState"
-          class="muteButton"
-          @click="() => handleMute()"
-        >
-          <Icon name="radix-icons:speaker-off" v-if="muted" />
-          <Icon name="radix-icons:speaker-loud" v-else />
-        </button>
-      </Transition>
-      <EventPreview
-        v-if="dialogState && event1"
-        :key="event1.projectLink"
-        :event="event1"
-        :dialog-state="dialogState"
-        :is-event="true"
-        @close-dialog="dialogState = false"
-      />
+  <div>
+    <ErrorCard v-if="frontpageError" />
+    <div v-else class="Page">
+      <div class="videoWrapper" :class="{ dialogActive: dialogState }">
+        <Transition>
+          <ETitle v-if="!dialogState" size="lg" class="about">
+            <div v-html="frontpage?.descriptions[lang]" />
+          </ETitle>
+        </Transition>
+        <video
+          v-if="frontpage"
+          class="video"
+          :src="frontpage.background.url"
+          :muted="muted"
+          autoplay
+          playsinline
+          webkit-playsinline
+          preload="auto"
+          loop
+        />
+        <Transition>
+          <button
+            v-if="!dialogState"
+            class="muteButton"
+            @click="() => handleMute()"
+          >
+            <Icon name="radix-icons:speaker-off" v-if="muted" />
+            <Icon name="radix-icons:speaker-loud" v-else />
+          </button>
+        </Transition>
+        <EventPreview
+          v-if="dialogState && event1"
+          :key="event1.projectLink"
+          :event="event1"
+          :dialog-state="dialogState"
+          :is-event="true"
+          @close-dialog="dialogState = false"
+        />
+      </div>
     </div>
   </div>
 </template>

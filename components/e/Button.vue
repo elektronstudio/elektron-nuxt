@@ -10,12 +10,7 @@ const { size = "md", el = "button", disabled = false } = defineProps<Props>();
 </script>
 
 <template>
-  <component
-    :is="el"
-    class="EButton"
-    :class="`${size} ${color}`"
-    :disabled="disabled"
-  >
+  <component :is="el" class="EButton" :class="`${size} ${color}`">
     <slot />
   </component>
 </template>

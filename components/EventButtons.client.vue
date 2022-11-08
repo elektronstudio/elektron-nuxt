@@ -12,6 +12,7 @@ const formattedStartAtDistance = event.start_at
   ? useFormattedDistance(event.start_at)
   : null;
 const { lang } = useLang();
+
 const processEventFienta = (event) => {
   // TODO Add [event,event.project] support
   return { ...event, ...getTicketableStatus([event]) };

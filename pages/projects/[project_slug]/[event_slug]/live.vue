@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const route = useRoute();
+const router = useRouter();
 const slug = route.params.event_slug as string;
 const { data: event, error } = await useEventBySlug(slug as string);
 
@@ -41,13 +42,30 @@ const draggables = useDraggables({
 });
 
 const controls = parseControls(event.value.controls);
+const hasTicket = ref<boolean>(false);
+const dialogState = ref<boolean>(true);
+
+onMounted(() => {
+  const fientaValidate = getTicketableStatus([event.value]);
+
+  if (fientaValidate.status !== "REQUIRES_TICKET") {
+    hasTicket.value = true;
+  }
+});
 </script>
 
 <template>
   <div>
-    <EBreadBoard>
-      <BackToEvent :event="event" />
-
+    <BackToEvent :event="event" />
+    <EBreadBoard v-if="!hasTicket">
+      <EventPreview
+        :event="event"
+        :dialog-state="dialogState"
+        :is-event="true"
+        @close-dialog="dialogState = false"
+      />
+    </EBreadBoard>
+    <EBreadBoard v-else>
       <DraggableHoc v-bind="draggables.video" v-if="videostreams.length">
         <Videostream :url="videostreams[0].url" />
       </DraggableHoc>
@@ -68,3 +86,12 @@ const controls = parseControls(event.value.controls);
     </EBreadBoard>
   </div>
 </template>
+
+<style scoped>
+.ELivePreview {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>
