@@ -66,18 +66,10 @@ const {
   preventDefault: true,
   onEnd: () => {
     calculateCoordinates();
-    // updateXY({
-    //   x: snappedX.value,
-    //   y: snappedY.value,
-    // });
   },
 });
 
-// const snappedX = computed(() => Math.round(draggableX.value / tileSize.value));
-// const snappedY = computed(() => Math.round(draggableY.value / tileSize.value));
-
 const calculateCoordinates = function () {
-  tileSize.value = windowWidth.value / tileDivider;
   const snappedX = Math.round(draggableX.value / tileSize.value);
   const snappedY = Math.round(draggableY.value / tileSize.value);
   draggableX.value =
@@ -87,16 +79,18 @@ const calculateCoordinates = function () {
       ? tileSize.value * snappedX
       : 0;
   draggableY.value = snappedY >= 0 ? tileSize.value * snappedY : 0;
+  updateXY({ x: snappedX, y: snappedY });
 };
 
 const handleResize = () => {
-  calculateCoordinates();
+  tileSize.value = windowWidth.value / tileDivider;
+  console.log(tileSize.value, x.value);
+  draggableX.value = tileSize.value * x.value;
+  draggableY.value = tileSize.value * y.value;
 };
 
 onMounted(() => {
-  draggableX.value = tileSize.value * x.value;
-  draggableY.value = tileSize.value * y.value;
-
+  handleResize();
   window.addEventListener("resize", handleResize);
 });
 
