@@ -8,7 +8,7 @@ export const useMessages = () => {
     const config = useRuntimeConfig();
     const { ws: websocket, send } = useWebSocket(config.public.wsUrl, {
       autoReconnect: true,
-      autoClose: false,
+      // autoClose: false,
       // heartbeat: true,
       // autoReconnect: {
       //   retries: 3,
