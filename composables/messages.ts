@@ -7,7 +7,11 @@ export const useMessages = () => {
   onMounted(() => {
     const config = useRuntimeConfig();
     const { ws: websocket, send } = useWebSocket(config.public.wsUrl, {
-      autoReconnect: true,
+      heartbeat: true,
+      autoReconnect: {
+        retries: 3,
+        delay: 1000,
+      },
     });
     websocket.value.addEventListener("message", ({ data }) => {
       const message = JSON.parse(data);
