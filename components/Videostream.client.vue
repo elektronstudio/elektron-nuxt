@@ -79,7 +79,13 @@ const { idle } = useIdle(5000);
 .controls nav {
   display: flex;
   gap: var(--gap-1);
+  /* opacity: 1; */
+  /* transition: opacity 0.3s ease-in-out; */
 }
+
+/* .idle .controls {
+  opacity: 0;
+} */
 .controls nav button {
   width: 1rem;
   height: 1rem;

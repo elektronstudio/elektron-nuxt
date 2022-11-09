@@ -203,8 +203,8 @@ function findCoordinates(el: Element, done: () => void) {
     height: auto;
   }
   .EDraggable.maximised {
-    width: 100%;
-    height: 100%;
+    width: 100% !important;
+    height: 100% !important;
     top: 0 !important;
     left: 0 !important;
   }
@@ -225,11 +225,11 @@ function findCoordinates(el: Element, done: () => void) {
     z-index: 1;
     width: 100%;
   }
-  .EDraggable.hideTitleBarOnIdle:hover :is(.titleBar, .topBarNav) {
+  .EDraggable.hideTitleBarOnIdle:hover :is(.titleBar, .topBarNav, .controls) {
     opacity: 1;
   }
   .idle .EDraggable.maximised :is(.titleBar, .topBarNav),
-  .EDraggable.hideTitleBarOnIdle :is(.titleBar, .topBarNav) {
+  .EDraggable.hideTitleBarOnIdle :is(.titleBar, .topBarNav, .controls) {
     opacity: 0;
     transition: 0.3s ease-in-out;
   }
