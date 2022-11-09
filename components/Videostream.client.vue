@@ -71,14 +71,32 @@ const { idle } = useIdle(5000);
   padding: var(--p-2);
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
   width: 100%;
   bottom: 0;
   opacity: 1;
+}
+.controls:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  height: 3rem;
   transition: 0.3s ease-in-out;
+}
+.controls > * {
+  position: relative;
+  z-index: 1;
 }
 .controls nav {
   display: flex;
-  gap: var(--gap-1);
+  gap: var(--gap-2);
   /* opacity: 1; */
   /* transition: opacity 0.3s ease-in-out; */
 }
@@ -89,7 +107,7 @@ const { idle } = useIdle(5000);
 .controls nav button {
   width: 1rem;
   height: 1rem;
-  color: var(--gray-300);
+  color: white;
   display: flex;
 }
 .controls .EButton svg {
