@@ -52,12 +52,18 @@ export const useUpcomingEvent = async () => {
   const { data: upcomingEvents, error } = await useEvents({
     filters: { end_at: { $gt: today() } },
   });
+  console.log(upcomingEvents);
   const data = computed(() => {
     return upcomingEvents?.value?.filter((event) => {
       const { urgency } = useDatetime(event.start_at, event.end_at);
-      return urgency.value === "soon" || urgency.value === "now";
+      return (
+        urgency.value === "future" ||
+        urgency.value === "soon" ||
+        urgency.value === "now"
+      );
     })[0];
   });
+  console.log(data);
   // TODO Avoid duplication of useDatetime()
   const formattedStartAtDistance = computed(() =>
     data.value?.start_at
