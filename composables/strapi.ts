@@ -333,6 +333,7 @@ const processLocalizations = (item) => {
     ["descriptions", "description"],
     ["detailss", "details"],
     ["contents", "content"],
+    ["live_contents", "live_content"],
   ];
   keys.forEach(([multiple, single]) => {
     item[multiple] = [
@@ -353,6 +354,7 @@ const proccessMarkdown = (item) => {
   item.intros = item.intros.map(parseMarkdown);
   item.detailss = item.detailss.map(parseMarkdown);
   item.contents = item.contents.map(parseMarkdown);
+  item.live_contents = item.live_contents.map(parseMarkdown);
   return item;
 };
 

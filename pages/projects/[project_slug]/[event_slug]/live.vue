@@ -4,7 +4,7 @@ import { Urgency } from "~~/types";
 const route = useRoute();
 const router = useRouter();
 const slug = route.params.event_slug as string;
-
+const { lang } = useLang();
 const { data: event, error } = await useEventBySlug(slug as string);
 
 useHead({
@@ -105,7 +105,7 @@ onMounted(() => {
       <DraggableHoc v-bind="draggables.about">
         <EStack style="padding: var(--p-5)">
           <ETitle size="lg">Live event: {{ event.title }}</ETitle>
-          <EContent :content="event.intro" />
+          <EContent :content="event.live_contents[lang]" />
         </EStack>
       </DraggableHoc>
       <DraggableHoc v-if="event.controls" v-bind="draggables.controls">

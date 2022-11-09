@@ -12,8 +12,8 @@ const { details } = defineProps<Props>();
 <template>
   <ul class="EDetailsList">
     <li v-for="detail in details">
-      <span v-html="detail[0]" />
-      <span v-html="detail[1]" />
+      <span v-if="detail[0]" v-html="detail[0]" />
+      <span v-if="detail[1]" v-html="detail[1]" />
     </li>
   </ul>
 </template>
