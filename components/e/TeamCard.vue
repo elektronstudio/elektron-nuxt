@@ -14,7 +14,9 @@ const { name, media, content } = defineProps<Props>();
 <template>
   <ECard :media="media">
     <template #header>
-      <ETitle v-if="name" el="h3" size="lg" :title="name" />
+      <ETitle v-if="name" el="h3" size="lg">
+        {{ name }}
+      </ETitle>
     </template>
     <template #footer>
       <EContent :content="content" />

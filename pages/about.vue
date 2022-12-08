@@ -8,7 +8,6 @@ const { lang } = useLang();
 const cards = ref(
   lang.value === 0 ? data.value.cards : data.value.localizations[1].cards,
 );
-console.log(cards);
 </script>
 
 <template>

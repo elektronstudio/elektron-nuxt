@@ -8,7 +8,9 @@ const { title } = defineProps<Props>();
 </script>
 <template>
   <EBox color="accent" ratio="1 / 1" layout="columns1">
-    <ETitle v-if="title" el="h3" size="lg" :title="title" />
+    <ETitle v-if="title" el="h3" size="lg">
+      {{ title }}
+    </ETitle>
     <a :href="url" target="_blank" :alt="`Read more on ${title}`">
       Read more
     </a>
