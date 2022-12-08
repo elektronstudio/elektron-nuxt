@@ -152,7 +152,12 @@ export const useAboutPage = (params: Strapi4RequestParams = {}) => {
     "about",
     merge(
       {
-        populate: ["cards", "localizations.cards"],
+        populate: [
+          "cards",
+          "localizations.cards",
+          "cards.image",
+          "localizations.cards.image",
+        ],
       },
       params,
     ),
