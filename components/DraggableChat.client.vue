@@ -239,14 +239,9 @@ const { debounce, userRef, userStyle, otherUsers, otherUserStyle, chat } =
   pointer-events: none;
 }
 .userIndicator:not(.chatActive) {
-  /* filter: blur(5px);
-  opacity: 1;
-  transform: scale(2); */
   background-color: transparent;
   border: 1px solid var(--accent);
-}
-.userContent {
-  /* margin-top: -0.1em; */
+  pointer-events: none;
 }
 .userContent span {
   font-family: var(--font-mono);
