@@ -4,7 +4,6 @@ definePageMeta({
 });
 
 const { data, error } = await useAboutPage();
-console.log(data.value);
 const { lang } = useLang();
 </script>
 
