@@ -156,7 +156,7 @@ export const useAboutPage = (params: Strapi4RequestParams = {}) => {
       },
       params,
     ),
-    (data) => processCards(data),
+    (data) => data,
   );
 };
 
@@ -276,19 +276,6 @@ const processEvent = (event) => {
   event = proccessMarkdown(event);
   event = processEventVideostreams(event);
   return event;
-};
-
-const processCards = (page) => {
-  const cards = page.cards.map((card, i) => {
-    if (card.title) {
-      card.titles = [card.title, page.localizations[0].cards[i].title];
-    }
-    if (card.content) {
-      card.contents = [card.content, page.localizations[0].cards[i].content];
-    }
-    return card;
-  });
-  return { ...page, cards };
 };
 
 const processProjectEvent = (event, project) => {

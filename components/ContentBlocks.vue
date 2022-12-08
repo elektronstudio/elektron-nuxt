@@ -30,24 +30,20 @@ type Props = {
   cards: Card[];
 };
 
-const { lang } = useLang();
 const { cards } = defineProps<Props>();
 </script>
 
 <template>
   <section class="ContentBlocks">
     <template v-for="item in cards">
-      <ETitle
-        v-if="item.__component === 'content.title'"
-        el="h2"
-        size="lg"
-        :title="item.titles[lang]"
-      />
+      <ETitle v-if="item.__component === 'content.title'" el="h2" size="lg">
+        {{ item.title }}
+      </ETitle>
       <EAboutPageCard
         v-else-if="item.__component === 'content.about-card'"
         :layout="item.layout"
-        :title="item.titles[lang]"
-        :content="item.contents[lang]"
+        :title="item.title"
+        :content="item.content"
       />
       <NuxtLink
         v-else-if="

@@ -10,7 +10,9 @@ const { layout, title, content } = defineProps<Props>();
 <template>
   <!-- TODO: minimum aspect ratio is probably needed -->
   <EBox :class="layout">
-    <ETitle v-if="title" el="h3" size="lg" :title="title" />
+    <ETitle v-if="title" el="h3" size="lg">
+      {{ title }}
+    </ETitle>
     <EContent v-if="content" :content="content" />
   </EBox>
 </template>
