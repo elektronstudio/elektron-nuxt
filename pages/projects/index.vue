@@ -3,11 +3,7 @@ definePageMeta({
   title: "Projects",
 });
 
-breadcrumbs.value = [
-  {
-    title: "Projects",
-  },
-];
+breadcrumbs.value = [];
 
 const { data: currentProjects, error: currentError } = await useProjects({
   filters: { slug: { $notIn: ["signal", "kohe2022"] }, pinned: { $eq: true } },

@@ -5,11 +5,7 @@ definePageMeta({
   title: "Schedule",
 });
 
-breadcrumbs.value = [
-  {
-    title: ["Schedule", "Kava"][lang.value],
-  },
-];
+breadcrumbs.value = [];
 
 const { data: upcomingEvents, error } = await useEvents({
   filters: { end_at: { $gt: today() } },

@@ -1,6 +1,7 @@
 <template>
   <main class="main">
     <Nav />
+    <Breadcrumbs />
     <slot />
     <UserInfo />
     <EWindowBorder />

@@ -1,18 +1,20 @@
 <template>
-  <nav class="Breadcrumbs">
-    <template v-for="breadcrumb in breadcrumbs">
-      <NuxtLink
-        v-if="breadcrumb.link"
-        :to="breadcrumb.link"
-        class="breadcrumbItem"
-      >
-        {{ breadcrumb.title }}
-      </NuxtLink>
-      <span v-else class="breadcrumbItem">
-        {{ breadcrumb.title }}
-      </span>
-    </template>
-  </nav>
+  <Transition appear>
+    <nav v-if="breadcrumbs.length" class="Breadcrumbs">
+      <template v-for="breadcrumb in breadcrumbs">
+        <NuxtLink
+          v-if="breadcrumb.link"
+          :to="breadcrumb.link"
+          class="breadcrumbItem"
+        >
+          {{ breadcrumb.title }}
+        </NuxtLink>
+        <span v-else class="breadcrumbItem">
+          {{ breadcrumb.title }}
+        </span>
+      </template>
+    </nav>
+  </Transition>
 </template>
 
 <style scoped>
@@ -22,6 +24,7 @@
   display: flex;
   font-size: var(--text-sm);
   background-color: var(--bg);
+  transform: none;
 }
 
 .breadcrumbItem {
@@ -52,5 +55,15 @@
     z-index: 2;
     color: var(--gray-300);
   }
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: transform 0.2s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  transform: translateY(-100%);
 }
 </style>
