@@ -1,5 +1,8 @@
 <template>
-  <main class="main">
+  <main
+    class="main"
+    :class="{ indexPage: $route.fullPath === '/', isLive: isLive }"
+  >
     <Nav />
     <Breadcrumbs />
     <slot />
@@ -16,6 +19,17 @@
   min-height: 100vh;
   height: 100vh;
   flex-direction: column;
-  padding-top: calc(var(--h-9) + var(--h-6));
+  padding-top: var(--h-9);
+}
+
+.main.isLive {
+  padding-top: calc(var(--h-9) * 2);
+}
+
+@media only screen and (min-width: 600px) {
+  .main.isLive,
+  .main {
+    padding-top: calc(var(--h-9) + var(--h-6));
+  }
 }
 </style>
