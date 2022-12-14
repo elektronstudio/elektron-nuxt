@@ -17,7 +17,7 @@ const navItems = [
   },
   {
     label: ["Podcast", "Podcast"],
-    path: "/podcast",
+    path: "/signal",
   },
   {
     label: ["Lab", "Lab"],

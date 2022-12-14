@@ -35,17 +35,22 @@
   text-transform: uppercase;
   padding: var(--p-1) var(--p-2);
   height: var(--h-6);
+  color: var(--gray-500);
 }
 
 .breadcrumbItem:not(:first-child) {
-  margin-right: calc(var(--border-DEFAULT) * -1);
+  margin-left: calc(var(--border-DEFAULT) * -1);
+}
+
+.breadcrumbItem:last-child {
+  color: var(--gray-300);
 }
 
 @media only screen and (min-width: 600px) {
-  .breadcrumbItem:is(span),
   .breadcrumbItem:hover {
     border-image: url("/images/bg-texture-xs.gif") 1;
     z-index: 2;
+    color: var(--gray-300);
   }
 }
 </style>
