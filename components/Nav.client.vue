@@ -67,6 +67,7 @@ console.log(breadcrumbs.value);
       <button class="toggleNav" @click="navState = !navState">
         <Icon name="radix-icons:hamburger-menu" />
       </button>
+      <Breadcrumbs />
     </header>
   </Transition>
 </template>
