@@ -4,6 +4,8 @@ definePageMeta({
   ttl: 60 * 30,
 });
 
+breadcrumbs.value = [];
+
 const { data: podcastPage, error: podcastPageError } = await usePodcastPage();
 const { data: podcast, error: podcastError } = await usePodcast();
 

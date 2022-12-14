@@ -8,6 +8,17 @@ useHead({
   title: `${project.value.title} – elektron.art`,
 });
 
+breadcrumbs.value = [
+  {
+    title: "Projects",
+    link: "/projects",
+  },
+  {
+    title: project.value.title,
+    link: `/projects/${project.value.slug}`,
+  },
+];
+
 // const project = data.value as Project;
 const { lang } = useLang();
 </script>

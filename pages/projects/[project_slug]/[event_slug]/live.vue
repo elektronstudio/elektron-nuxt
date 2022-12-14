@@ -2,7 +2,6 @@
 import { Urgency } from "~~/types";
 
 const route = useRoute();
-const router = useRouter();
 const slug = route.params.event_slug as string;
 const { lang } = useLang();
 const { data: event, error } = await useEventBySlug(slug as string);
@@ -96,7 +95,7 @@ onMounted(() => {
       <DraggablesDock :draggables="noTicketDraggables" />
     </EBreadBoard>
     <EBreadBoard v-else>
-      <DraggableHoc v-bind="draggables.video" v-if="videostreams.length">
+      <DraggableHoc v-bind="draggables.video" v-if="videostreams?.length">
         <Videostream :url="videostreams[0].url" />
       </DraggableHoc>
       <DraggableHoc v-bind="draggables.chat">

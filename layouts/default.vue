@@ -1,6 +1,7 @@
 <template>
   <main class="main">
     <Nav />
+    <Breadcrumbs />
     <slot />
     <UserInfo />
     <EWindowBorder />
@@ -15,6 +16,6 @@
   min-height: 100vh;
   height: 100vh;
   flex-direction: column;
-  padding-top: var(--h-9);
+  padding-top: calc(var(--h-9) + var(--h-6));
 }
 </style>

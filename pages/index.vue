@@ -4,6 +4,7 @@ import { Urgency } from "~~/types";
 const { lang } = useLang();
 const { data: frontpage, error: frontpageError } = await useFrontPage();
 const muted = ref<boolean | undefined>(true);
+breadcrumbs.value = [];
 
 const handleMute = () => {
   muted.value = !muted.value;
