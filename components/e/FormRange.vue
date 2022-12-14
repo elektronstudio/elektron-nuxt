@@ -6,8 +6,6 @@ type Props = {
   min?: number;
   max?: number;
   step?: number;
-  showMinMax?: boolean;
-  showOutput?: boolean;
 };
 
 const {
@@ -17,8 +15,6 @@ const {
   min = 0,
   max = 10,
   step = 1,
-  showMinMax,
-  showOutput,
 } = defineProps<Props>();
 
 const fieldId = randomString();
@@ -41,7 +37,6 @@ const backgroundSize = computed(
 <template>
   <ELabel v-if="label" :fieldId="fieldId">{{ label }}</ELabel>
   <div class="EFormRange">
-    <span v-if="showMinMax && !showOutput" class="min">{{ min }}</span>
     <input
       v-model="inputValue"
       :name="name"
@@ -51,14 +46,6 @@ const backgroundSize = computed(
       :id="fieldId"
       :style="{ backgroundSize }"
       type="range"
-    />
-    <span v-if="showMinMax && !showOutput" class="max">{{ max }}</span>
-    <EInput
-      v-if="showOutput && !showMinMax"
-      v-model="modelValue"
-      :min="min"
-      :max="max"
-      type="number"
     />
   </div>
 </template>
