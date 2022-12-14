@@ -138,12 +138,17 @@ export const useFrontPage = (params: Strapi4RequestParams = {}) => {
           "events.images",
           "events.projects",
           "events.localizations",
+          "events",
           "projects",
+          "projects.thumbnail",
+          "projects.images",
+          "projects.projects",
+          "projects.localizations",
         ],
       },
       params,
     ),
-    processPage,
+    processFrontPage,
   );
 };
 
@@ -235,10 +240,38 @@ export const processEvents = (result) => {
   return result;
 };
 
-export const processPage = (result) => {
+export const processFrontPage = (result) => {
   result = processLocalizations(result);
   result = proccessMarkdown(result);
   result.events = result.events ? result.events.map(processEvent) : null;
+  if (result.events) {
+    result.events = result.events.map((event) => {
+      const { urgency } = useDatetime(event.start_at, event.end_at);
+
+      const urgencyLabel = computed(() => {
+        if (urgency.value === ("future" as Urgency)) {
+          return ["upcoming", "tulemas"];
+        } else if (urgency.value === ("soon" as Urgency)) {
+          return ["soon", "varsti"];
+        } else if (urgency.value === ("now" as Urgency)) {
+          return ["live", "live"];
+        } else {
+          return ["new", "uus"];
+        }
+      });
+
+      return { ...event, urgencyLabel };
+    });
+  }
+  result.projects = result.projects
+    ? result.projects.map(processProject)
+    : null;
+  return result;
+};
+
+export const processPage = (result) => {
+  result = processLocalizations(result);
+  result = proccessMarkdown(result);
   return result;
 };
 

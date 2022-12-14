@@ -4,27 +4,25 @@ import { MediaItem } from "~~/types";
 const { lang } = useLang();
 
 type Props = {
-  event: any;
+  project: any;
 };
 
-const { event } = defineProps<Props>();
+const { project } = defineProps<Props>();
 </script>
 <template>
   <PinnedItem>
     <aside>
       <EStack is="header">
-        <EventDatetime :event="event" />
-        <NuxtLink :to="event.eventLink">
+        <NuxtLink :to="project.projectLink">
           <ETitle el="h3">
-            {{ event.titles[0] }}
+            {{ project.titles[lang] }}
           </ETitle>
         </NuxtLink>
-        <EContent :content="event.intros[lang]" />
+        <EContent :content="project.intros[lang]" />
       </EStack>
       <footer>
-        <EventButtons v-if="isEvent" :event="event" />
-        <template v-else>
-          <NuxtLink :to="event.projectLink">
+        <template>
+          <NuxtLink :to="project.projectLink">
             <EButton size="xs" el="a" color="transparent">
               <Icon name="radix-icons:arrow-right" />
               {{ ["View project", "Vaata projekti"][lang] }}
@@ -33,6 +31,9 @@ const { event } = defineProps<Props>();
         </template>
       </footer>
     </aside>
-    <EImage v-if="event.thumbnail" :media="(event.thumbnail as MediaItem)" />
+    <EImage
+      v-if="project.thumbnail"
+      :media="(project.thumbnail as MediaItem)"
+    />
   </PinnedItem>
 </template>
