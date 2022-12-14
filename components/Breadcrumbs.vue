@@ -1,36 +1,6 @@
-<script setup lang="ts">
-// type Breadcrumb = {
-//   title: string;
-//   link: string;
-// };
-
-// type Props = {
-//   breadcrumbs: Breadcrumb[];
-// };
-
-// const { breadcrumbs } = defineProps<Props>();
-
-const router = useRouter();
-
-// const breadcrumbs = [
-//   {
-//     title: "Projects",
-//     link: "/projects",
-//   },
-//   {
-//     title: "Something Great",
-//     link: "/projects/great",
-//   },
-//   {
-//     title: "Something Greater",
-//     link: "/projects/great/greater",
-//   },
-// ];
-</script>
-
 <template>
   <nav class="Breadcrumbs">
-    <template v-for="(breadcrumb, index) in breadcrumbs" :key="index">
+    <template v-for="breadcrumb in breadcrumbs">
       <NuxtLink
         v-if="breadcrumb.link"
         :to="breadcrumb.link"
