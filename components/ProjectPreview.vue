@@ -21,14 +21,12 @@ const { project } = defineProps<Props>();
         <EContent :content="project.intros[lang]" />
       </EStack>
       <footer>
-        <template>
-          <NuxtLink :to="project.projectLink">
-            <EButton size="xs" el="a" color="transparent">
-              <Icon name="radix-icons:arrow-right" />
-              {{ ["View project", "Vaata projekti"][lang] }}
-            </EButton>
-          </NuxtLink>
-        </template>
+        <NuxtLink :to="project.projectLink">
+          <EButton size="xs" el="a" color="accent">
+            <Icon name="radix-icons:arrow-right" />
+            {{ ["View project", "Vaata projekti"][lang] }}
+          </EButton>
+        </NuxtLink>
       </footer>
     </aside>
     <EImage
