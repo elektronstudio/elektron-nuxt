@@ -10,28 +10,15 @@ const handleMute = () => {
   muted.value = !muted.value;
 };
 
-// TODO: Get this value from Strapi
-const pinnedEvent = "ruumiantropoloogiad";
-
 const dialogState = ref<boolean>(true);
 // const { projects, firstUpcomingLiveEvent } = useProjects();
 
-const event1 = computed(() => {
+const event = computed(() => {
   return frontpage.value?.events?.length ? frontpage.value.events[0] : null;
 });
 
-// @TODO: Move this to processing level
-const { urgency } = useDatetime(event1.value.start_at, event1.value.end_at);
-const urgencyLabel = computed(() => {
-  if (urgency.value === ("future" as Urgency)) {
-    return ["upcoming", "tulemas"];
-  } else if (urgency.value === ("soon" as Urgency)) {
-    return ["soon", "varsti"];
-  } else if (urgency.value === ("now" as Urgency)) {
-    return ["live", "live"];
-  } else {
-    return ["new", "uus"];
-  }
+const project = computed(() => {
+  return frontpage.value?.projects?.length ? frontpage.value.projects[0] : null;
 });
 
 // const {
@@ -48,14 +35,6 @@ const urgencyLabel = computed(() => {
 //     firstUpcomingLiveEvent?.value?.urgency === "now"
 //   ) {
 //     return firstUpcomingLiveEvent.value;
-//   } else {
-//     return null;
-//   }
-// });
-
-// const pinnedProject = computed(() => {
-//   if (projects.value && pinnedEvent) {
-//     return projects.value.find((project: any) => project.slug === pinnedEvent);
 //   } else {
 //     return null;
 //   }
@@ -93,12 +72,17 @@ const urgencyLabel = computed(() => {
           </button>
         </Transition>
         <EDialog
-          v-if="dialogState && event1"
-          :title="urgencyLabel[lang]"
+          v-if="dialogState && (event || project)"
+          :title="
+            event?.urgencyLabel
+              ? event.urgencyLabel[lang]
+              : ['Pinned', 'Pinned'][lang]
+          "
           :dialog-state="dialogState"
           @close-dialog="dialogState = false"
         >
-          <EventPreview :event="event1" :is-event="true" />
+          <EventPreview v-if="event" :event="event" />
+          <ProjectPreview v-else-if="project" :project="project" />
         </EDialog>
       </div>
     </div>
