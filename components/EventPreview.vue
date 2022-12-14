@@ -22,15 +22,7 @@ const { event } = defineProps<Props>();
         <EContent :content="event.intros[lang]" />
       </EStack>
       <footer>
-        <EventButtons v-if="isEvent" :event="event" />
-        <template v-else>
-          <NuxtLink :to="event.projectLink">
-            <EButton size="xs" el="a" color="transparent">
-              <Icon name="radix-icons:arrow-right" />
-              {{ ["View project", "Vaata projekti"][lang] }}
-            </EButton>
-          </NuxtLink>
-        </template>
+        <EventButtons :event="event" />
       </footer>
     </aside>
     <EImage v-if="event.thumbnail" :media="(event.thumbnail as MediaItem)" />
