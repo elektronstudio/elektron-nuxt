@@ -28,8 +28,6 @@ const navItems = [
 const { theme, changeTheme } = useTheme();
 const navState = ref(false);
 const { isLive } = route.meta;
-
-console.log(breadcrumbs.value);
 </script>
 
 <template>
