@@ -19,6 +19,7 @@ const { size = "md", el = "button", disabled = false } = defineProps<Props>();
 .EButton {
   background: none;
   display: inline-flex;
+  gap: var(--m-1);
   color: var(--gray-300);
   border: 1px solid var(--gray-300);
   cursor: pointer;
@@ -41,7 +42,6 @@ const { size = "md", el = "button", disabled = false } = defineProps<Props>();
   padding: var(--p-1);
 }
 .EButton svg {
-  margin-right: var(--m-1);
   width: 1em;
   height: 1em;
 }

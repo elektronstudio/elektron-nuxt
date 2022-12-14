@@ -19,10 +19,6 @@ const navItems = [
     label: ["Podcast", "Podcast"],
     path: "/signal",
   },
-  {
-    label: ["Lab", "Lab"],
-    path: "https://lab.elektron.art/",
-  },
 ];
 
 const { theme, changeTheme } = useTheme();
@@ -46,6 +42,10 @@ const { isLive } = route.meta;
         >
           {{ item.label[lang] }}
         </NuxtLink>
+        <a href="https://lab.elektron.art" class="menuItem">
+          <Icon name="radix-icons:external-link" />
+          Lab
+        </a>
         <!-- TODO: Consider using client-side mediaQuery component -->
         <Lang class="menuItem languageSwitcher largeScreen" />
       </nav>
@@ -89,6 +89,8 @@ const { isLive } = route.meta;
 }
 .menuItem {
   display: inline-flex;
+  /* justify-content: space-between; */
+  gap: 0.4em;
   height: var(--h-9);
   padding: var(--p-1) var(--p-3);
   font-family: var(--font-mono);
@@ -97,6 +99,10 @@ const { isLive } = route.meta;
   text-transform: uppercase;
   color: var(--gray-300);
   border: var(--border-DEFAULT) solid var(--gray-500);
+}
+.menuItem svg {
+  width: 1em;
+  height: 1em;
 }
 .languageSwitcher {
   margin-left: auto;
