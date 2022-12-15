@@ -148,6 +148,7 @@ export const useAnthropologiesBySlug = (
           slug: { $eq: slug },
         },
         populate: [
+          "backgroundImage",
           "localizations",
           "images",
           "thumbnail",

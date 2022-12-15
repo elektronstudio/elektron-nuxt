@@ -3,7 +3,7 @@ const route = useRoute();
 const slug = route.params.event_slug;
 
 const { data: event, error } = await useAnthropologiesBySlug(slug as string);
-console.log(event.value);
+
 // TODO: Make this more dynamic
 useHead({
   title: `${event.value.title} – elektron.art`,
@@ -27,6 +27,10 @@ breadcrumbs.value = [
 </script>
 
 <template>
+  <BackgroundImage
+    v-if="event.backgroundImage"
+    :image="event.backgroundImage"
+  />
   <ErrorCard v-if="error" />
   <article v-else class="Page SingleProduction">
     <header class="eventHeader">
