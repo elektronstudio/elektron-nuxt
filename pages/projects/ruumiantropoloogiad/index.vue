@@ -27,14 +27,8 @@ const { lang } = useLang();
 <template>
   <ErrorCard v-if="error" />
   <article v-else class="Page SingleProduction">
-    <header>
-      <div class="title">
-        <!-- <NuxtLink to="/projects">
-          <EButton size="xs" el="a" color="transparent">
-            <Icon name="radix-icons:arrow-left" />
-            {{ ["Projects", "Projektid"][lang] }}
-          </EButton>
-        </NuxtLink> -->
+    <header class="eventHeader">
+      <div class="eventTitles">
         <h2 class="ETitle lg">{{ project.titles[lang] }}</h2>
         <ETitle v-if="project.authors" el="h5" size="xs">
           {{ project.authors }}
@@ -43,13 +37,13 @@ const { lang } = useLang();
 
       <EContent
         v-if="project.intros[lang]"
-        class="Description"
+        class="eventDescription"
         size="lg"
         :content="project.intros[lang]"
       />
     </header>
-    <main class="MainContent">
-      <EBox>
+    <main class="mainContent">
+      <EBox class="eventDetails">
         <EDetailsList
           v-if="project.detailss[lang]"
           :details="parseDetails(project.detailss[lang])"
@@ -57,14 +51,18 @@ const { lang } = useLang();
         <EContent el="div" :content="project.descriptions[lang]" />
       </EBox>
       <EImageCard :media="project.thumbnail" ratio="16 / 9" />
-      <div class="Items">
-        <EBox v-for="event in events" class="EventItem" color="accent">
+      <div class="eventItems">
+        <NuxtLink
+          v-for="event in events"
+          :href="`/projects/ruumiantropoloogiad/${event.slug}`"
+          class="eventItem EBox accent"
+        >
           <ETitle v-if="event.title" el="h3" size="lg">
             {{ event.title }}
           </ETitle>
           <span>Read more</span>
-        </EBox>
-        <EBox class="EventItem">
+        </NuxtLink>
+        <EBox class="eventItem">
           <ETitle el="h3" size="lg"> Kelli Gedvili veeb </ETitle>
           <EButton
             el="a"
@@ -82,8 +80,8 @@ const { lang } = useLang();
 </template>
 
 <style scoped>
-.Page.SingleProduction header,
-.MainContent {
+.eventHeader,
+.mainContent {
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: var(--gap-5);
@@ -91,80 +89,63 @@ const { lang } = useLang();
   color: var(--gray-300);
 }
 
-.Page.SingleProduction header {
+.eventHeader {
   grid-template-areas:
     "title"
     "subtitle"
     "description";
 }
 
-.Page.SingleProduction header .title {
+.eventHeader .eventTitles {
   grid-area: title;
 }
-.Page.SingleProduction header .title h2 {
+.eventHeader .eventTitles h2 {
   margin-bottom: var(--m-3);
 }
 
-.Page.SingleProduction header h4 {
+.eventHeader h4 {
   grid-area: subtitle;
   align-self: end;
 }
 
-.Page.SingleProduction header .Description {
+.eventHeader .eventDescription {
   grid-area: description;
-}
-
-.SideContent {
-  grid-area: side;
-  align-self: start;
-}
-.SideContent h3 {
-  margin-bottom: var(--m-6);
-}
-.SideContent h3:not(:first-child) {
-  margin-top: var(--m-8);
-}
-
-.buttons {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--gap-5);
 }
 
 /* TODO: Add breakpoints system */
 @media only screen and (max-width: 599px) {
-  .EContent.Description :deep(p) {
+  .EContent.eventDescription :deep(p) {
     font-size: var(--text-xl);
   }
 }
 @media only screen and (min-width: 600px) {
-  .Page.SingleProduction header,
-  .MainContent {
+  .eventHeader,
+  .mainContent {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
-  .Page.SingleProduction header {
+  .eventHeader {
     grid-template-areas:
       "title description description description"
       "subtitle description description description";
   }
 
-  .MainContent {
+  .mainContent {
     grid-template-areas: ". main main main";
   }
-  .MainContent > .EBox {
+  .mainContent > .eventDetails {
     grid-area: main;
   }
-  .MainContent .EImageCard {
+  .mainContent .EImageCard {
     grid-area: visual;
     align-self: start;
   }
-  .MainContent .Items {
+  .mainContent .eventItems {
     grid-area: items;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--gap-5);
   }
-  .EventItem {
+  .eventItem {
     aspect-ratio: 1;
     display: flex;
     flex-direction: column;
@@ -173,27 +154,27 @@ const { lang } = useLang();
   }
 }
 @media only screen and (min-width: 1240px) {
-  .Page.SingleProduction header,
-  .MainContent {
+  .eventHeader,
+  .mainContent {
     grid-template-columns: repeat(8, minmax(0, 1fr));
   }
-  .Page.SingleProduction header {
+  .eventHeader {
     grid-template-areas:
       "title title title description description description description description"
       "subtitle subtitle subtitle description description description description description";
   }
-  .MainContent > .EBox {
+  .eventDetails {
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
     grid-template-areas: "details details content content content";
   }
-  .MainContent > .EBox > .EDetailsList {
+  .eventDetails > .EDetailsList {
     grid-area: details;
   }
-  .MainContent > .EBox > .EContent {
+  .eventDetails > .EContent {
     grid-area: content;
   }
-  .MainContent {
+  .mainContent {
     grid-template-areas: ". . . main main main main main" "visual visual visual visual items items items items";
   }
 }

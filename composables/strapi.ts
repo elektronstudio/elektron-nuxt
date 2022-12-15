@@ -136,6 +136,34 @@ export const useAnthropologies = (params: Strapi4RequestParams = {}) => {
   );
 };
 
+export const useAnthropologiesBySlug = (
+  slug: string,
+  params: Strapi4RequestParams = {},
+) => {
+  return useFind(
+    "anthropologies-of-spaces",
+    merge(
+      {
+        filters: {
+          slug: { $eq: slug },
+        },
+        populate: [
+          "localizations",
+          "images",
+          "thumbnail",
+          "event",
+          "cards",
+          "localizations.cards",
+          "cards.image",
+          "localizations.cards.image",
+        ],
+      },
+      params,
+    ),
+    (events) => events.map(processAnthropologies)[0],
+  );
+};
+
 // Pages
 
 export const useFrontPage = (params: Strapi4RequestParams = {}) => {

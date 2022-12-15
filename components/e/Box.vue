@@ -25,7 +25,7 @@ const { el = "div", color, ratio = "auto", layout } = defineProps<Props>();
   </component>
 </template>
 
-<style scoped>
+<style>
 .EBox {
   padding: var(--p-4);
   border: 1px solid var(--gray-500);
