@@ -29,6 +29,12 @@ const { data: upcomingEvents, error } = await useEvents({
         v-for="event in upcomingEvents"
         :event="event"
       />
+      <ETitle
+        v-else-if="!upcomingEvents || upcomingEvents?.length === 0"
+        size="lg"
+      >
+        Currently no upcoming events
+      </ETitle>
     </section>
   </ScheduleWrapper>
 </template>

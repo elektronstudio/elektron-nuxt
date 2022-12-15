@@ -30,7 +30,9 @@ export const formatDatetimePrecise = (datetime: Date | null) => {
 };
 
 export const formatDatetime = (datetime: Date | string | null) => {
-  return `${formatDate(new Date(datetime))} ${formatTime(datetime)}`;
+  return datetime
+    ? `${formatDate(new Date(datetime))} ${formatTime(datetime)}`
+    : null;
 };
 
 export const useFormattedDistance = (datetime: Date | string) => {
@@ -45,36 +47,11 @@ export const useFormattedDistance = (datetime: Date | string) => {
   });
 };
 
-// TODO: Support string dates
-export const _useUrgency = (
-  fromDateTime: Date,
-  toDateTime: Date | null,
-  _now: Date,
-) => {
-  const soonMinutes = 3 * 60;
-  const started = differenceInSeconds(fromDateTime, _now);
-  const ended = differenceInSeconds(toDateTime, _now);
-  let urgency = "";
-
-  if (toDateTime === null) {
-    urgency = "permanent";
-  } else if (started <= 0 && ended >= 0) {
-    urgency = "now";
-  } else if (started >= 0 && started <= soonMinutes) {
-    urgency = "soon";
-  } else if (started >= 0 && started > soonMinutes) {
-    urgency = "future";
-  } else {
-    urgency = "past";
-  }
-  return urgency as Urgency;
-};
-
 export const useUrgency = (fromDateTime: Date, toDateTime: Date | null) => {
   return computed<Urgency>(() => {
     const soonSeconds = 3 * 60 * 60;
     const started = differenceInSeconds(fromDateTime, now.value);
-    const ended = differenceInSeconds(toDateTime, now.value);
+    const ended = toDateTime ? differenceInSeconds(toDateTime, now.value) : 0;
     if (toDateTime === null) {
       return "permanent";
     } else if (started <= 0 && ended >= 0) {
@@ -125,5 +102,5 @@ export const useDatetime = (
 
 export const today = () => formatISO(new Date(), { representation: "date" });
 
-export const formatLongDatetime = (str) =>
+export const formatLongDatetime = (str: string) =>
   format(new Date(str), "dd.LL.yyyy HH:mm:ss z");
