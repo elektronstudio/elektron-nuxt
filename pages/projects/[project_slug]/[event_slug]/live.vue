@@ -95,7 +95,10 @@ onMounted(() => {
       <DraggablesDock :draggables="noTicketDraggables" />
     </EBreadBoard>
     <EBreadBoard v-else>
-      <DraggableHoc v-bind="draggables.video" v-if="videostreams?.length">
+      <DraggableHoc v-bind="draggables.video" v-if="event.streamUrl">
+        <Videostream :url="event.streamUrl" />
+      </DraggableHoc>
+      <DraggableHoc v-bind="draggables.video" v-else-if="videostreams?.length">
         <Videostream :url="videostreams[0].url" />
       </DraggableHoc>
       <DraggableHoc v-bind="draggables.chat">
