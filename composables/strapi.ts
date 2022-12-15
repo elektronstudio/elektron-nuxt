@@ -324,6 +324,9 @@ const processProjectEvent = (event, project) => {
   event.eventExperimentLink = project
     ? `/projects/${project.slug}/${event.slug}/experiment`
     : "/";
+  const { urgency } = useDatetime(event.start_at, event.end_at);
+  event.urgency = urgency.value;
+  console.log(event);
   event = processLocalizations(event);
   event = proccessMarkdown(event);
   event = processEventVideostreams(event);
