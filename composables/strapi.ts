@@ -122,6 +122,20 @@ export const useProjectBySlug = (
   );
 };
 
+// Antrhopologies of space
+export const useAnthropologies = (params: Strapi4RequestParams = {}) => {
+  return useFind(
+    "anthropologies-of-spaces",
+    merge(
+      {
+        populate: ["localizations", "thumbnail"],
+      },
+      params,
+    ),
+    (events) => events.map(processAnthropologies),
+  );
+};
+
 // Pages
 
 export const useFrontPage = (params: Strapi4RequestParams = {}) => {
@@ -312,6 +326,12 @@ const processEvent = (event) => {
   event = processLocalizations(event);
   event = proccessMarkdown(event);
   event = processEventVideostreams(event);
+  return event;
+};
+
+const processAnthropologies = (event) => {
+  event = processLocalizations(event);
+  event = proccessMarkdown(event);
   return event;
 };
 

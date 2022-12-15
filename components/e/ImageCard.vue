@@ -18,8 +18,13 @@ const { media } = defineProps<Props>();
 .EBox {
   padding: 0;
   overflow: hidden;
+  position: relative;
 }
 .EBox .EImage {
   object-fit: cover;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 </style>
