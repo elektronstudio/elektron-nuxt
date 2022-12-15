@@ -1,6 +1,6 @@
 <script setup lang="ts">
 type Props = {
-  layout?: "columns1" | "columns2" | "columns3" | "columns4";
+  layout?: "columns1" | "columns1-5" | "columns2" | "columns3" | "columns4";
   title?: string;
   content?: string;
 };

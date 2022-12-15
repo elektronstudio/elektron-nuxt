@@ -98,7 +98,10 @@ const { cards } = defineProps<Props>();
 /* TODO: Add breakpoints system */
 @media only screen and (min-width: 1240px) {
   .ContentBlocks {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .ContentBlocks .ECard {
+    grid-column: span 3;
   }
 }
 </style>
