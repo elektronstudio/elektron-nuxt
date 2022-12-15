@@ -55,6 +55,7 @@ onMounted(() => {
   place-items: center;
   opacity: 0;
   transition: 0.3s ease-in-out;
+  z-index: 1;
 }
 .EVideo button:hover {
   opacity: 1;
