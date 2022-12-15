@@ -2,6 +2,7 @@
 definePageMeta({
   title: "Fienta",
 });
+breadcrumbs.value = [];
 </script>
 
 <template>

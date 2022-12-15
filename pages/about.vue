@@ -2,7 +2,7 @@
 definePageMeta({
   title: "About us",
 });
-
+breadcrumbs.value = [];
 const { data, error } = await useAboutPage();
 const { lang } = useLang();
 </script>

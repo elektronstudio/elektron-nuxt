@@ -1,7 +1,6 @@
 import { Strapi4RequestParams } from "@nuxtjs/strapi/dist/runtime/types";
 import { merge, has, isArray, head, forEach, isObject } from "lodash-es";
 import { compareAsc } from "date-fns";
-import { Urgency } from "~~/types";
 
 // Events
 export const useEvents = (params: Strapi4RequestParams = {}) => {
@@ -325,6 +324,8 @@ const processProjectEvent = (event, project) => {
   event.eventExperimentLink = project
     ? `/projects/${project.slug}/${event.slug}/experiment`
     : "/";
+  const { urgency } = useDatetime(event.start_at, event.end_at);
+  event.urgency = urgency.value;
   event = processLocalizations(event);
   event = proccessMarkdown(event);
   event = processEventVideostreams(event);

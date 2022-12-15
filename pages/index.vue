@@ -4,6 +4,7 @@ import { Urgency } from "~~/types";
 const { lang } = useLang();
 const { data: frontpage, error: frontpageError } = await useFrontPage();
 const muted = ref<boolean | undefined>(true);
+breadcrumbs.value = [];
 
 const handleMute = () => {
   muted.value = !muted.value;
@@ -93,8 +94,11 @@ const project = computed(() => {
   position: relative;
 }
 .videoWrapper {
-  /* TODO: Add global navbutton size variable for consistency */
-  height: calc(var(--app-height, 100vh) - var(--h-9) * 2);
+  position: fixed;
+  top: var(--h-9);
+  width: 100%;
+  left: 0;
+  height: calc(100dvh - var(--h-9));
   overflow-y: auto;
   display: grid;
   place-content: center;
@@ -140,9 +144,6 @@ const project = computed(() => {
 @media only screen and (min-width: 600px) {
   .about {
     padding: var(--p-5);
-  }
-  .videoWrapper {
-    height: calc(var(--app-height, 100vh) - var(--h-9));
   }
 }
 

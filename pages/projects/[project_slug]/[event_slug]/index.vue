@@ -8,6 +8,21 @@ useHead({
   title: `${event.value.title} – elektron.art`,
 });
 
+breadcrumbs.value = [
+  {
+    title: "Projects",
+    link: "/projects",
+  },
+  {
+    title: event.value.projects[0].title,
+    link: `/projects/${event.value.projects[0].slug}`,
+  },
+  {
+    title: event.value.title,
+    link: `/projects/${event.value.projects[0].slug}/${event.value.slug}`,
+  },
+];
+
 const { lang } = useLang();
 </script>
 

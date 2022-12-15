@@ -16,12 +16,18 @@ const { title, author, media, nextEvent } = defineProps<Props>();
       <h3 class="ETitle lg" v-html="title" />
       <h6 v-if="author" v-html="author" />
     </template>
-    <template #footer>
-      <p v-if="nextEvent" class="next-event">Järgmine etendus:</p>
-      <!-- <time v-if="nextEvent" :datetime="nextEvent">
-        {{ nextEvent }}
-      </time> -->
-      <EventDatetime v-if="nextEvent" :event="nextEvent" />
+    <template
+      v-if="
+        nextEvent &&
+        (nextEvent.urgency === 'soon' || nextEvent.urgency === 'live')
+      "
+      #footer
+    >
+      <p class="next-event">Järgmine etendus:</p>
+      <EventDatetime :event="nextEvent" />
+    </template>
+    <template v-else-if="nextEvent && nextEvent.urgency === 'now'" #footer>
+      <EButton color="accent" size="xs">Live now!</EButton>
     </template>
   </ECard>
 </template>

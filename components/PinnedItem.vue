@@ -16,6 +16,9 @@
   padding: var(--p-3);
   color: var(--gray-300);
 }
+.ELivePreview :deep(.EStack) {
+  margin-bottom: var(--m-4);
+}
 .ELivePreview :deep(aside header a) {
   color: var(--fg);
 }
@@ -35,13 +38,17 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  aspect-ratio: 1;
+  aspect-ratio: 16 / 9;
 }
 
 @media only screen and (min-width: 600px) {
   .ELivePreview {
     display: grid;
     grid-template-columns: 1fr 1fr;
+  }
+
+  .ELivePreview :deep(img) {
+    aspect-ratio: 1;
   }
 }
 </style>

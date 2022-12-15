@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Urgency } from "~~/types";
+
 const {
   data: event,
   formattedStartAtDistance,
@@ -6,20 +8,25 @@ const {
   error,
 } = await useUpcomingEvent();
 const { lang } = useLang();
+watch(urgency, (urgency) => {
+  if (urgency && urgency.value === ("now" as Urgency)) {
+    isLive.value = true;
+  }
+});
 </script>
 
 <template>
   <NuxtLink
     class="NavLive menuItem"
     :to="event.eventLiveLink"
-    :class="{ isLive: urgency.value === 'now' }"
+    :class="{ isLive: urgency?.value === 'now' }"
     v-if="event"
   >
     <a>
-      <span v-if="formattedStartAtDistance.value && urgency.value !== 'now'">
+      <span v-if="formattedStartAtDistance?.value && urgency?.value !== 'now'">
         {{ formattedStartAtDistance.value }}:
       </span>
-      <span v-else-if="urgency.value === 'now'">
+      <span v-else-if="urgency?.value === 'now'">
         {{ ["LIVE NOW!", "LIVE"][lang] }}:
       </span>
       <span class="eventTitle">{{ event.titles[lang] }}</span>

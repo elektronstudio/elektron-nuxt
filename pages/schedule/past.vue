@@ -3,12 +3,22 @@ definePageMeta({
   title: "Past events",
 });
 
+const { lang } = useLang();
+
+breadcrumbs.value = [
+  {
+    title: "Schedule",
+    link: "/schedule",
+  },
+  {
+    title: "Past",
+  },
+];
+
 const { data: upcomingEvents, error } = await useEvents({
   sort: ["start_at:desc"],
   filters: { start_at: { $lt: today() } },
 });
-
-const { lang } = useLang();
 </script>
 
 <template>
