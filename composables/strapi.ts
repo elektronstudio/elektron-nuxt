@@ -259,6 +259,43 @@ export const useMessagesHistory = (params: Strapi4RequestParams = {}) => {
   return useFind("messages", merge({ sort: ["datetime:asc"] }, params));
 };
 
+// Blog
+
+export const useBlogPosts = (params: Strapi4RequestParams = {}) => {
+  return useFind(
+    "blogs",
+    merge(
+      {
+        populate: ["localizations", "thumbnail"],
+      },
+      params,
+    ),
+    (posts) => posts.map(processBlogPost),
+  );
+};
+
+export const useBlogPostBySlug = (
+  slug: string,
+  params: Strapi4RequestParams = {},
+) => {
+  return useFind(
+    "blogs",
+    merge(
+      {
+        filters: {
+          slug: { $eq: slug },
+        },
+        populate: ["localizations", "thumbnail"],
+      },
+      params,
+    ),
+    (posts) => posts.map(processBlogPost),
+  ).then((res) => {
+    res.data.value = res.data.value?.[0];
+    return res;
+  });
+};
+
 // Strapi request wrapper
 
 export const useFind = (
@@ -318,6 +355,12 @@ export const processFrontPage = (result) => {
 };
 
 export const processPage = (result) => {
+  result = processLocalizations(result);
+  result = proccessMarkdown(result);
+  return result;
+};
+
+export const processBlogPost = (result) => {
   result = processLocalizations(result);
   result = proccessMarkdown(result);
   return result;
