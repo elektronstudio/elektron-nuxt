@@ -7,15 +7,16 @@ type Card = {
     | "content.related-page"
     | "content.person-card"
     | "content.image-card"
-    | "content.external-link";
+    | "content.external-link"
+    | "content.media-card";
   title: string;
-  titles: [string, string];
   content: string;
-  contents: [string, string];
+  description?: string;
   name?: string;
   url?: string;
-  layout?: "columns1" | "columns2" | "columns3" | "columns4";
+  layout?: "columns1" | "columns1-5" | "columns2" | "columns3" | "columns4";
   image?: any;
+  media?: any;
   page?: {
     data: {
       attributes: {
@@ -68,6 +69,13 @@ const { cards } = defineProps<Props>();
       <EImageCard
         v-else-if="item.__component === 'content.image-card'"
         :media="item.image"
+      />
+      <EMediaCard
+        v-else-if="item.__component === 'content.media-card'"
+        :layout="item.layout"
+        :title="item.title"
+        :description="item.description"
+        :media="item.media"
       />
     </template>
   </section>
