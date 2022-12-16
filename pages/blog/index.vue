@@ -17,6 +17,11 @@ breadcrumbs.value = [];
       :href="`/blog/${item.slug}`"
       class="blogItem EBox"
     >
+      <img
+        v-if="item.thumbnail"
+        class="postThumbnail"
+        :src="item.thumbnail.url"
+      />
       <ETitle v-if="item.title" el="h3" size="lg">
         {{ item.title }}
       </ETitle>
@@ -35,11 +40,27 @@ breadcrumbs.value = [];
   padding: var(--p-4);
 }
 .blogItem {
+  position: relative;
   aspect-ratio: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
+}
+
+.postThumbnail {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0;
+  object-fit: cover;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.blogItem:hover .postThumbnail {
+  opacity: 1;
 }
 
 @media only screen and (min-width: 600px) {
