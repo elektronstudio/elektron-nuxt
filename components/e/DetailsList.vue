@@ -23,12 +23,12 @@ const { details } = defineProps<Props>();
   color: var(--gray-300);
   font-size: var(--text-xs);
   line-height: var(--line-height-xs);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-3);
 }
 .EDetailsList li {
   display: flex;
-}
-.EDetailsList li:not(:last-child) {
-  margin-bottom: var(--m-3);
 }
 .EDetailsList li span:first-child {
   display: inline-block;
