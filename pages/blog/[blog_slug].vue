@@ -34,6 +34,7 @@ breadcrumbs.value = [];
       <EContent :content="post.contents[lang]" />
     </EBox>
   </div>
+  <BackgroundImage v-if="post.backgroundImage" :image="post.backgroundImage" />
 </template>
 
 <style scoped>

@@ -285,7 +285,7 @@ export const useBlogPostBySlug = (
         filters: {
           slug: { $eq: slug },
         },
-        populate: ["localizations", "thumbnail"],
+        populate: ["localizations", "thumbnail", "backgroundImage"],
       },
       params,
     ),
