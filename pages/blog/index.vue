@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { data: items, error } = await useBlogPosts();
-
+const { lang } = useLang();
 useHead({
   title: `Blog – elektron.art`,
 });
@@ -18,7 +18,9 @@ useHead({
       <ETitle v-if="item.title" el="h3" size="lg">
         {{ item.title }}
       </ETitle>
-      <EButton color="accent" size="xs">Read more</EButton>
+      <EButton color="accent" size="xs">{{
+        ["Read more", "Loe postitust"][lang]
+      }}</EButton>
     </NuxtLink>
   </div>
 </template>
