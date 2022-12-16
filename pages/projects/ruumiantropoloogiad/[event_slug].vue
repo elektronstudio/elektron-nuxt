@@ -3,6 +3,13 @@ const route = useRoute();
 const slug = route.params.event_slug;
 
 const { data: event, error } = await useAnthropologiesBySlug(slug as string);
+const { data: events } = await useAnthropologies({
+  filters: {
+    id: {
+      $ne: [event.value.id],
+    },
+  },
+});
 
 // TODO: Make this more dynamic
 useHead({
@@ -51,6 +58,18 @@ breadcrumbs.value = [
       :key="lang"
       :cards="lang === 0 ? event.cards : event.localizations[0].cards"
     />
+    <AnthroFooter :events="events">
+      <ETitle el="h3" size="md">{{
+        ["Ruumiantropoloogiad", "Anthropologies of space"][lang]
+      }}</ETitle>
+      <p>
+        Aliquip veniam culpa id ut ad duis do id esse Lorem consectetur. Esse
+        nisi officia elit deserunt. Et cillum veniam nostrud consequat magna
+        dolor nostrud cupidatat. Do et cupidatat veniam sunt excepteur cupidatat
+        irure non veniam. Duis nisi sit ex sit eu magna eiusmod ullamco dolore
+        officia. Eu deserunt veniam nisi nisi anim veniam.
+      </p>
+    </AnthroFooter>
   </article>
 </template>
 

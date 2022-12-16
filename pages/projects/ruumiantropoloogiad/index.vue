@@ -49,39 +49,14 @@ const { lang } = useLang();
         <EContent el="div" :content="project.descriptions[lang]" />
       </EBox>
     </header>
-    <main class="mainContent">
+    <AnthroFooter :events="events">
       <EImageCard :media="project.thumbnail" ratio="16 / 9" />
-      <div class="eventItems">
-        <NuxtLink
-          v-for="event in events"
-          :href="`/projects/ruumiantropoloogiad/${event.slug}`"
-          class="eventItem EBox accent"
-        >
-          <ETitle v-if="event.title" el="h3" size="lg">
-            {{ event.title }}
-          </ETitle>
-          <span>Read more</span>
-        </NuxtLink>
-        <EBox class="eventItem">
-          <ETitle el="h3" size="lg"> Kelli Gedvili veeb </ETitle>
-          <EButton
-            el="a"
-            href="https://www.post-gallery.online/elektron/index.html?fbclid=IwAR0HOV0gbMvOkL9t2aDqB47XQHMwfWdcNgS6NUpANZfzA0sBDZSWVjRE0ss"
-            size="xs"
-            color="accent"
-          >
-            <Icon name="radix-icons:external-link" />
-            {{ ["Link to website", "Veebilehele"][lang] }}
-          </EButton>
-        </EBox>
-      </div>
-    </main>
+    </AnthroFooter>
   </article>
 </template>
 
 <style scoped>
-.eventHeader,
-.mainContent {
+.eventHeader {
   display: flex;
   flex-direction: column;
   gap: var(--gap-4);
@@ -112,20 +87,6 @@ const { lang } = useLang();
   grid-area: description;
 }
 
-.eventItems {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-4);
-}
-
-.eventItem {
-  aspect-ratio: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
 /* TODO: Add breakpoints system */
 @media only screen and (max-width: 599px) {
   .EContent.eventDescription :deep(p) {
@@ -142,16 +103,9 @@ const { lang } = useLang();
   .eventDetails {
     grid-area: content;
   }
-  .eventItems {
-    grid-area: items;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--gap-5);
-  }
 }
 @media only screen and (min-width: 1240px) {
-  .eventHeader,
-  .mainContent {
+  .eventHeader {
     grid-template-columns: repeat(8, minmax(0, 1fr));
   }
   .eventHeader {
@@ -164,14 +118,7 @@ const { lang } = useLang();
     grid-template-columns: repeat(5, minmax(0, 1fr));
     grid-template-areas: "details details content content content";
   }
-  .mainContent {
-    display: grid;
-    grid-template-areas: "visual visual visual visual items items items items";
-  }
-  .mainContent .EImageCard {
-    grid-area: visual;
-    align-self: start;
-  }
+
   .eventDetails > .EDetailsList {
     grid-area: details;
   }
