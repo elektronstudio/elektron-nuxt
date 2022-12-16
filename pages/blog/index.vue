@@ -4,6 +4,8 @@ const { lang } = useLang();
 useHead({
   title: `Blog – elektron.art`,
 });
+
+breadcrumbs.value = [];
 </script>
 
 <template>

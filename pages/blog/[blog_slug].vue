@@ -5,11 +5,11 @@ const slug = route.params.blog_slug;
 const { data: post, error } = await useBlogPostBySlug(slug as string);
 const { lang } = useLang();
 
-console.log(post.value);
-
 useHead({
   title: `${post.value.title} – elektron.art`,
 });
+
+breadcrumbs.value = [];
 </script>
 
 <template>
