@@ -26,6 +26,8 @@ const { details } = defineProps<Props>();
 }
 .EDetailsList li {
   display: flex;
+}
+.EDetailsList li:not(:last-child) {
   margin-bottom: var(--m-3);
 }
 .EDetailsList li span:first-child {
