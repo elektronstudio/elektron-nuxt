@@ -55,15 +55,15 @@ breadcrumbs.value = [
 </template>
 
 <style scoped>
+.eventHeader,
+.mainContent {
+  padding: 0 var(--p-4);
+}
 .eventHeader {
   display: grid;
   grid-template-columns: 1fr;
-  grid-gap: var(--gap-5);
-  padding: var(--p-4);
+  gap: var(--gap-4);
   color: var(--gray-300);
-}
-
-.eventHeader {
   grid-template-areas:
     "title"
     "subtitle"

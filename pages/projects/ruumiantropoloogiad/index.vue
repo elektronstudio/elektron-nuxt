@@ -84,9 +84,9 @@ const { lang } = useLang();
 .mainContent {
   display: grid;
   grid-template-columns: 1fr;
-  grid-gap: var(--gap-5);
-  padding: var(--p-4);
+  grid-gap: var(--gap-4);
   color: var(--gray-300);
+  padding: 0 var(--p-4);
 }
 
 .eventHeader {

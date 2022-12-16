@@ -44,6 +44,7 @@ const { images } = defineProps<Props>();
   height: 70vw;
   width: auto;
   border-radius: var(--rounded-4xl);
+  overflow: hidden;
 }
 @media only screen and (min-width: 600px) {
   .ImageSlider .EImage,
