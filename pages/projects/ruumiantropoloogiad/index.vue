@@ -26,6 +26,7 @@ const { lang } = useLang();
 
 <template>
   <ErrorCard v-if="error" />
+
   <article v-else class="Page SingleProduction">
     <header class="eventHeader">
       <div class="eventTitles">
@@ -53,6 +54,10 @@ const { lang } = useLang();
       <EImageCard :media="project.thumbnail" ratio="16 / 9" />
     </AnthroFooter>
   </article>
+  <BackgroundImage
+    v-if="project.backgroundImage"
+    :image="project.backgroundImage"
+  />
 </template>
 
 <style scoped>

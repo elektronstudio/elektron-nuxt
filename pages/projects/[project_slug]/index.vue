@@ -92,6 +92,10 @@ const { lang } = useLang();
       </EBox>
     </main>
   </article>
+  <BackgroundImage
+    v-if="project.backgroundImage"
+    :image="project.backgroundImage"
+  />
 </template>
 
 <style scoped>

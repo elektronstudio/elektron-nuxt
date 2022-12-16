@@ -34,11 +34,8 @@ breadcrumbs.value = [
 </script>
 
 <template>
-  <BackgroundImage
-    v-if="event.backgroundImage"
-    :image="event.backgroundImage"
-  />
   <ErrorCard v-if="error" />
+
   <article v-else class="Page SingleProduction">
     <header class="eventHeader">
       <div class="eventTitles">
@@ -59,7 +56,7 @@ breadcrumbs.value = [
       :cards="lang === 0 ? event.cards : event.localizations[0].cards"
     />
     <AnthroFooter :events="events">
-      <ETitle el="h3" size="md">{{
+      <ETitle el="h3" size="lg">{{
         ["Ruumiantropoloogiad", "Anthropologies of space"][lang]
       }}</ETitle>
       <p>
@@ -71,6 +68,10 @@ breadcrumbs.value = [
       </p>
     </AnthroFooter>
   </article>
+  <BackgroundImage
+    v-if="event.backgroundImage"
+    :image="event.backgroundImage"
+  />
 </template>
 
 <style scoped>
