@@ -55,15 +55,12 @@ breadcrumbs.value = [
 </template>
 
 <style scoped>
-.eventHeader,
-.mainContent {
-  padding: 0 var(--p-4);
-}
 .eventHeader {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   gap: var(--gap-4);
   color: var(--gray-300);
+  padding: 0 var(--p-4);
   grid-template-areas:
     "title"
     "subtitle"
@@ -73,72 +70,54 @@ breadcrumbs.value = [
 .eventHeader .eventTitles {
   grid-area: title;
 }
-.eventHeader .eventDetails {
-  grid-area: details;
-}
-.Page.SingleProduction main {
-  align-content: start;
-  grid-template-areas:
-    "main"
-    "side";
-}
-
-.Page.SingleProduction header .eventTitles h2 {
+.eventHeader .eventTitles h2 {
   margin-bottom: var(--m-3);
 }
 
-.Page.SingleProduction header h4 {
+.eventHeader h4 {
   grid-area: subtitle;
   align-self: end;
 }
 
-.Page.SingleProduction header .Description {
+.eventHeader .eventDescription {
   grid-area: description;
 }
 
-.mainContent {
-  align-self: start;
-  grid-area: main;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: var(--gap-5);
-}
-.SideContent {
-  grid-area: side;
-  align-self: start;
-}
-.SideContent h3 {
-  margin-bottom: var(--m-6);
-}
-.SideContent h3:not(:first-child) {
-  margin-top: var(--m-8);
-}
-
-.buttons {
+.eventItems {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  /* justify-content: flex-end; */
-  gap: var(--gap-1);
-  grid-area: buttons;
+  gap: var(--gap-4);
+}
+
+.eventItem {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 /* TODO: Add breakpoints system */
 @media only screen and (max-width: 599px) {
-  .EContent.Description :deep(p) {
+  .EContent.eventDescription :deep(p) {
     font-size: var(--text-xl);
   }
 }
 @media only screen and (min-width: 600px) {
   .eventHeader {
+    display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-areas: "title title title title" "content content content content";
   }
-  .eventHeader {
-    grid-template-areas: "title details details details";
-  }
+
   .eventDetails {
-    display: flex;
-    flex-direction: column;
+    grid-area: content;
+  }
+  .eventItems {
+    grid-area: items;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--gap-5);
   }
 }
 @media only screen and (min-width: 1240px) {
@@ -146,13 +125,14 @@ breadcrumbs.value = [
     grid-template-columns: repeat(8, minmax(0, 1fr));
   }
   .eventHeader {
-    grid-template-areas: "title title title details details details details details";
+    grid-template-areas: "title title title content content content content content";
   }
   .eventDetails {
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
     grid-template-areas: "details details content content content";
   }
+
   .eventDetails > .EDetailsList {
     grid-area: details;
   }
