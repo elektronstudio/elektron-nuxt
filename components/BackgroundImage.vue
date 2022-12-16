@@ -22,7 +22,7 @@ const { image } = defineProps<Props>();
   inset: 0;
   z-index: -1;
   filter: blur(50px);
-  opacity: 0.3;
+  opacity: 0.4;
   object-fit: cover;
 }
 </style>
