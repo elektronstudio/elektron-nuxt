@@ -21,7 +21,6 @@ breadcrumbs.value = [];
         v-if="post.thumbnail"
         class="postThumbnail"
         :media="post.thumbnail"
-        ratio="16 / 9"
       />
       <div>
         <ETitle size="lg" el="h1" class="postTitle">

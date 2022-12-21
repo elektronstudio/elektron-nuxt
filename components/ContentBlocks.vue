@@ -69,6 +69,7 @@ const { cards } = defineProps<Props>();
       <EImageCard
         v-else-if="item.__component === 'content.image-card'"
         :media="item.image"
+        :layout="item.layout"
       />
       <EMediaCard
         v-else-if="item.__component === 'content.media-card'"
