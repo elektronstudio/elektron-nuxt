@@ -40,6 +40,10 @@ export const useEventBySlug = (
           "projects",
           "projects.thumbnail",
           "backgroundImage",
+          "cards.image",
+          "cards.media",
+          "localizations.cards.image",
+          "localizations.cards.media",
         ],
       },
       params,
@@ -124,53 +128,7 @@ export const useProjectBySlug = (
   );
 };
 
-// Antrhopologies of space
-export const useAnthropologies = (params: Strapi4RequestParams = {}) => {
-  return useFind(
-    "anthropologies-of-spaces",
-    merge(
-      {
-        populate: ["localizations", "thumbnail"],
-      },
-      params,
-    ),
-    (events) => events.map(processAnthropologies),
-  );
-};
-
-export const useAnthropologiesBySlug = (
-  slug: string,
-  params: Strapi4RequestParams = {},
-) => {
-  return useFind(
-    "anthropologies-of-spaces",
-    merge(
-      {
-        filters: {
-          slug: { $eq: slug },
-        },
-        populate: [
-          "backgroundImage",
-          "localizations",
-          "images",
-          "thumbnail",
-          "event",
-          "cards",
-          "localizations.cards",
-          "cards.image",
-          "cards.media",
-          "localizations.cards.image",
-          "localizations.cards.media",
-        ],
-      },
-      params,
-    ),
-    (events) => events.map(processAnthropologies)[0],
-  );
-};
-
 // Pages
-
 export const useFrontPage = (params: Strapi4RequestParams = {}) => {
   return useFind(
     "frontpage",

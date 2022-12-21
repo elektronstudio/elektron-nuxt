@@ -1,42 +1,15 @@
-<script setup lang="ts">
-const route = useRoute();
-const slug = route.params.event_slug;
+<script lang="ts" setup>
+type Props = {
+  event: any;
+  events: any;
+};
 
-const { data: event, error } = await useAnthropologiesBySlug(slug as string);
-const { data: events } = await useAnthropologies({
-  filters: {
-    id: {
-      $ne: [event.value.id],
-    },
-  },
-});
-
-// TODO: Make this more dynamic
-useHead({
-  title: `${event.value.title} – elektron.art`,
-});
+const { event, events } = defineProps<Props>();
 const { lang } = useLang();
-
-breadcrumbs.value = [
-  {
-    title: "Projects",
-    link: "/projects",
-  },
-  {
-    title: ["Anthropologies of space", "Ruumiantropoloogiad"][lang.value],
-    link: `/projects/ruumiantropoloogiad`,
-  },
-  {
-    title: event.value.title,
-    link: `/projects/ruumiantropoloogiad/${event.value.slug}`,
-  },
-];
 </script>
 
 <template>
-  <ErrorCard v-if="error" />
-
-  <article v-else class="Page SingleProduction">
+  <article class="Page SingleProduction">
     <header class="eventHeader">
       <div class="eventTitles">
         <h2 class="ETitle lg">{{ event.titles[lang] }}</h2>

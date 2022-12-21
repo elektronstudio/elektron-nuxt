@@ -2,7 +2,15 @@
 const route = useRoute();
 const slug = "ruumiantropoloogiad";
 const { data: project, error } = await useProjectBySlug(slug as string);
-const { data: events } = await useAnthropologies();
+const { data: events } = await useEvents({
+  filters: {
+    projects: {
+      id: {
+        $in: project.value.id,
+      },
+    },
+  },
+});
 
 // TODO: Make this more dynamic
 useHead({
