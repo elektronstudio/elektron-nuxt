@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data: event, error } = await useEventBySlug("walk" as string);
+const { data: event, error } = await useEventBySlug("kussaoled" as string);
 const { data: events } = await useEvents({
   filters: {
     projects: {
