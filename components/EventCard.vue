@@ -13,6 +13,7 @@ const { event, layout = "horizontal" } = defineProps<Props>();
   <article class="EventCard" :class="layout">
     <figure>
       <EImage v-if="event.thumbnail" :media="event.thumbnail" />
+      <img v-else src="/images/bg-texture-xs.gif" />
     </figure>
     <div class="content">
       <header>

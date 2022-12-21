@@ -13,6 +13,7 @@ const { lang } = useLang();
   <article class="ScheduleItem">
     <figure>
       <EImage v-if="event.thumbnail" :media="event.thumbnail" />
+      <img v-else src="/images/bg-texture-xs.gif" />
     </figure>
     <div class="content">
       <header>
@@ -55,7 +56,6 @@ const { lang } = useLang();
   width: 8rem;
   height: 8rem;
   border-radius: var(--rounded-md);
-  background-color: var(--gray-500);
   overflow: hidden;
 }
 .ScheduleItem figure img {
