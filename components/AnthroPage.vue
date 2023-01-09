@@ -28,6 +28,7 @@ const { lang } = useLang();
       :key="lang"
       :cards="lang === 0 ? event.cards : event.localizations[0].cards"
     />
+    <slot />
     <AnthroFooter :events="events">
       <ETitle el="h3" size="lg">{{
         ["Ruumiantropoloogiad", "Anthropologies of space"][lang]

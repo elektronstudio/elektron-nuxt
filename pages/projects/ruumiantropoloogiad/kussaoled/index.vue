@@ -2,6 +2,9 @@
 const { data: event, error } = await useEventBySlug("kussaoled" as string);
 const { data: events } = await useEvents({
   filters: {
+    slug: {
+      $ne: "kussaoled",
+    },
     projects: {
       id: {
         $in: event.value.projects[0].id,

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-const { data: event, error } = await useEventBySlug("kiss" as string);
+const { data: event, error } = await useEventBySlug("aja-hambad" as string);
 const { data: events } = await useEvents({
   filters: {
     slug: {
-      $ne: "kiss",
+      $ne: "aja-hambad",
     },
     projects: {
       id: {
@@ -12,7 +12,7 @@ const { data: events } = await useEvents({
     },
   },
 });
-
+const { data: blogs } = await useBlogPosts();
 // TODO: Make this more dynamic
 useHead({
   title: `${event.value.title} – elektron.art`,
@@ -37,5 +37,15 @@ breadcrumbs.value = [
 
 <template>
   <ErrorCard v-if="error" />
-  <AnthroPage v-else :event="event" :events="events" />
+  <AnthroPage v-else :event="event" :events="events">
+    <BlogItems v-if="blogs">
+      <BlogItem
+        v-for="item in blogs"
+        :key="item.id"
+        :slug="item.slug"
+        :thumbnail="item.thumbnail"
+        :title="item.title"
+      />
+    </BlogItems>
+  </AnthroPage>
 </template>
