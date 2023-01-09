@@ -120,6 +120,7 @@ export const useProjectBySlug = (
           "events",
           "events.thumbnail",
           "backgroundImage",
+          "video",
         ],
       },
       params,

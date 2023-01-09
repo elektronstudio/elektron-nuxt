@@ -59,7 +59,7 @@ const { lang } = useLang();
       </EBox>
     </header>
     <AnthroFooter :events="events">
-      <EImageCard :media="project.thumbnail" ratio="16 / 9" />
+      <EImageCard :media="project.video" ratio="16 / 9" />
     </AnthroFooter>
   </article>
   <BackgroundImage
