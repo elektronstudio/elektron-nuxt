@@ -4,22 +4,22 @@ type Props = {
   thumbnail: {
     url: string;
   };
-  title: string;
+  titles: string;
 };
 
-const { slug, thumbnail, title } = defineProps<Props>();
+const { slug, thumbnail, titles } = defineProps<Props>();
 const { lang } = useLang();
 </script>
 
 <template>
   <NuxtLink :href="slug" class="blogItem EBox">
     <img v-if="thumbnail" class="postThumbnail" :src="thumbnail.url" />
-    <ETitle v-if="title" el="h3" size="lg">
-      {{ title }}
+    <ETitle v-if="titles" el="h3" size="lg">
+      {{ titles[lang] }}
     </ETitle>
-    <EButton color="accent" size="xs">{{
-      ["Read more", "Loe postitust"][lang]
-    }}</EButton>
+    <EButton color="accent" size="xs">
+      {{ ["Read more", "Loe postitust"][lang] }}
+    </EButton>
   </NuxtLink>
 </template>
 
