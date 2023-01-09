@@ -42,9 +42,9 @@ breadcrumbs.value = [
       <BlogItem
         v-for="item in blogs"
         :key="item.id"
-        :slug="item.slug"
         :thumbnail="item.thumbnail"
         :title="item.title"
+        :slug="`/projects/ruumiantropoloogiad/aja-hambad/${item.slug}`"
       />
     </BlogItems>
   </AnthroPage>

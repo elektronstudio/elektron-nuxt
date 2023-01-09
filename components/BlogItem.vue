@@ -12,7 +12,7 @@ const { lang } = useLang();
 </script>
 
 <template>
-  <NuxtLink :href="`/blog/${slug}`" class="blogItem EBox">
+  <NuxtLink :href="slug" class="blogItem EBox">
     <img v-if="thumbnail" class="postThumbnail" :src="thumbnail.url" />
     <ETitle v-if="title" el="h3" size="lg">
       {{ title }}
