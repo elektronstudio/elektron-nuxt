@@ -31,6 +31,11 @@ const { lang } = useLang();
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
+  overflow: hidden;
+}
+.blogItem .ETitle,
+.postThumbnail {
+  transition: opacity 0.3s ease-in-out;
 }
 
 .postThumbnail {
@@ -41,10 +46,12 @@ const { lang } = useLang();
   z-index: -1;
   opacity: 0;
   object-fit: cover;
-  transition: opacity 0.3s ease-in-out;
 }
 
 .blogItem:hover .postThumbnail {
   opacity: 1;
+}
+.blogItem:hover .ETitle {
+  opacity: 0;
 }
 </style>
