@@ -226,6 +226,7 @@ export const useBlogPosts = (params: Strapi4RequestParams = {}) => {
     merge(
       {
         populate: ["localizations", "thumbnail"],
+        sort: "date",
       },
       params,
     ),
