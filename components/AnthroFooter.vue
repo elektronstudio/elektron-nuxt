@@ -36,7 +36,7 @@ const { lang } = useLang();
         <ETitle v-if="event.titles" el="h3" size="lg">
           {{ event.titles[lang] }}
         </ETitle>
-        <span>Read more</span>
+        <span> {{ ["Read more", "Loe postitust"][lang] }}</span>
       </NuxtLink>
     </div>
   </footer>
