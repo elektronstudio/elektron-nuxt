@@ -33,8 +33,8 @@ const { lang } = useLang();
         :href="`/projects/ruumiantropoloogiad/${event.slug}`"
         class="eventItem EBox accent"
       >
-        <ETitle v-if="event.title" el="h3" size="lg">
-          {{ event.title }}
+        <ETitle v-if="event.titles" el="h3" size="lg">
+          {{ event.titles[lang] }}
         </ETitle>
         <span>Read more</span>
       </NuxtLink>
