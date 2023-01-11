@@ -3,6 +3,7 @@ const route = useRoute();
 const slug = "ruumiantropoloogiad";
 const { data: project, error } = await useProjectBySlug(slug as string);
 const { data: events } = await useEvents({
+  sort: ["start_at:desc"],
   filters: {
     projects: {
       id: {

@@ -16,16 +16,6 @@ const { lang } = useLang();
     </div>
 
     <div class="eventItems">
-      <NuxtLink
-        v-for="event in events"
-        :href="`/projects/ruumiantropoloogiad/${event.slug}`"
-        class="eventItem EBox accent"
-      >
-        <ETitle v-if="event.title" el="h3" size="lg">
-          {{ event.title }}
-        </ETitle>
-        <span>Read more</span>
-      </NuxtLink>
       <EBox class="eventItem">
         <ETitle el="h3" size="lg"> Kelli Gedvili veeb </ETitle>
         <EButton
@@ -38,6 +28,16 @@ const { lang } = useLang();
           {{ ["Link to website", "Veebilehele"][lang] }}
         </EButton>
       </EBox>
+      <NuxtLink
+        v-for="event in events"
+        :href="`/projects/ruumiantropoloogiad/${event.slug}`"
+        class="eventItem EBox accent"
+      >
+        <ETitle v-if="event.title" el="h3" size="lg">
+          {{ event.title }}
+        </ETitle>
+        <span>Read more</span>
+      </NuxtLink>
     </div>
   </footer>
 </template>

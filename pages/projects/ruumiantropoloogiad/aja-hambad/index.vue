@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const { data: event, error } = await useEventBySlug("aja-hambad" as string);
 const { data: events } = await useEvents({
+  sort: ["start_at:desc"],
   filters: {
     slug: {
       $ne: "aja-hambad",

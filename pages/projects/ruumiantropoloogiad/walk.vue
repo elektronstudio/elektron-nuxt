@@ -2,6 +2,7 @@
 const { data: event, error } = await useEventBySlug("walk" as string);
 console.log(event.value.projects[0].id);
 const { data: events } = await useEvents({
+  sort: ["start_at:desc"],
   filters: {
     slug: {
       $ne: "walk",

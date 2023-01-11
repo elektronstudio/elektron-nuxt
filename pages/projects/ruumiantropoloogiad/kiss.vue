@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const { data: event, error } = await useEventBySlug("kiss" as string);
 const { data: events } = await useEvents({
+  sort: ["start_at:desc"],
   filters: {
     slug: {
       $ne: "kiss",
