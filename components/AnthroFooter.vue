@@ -17,7 +17,9 @@ const { lang } = useLang();
 
     <div class="eventItems">
       <EBox class="eventItem">
-        <ETitle el="h3" size="lg"> Kelli Gedvili veeb </ETitle>
+        <ETitle el="h3" size="lg">
+          {{ ["Behind the Layers", "Kihtide taga"][lang] }}
+        </ETitle>
         <EButton
           el="a"
           href="https://www.post-gallery.online/elektron/index.html?fbclid=IwAR0HOV0gbMvOkL9t2aDqB47XQHMwfWdcNgS6NUpANZfzA0sBDZSWVjRE0ss"

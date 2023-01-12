@@ -6,6 +6,15 @@ type Props = {
 
 const { event, events } = defineProps<Props>();
 const { lang } = useLang();
+
+const intro = [
+  `In 2020 eˉlektron started an experimental project Anthropologies of Space, in which the participating artists deal with issues of man and space. Even in the global context, the contemporary cultural space is in a new delicate situation. As cultural theorists have documented, contemporary precarity is linked to a broader range of technological, social, and political changes. Traditional "grand narratives" and values ​​associated with the Enlightenment and the old Western moral order are also constantly being called into question. Our traditional space of values ​​has to constantly explain and make sense of itself, to stand up for itself.
+Artists Daria Khrystych, Liis Vares, Bohdana Korohod and Inga Salurand focus on liminality. The concept of liminal spaces is familiar from architecture - spaces whose function is limited, whose role is to take the user from one place to another. These spaces are not for staying or being in - lobbies, corridors, streets, highways and abandoned spaces. Transitional spaces are also psychological spaces - spaces where we mentally prepare ourselves to consider what is on the other side. Big personal changes are also transition spaces - a child becomes an adult and leaves home, you are fired or you are caught in the emotional whirlwind of a divorce. In these spaces - both in a stairwell and in court - one is in limbo - neither here nor there. Transitional spaces can and must be treated as a material, semiotic and psychological whole.
+The 2022 Anthropologies of Space had their premieres at the Baltoscandal festival in different locations in the city of Rakvere.`,
+  `Aastal 2020 alustasime eˉlektronis eksperimentaalprojektiga Ruumiantropoloogiad, milles osalevad kunstnikud käsitlevad inimese ja ruumi küsimusi. Isegi globaalses kontekstis on kaasaegne kultuuriruum õrnas, hoovuste eest põiklevas olukorras. Nagu kultuuriteoreetikud on dokumenteerinud, on tänapäeva ebakindlus seotud laiema hulga tehnoloogiliste, sotsiaalsete ja poliitiliste muutustega. Ka traditsioonilised "suured narratiivid" ja väärtushinnangud, mis on seotud valgustusajastu ja vana lääne moraalikorraga pannakse pidevalt küsimuse alla. Meie traditsiooniline väärtusruum peab justkui pidevalt ennast selgitama ja mõtestama, enda eest seisma.
+Kunstnikud Daria Khrystych, Liis Vares, Bohdana Korohod ja Inga Salurand keskenduvad seekord liminaalsusele. Ühest küljest on liminaalsete ruumide mõiste tuttav arhitektuurist - ruumid, mille funktsioon on limiteeritud, mille roll on kasutajat viia ühest kohast teise. Need ruumid pole viibimiseks ega tegutsemiseks - fuajeed, koridorid, tänavad, maanteed ja mahajäetud ruumid. Üleminekuruumid on ka psühholoogilised ruumid - ruumid, kus me valmistame end vaimselt arvestama sellega, mis on teistpool. Ka suured isiklikud muutused on üleminekuruumid - laps saab täiskasvanuks ja lahkub kodust, sind vallandatakse või sa oled sattunud lahutuse emotsionaalsesse tõmbetuulde. Neis ruumides - nii trepikojas kui ka kohtus on inimene ühtmoodi limbos - ei siin ega seal. Üleminekuruume saab ja peab käsitlema materiaalse, semiootilise ja psühholoogilise tervikuna.
+2022 aasta Ruumiantropoloogiad esietendusid Baltoscandali festivalil Rakvere linna eri paikades.`,
+];
 </script>
 
 <template>
@@ -30,15 +39,11 @@ const { lang } = useLang();
     />
     <slot />
     <AnthroFooter :events="events">
-      <ETitle el="h3" size="lg">{{
-        ["Ruumiantropoloogiad", "Anthropologies of space"][lang]
-      }}</ETitle>
+      <ETitle el="h3" size="lg">
+        {{ ["Anthropologies of space", "Ruumiantropoloogiad"][lang] }}
+      </ETitle>
       <p>
-        Aliquip veniam culpa id ut ad duis do id esse Lorem consectetur. Esse
-        nisi officia elit deserunt. Et cillum veniam nostrud consequat magna
-        dolor nostrud cupidatat. Do et cupidatat veniam sunt excepteur cupidatat
-        irure non veniam. Duis nisi sit ex sit eu magna eiusmod ullamco dolore
-        officia. Eu deserunt veniam nisi nisi anim veniam.
+        {{ intro[lang] }}
       </p>
     </AnthroFooter>
   </article>
