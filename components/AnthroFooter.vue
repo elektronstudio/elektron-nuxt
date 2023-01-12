@@ -17,9 +17,13 @@ const { lang } = useLang();
 
     <div class="eventItems">
       <EBox class="eventItem">
-        <ETitle el="h3" size="lg">
-          {{ ["Behind the Layers", "Kihtide taga"][lang] }}
-        </ETitle>
+        <header>
+          <ETitle class="eventTitle" el="h3" size="lg">
+            {{ ["Behind the Layers", "Kihtide taga"][lang] }}
+          </ETitle>
+          <h4>Kelli Gedvil</h4>
+        </header>
+
         <EButton
           el="a"
           href="https://www.post-gallery.online/elektron/index.html?fbclid=IwAR0HOV0gbMvOkL9t2aDqB47XQHMwfWdcNgS6NUpANZfzA0sBDZSWVjRE0ss"
@@ -35,9 +39,12 @@ const { lang } = useLang();
         :href="`/projects/ruumiantropoloogiad/${event.slug}`"
         class="eventItem EBox accent"
       >
-        <ETitle v-if="event.titles" el="h3" size="lg">
-          {{ event.titles[lang] }}
-        </ETitle>
+        <header>
+          <ETitle v-if="event.titles" class="eventTitle" el="h3" size="lg">
+            {{ event.titles[lang] }}
+          </ETitle>
+          <h4 v-if="event.authors">{{ event.authors }}</h4>
+        </header>
         <span> {{ ["Read more", "Loe postitust"][lang] }}</span>
       </NuxtLink>
     </div>
@@ -75,6 +82,10 @@ const { lang } = useLang();
 
 .slotArea :deep(p) {
   max-width: 50ch;
+}
+
+.eventTitle {
+  margin-bottom: 0.4em;
 }
 
 @media only screen and (min-width: 600px) {
