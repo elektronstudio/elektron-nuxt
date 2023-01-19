@@ -1,9 +1,15 @@
-export type MessageType = "CHAT" | string;
+export type MessageType = "CHAT" | "COMMAND" | string;
 
 export type Message = {
   channel: string;
+  datetime: Date;
+  id: string;
+  store: boolean;
+  userid: string;
+  username: string;
+  value: any;
   type: MessageType;
-  [key: string]: any;
+  // [key: string]: any;
 };
 
 export type DraggableChatUser = {

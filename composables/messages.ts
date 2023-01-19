@@ -1,9 +1,10 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
+import { Message } from "~~/types";
 
 export const useMessages = () => {
-  const messages = ref([]);
+  const messages = ref<Message[]>([]);
   const sendMessage = ref((_: any) => {});
-  const ws = ref(null);
+  const ws = ref<ReconnectingWebSocket | null>(null);
 
   onMounted(() => {
     const config = useRuntimeConfig();
@@ -13,6 +14,7 @@ export const useMessages = () => {
       const message = JSON.parse(data);
       messages.value.push(message);
     });
+
     ws.value = websocket;
     sendMessage.value = (message: any) =>
       websocket.send(

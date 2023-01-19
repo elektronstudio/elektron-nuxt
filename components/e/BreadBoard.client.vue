@@ -6,8 +6,7 @@ const { wallpaper } = defineProps<Props>();
 </script>
 <template>
   <div
-    class="EBreadBoard"
-    :class="{ wallpaper: 'wallpaper' }"
+    class="breadboard"
     :style="{
       backgroundImage: wallpaper ? 'url(' + wallpaper + ')' : '',
     }"
@@ -17,7 +16,7 @@ const { wallpaper } = defineProps<Props>();
 </template>
 
 <style scoped>
-.EBreadBoard {
+.breadboard {
   --pin-size: 1px;
   position: fixed;
   display: flex;
@@ -27,6 +26,8 @@ const { wallpaper } = defineProps<Props>();
   left: 0;
   width: 100%;
   height: var(--app-height, 100vh);
+  background-size: cover !important;
+  background-position: 50% 50% !important;
   background: repeating-linear-gradient(
       0.25turn,
       transparent var(--pin-size),
@@ -45,13 +46,8 @@ const { wallpaper } = defineProps<Props>();
     repeating-linear-gradient(var(--gray-500), var(--gray-500));
 }
 
-.EBreadBoard.wallpaper {
-  background-size: cover !important;
-  background-position: 50% 50% !important;
-}
-
 @media only screen and (min-width: 900px) {
-  .EBreadBoard {
+  .breadboard {
     height: 100%;
   }
 }
