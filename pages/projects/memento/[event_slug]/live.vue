@@ -111,7 +111,7 @@ onMounted(() => {
         </EStack>
       </DraggableHoc>
       <DraggableHoc v-bind="draggables.controls">
-        <MementoButtons :controls="controls" />
+        <MementoButtons :initial-controls="event.controls" />
       </DraggableHoc>
 
       <DraggablesDock :draggables="draggables" />

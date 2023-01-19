@@ -1,8 +1,6 @@
 import ReconnectingWebSocket from "reconnecting-websocket";
 import { Message } from "~~/types";
 
-// type Message = {}
-
 export const useMessages = () => {
   const messages = ref<Message[]>([]);
   const sendMessage = ref((_: any) => {});

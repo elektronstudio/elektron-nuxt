@@ -1,15 +1,22 @@
 <script lang="ts" setup>
 type Props = {
-  controls: {
-    label: string;
-    channel: string;
-    type: string;
-  }[];
+  initialControls: string;
 };
 
-const { controls } = defineProps<Props>();
-const { sendMessage } = useMessages();
-
+const { initialControls } = defineProps<Props>();
+const { sendMessage, messages } = useMessages();
+const commands = computed(() => {
+  return messages.value.filter(
+    (m) => m.type === "COMMAND" && m.channel === "experiment",
+  );
+});
+const controls = computed(() => {
+  return parseControls(
+    messages.value.length > 0
+      ? messages.value[messages.value.length - 1].value
+      : initialControls,
+  );
+});
 const handleClick = (channel: string, type: string) => {
   sendMessage.value({
     channel: channel,
@@ -31,6 +38,7 @@ const handleClick = (channel: string, type: string) => {
 <template>
   <div class="MementoButtons">
     <button
+      v-if="controls"
       v-for="control in controls"
       className="MementoButton"
       @click="handleClick(control.channel, control.type)"

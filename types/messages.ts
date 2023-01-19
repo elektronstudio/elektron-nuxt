@@ -1,4 +1,4 @@
-export type MessageType = "CHAT" | string;
+export type MessageType = "CHAT" | "COMMAND" | string;
 
 export type Message = {
   channel: string;
@@ -7,7 +7,7 @@ export type Message = {
   store: boolean;
   userid: string;
   username: string;
-  value: string;
+  value: any;
   type: MessageType;
   // [key: string]: any;
 };
