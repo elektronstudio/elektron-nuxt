@@ -96,6 +96,10 @@ Kunstnikud Daria Khrystych, Liis Vares, Bohdana Korohod ja Inga Salurand keskend
   align-items: flex-start;
 }
 
+.eventDetails {
+  gap: var(--gap-4);
+}
+
 /* TODO: Add breakpoints system */
 @media only screen and (max-width: 599px) {
   .EContent.eventDescription :deep(p) {

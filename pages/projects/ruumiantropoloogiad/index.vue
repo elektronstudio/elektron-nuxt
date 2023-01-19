@@ -101,6 +101,10 @@ const { lang } = useLang();
   grid-area: description;
 }
 
+.eventDetails {
+  gap: var(--gap-4);
+}
+
 /* TODO: Add breakpoints system */
 @media only screen and (max-width: 599px) {
   .EContent.eventDescription :deep(p) {

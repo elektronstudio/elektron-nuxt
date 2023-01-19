@@ -16,24 +16,6 @@ const { lang } = useLang();
     </div>
 
     <div class="eventItems">
-      <EBox class="eventItem">
-        <header>
-          <ETitle class="eventTitle" el="h3" size="lg">
-            {{ ["Behind the Layers", "Kihtide taga"][lang] }}
-          </ETitle>
-          <h4>Kelli Gedvil</h4>
-        </header>
-
-        <EButton
-          el="a"
-          href="https://www.post-gallery.online/elektron/index.html?fbclid=IwAR0HOV0gbMvOkL9t2aDqB47XQHMwfWdcNgS6NUpANZfzA0sBDZSWVjRE0ss"
-          size="xs"
-          color="accent"
-        >
-          <Icon name="radix-icons:external-link" />
-          {{ ["Link to website", "Veebilehele"][lang] }}
-        </EButton>
-      </EBox>
       <NuxtLink
         v-for="event in events"
         :href="`/projects/ruumiantropoloogiad/${event.slug}`"
