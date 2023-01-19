@@ -12,8 +12,8 @@ const commands = computed(() => {
 });
 const controls = computed(() => {
   return parseControls(
-    messages.value.length > 0
-      ? messages.value[messages.value.length - 1].value
+    commands.value.length > 0
+      ? commands.value[commands.value.length - 1].value
       : initialControls,
   );
 });
