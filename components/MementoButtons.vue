@@ -8,11 +8,33 @@ type Props = {
 };
 
 const { controls } = defineProps<Props>();
+const { sendMessage } = useMessages();
+
+const handleClick = (channel: string, type: string) => {
+  sendMessage.value({
+    channel: channel,
+    type: type,
+    value: 10,
+    userid: userId.value,
+    username: userName.value,
+  });
+  sendMessage.value({
+    channel: channel,
+    type: type,
+    value: 0,
+    userid: userId.value,
+    username: userName.value,
+  });
+};
 </script>
 
 <template>
   <div class="MementoButtons">
-    <button v-for="control in controls" className="MementoButton">
+    <button
+      v-for="control in controls"
+      className="MementoButton"
+      @click="handleClick(control.channel, control.type)"
+    >
       <svg>
         <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle">
           {{ control.label }}
