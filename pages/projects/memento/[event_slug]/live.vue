@@ -83,7 +83,7 @@ onMounted(() => {
 <template>
   <div>
     <BackToEvent :event="event" />
-    <EBreadBoard v-if="!hasTicket">
+    <EBreadBoard v-if="!hasTicket" :wallpaper="event.wallpaper?.url">
       <DraggableHoc v-bind="noTicketDraggables.preview">
         <EventPreview
           :event="event"
@@ -94,7 +94,7 @@ onMounted(() => {
       </DraggableHoc>
       <DraggablesDock :draggables="noTicketDraggables" />
     </EBreadBoard>
-    <EBreadBoard v-else>
+    <EBreadBoard v-else :wallpaper="event.wallpaper?.url">
       <DraggableHoc v-bind="draggables.video" v-if="event.streamUrl">
         <Videostream :url="event.streamUrl" />
       </DraggableHoc>
