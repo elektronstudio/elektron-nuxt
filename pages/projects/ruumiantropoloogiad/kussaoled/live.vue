@@ -8,7 +8,7 @@ definePageMeta({
   labIntro: "Interactive hybrid installation in Baltoscandal 2022",
   labGroup: "Experiments",
 });
-
+breadcrumbs.value = [];
 const REFRESH_INTERVAL = 1000 * 10;
 const path = "anthropologies2";
 

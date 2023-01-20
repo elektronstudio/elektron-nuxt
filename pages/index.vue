@@ -102,7 +102,6 @@ const project = computed(() => {
   overflow-y: auto;
   display: grid;
   place-content: center;
-  overflow-y: auto;
   padding: var(--p-3);
 }
 .videoWrapper.dialogActive > *:not(.EDialog) {

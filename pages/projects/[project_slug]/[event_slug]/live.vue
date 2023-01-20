@@ -5,7 +5,7 @@ const route = useRoute();
 const slug = route.params.event_slug as string;
 const { lang } = useLang();
 const { data: event, error } = await useEventBySlug(slug as string);
-
+breadcrumbs.value = [];
 useHead({
   title: `${event.value.title} – elektron.art`,
 });

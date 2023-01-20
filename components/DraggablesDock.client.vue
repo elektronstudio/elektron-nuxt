@@ -22,7 +22,7 @@ const handleClick = (d: any) => {
     <EDraggableTitlebar
       v-for="d in draggables"
       v-show="mobile ? d.getDocked() : true"
-      :title="d.titles[lang]"
+      :title="d.titles?.[lang]"
       @click="handleClick(d)"
       :data-id="d.id"
       :key="d.id"
@@ -40,33 +40,31 @@ const handleClick = (d: any) => {
 
 <style scoped>
 .DraggablesDock {
-  display: flex;
   flex-flow: wrap;
   flex-direction: column-reverse;
-  width: 100%;
-  z-index: 1000;
-}
-.DraggablesDock {
   transform: translateY(0%);
   transition: transform 0.3s ease-in-out;
+  width: 100%;
+  z-index: 1000;
+  display: none;
 }
 
 /* TODO: Add breakpoints system */
-@media only screen and (max-width: 599px) {
+
+@media only screen and (max-width: 899px) {
   .DraggablesDock {
     margin-top: auto;
   }
   .DraggablesDock > * {
     width: 100%;
   }
-}
-@media only screen and (max-width: 899px) {
   .EDraggableTitlebar {
     border-top: 1px solid var(--gray-500);
   }
 }
 @media only screen and (min-width: 900px) {
   .DraggablesDock {
+    display: flex;
     flex-flow: nowrap;
     justify-content: flex-start;
     overflow-x: auto;

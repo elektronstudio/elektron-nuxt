@@ -58,6 +58,7 @@ const { idle } = useIdle(5000);
 .VideoStream {
   position: relative;
   display: flex;
+  width: 100%;
   align-items: center;
   background-color: black;
 }

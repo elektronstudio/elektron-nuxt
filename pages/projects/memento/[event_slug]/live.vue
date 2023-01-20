@@ -5,6 +5,7 @@ const route = useRoute();
 const slug = route.params.event_slug as string;
 const { lang } = useLang();
 const { data: event, error } = await useEventBySlug(slug as string);
+breadcrumbs.value = [];
 
 useHead({
   title: `${event.value.title} – elektron.art`,
@@ -22,6 +23,12 @@ const draggables = useDraggables({
     maximisable: true,
     hideTitleBarOnIdle: true,
   },
+  controls: {
+    tilesWidth: 4,
+    // tilesHeight: 2,
+    initialX: 10,
+    initialY: 6,
+  },
   chat: {
     contentType: "chat",
     initialX: 16,
@@ -33,12 +40,6 @@ const draggables = useDraggables({
     tilesWidth: 8,
     tilesHeight: 4,
     initialX: 1,
-    initialY: 6,
-  },
-  controls: {
-    tilesWidth: 4,
-    // tilesHeight: 2,
-    initialX: 10,
     initialY: 6,
   },
 });
@@ -101,6 +102,9 @@ onMounted(() => {
       <DraggableHoc v-bind="draggables.video" v-else-if="videostreams?.length">
         <Videostream :url="videostreams[0].url" />
       </DraggableHoc>
+      <DraggableHoc v-bind="draggables.controls">
+        <MementoButtons :initial-controls="event.controls" />
+      </DraggableHoc>
       <DraggableHoc v-bind="draggables.chat">
         <Chat :channel="slug" />
       </DraggableHoc>
@@ -109,9 +113,6 @@ onMounted(() => {
           <ETitle size="lg">Live event: {{ event.title }}</ETitle>
           <EContent :content="event.live_contents[lang]" />
         </EStack>
-      </DraggableHoc>
-      <DraggableHoc v-bind="draggables.controls">
-        <MementoButtons :initial-controls="event.controls" />
       </DraggableHoc>
 
       <DraggablesDock :draggables="draggables" />

@@ -47,7 +47,7 @@ export const useDraggables = (initialDraggables: InitialDraggables) => {
     const y = ref(initialDraggables[key].initialY);
     const updateIndex = () =>
       (indexes.value = unique([...indexes.value, key].reverse()).reverse());
-    const updateXY = ({ x: newX, y: newY }) => {
+    const updateXY = ({ x: newX, y: newY }: { x: number; y: number }) => {
       x.value = newX;
       y.value = newY;
       updateIndex();

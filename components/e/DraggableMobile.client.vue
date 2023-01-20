@@ -48,8 +48,7 @@ onMounted(() => {
 
 <template>
   <Transition>
-    <div class="EDraggableMobile" v-show="!getDocked()">
-      <ETitlebarButton icon="cross" @click.stop="setDocked()" />
+    <div class="EDraggableMobile">
       <div class="titleBar" ref="draggableRef">
         <EDraggableTitlebar :title="titles[lang]" />
       </div>
@@ -96,9 +95,7 @@ onMounted(() => {
   display: none;
 }
 .EDraggableMobile article {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+  display: flex;
   padding-top: var(--h-6);
   flex-grow: 1;
   overflow-y: auto;

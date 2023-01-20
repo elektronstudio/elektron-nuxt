@@ -18,14 +18,10 @@ const { wallpaper } = defineProps<Props>();
 <style scoped>
 .breadboard {
   --pin-size: 1px;
-  position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: var(--app-height, 100vh);
+  gap: var(--m-4);
   background-size: cover !important;
   background-position: 50% 50% !important;
   background: repeating-linear-gradient(
@@ -48,7 +44,18 @@ const { wallpaper } = defineProps<Props>();
 
 @media only screen and (min-width: 900px) {
   .breadboard {
-    height: 100%;
+    /* height: 100%; */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--app-height, 100vh);
   }
+}
+</style>
+
+<style>
+main.main {
+  padding-top: 0 !important;
 }
 </style>

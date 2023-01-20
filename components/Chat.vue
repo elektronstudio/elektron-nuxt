@@ -145,4 +145,10 @@ const newMessagesString = computed(() => {
   left: 50%;
   transform: translateX(-50%);
 }
+
+@media (max-width: 899px) {
+  .messagesWrapper {
+    min-height: 400px;
+  }
+}
 </style>

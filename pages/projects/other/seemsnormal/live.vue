@@ -6,6 +6,7 @@ const { data: event, error } = await useEventBySlug(slug as string);
 useHead({
   title: `${event.value.title} – elektron.art`,
 });
+breadcrumbs.value = [];
 
 const wallpaper =
   "https://elektron.fra1.cdn.digitaloceanspaces.com/assets/zahir_seems_normal_wallpaper.jpg";
