@@ -38,5 +38,17 @@ breadcrumbs.value = [
 
 <template>
   <ErrorCard v-if="error" />
-  <AnthroPage v-else :event="event" :events="events" />
+  <AnthroPage v-else :event="event" :events="events">
+    <template #header>
+      <EButton
+        el="a"
+        href="https://www.post-gallery.online/elektron/index.html"
+        target="_blank"
+        size="xs"
+        color="accent"
+      >
+        {{ ["Website", "Veebileht"][lang] }}
+      </EButton>
+    </template>
+  </AnthroPage>
 </template>

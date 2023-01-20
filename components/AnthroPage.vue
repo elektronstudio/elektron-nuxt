@@ -23,6 +23,7 @@ Kunstnikud Daria Khrystych, Liis Vares, Bohdana Korohod ja Inga Salurand keskend
       <div class="eventTitles">
         <h2 class="ETitle lg">{{ event.titles[lang] }}</h2>
         <h4 v-if="event.authors">{{ event.authors }}</h4>
+        <slot name="header" />
       </div>
       <EBox class="eventDetails">
         <EDetailsList
@@ -34,6 +35,7 @@ Kunstnikud Daria Khrystych, Liis Vares, Bohdana Korohod ja Inga Salurand keskend
     </header>
     <ImageSlider v-if="event.images" :images="event.images" />
     <ContentBlocks
+      v-if="event.cards && event.cards.length > 0"
       :key="lang"
       :cards="lang === 0 ? event.cards : event.localizations[0].cards"
     />
@@ -60,22 +62,17 @@ Kunstnikud Daria Khrystych, Liis Vares, Bohdana Korohod ja Inga Salurand keskend
   gap: var(--gap-4);
   color: var(--gray-300);
   padding: 0 var(--p-4);
-  grid-template-areas:
-    "title"
-    "subtitle"
-    "description";
 }
 
 .eventHeader .eventTitles {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-3);
   grid-area: title;
 }
 .eventHeader .eventTitles h2 {
-  margin-bottom: var(--m-3);
-}
-
-.eventHeader h4 {
-  grid-area: subtitle;
-  align-self: end;
+  /* margin-bottom: var(--m-3); */
 }
 
 .eventHeader .eventDescription {

@@ -38,5 +38,14 @@ breadcrumbs.value = [
 
 <template>
   <ErrorCard v-if="error" />
-  <AnthroPage v-else :event="event" :events="events" />
+  <AnthroPage v-else :event="event" :events="events">
+    <template #header>
+      <NuxtLink
+        class="EButton xs accent"
+        to="/projects/ruumiantropoloogiad/kussaoled/live"
+      >
+        {{ ["Live archive", "Laivi arhiiv"][lang] }}
+      </NuxtLink>
+    </template>
+  </AnthroPage>
 </template>
