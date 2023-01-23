@@ -47,7 +47,7 @@ breadcrumbs.value = [
         size="xs"
         color="accent"
       >
-        {{ ["Website", "Veebileht"][lang] }}
+        {{ ["Play", "Play"][lang] }}
       </EButton>
     </template>
   </AnthroPage>
