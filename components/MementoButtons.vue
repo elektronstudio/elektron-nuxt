@@ -42,6 +42,7 @@ const handleClick = (channel: string, type: string) => {
       v-for="control in controls"
       className="MementoButton"
       @click="handleClick(control.channel, control.type)"
+      :style="{ backgroundColor: control.color }"
     >
       <svg>
         <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle">
