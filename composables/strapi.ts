@@ -1,6 +1,6 @@
 import { Strapi4RequestParams } from "@nuxtjs/strapi/dist/runtime/types";
 import { merge, has, isArray, head, forEach, isObject } from "lodash-es";
-import { compareAsc } from "date-fns";
+import { compareAsc, compareDesc } from "date-fns";
 
 // Events
 export const useEvents = (params: Strapi4RequestParams = {}) => {
@@ -331,7 +331,7 @@ export const processBlogPost = (result) => {
 
 export function sortEvents(a: any, b: any) {
   if (a.start_at && b.start_at) {
-    return compareAsc(new Date(b.start_at), new Date(a.start_at));
+    return compareDesc(new Date(b.start_at), new Date(a.start_at));
   }
   return 0; // Keep original sort order if no data for sorting
 }
