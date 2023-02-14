@@ -56,7 +56,7 @@ debouncedWatch(
       }
     });
   },
-  { deep: true, debounce: 1000 },
+  { deep: true, debounce: 200 },
 );
 </script>
 
