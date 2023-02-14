@@ -34,7 +34,7 @@ const handleClick = useThrottleFn((channel: string, type: string) => {
     userid: userId.value,
     username: userName.value,
   });
-}, 1000);
+}, 3000);
 </script>
 
 <template>
