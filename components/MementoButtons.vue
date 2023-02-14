@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { useThrottleFn } from "@vueuse/core";
+
 type Props = {
   initialControls: string;
 };
@@ -17,7 +19,7 @@ const controls = computed(() => {
       : initialControls,
   );
 });
-const handleClick = (channel: string, type: string) => {
+const handleClick = useThrottleFn((channel: string, type: string) => {
   sendMessage.value({
     channel: channel,
     type: type,
@@ -32,7 +34,7 @@ const handleClick = (channel: string, type: string) => {
     userid: userId.value,
     username: userName.value,
   });
-};
+}, 1000);
 </script>
 
 <template>
