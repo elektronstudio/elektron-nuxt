@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { debouncedWatch, watchThrottled } from "@vueuse/core";
+import { debouncedWatch } from "@vueuse/core";
 
 type Props = {
   controls: any;
@@ -18,7 +18,7 @@ watch(
   { immediate: true },
 );
 
-watchThrottled(
+debouncedWatch(
   () => controls.value.map((c) => c.value),
   (controlsValues, prevControlsValues) => {
     controlsValues.forEach((controlsValue, i) => {
@@ -56,7 +56,7 @@ watchThrottled(
       }
     });
   },
-  { deep: true, throttle: 1000 },
+  { deep: true, debounce: 1000 },
 );
 </script>
 
