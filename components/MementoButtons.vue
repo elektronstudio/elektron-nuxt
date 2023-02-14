@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { useDebounceFn } from "@vueuse/core";
-
 type Props = {
   initialControls: string;
 };
@@ -43,9 +41,7 @@ const handleClick = (channel: string, type: string) => {
       v-if="controls"
       v-for="control in controls"
       className="MementoButton"
-      @click="
-        useDebounceFn(() => handleClick(control.channel, control.type), 1000)
-      "
+      @click="handleClick(control.channel, control.type)"
       :style="{ backgroundColor: control.color }"
     >
       <svg>
