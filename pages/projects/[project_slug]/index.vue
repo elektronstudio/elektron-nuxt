@@ -66,7 +66,6 @@ const { lang } = useLang();
           <EventCard
             v-for="event in project.events"
             :event="event"
-            :project-thumbnail="project.thumbnail"
             layout="vertical"
           />
         </template>
