@@ -16,3 +16,9 @@ const { lang } = useLang();
     />
   </main>
 </template>
+
+<style scoped>
+.Page {
+  padding: var(--p-4);
+}
+</style>

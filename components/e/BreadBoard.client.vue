@@ -56,6 +56,6 @@ const { wallpaper } = defineProps<Props>();
 
 <style>
 main.main {
-  padding-top: 0 !important;
+  padding-top: 0;
 }
 </style>
