@@ -26,6 +26,7 @@ const processEvent = processEventFienta(event);
       processEvent.status === 'FREE' || processEvent.status === 'HAS_TICKET'
     "
     :to="processEvent.eventLiveLink"
+    custom
   >
     <EButton v-if="urgency === 'now'" el="a" :size="size" color="accent">
       {{ ["Live now!", "Vaata laivis!"][lang] }}
