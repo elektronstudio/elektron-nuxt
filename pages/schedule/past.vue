@@ -15,7 +15,7 @@ breadcrumbs.value = [
   },
 ];
 
-const { data: upcomingEvents, error } = await useEvents({
+const { data: pastEvents, error } = await useEvents({
   sort: ["start_at:desc"],
   filters: { start_at: { $lt: today() } },
 });
@@ -34,8 +34,8 @@ const { data: upcomingEvents, error } = await useEvents({
     </aside>
     <section>
       <ScheduleItem
-        v-if="upcomingEvents?.length > 0"
-        v-for="event in upcomingEvents"
+        v-if="pastEvents?.length > 0"
+        v-for="event in pastEvents"
         :event="event"
       />
     </section>
