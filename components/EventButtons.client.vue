@@ -25,14 +25,21 @@ const processEvent = processEventFienta(event);
     v-if="
       processEvent.status === 'FREE' || processEvent.status === 'HAS_TICKET'
     "
+    v-slot="{ navigate }"
     :to="processEvent.eventLiveLink"
-    custom
   >
-    <EButton v-if="urgency === 'now'" el="a" :size="size" color="accent">
+    <EButton
+      v-if="urgency === 'now'"
+      @click="navigate"
+      el="a"
+      :size="size"
+      color="accent"
+    >
       {{ ["Live now!", "Vaata laivis!"][lang] }}
     </EButton>
     <EButton
       v-else-if="urgency === 'future' || urgency === 'soon'"
+      @click="navigate"
       el="a"
       :size="size"
       color="anime"
@@ -43,7 +50,13 @@ const processEvent = processEventFienta(event);
         } ${formattedStartAtDistance}`
       }}
     </EButton>
-    <EButton v-else-if="urgency === 'past'" el="a" :size="size" color="anime">
+    <EButton
+      v-else-if="urgency === 'past'"
+      @click="navigate"
+      el="a"
+      :size="size"
+      color="anime"
+    >
       {{ ["Revisit event", "Meenuta üritust"][lang] }}
     </EButton>
   </NuxtLink>
