@@ -17,7 +17,13 @@ const { lang } = useLang();
     </figure>
     <div class="content">
       <header>
-        <EventDatetime :event="event" />
+        <div class="topBar">
+          <EventDatetime :event="event" />
+          <EEventLocations
+            :is-online="!!event.online || !!event.streamUrl || !!event.live"
+            :is-onlocation="!!event.onlocation"
+          />
+        </div>
         <ETitle v-if="event.authors" size="xs" el="h5" class="project">
           {{ event.authors }}
         </ETitle>
@@ -51,11 +57,6 @@ const { lang } = useLang();
   border-top: 1px solid var(--gray-500);
   gap: var(--gap-3);
   color: var(--fg);
-}
-
-.ScheduleItem .EventDatetime,
-.ScheduleItem :deep(.EventDatetime) {
-  margin-bottom: var(--m-3);
 }
 .ScheduleItem figure {
   flex-shrink: 0;
@@ -102,6 +103,15 @@ const { lang } = useLang();
 .project {
   color: var(--gray-300);
 }
+
+.topBar {
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: space-between; */
+  width: 100%;
+  gap: var(--gap-4);
+  margin-bottom: var(--m-3);
+}
 /* TODO: Add breakpoints system */
 
 @media only screen and (min-width: 600px) {
@@ -109,6 +119,11 @@ const { lang } = useLang();
     flex-grow: 1;
     flex-direction: row;
     justify-content: space-between;
+  }
+  .topBar {
+    align-items: center;
+    flex-grow: 1;
+    width: 100%;
   }
 }
 </style>

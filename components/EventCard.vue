@@ -24,20 +24,10 @@ const {
       <header>
         <div class="topBar">
           <EventDatetime :event="event" />
-          <div
-            class="locations"
-            v-if="
-              event.online || event.streamUrl || event.live || event.onlocation
-            "
-          >
-            <span v-if="event.online || event.streamUrl || event.streamkey">
-              <Icon name="radix-icons:globe" />Online
-            </span>
-
-            <span v-if="event.onlocation">
-              <Icon name="radix-icons:sewing-pin" />Onsite
-            </span>
-          </div>
+          <EEventLocations
+            :is-online="!!event.online || !!event.streamUrl || !!event.live"
+            :is-onlocation="!!event.onlocation"
+          />
         </div>
         <NuxtLink :to="event.eventLink">
           <ETitle el="h4" size="xs" class="eventTitle">
@@ -110,21 +100,7 @@ const {
   justify-content: space-between;
   width: 100%;
 }
-.locations {
-  display: flex;
-  gap: var(--gap-2);
-  color: var(--gray-300);
-  font-size: var(--text-xs);
-  line-height: var(--line-height-xs);
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-}
 
-.locations span {
-  display: flex;
-  align-items: center;
-  gap: 0.2em;
-}
 /* TODO: Add breakpoints system */
 @media only screen and (max-width: 599px) {
   .EventCard section {
