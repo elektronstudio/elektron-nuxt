@@ -23,7 +23,7 @@
   min-height: 100vh;
   /* height: 100vh; */
   flex-direction: column;
-  padding-top: var(--h-9);
+  padding-top: calc(var(--h-9) * 2);
 }
 
 @media only screen and (max-width: 599px) {

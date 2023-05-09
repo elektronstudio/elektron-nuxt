@@ -4,9 +4,14 @@ import { Event } from "~~/types";
 type Props = {
   event: Event;
   layout?: "vertical" | "horizontal";
+  noButtons: boolean;
 };
 
-const { event, layout = "horizontal" } = defineProps<Props>();
+const {
+  event,
+  layout = "horizontal",
+  noButtons = false,
+} = defineProps<Props>();
 </script>
 
 <template>
@@ -17,14 +22,28 @@ const { event, layout = "horizontal" } = defineProps<Props>();
     </figure>
     <div class="content">
       <header>
-        <EventDatetime :event="event" />
+        <div class="topBar">
+          <EventDatetime :event="event" />
+          <div
+            class="locations"
+            v-if="event.online || event.streamUrl || event.onlocation"
+          >
+            <span v-if="event.online || event.streamUrl">
+              <Icon name="radix-icons:globe" />Online
+            </span>
+
+            <span v-if="event.onlocation">
+              <Icon name="radix-icons:sewing-pin" />Onsite
+            </span>
+          </div>
+        </div>
         <NuxtLink :to="event.eventLink">
           <ETitle el="h4" size="xs" class="eventTitle">
             {{ event.title }}
           </ETitle>
         </NuxtLink>
       </header>
-      <section>
+      <section v-if="!noButtons">
         <EventButtons :event="event" />
       </section>
     </div>
@@ -54,10 +73,12 @@ const { event, layout = "horizontal" } = defineProps<Props>();
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  width: 100%;
 }
 .EventCard header {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 .EventCard,
 .EventCard.vertical .content {
@@ -80,6 +101,28 @@ const { event, layout = "horizontal" } = defineProps<Props>();
 .eventTitle {
   color: var(--fg);
 }
+
+.topBar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+.locations {
+  display: flex;
+  gap: var(--gap-2);
+  color: var(--gray-300);
+  font-size: var(--text-xs);
+  line-height: var(--line-height-xs);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+}
+
+.locations span {
+  display: flex;
+  align-items: center;
+  gap: 0.2em;
+}
 /* TODO: Add breakpoints system */
 @media only screen and (max-width: 599px) {
   .EventCard section {
@@ -88,12 +131,11 @@ const { event, layout = "horizontal" } = defineProps<Props>();
 }
 
 @media only screen and (min-width: 600px) {
-  .EventCard.horizontal .content {
+  .topBar {
+    align-items: center;
     flex-grow: 1;
-    flex-direction: row;
-    justify-content: space-between;
+    width: 100%;
   }
-
   .EventCard section {
     flex-direction: row;
     align-items: flex-start;

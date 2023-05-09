@@ -19,7 +19,6 @@ breadcrumbs.value = [
   },
 ];
 
-// const project = data.value as Project;
 const { lang } = useLang();
 </script>
 
@@ -28,12 +27,6 @@ const { lang } = useLang();
   <article v-else class="Page SingleProduction">
     <header class="eventHeader">
       <div class="title">
-        <!-- <NuxtLink to="/projects">
-          <EButton size="xs" el="a" color="transparent">
-            <Icon name="radix-icons:arrow-left" />
-            {{ ["Projects", "Projektid"][lang] }}
-          </EButton>
-        </NuxtLink> -->
         <h2 class="ETitle lg">{{ project.titles[lang] }}</h2>
         <ETitle v-if="project.authors" el="h5" size="xs">
           {{ project.authors }}
@@ -46,6 +39,9 @@ const { lang } = useLang();
         size="lg"
         :content="project.intros[lang]"
       />
+      <div v-if="project.mainEvent" class="buttons">
+        <EventButtons size="md" :event="project.mainEvent" />
+      </div>
     </header>
 
     <ImageSlider v-if="project.images" :images="project.images" />
@@ -63,27 +59,9 @@ const { lang } = useLang();
             v-for="event in project.events"
             :event="event"
             layout="vertical"
+            :no-buttons="true"
           />
         </template>
-
-        <!-- <template v-if="project.pastEvents">
-          <ETitle
-            el="h3"
-            size="lg"
-            :title="['Past events', 'Toimunud üritused'][lang]"
-          />
-          <EventCard
-            v-for="event in project.pastEvents"
-            :event="event"
-            :project-thumbnail="project.thumbnail"
-            layout="vertical"
-          />
-        </template> -->
-        <!-- TODO: Add press -->
-        <!-- <template v-if="press">
-          <ETitle el="h3" size="lg">Press</ETitle>
-          <EPressItems :items="press" />
-        </template> -->
       </EBox>
     </main>
   </article>
@@ -151,9 +129,13 @@ const { lang } = useLang();
 }
 
 .buttons {
+  position: fixed;
+  bottom: var(--m-2);
+  left: var(--m-2);
   display: flex;
-  align-items: flex-start;
-  gap: var(--gap-5);
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--gap-1);
 }
 
 /* TODO: Add breakpoints system */
@@ -169,8 +151,8 @@ const { lang } = useLang();
   }
   .eventHeader {
     grid-template-areas:
-      "title description description description"
-      "subtitle description description description";
+      "title description description"
+      "subtitle description description";
   }
 
   .mainContent {
@@ -185,6 +167,12 @@ const { lang } = useLang();
   }
   .eventContent .EContent {
     grid-area: content;
+  }
+
+  .buttons {
+    top: calc(var(--h-9) + var(--h-4));
+    right: var(--m-4);
+    left: auto;
   }
 }
 @media only screen and (min-width: 1240px) {

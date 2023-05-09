@@ -33,6 +33,9 @@ export type Event = {
   videostreams?: Videostream[];
   live_content: string;
   images: MediaItem[];
+  streamUrl?: string | null;
+  onlocation?: boolean | null;
+  online?: boolean | null;
 };
 
 type Videostream = {

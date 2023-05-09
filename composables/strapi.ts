@@ -122,6 +122,7 @@ export const useProjectBySlug = (
           "events.thumbnail",
           "backgroundImage",
           "video",
+          "mainEvent",
         ],
       },
       params,
@@ -397,6 +398,9 @@ const processProject = (project) => {
     project.events = project.events
       .map((event) => processProjectEvent(event, project))
       .sort(sortEvents);
+  }
+  if (project.mainEvent) {
+    project.mainEvent = processProjectEvent(project.mainEvent, project);
   }
   project = processLocalizations(project);
   project = proccessMarkdown(project);

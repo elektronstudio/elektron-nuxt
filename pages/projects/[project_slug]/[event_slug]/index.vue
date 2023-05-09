@@ -31,12 +31,6 @@ const { lang } = useLang();
   <article v-else class="Page SingleProduction">
     <header class="eventHeader">
       <div class="title">
-        <!-- <NuxtLink v-if="event.projectLink" :to="event.projectLink">
-          <EButton size="xs" el="a" color="transparent">
-            <Icon name="radix-icons:arrow-left" />
-            {{ event.projects[0].titles[lang] }}
-          </EButton>
-        </NuxtLink> -->
         <h2 class="ETitle lg">{{ event.titles[lang] }}</h2>
         <h4 v-if="event.authors">{{ event.authors }}</h4>
       </div>
@@ -47,7 +41,7 @@ const { lang } = useLang();
         :content="event.intros[lang]"
       />
       <div class="buttons">
-        <EventButtons :event="event" />
+        <EventButtons size="md" :event="event" />
       </div>
     </header>
     <ImageSlider v-if="event.images" :images="event.images" />
@@ -82,8 +76,7 @@ const { lang } = useLang();
   grid-template-areas:
     "title"
     "subtitle"
-    "description"
-    "buttons";
+    "description";
 }
 .mainContent {
   align-content: start;
@@ -128,12 +121,13 @@ const { lang } = useLang();
 }
 
 .buttons {
+  position: fixed;
+  bottom: var(--m-2);
+  left: var(--m-2);
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  /* justify-content: flex-end; */
   gap: var(--gap-1);
-  grid-area: buttons;
 }
 
 /* TODO: Add breakpoints system */
@@ -149,8 +143,8 @@ const { lang } = useLang();
   }
   .eventHeader {
     grid-template-areas:
-      "title description description buttons"
-      "subtitle description description buttons";
+      "title description description"
+      "subtitle description description";
   }
 
   .mainContent {
@@ -166,6 +160,11 @@ const { lang } = useLang();
   .eventContent .EContent {
     grid-area: content;
   }
+  .buttons {
+    top: calc(var(--h-9) + var(--h-4));
+    right: var(--m-4);
+    left: auto;
+  }
 }
 @media only screen and (min-width: 1240px) {
   .eventHeader,
@@ -174,8 +173,8 @@ const { lang } = useLang();
   }
   .eventHeader {
     grid-template-areas:
-      "title title description description description description buttons buttons"
-      "subtitle subtitle description description description description buttons buttons";
+      "title title description description description description . ."
+      "subtitle subtitle description description description description . .";
   }
   .mainContent {
     grid-template-areas: "main main main main main side side side";
