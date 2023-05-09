@@ -357,7 +357,6 @@ const processEvent = (event) => {
   const project = event.projects?.[0];
   event.projectLink = project ? `/projects/${project.slug}` : "/";
   event.eventLink = project ? `/projects/${project.slug}/${event.slug}` : "/";
-  console.log(event.title, project?.online, event.online);
   event.eventLiveLink = project?.online
     ? `/projects/${project.slug}/live`
     : project && (event.online || event.streamkey || event.streamUrl)
