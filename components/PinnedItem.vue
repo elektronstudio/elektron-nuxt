@@ -29,6 +29,10 @@
 }
 .ELivePreview :deep(aside footer) {
   display: flex;
+  gap: var(--gap-2);
+}
+.ELivePreview :deep(aside footer .eventButtons) {
+  display: flex;
   flex-direction: column-reverse;
   align-items: flex-start;
   gap: var(--gap-1);

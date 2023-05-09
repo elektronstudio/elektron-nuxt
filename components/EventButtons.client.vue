@@ -25,13 +25,14 @@ const processEvent = processEventFienta(event);
     v-if="
       processEvent.status === 'FREE' || processEvent.status === 'HAS_TICKET'
     "
-    v-slot="{ navigate }"
+    v-slot="{ href }"
     :to="processEvent.eventLiveLink"
+    custom
   >
     <EButton
       v-if="urgency === 'now'"
-      @click="navigate"
       el="a"
+      :href="href"
       :size="size"
       color="accent"
     >
@@ -39,8 +40,8 @@ const processEvent = processEventFienta(event);
     </EButton>
     <EButton
       v-else-if="urgency === 'future' || urgency === 'soon'"
-      @click="navigate"
       el="a"
+      :href="href"
       :size="size"
       color="anime"
     >
@@ -52,8 +53,8 @@ const processEvent = processEventFienta(event);
     </EButton>
     <EButton
       v-else-if="urgency === 'past'"
-      @click="navigate"
       el="a"
+      :href="href"
       :size="size"
       color="anime"
     >

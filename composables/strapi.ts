@@ -151,6 +151,7 @@ export const useFrontPage = (params: Strapi4RequestParams = {}) => {
           "projects.images",
           "projects.projects",
           "projects.localizations",
+          "projects.mainEvent",
         ],
       },
       params,

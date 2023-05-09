@@ -22,7 +22,9 @@ const { event } = defineProps<Props>();
         <EContent :content="event.intros[lang]" />
       </EStack>
       <footer>
-        <EventButtons :event="event" />
+        <div class="eventButtons">
+          <EventButtons :event="event" />
+        </div>
       </footer>
     </aside>
     <EImage v-if="event.thumbnail" :media="(event.thumbnail as MediaItem)" />
