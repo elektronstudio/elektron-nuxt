@@ -28,7 +28,7 @@ const { project } = defineProps<Props>();
           </EButton>
         </NuxtLink>
         <div class="eventButtons">
-          <EventButtons :event="project.mainEvent" />
+          <EventButtons :event="project" />
         </div>
       </footer>
     </aside>

@@ -1,14 +1,12 @@
 <script setup lang="ts">
-import { Event } from "~~/types";
-
 type Props = {
-  event: Event;
+  link: string;
 };
 const { lang } = useLang();
-const { event } = defineProps<Props>();
+const { link } = defineProps<Props>();
 </script>
 <template>
-  <NuxtLink v-if="event" :to="event.eventLink" class="backToEvent">
+  <NuxtLink v-if="link" :to="link" class="backToEvent">
     <Icon name="radix-icons:arrow-left" />
     {{ ["Back to event", "Tagasi sündmuse juurde"][lang] }}
   </NuxtLink>

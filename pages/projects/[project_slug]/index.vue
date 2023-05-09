@@ -39,8 +39,8 @@ const { lang } = useLang();
         size="lg"
         :content="project.intros[lang]"
       />
-      <div v-if="project.mainEvent" class="buttons">
-        <EventButtons size="md" :event="project.mainEvent" />
+      <div v-if="project" class="buttons">
+        <EventButtons size="md" :event="project" />
       </div>
     </header>
 

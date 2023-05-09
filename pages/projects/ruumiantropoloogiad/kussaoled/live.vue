@@ -14,7 +14,6 @@ const path = "anthropologies2";
 
 const slug = "kussaoled";
 const { data: event, error } = await useEventBySlug(slug);
-const videostreams = getVideostreams(event.value.streamkey);
 
 const { theme, changeTheme } = useTheme();
 
@@ -39,7 +38,9 @@ const draggables = useDraggables({
 
 const video = ref<HTMLVideoElement>();
 const canvas = ref<HTMLCanvasElement>();
-const { width, height } = useVideostreamLegacy(video, videostreams[0].url);
+const live = ref<string>(event.value.live);
+
+const { width, height } = useVideostreamLegacy(video, live);
 const { capture: captureFrame, frame } = useVideoframe(
   video,
   canvas,
@@ -97,7 +98,7 @@ onMounted(() => {
 <template>
   <div>
     <EBreadBoard :wallpaper="wallpapers[0]">
-      <BackToEvent :event="event" />
+      <BackToEvent :link="event.eventLink" />
       <video
         ref="video"
         muted
@@ -135,9 +136,9 @@ onMounted(() => {
         </div>
       </div>
 
-      <DraggableHoc v-bind="draggables.video" v-if="videostreams.length">
+      <DraggableHoc v-bind="draggables.video" v-if="live">
         <div class="md:w-[70vw]">
-          <Videostream :url="videostreams[0].url">
+          <Videostream :url="live">
             <RechargingButton @click="capture">
               <Icon name="radix-icons:camera" />
               {{ ["Capture", "Pildista"][lang] }}

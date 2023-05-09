@@ -26,7 +26,9 @@ const {
           <EventDatetime :event="event" />
           <div
             class="locations"
-            v-if="event.online || event.streamUrl || event.onlocation"
+            v-if="
+              event.online || event.streamUrl || event.live || event.onlocation
+            "
           >
             <span v-if="event.online || event.streamUrl">
               <Icon name="radix-icons:globe" />Online

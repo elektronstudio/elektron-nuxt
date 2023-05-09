@@ -2,12 +2,12 @@
 import { Urgency } from "~~/types";
 
 const route = useRoute();
-const slug = route.params.event_slug as string;
+const slug = route.params.project_slug as string;
 const { lang } = useLang();
-const { data: event, error } = await useEventBySlug(slug as string);
+const { data: project, error } = await useProjectBySlug(slug as string);
 breadcrumbs.value = [];
 useHead({
-  title: `${event.value.title} – elektron.art`,
+  title: `${project.value.title} – elektron.art`,
 });
 
 const draggables = useDraggables({
@@ -41,13 +41,11 @@ const draggables = useDraggables({
   },
 });
 
-const controls = parseControls(event.value.controls);
 const hasTicket = ref<boolean>(false);
-const dialogState = ref<boolean>(true);
-const live = ref<string>(event.value.live);
+const live = ref<string>(project.value.live);
 
 // @TODO: Move this to processing level
-const { urgency } = useDatetime(event.value.start_at, event.value.end_at);
+const { urgency } = useDatetime(project.value.start_at, project.value.end_at);
 const urgencyLabel = computed(() => {
   if (urgency.value === ("future" as Urgency)) {
     return ["upcoming", "tulemas"];
@@ -69,27 +67,39 @@ const noTicketDraggables = useDraggables({
     // tilesHeight: 5,
   },
 });
+let interval: ReturnType<typeof setInterval>;
 
 onMounted(() => {
-  const fientaValidate = getTicketableStatus([event.value]);
+  const fientaValidate = getTicketableStatus([project.value]);
 
   if (fientaValidate.status !== "REQUIRES_TICKET") {
     hasTicket.value = true;
   }
 });
+
+onMounted(() => {
+  interval = setInterval(async () => {
+    const slug = route.params.event_slug as string;
+    const { data: project, error } = await useProjectBySlug(slug as string, {
+      fields: ["live"],
+    });
+    live.value = project.value.live;
+  }, 30000);
+});
+
+onUnmounted(() => {
+  clearInterval(interval);
+});
 </script>
 
 <template>
-  <FetchStreamData @update-stream="(r) => (live = r)" />
+  <!-- TODO: how to use with project -->
+  <!-- <FetchStreamData @update-stream="(r) => (live = r)" /> -->
   <div>
-    <BackToEvent :link="event.eventLink" />
+    <BackToEvent :link="project.projectLink" />
     <EBreadBoard v-if="!hasTicket">
       <DraggableHoc v-bind="noTicketDraggables.preview">
-        <EventPreview
-          :event="event"
-          :dialog-state="dialogState"
-          @close-dialog="dialogState = false"
-        />
+        <ProjectPreview :project="project" />
       </DraggableHoc>
       <DraggablesDock :draggables="noTicketDraggables" />
     </EBreadBoard>
@@ -102,12 +112,9 @@ onMounted(() => {
       </DraggableHoc>
       <DraggableHoc v-bind="draggables.about">
         <EStack style="padding: var(--p-5)">
-          <ETitle size="lg">{{ event.title }}</ETitle>
-          <EContent :content="event.live_contents[lang]" />
+          <ETitle size="lg">{{ project.title }}</ETitle>
+          <EContent :content="project.description" />
         </EStack>
-      </DraggableHoc>
-      <DraggableHoc v-if="event.controls" v-bind="draggables.controls">
-        <Controls :controls="controls" />
       </DraggableHoc>
 
       <DraggablesDock :draggables="draggables" />

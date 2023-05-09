@@ -122,7 +122,6 @@ export const useProjectBySlug = (
           "events.thumbnail",
           "backgroundImage",
           "video",
-          "mainEvent",
         ],
       },
       params,
@@ -151,7 +150,6 @@ export const useFrontPage = (params: Strapi4RequestParams = {}) => {
           "projects.images",
           "projects.projects",
           "projects.localizations",
-          "projects.mainEvent",
         ],
       },
       params,
@@ -366,7 +364,6 @@ const processEvent = (event) => {
   event.projects = event.projects ? event.projects.map(processProject) : null;
   event = processLocalizations(event);
   event = proccessMarkdown(event);
-  event = processEventVideostreams(event);
   return event;
 };
 
@@ -389,7 +386,6 @@ const processProjectEvent = (event, project) => {
   event.urgency = urgency.value;
   event = processLocalizations(event);
   event = proccessMarkdown(event);
-  event = processEventVideostreams(event);
   return event;
 };
 
@@ -399,9 +395,6 @@ const processProject = (project) => {
     project.events = project.events
       .map((event) => processProjectEvent(event, project))
       .sort(sortEvents);
-  }
-  if (project.mainEvent) {
-    project.mainEvent = processProjectEvent(project.mainEvent, project);
   }
   project = processLocalizations(project);
   project = proccessMarkdown(project);
@@ -450,10 +443,6 @@ const proccessMarkdown = (item) => {
   item.contents = item.contents.map(parseMarkdown);
   item.live_contents = item.live_contents.map(parseMarkdown);
   return item;
-};
-
-const processEventVideostreams = (event) => {
-  return { ...event, videostreams: getVideostreams(event.streamkey) };
 };
 
 // https://github.com/ComfortablyCoding/strapi-plugin-transformer/blob/master/server/services/transform-service.js

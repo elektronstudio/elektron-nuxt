@@ -11,7 +11,6 @@ export type Event = {
   start_at: string;
   end_at: string;
   description: string;
-  streamkey?: string;
   fienta_id: any;
   intro: string;
   details: string;
@@ -30,18 +29,13 @@ export type Event = {
   contents: string[];
   status: string;
   ticketLinks: any[];
-  videostreams?: Videostream[];
   live_content: string;
   images: MediaItem[];
-  streamUrl?: string | null;
   onlocation?: boolean | null;
   online?: boolean | null;
-};
-
-type Videostream = {
-  ingest: string;
-  streamkey: string;
-  url: string;
+  live?: string | null;
+  streamkey: string | null;
+  streamUrl?: string | null;
 };
 
 interface Project {

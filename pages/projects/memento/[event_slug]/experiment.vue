@@ -15,8 +15,6 @@ useHead({
   title: `${event.value.title} – elektron.art`,
 });
 
-const videostreams = getVideostreams(event.value.streamkey);
-
 const draggables = useDraggables({
   stream: {
     initialX: 0,
@@ -57,6 +55,7 @@ const draggables = useDraggables({
 });
 
 const controls = parseControls(event.value.controls);
+const live = ref<string>(event.value.live);
 
 const { lang } = useLang();
 
@@ -104,11 +103,11 @@ const fetchControls = async () => {
 
 <template>
   <div>
-    <EBreadBoard :wallpaper="false">
-      <BackToEvent :event="event" />
-      <DraggableHoc v-bind="draggables.stream" v-if="videostreams.length">
-        <Videostream :url="videostreams[0].url" />
-        <ECode>{{ formatData(videostreams[0]) }}</ECode>
+    <EBreadBoard>
+      <BackToEvent :link="event.eventLink" />
+      <DraggableHoc v-bind="draggables.stream" v-if="live">
+        <Videostream :url="live" />
+        <ECode>{{ formatData(live) }}</ECode>
       </DraggableHoc>
 
       <DraggableHoc v-bind="draggables.about">
@@ -125,7 +124,7 @@ const fetchControls = async () => {
         <Chat :channel="slug" />
       </DraggableHoc>
 
-      <DraggableHoc v-bind="draggables.data">
+      <DraggableHoc v-if="controls" v-bind="draggables.data">
         <ControlsData :messages="experimentMessages" :controls="controls" />
       </DraggableHoc>
 

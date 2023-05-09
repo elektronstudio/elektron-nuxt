@@ -32,7 +32,10 @@ const { lang } = useLang();
         <!-- <EContent nolinks :content="event.intros[lang]" /> -->
       </header>
       <footer>
-        <EventButtons :event="event" v-if="event.streamkey" />
+        <EventButtons
+          :event="event"
+          v-if="event.streamUrl || event.live || event.streamkey"
+        />
       </footer>
     </div>
   </article>

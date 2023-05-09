@@ -15,8 +15,6 @@ useHead({
   title: `${event.value.title} – elektron.art`,
 });
 
-const videostreams = getVideostreams(event.value.streamkey);
-
 const draggables = useDraggables({
   stream: {
     initialX: 0,
@@ -45,13 +43,14 @@ const draggables = useDraggables({
 });
 
 const controls = parseControls(event.value.controls);
+const live = ref<string>(event.value.live);
 
 const { lang } = useLang();
 
 const { messages } = useMessages();
 const experimentMessages = computed(() =>
   messages.value.filter((m) =>
-    controls.map((c) => c.channel).includes(m.channel),
+    controls?.map((c) => c.channel).includes(m.channel),
   ),
 );
 const onDownloadCsv = () => {
@@ -81,10 +80,10 @@ const video = ref<HTMLVideoElement | null>(null);
 <template>
   <div>
     <EBreadBoard>
-      <BackToEvent :event="event" />
-      <DraggableHoc v-bind="draggables.stream" v-if="videostreams.length">
-        <Videostream :url="videostreams[0].url" />
-        <ECode>{{ formatData(videostreams[0]) }}</ECode>
+      <BackToEvent :link="event.eventLink" />
+      <DraggableHoc v-bind="draggables.stream" v-if="live">
+        <Videostream :url="live" />
+        <ECode>{{ formatData(live) }}</ECode>
       </DraggableHoc>
 
       <DraggableHoc v-bind="draggables.about">
@@ -101,7 +100,7 @@ const video = ref<HTMLVideoElement | null>(null);
         <Chat :channel="slug" />
       </DraggableHoc>
 
-      <DraggableHoc v-bind="draggables.data">
+      <DraggableHoc v-if="controls" v-bind="draggables.data">
         <ControlsData :messages="experimentMessages" :controls="controls" />
       </DraggableHoc>
 

@@ -25,6 +25,11 @@ export type Project = {
   descriptions: string[];
   detailss: string[];
   contents: string[];
+  online?: boolean | null;
+  live?: string | null;
+  start_at: string;
+  end_at: string;
+  fienta_id: any;
 };
 
 export interface Localization {
@@ -41,10 +46,4 @@ export interface Localization {
   intro: string;
   authors: string;
   details: string;
-}
-
-interface Videostream {
-  ingest: string;
-  streamkey: string;
-  url: string;
 }

@@ -55,7 +55,7 @@ const { theme } = useTheme();
 <template>
   <div>
     <EBreadBoard :wallpaper="wallpaper">
-      <BackToEvent :event="event" />
+      <BackToEvent :link="event.eventLink" />
 
       <DraggableHoc v-bind="draggables.side1">
         <div v-for="(track, i) in tracks.slice(0, 4)" class="mt-4">

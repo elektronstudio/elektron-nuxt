@@ -11,8 +11,6 @@ useHead({
   title: `${event.value.title} – elektron.art`,
 });
 
-const videostreams = getVideostreams(event.value.streamkey);
-
 const draggables = useDraggables({
   video: {
     titles: ["Stream", "Stream"],
@@ -45,6 +43,8 @@ const draggables = useDraggables({
 });
 
 const controls = parseControls(event.value.controls);
+const live = ref<string>(event.value.live);
+
 const hasTicket = ref<boolean>(false);
 const dialogState = ref<boolean>(true);
 
@@ -83,7 +83,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <BackToEvent :event="event" />
+    <BackToEvent :link="event.eventLink" />
     <EBreadBoard v-if="!hasTicket" :wallpaper="event.wallpaper?.url">
       <DraggableHoc v-bind="noTicketDraggables.preview">
         <EventPreview
@@ -96,11 +96,11 @@ onMounted(() => {
       <DraggablesDock :draggables="noTicketDraggables" />
     </EBreadBoard>
     <EBreadBoard v-else :wallpaper="event.wallpaper?.url">
-      <DraggableHoc v-bind="draggables.video" v-if="event.streamUrl">
-        <Videostream :url="event.streamUrl" />
+      <DraggableHoc v-bind="draggables.video" v-if="event.live">
+        <Videostream :url="event.live" />
       </DraggableHoc>
-      <DraggableHoc v-bind="draggables.video" v-else-if="videostreams?.length">
-        <Videostream :url="videostreams[0].url" />
+      <DraggableHoc v-bind="draggables.video" v-else-if="live">
+        <Videostream :url="live" />
       </DraggableHoc>
       <DraggableHoc v-bind="draggables.controls">
         <MementoButtons :initial-controls="event.controls" />

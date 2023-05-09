@@ -2,7 +2,7 @@
 const route = useRoute();
 
 // 30 second interval to fetch new data
-let interval;
+let interval: ReturnType<typeof setInterval>;
 
 const emit = defineEmits(["update-stream"]);
 
@@ -10,11 +10,9 @@ onMounted(() => {
   interval = setInterval(async () => {
     const slug = route.params.event_slug as string;
     const { data: event, error } = await useEventBySlug(slug as string, {
-      fields: ["streamUrl"],
+      fields: ["live"],
     });
-    console.log(event.value);
-    console.log(event.value.streamUrl);
-    emit("update-stream", event.value.streamUrl);
+    emit("update-stream", event.value.live);
   }, 30000);
 });
 

@@ -9,9 +9,9 @@ import type { MaybeRef } from "@vueuse/core";
 type VideostreamStatus = "nodata" | "loading" | "playing";
 
 export const useVideostreamLegacy = (
-  videoRef: Ref<HTMLVideoElement | null>,
+  videoRef: Ref<HTMLVideoElement | undefined>,
   src: MaybeRef<string>,
-  autoReconnect = false
+  autoReconnect = false,
 ) => {
   const videoSrc = ref(src);
   const status = ref<VideostreamStatus>("nodata");
@@ -41,7 +41,7 @@ export const useVideostreamLegacy = (
         }
       }
     },
-    { immediate: true }
+    { immediate: true },
   );
 
   // Safari plays HLS natively, we just add
@@ -175,7 +175,7 @@ export const useVideostreamLegacy = (
 // TODO: Return { status, width, height }
 export const useVideostream = (
   videoRef: Ref<HTMLVideoElement | null>,
-  src: MaybeRef<string>
+  src: MaybeRef<string>,
 ) => {
   const RETRY_DELAY = 3000;
   let hls = shallowRef(null);
@@ -231,7 +231,7 @@ export const useVideostream = (
         }
       }
     },
-    { immediate: true }
+    { immediate: true },
   );
   return { levels };
 };
