@@ -30,7 +30,7 @@ const {
               event.online || event.streamUrl || event.live || event.onlocation
             "
           >
-            <span v-if="event.online || event.streamUrl">
+            <span v-if="event.online || event.streamUrl || event.streamkey">
               <Icon name="radix-icons:globe" />Online
             </span>
 

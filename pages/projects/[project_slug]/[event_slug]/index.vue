@@ -41,7 +41,10 @@ const { lang } = useLang();
         :content="event.intros[lang]"
       />
       <div class="buttons">
-        <EventButtons size="md" :event="event" />
+        <EventButtons
+          size="md"
+          :event="event.projects[0]?.online ? event.projects[0] : event"
+        />
       </div>
     </header>
     <ImageSlider v-if="event.images" :images="event.images" />

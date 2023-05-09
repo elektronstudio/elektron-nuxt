@@ -21,20 +21,23 @@ const { lang } = useLang();
         <ETitle v-if="event.authors" size="xs" el="h5" class="project">
           {{ event.authors }}
         </ETitle>
-        <!-- <ETitle v-if="event.projects?.[0]" size="xs" el="h5" class="project">
-          {{ event.projects[0].titles[lang] }}
-        </ETitle> -->
+
         <NuxtLink :to="event.eventLink">
           <ETitle el="h4" size="xs" class="eventTitle">
             {{ event.title }}
           </ETitle>
         </NuxtLink>
-        <!-- <EContent nolinks :content="event.intros[lang]" /> -->
       </header>
       <footer>
         <EventButtons
-          :event="event"
-          v-if="event.streamUrl || event.live || event.streamkey"
+          v-if="
+            event.streamUrl ||
+            event.live ||
+            event.streamkey ||
+            event.eventLiveLink ||
+            event.projects?.[0]?.online
+          "
+          :event="event.projects?.[0]?.online ? event.projects[0] as any : event"
         />
       </footer>
     </div>

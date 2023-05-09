@@ -59,4 +59,8 @@ interface Project {
   descriptions: string[];
   detailss: string[];
   contents: string[];
+  online?: boolean | null;
+  live?: string | null;
+  start_at?: string | null;
+  end_at?: string | null;
 }

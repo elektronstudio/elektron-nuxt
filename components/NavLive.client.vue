@@ -41,6 +41,13 @@ watch(urgency, (urgency) => {
   background-color: var(--bg);
   margin-top: calc(var(--border-DEFAULT) * -1);
 }
+.NavLive a {
+  display: flex;
+  gap: 0.2em;
+}
+.NavLive a > span:first-child {
+  flex-shrink: 0;
+}
 
 .eventTitle {
   color: var(--fg);
