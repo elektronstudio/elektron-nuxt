@@ -108,7 +108,7 @@ onMounted(() => {
       </DraggableHoc>
       <DraggableHoc v-bind="draggables.about">
         <EStack style="padding: var(--p-5)">
-          <ETitle size="lg">Live event: {{ event.title }}</ETitle>
+          <ETitle size="lg">{{ event.title }}</ETitle>
           <EContent :content="event.live_contents[lang]" />
         </EStack>
       </DraggableHoc>

@@ -63,6 +63,9 @@ const { event, layout = "horizontal" } = defineProps<Props>();
 .EventCard.vertical .content {
   gap: var(--gap-3);
 }
+.EventCard.vertical:first-child {
+  border-top: none;
+}
 .EventCard.vertical section > *:first-child {
   order: 2;
 }

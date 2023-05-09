@@ -59,10 +59,6 @@ const { lang } = useLang();
       </EBox>
       <EBox v-if="project.events" class="sideContent" el="aside">
         <template v-if="project.events">
-          <ETitle el="h3" size="lg">
-            {{ ["Events", "Üritused"][lang] }}
-          </ETitle>
-
           <EventCard
             v-for="event in project.events"
             :event="event"
