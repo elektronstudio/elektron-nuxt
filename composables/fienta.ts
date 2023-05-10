@@ -68,11 +68,23 @@ async function getTicketable(fienta_id: string): Promise<Ticketable | null> {
       fienta_id: { $eq: fienta_id },
     },
   });
+
   if (events.value.length) {
     // TODO: What is the right thing to do
     // on multiple results?
     return events.value[0];
   }
+
+  const { data: projects } = await useProjects({
+    filters: {
+      fienta_id: { $eq: fienta_id },
+    },
+  });
+
+  if (projects.value.length) {
+    return projects.value[0];
+  }
+
   // TODO: return { status: StapiStatus, ticketable: Ticketable }
 }
 
