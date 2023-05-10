@@ -36,6 +36,7 @@ export type Event = {
   live?: string | null;
   streamkey: string | null;
   streamUrl?: string | null;
+  haslive?: boolean | null;
 };
 
 interface Project {
@@ -63,4 +64,6 @@ interface Project {
   live?: string | null;
   start_at?: string | null;
   end_at?: string | null;
+  eventLiveLink: string | null;
+  haslive?: boolean | null;
 }

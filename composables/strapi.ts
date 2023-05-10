@@ -14,7 +14,6 @@ export const useEvents = (params: Strapi4RequestParams = {}) => {
           "thumbnail",
           "projects",
           "projects.thumbnail",
-          "project.online",
         ],
       },
       params,
@@ -58,7 +57,6 @@ export const useUpcomingEvent = async () => {
   const { data: upcomingEvents, error } = await useEvents({
     filters: { end_at: { $gt: today() } },
   });
-  console.log(upcomingEvents.value);
   const data = computed(() => {
     return upcomingEvents?.value?.filter((event) => {
       const { urgency } = useDatetime(event.start_at, event.end_at);
@@ -357,11 +355,12 @@ const processEvent = (event) => {
   const project = event.projects?.[0];
   event.projectLink = project ? `/projects/${project.slug}` : "/";
   event.eventLink = project ? `/projects/${project.slug}/${event.slug}` : "/";
-  event.eventLiveLink = project?.online
-    ? `/projects/${project.slug}/live`
-    : project && (event.online || event.streamkey || event.streamUrl)
-    ? `/projects/${project.slug}/${event.slug}/live`
-    : null;
+  event.eventLiveLink =
+    event.haslive && event.slug && project?.slug
+      ? `/projects/${project.slug}/${event.slug}/live`
+      : project?.haslive && project?.slug
+      ? `/projects/${project.slug}/live`
+      : null;
   event.eventExperimentLink = project
     ? `/projects/${project.slug}/${event.slug}/experiment`
     : "/";
@@ -380,10 +379,10 @@ const processAnthropologies = (event) => {
 const processProjectEvent = (event, project) => {
   event.projectLink = `/projects/${project.slug}`;
   event.eventLink = `/projects/${project.slug}/${event.slug}`;
-  event.eventLiveLink = project?.online
-    ? `/projects/${project.slug}/live`
-    : project && (event.online || event.streamkey || event.streamUrl)
+  event.eventLiveLink = event.haslive
     ? `/projects/${project.slug}/${event.slug}/live`
+    : project?.eventLiveLink
+    ? `/projects/${project.slug}/live`
     : null;
   event.eventExperimentLink = project
     ? `/projects/${project.slug}/${event.slug}/experiment`
@@ -402,7 +401,7 @@ const processProject = (project) => {
       .map((event) => processProjectEvent(event, project))
       .sort(sortEvents);
   }
-  if (project.online) {
+  if (project.haslive) {
     project.eventLiveLink = `/projects/${project.slug}/live`;
   }
   project = processLocalizations(project);

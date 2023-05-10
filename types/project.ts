@@ -30,6 +30,8 @@ export type Project = {
   start_at?: string | null;
   end_at?: string | null;
   fienta_id: any;
+  haslive?: boolean | null;
+  eventLiveLink: string | null;
 };
 
 export interface Localization {

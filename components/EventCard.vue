@@ -25,7 +25,7 @@ const {
         <div class="topBar">
           <EventDatetime :event="event" />
           <EEventLocations
-            :is-online="!!event.online || !!event.streamUrl || !!event.live"
+            :is-online="!!event.online || !!event.haslive"
             :is-onlocation="!!event.onlocation"
           />
         </div>

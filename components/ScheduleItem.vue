@@ -20,7 +20,7 @@ const { lang } = useLang();
         <div class="topBar">
           <EventDatetime :event="event" />
           <EEventLocations
-            :is-online="!!event.online || !!event.streamUrl || !!event.live"
+            :is-online="!!event.online || !!event.eventLiveLink"
             :is-onlocation="!!event.onlocation"
           />
         </div>
@@ -36,14 +36,8 @@ const { lang } = useLang();
       </header>
       <footer>
         <EventButtons
-          v-if="
-            event.streamUrl ||
-            event.live ||
-            event.streamkey ||
-            event.eventLiveLink ||
-            event.projects?.[0]?.online
-          "
-          :event="event.projects?.[0]?.online ? event.projects[0] as any : event"
+          v-if="event.eventLiveLink || event.projects?.[0]?.eventLiveLink"
+          :event="event.projects?.[0]?.eventLiveLink ? event.projects[0] as any : event"
         />
       </footer>
     </div>
