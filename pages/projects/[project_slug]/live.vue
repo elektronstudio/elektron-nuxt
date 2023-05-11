@@ -113,7 +113,9 @@ onUnmounted(() => {
       <DraggableHoc v-bind="draggables.about">
         <EStack style="padding: var(--p-5)">
           <ETitle size="lg">{{ project.title }}</ETitle>
-          <EContent :content="project.description" />
+          <EContent
+            :content="project.live_contents[lang] || project.description"
+          />
         </EStack>
       </DraggableHoc>
 
