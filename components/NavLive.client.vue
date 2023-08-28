@@ -18,13 +18,16 @@ watch(urgency, (urgency) => {
 <template>
   <NuxtLink
     class="NavLive menuItem"
-    :to="event.eventLiveLink"
-    :class="{ isLive: urgency?.value === 'now' }"
+    :to="event.eventLiveLink || event.eventLink"
+    :class="{ isLive: urgency?.value === 'now' && event.haslive }"
     v-if="event"
   >
     <a>
       <span v-if="formattedStartAtDistance?.value && urgency?.value !== 'now'">
         {{ formattedStartAtDistance.value }}:
+      </span>
+      <span v-else-if="urgency?.value === 'now' && !event.haslive">
+        {{ ["Happening now!", "Praegu käimas"][lang] }}:
       </span>
       <span v-else-if="urgency?.value === 'now'">
         {{ ["LIVE NOW!", "LIVE"][lang] }}:

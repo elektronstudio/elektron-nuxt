@@ -30,7 +30,7 @@ const processEvent = processEventFienta(event);
     custom
   >
     <EButton
-      v-if="urgency === 'now'"
+      v-if="urgency === 'now' && event.haslive"
       el="a"
       :href="href"
       :size="size"
