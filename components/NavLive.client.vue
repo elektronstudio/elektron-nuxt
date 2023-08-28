@@ -30,7 +30,7 @@ watch(urgency, (urgency) => {
         {{ ["Happening now", "Praegu käimas"][lang] }}:
       </span>
       <span v-else-if="urgency?.value === 'now'">
-        {{ ["LIVE NOW!", "LIVE"][lang] }}:
+        {{ ["Live now", "Live"][lang] }}:
       </span>
       <span class="eventTitle">{{ event.titles[lang] }}</span>
     </a>
