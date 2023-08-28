@@ -27,7 +27,7 @@ watch(urgency, (urgency) => {
         {{ formattedStartAtDistance.value }}:
       </span>
       <span v-else-if="urgency?.value === 'now' && !event.haslive">
-        {{ ["Happening now!", "Praegu käimas"][lang] }}:
+        {{ ["Happening now", "Praegu käimas"][lang] }}:
       </span>
       <span v-else-if="urgency?.value === 'now'">
         {{ ["LIVE NOW!", "LIVE"][lang] }}:
