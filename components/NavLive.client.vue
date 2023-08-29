@@ -8,19 +8,48 @@ const {
   error,
 } = await useUpcomingEvent();
 const { lang } = useLang();
+
+const playerState = ref<boolean>(false);
+const audio = ref<HTMLAudioElement>();
+
 watch(urgency, (urgency) => {
   if (urgency && urgency.value === ("now" as Urgency)) {
     isLive.value = true;
   }
 });
+
+watch(playerState, (playerState) => {
+  const audioElement = audio.value;
+  if (!audioElement) return;
+
+  if (!playerState) {
+    audioElement.src = "";
+  } else {
+    audioElement.src = event.value.radioUrl;
+    audioElement.load();
+    audioElement.play();
+  }
+});
 </script>
 
 <template>
+  <template v-if="event && event.radioUrl">
+    <button
+      class="NavLive menuItem"
+      :class="{ isLive: urgency?.value === 'now' }"
+      @click="playerState = !playerState"
+    >
+      <Icon :name="!playerState ? 'radix-icons:play' : 'radix-icons:stop'" />
+      <span>Radio: </span>
+      <span class="eventTitle">{{ event.titles[lang] }}</span>
+    </button>
+    <audio class="AudioPlayer" ref="audio" controls preload="none" />
+  </template>
   <NuxtLink
+    v-else-if="event"
     class="NavLive menuItem"
     :to="event.eventLiveLink || event.eventLink"
     :class="{ isLive: urgency?.value === 'now' && event.haslive }"
-    v-if="event"
   >
     <a>
       <span v-if="formattedStartAtDistance?.value && urgency?.value !== 'now'">
@@ -43,12 +72,13 @@ watch(urgency, (urgency) => {
   overflow: hidden;
   background-color: var(--bg);
   margin-top: calc(var(--border-DEFAULT) * -1);
+  text-align: left;
 }
-.NavLive a {
+.NavLive {
   display: flex;
   gap: 0.2em;
 }
-.NavLive a > span:first-child {
+.NavLive > span:not(.eventTitle) {
   flex-shrink: 0;
 }
 
@@ -89,6 +119,7 @@ watch(urgency, (urgency) => {
     width: 26rem;
   }
 }
+
 /* TODO: how to inherit this from Nav */
 .menuItem {
   display: inline-flex;
@@ -100,5 +131,14 @@ watch(urgency, (urgency) => {
   text-transform: uppercase;
   color: var(--gray-300);
   border: var(--border-DEFAULT) solid var(--gray-500);
+}
+
+.menuItem svg {
+  width: 1em;
+  height: 1em;
+}
+
+.AudioPlayer {
+  display: none;
 }
 </style>
