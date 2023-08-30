@@ -30,7 +30,7 @@ watch(playerState, (playerState) => {
 
 <template>
   <div class="wrapper">
-    <a to="https://elektron.art" class="homeButton">
+    <a href="https://elektron.art" class="homeButton">
       <ELogo el="span" />
     </a>
     <template v-if="urgency?.value === 'now' && event.radioUrl">
