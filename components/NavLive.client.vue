@@ -40,21 +40,12 @@ watch(playerState, (playerState) => {
 </script>
 
 <template>
-  <template v-if="liveEvent && liveEvent.radioUrl">
-    <button
-      class="NavLive menuItem"
-      :class="{ isLive: urgency === 'now' }"
-      @click="playerState = !playerState"
-    >
-      <Icon :name="!playerState ? 'radix-icons:play' : 'radix-icons:stop'" />
-      <span>Radio: </span>
-      <span class="eventTitle">{{ liveEvent.titles[lang] }}</span>
-    </button>
-    <audio class="AudioPlayer" ref="audio" controls preload="none" />
-  </template>
+  <div v-if="liveEvent && liveEvent.radioUrl" class="nav-live">
+    <AudioPlayer :event="liveEvent" :urgency="urgency" />
+  </div>
   <NuxtLink
     v-else-if="liveEvent"
-    class="NavLive menuItem"
+    class="nav-live menu-item"
     :to="liveEvent.eventLiveLink || liveEvent.eventLink"
     :class="{ isLive: urgency === 'now' && liveEvent.haslive }"
   >
@@ -68,67 +59,67 @@ watch(playerState, (playerState) => {
       <span v-else-if="urgency === 'now'">
         {{ ["Live now", "Live"][lang] }}:
       </span>
-      <span class="eventTitle">{{ liveEvent.titles[lang] }}</span>
+      <span class="event-title">{{ liveEvent.titles[lang] }}</span>
     </a>
   </NuxtLink>
 </template>
 
 <style scoped>
-.NavLive {
+.nav-live {
   display: inline;
   overflow: hidden;
   background-color: var(--bg);
   margin-top: calc(var(--border-DEFAULT) * -1);
   text-align: left;
 }
-.NavLive {
+.nav-live {
   display: flex;
   gap: 0.2em;
 }
-.NavLive > span:not(.eventTitle) {
+.nav-live > span:not(.event-title) {
   flex-shrink: 0;
 }
 
-.eventTitle {
+.event-title {
   color: var(--fg);
 }
-.NavLive.isLive {
+.nav-live.isLive {
   color: var(--bg);
   background-color: var(--gray-200);
 }
-.NavLive.isLive:hover {
+.nav-live.isLive:hover {
   background-color: var(--gray-100);
 }
-.NavLive.isLive .eventTitle {
+.nav-live.isLive .event-title {
   color: var(--bg);
 }
 @media only screen and (max-width: 599px) {
-  .NavLive {
+  .nav-live {
     border-top: none;
     width: 100%;
     order: 99;
   }
 }
 @media only screen and (min-width: 600px) {
-  .NavLive {
+  .nav-live {
     width: 20rem;
     padding: var(--p-1);
     margin-top: 0;
   }
 }
 @media only screen and (min-width: 1000px) {
-  .NavLive {
+  .nav-live {
     margin-left: calc(var(--border-DEFAULT) * -1);
   }
 }
 @media only screen and (min-width: 1240px) {
-  .NavLive {
+  .nav-live {
     width: 26rem;
   }
 }
 
 /* TODO: how to inherit this from Nav */
-.menuItem {
+.menu-item {
   display: inline-flex;
   height: var(--h-9);
   padding: var(--p-1);
@@ -140,7 +131,7 @@ watch(playerState, (playerState) => {
   border: var(--border-DEFAULT) solid var(--gray-500);
 }
 
-.menuItem svg {
+.menu-item svg {
   width: 1em;
   height: 1em;
 }
