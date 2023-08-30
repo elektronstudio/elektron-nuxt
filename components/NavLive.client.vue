@@ -12,12 +12,6 @@ const { lang } = useLang();
 const playerState = ref<boolean>(false);
 const audio = ref<HTMLAudioElement>();
 
-watch(urgency, (urgency) => {
-  if (urgency && urgency.value === ("now" as Urgency)) {
-    isLive.value = true;
-  }
-});
-
 watch(playerState, (playerState) => {
   const audioElement = audio.value;
   if (!audioElement) return;
