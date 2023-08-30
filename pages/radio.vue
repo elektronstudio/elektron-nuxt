@@ -33,7 +33,7 @@ watch(playerState, (playerState) => {
     <a href="https://elektron.art" class="homeButton">
       <ELogo el="span" />
     </a>
-    <template v-if="urgency?.value === 'now' && event.radioUrl">
+    <template v-if="urgency === 'now' && event.radioUrl">
       <div class="player">
         <h6 class="event-title">{{ event.titles[lang] }}</h6>
         <button

@@ -15,6 +15,16 @@ const { lang } = useLang();
 const playerState = ref<boolean>(false);
 const audio = ref<HTMLAudioElement>();
 
+// TODO: Temp solution
+const liveEvent = computed(() => {
+  if (urgency.value === "now") {
+    const firstRadio = liveEvents.value.find((e: Event) => e.radioUrl);
+    return firstRadio || event.value;
+  } else {
+    return event.value;
+  }
+});
+
 watch(playerState, (playerState) => {
   const audioElement = audio.value;
   if (!audioElement) return;
@@ -22,20 +32,9 @@ watch(playerState, (playerState) => {
   if (!playerState) {
     audioElement.src = "";
   } else {
-    audioElement.src = event.value.radioUrl;
+    audioElement.src = liveEvent.value.radioUrl;
     audioElement.load();
     audioElement.play();
-  }
-});
-
-// TODO: Temp solution
-const liveEvent = computed(() => {
-  if (urgency.value?.value === "now") {
-    const firstRadio = liveEvents.value.find((e: Event) => e.radioUrl);
-    console.log(firstRadio);
-    return firstRadio || event.value;
-  } else {
-    return event.value;
   }
 });
 </script>
@@ -44,7 +43,7 @@ const liveEvent = computed(() => {
   <template v-if="liveEvent && liveEvent.radioUrl">
     <button
       class="NavLive menuItem"
-      :class="{ isLive: urgency?.value === 'now' }"
+      :class="{ isLive: urgency === 'now' }"
       @click="playerState = !playerState"
     >
       <Icon :name="!playerState ? 'radix-icons:play' : 'radix-icons:stop'" />
@@ -57,16 +56,16 @@ const liveEvent = computed(() => {
     v-else-if="liveEvent"
     class="NavLive menuItem"
     :to="liveEvent.eventLiveLink || liveEvent.eventLink"
-    :class="{ isLive: urgency?.value === 'now' && liveEvent.haslive }"
+    :class="{ isLive: urgency === 'now' && liveEvent.haslive }"
   >
     <a>
-      <span v-if="formattedStartAtDistance?.value && urgency?.value !== 'now'">
+      <span v-if="formattedStartAtDistance?.value && urgency !== 'now'">
         {{ formattedStartAtDistance.value }}:
       </span>
-      <span v-else-if="urgency?.value === 'now' && !liveEvent.haslive">
+      <span v-else-if="urgency === 'now' && !liveEvent.haslive">
         {{ ["Happening now", "Praegu käimas"][lang] }}:
       </span>
-      <span v-else-if="urgency?.value === 'now'">
+      <span v-else-if="urgency === 'now'">
         {{ ["Live now", "Live"][lang] }}:
       </span>
       <span class="eventTitle">{{ liveEvent.titles[lang] }}</span>

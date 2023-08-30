@@ -90,6 +90,7 @@ export const useUpcomingEvent = async () => {
   const urgency = computed(() =>
     data.value?.start_at && data.value?.start_at
       ? useUrgency(new Date(data.value.start_at), new Date(data.value.end_at))
+          .value
       : null,
   );
 
