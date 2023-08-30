@@ -47,7 +47,9 @@ watch(playerState, (playerState) => {
         </button>
       </div>
     </template>
-    <h2 v-else>No live radio</h2>
+    <div v-else class="player">
+      <h2 class="event-title">No live radio</h2>
+    </div>
   </div>
   <audio class="audio-player" ref="audio" controls preload="none" />
 </template>
