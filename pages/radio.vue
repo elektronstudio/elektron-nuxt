@@ -71,15 +71,9 @@ watch(playerState, (playerState) => {
   border: var(--border-DEFAULT) solid var(--gray-500);
   border-left: none;
   height: var(--h-9);
+  padding-right: calc(var(--h-9) + var(--p-2));
   min-width: 0;
   flex: 1 1 0;
-}
-
-.title-wrapper {
-  display: inline-flex;
-  overflow: hidden;
-  flex-shrink: 1;
-  /* display: flex; */
 }
 
 .event-title {
@@ -96,10 +90,13 @@ watch(playerState, (playerState) => {
 }
 
 .play-button {
-  width: 1.6rem;
-  height: 1.6rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: var(--h-9);
+  height: var(--h-9);
   color: var(--gray-100);
-  background-color: var(--gray-400);
+  background: url("/images/bg-texture-xs.gif");
   color: var(--bg);
   display: flex;
   align-items: center;
@@ -108,7 +105,7 @@ watch(playerState, (playerState) => {
 }
 
 .play-button.is-active {
-  background-color: var(--accent);
+  background: var(--accent);
 }
 
 .homeButton {
@@ -118,7 +115,7 @@ watch(playerState, (playerState) => {
   color: var(--gray-300);
   padding: var(--p-1);
   border: var(--border-DEFAULT) solid var(--gray-500);
-  border-image: url("/images/bg-texture-xs.gif") 1;
+  /* border-image: url("/images/bg-texture-xs.gif") 1; */
   height: var(--h-9);
 }
 
