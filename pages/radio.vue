@@ -66,7 +66,6 @@ watch(playerState, (playerState) => {
   display: flex;
   gap: var(--p-2);
   background-color: var(--bg);
-  /* margin-left: calc(var(--border-DEFAULT) * -1); */
   padding: var(--p-1);
   border: var(--border-DEFAULT) solid var(--gray-500);
   border-left: none;
@@ -86,7 +85,6 @@ watch(playerState, (playerState) => {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  /* flex-shrink: 0; */
 }
 
 .play-button {
@@ -115,7 +113,6 @@ watch(playerState, (playerState) => {
   color: var(--gray-300);
   padding: var(--p-1);
   border: var(--border-DEFAULT) solid var(--gray-500);
-  /* border-image: url("/images/bg-texture-xs.gif") 1; */
   height: var(--h-9);
 }
 
