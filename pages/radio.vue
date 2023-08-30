@@ -60,9 +60,11 @@ watch(playerState, (playerState) => {
 }
 
 .wrapper {
+  position: relative;
   display: flex;
   flex-wrap: nowrap;
   width: 100vw;
+  max-width: 700px;
 }
 .player {
   display: flex;
