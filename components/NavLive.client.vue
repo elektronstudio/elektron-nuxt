@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Urgency } from "~~/types";
+import { Event, Urgency } from "~~/types";
 
 const {
   data: event,
@@ -7,6 +7,9 @@ const {
   urgency,
   error,
 } = await useUpcomingEvent();
+
+const { data: liveEvents } = await useLiveEvents();
+
 const { lang } = useLang();
 
 const playerState = ref<boolean>(false);
@@ -24,10 +27,21 @@ watch(playerState, (playerState) => {
     audioElement.play();
   }
 });
+
+// TODO: Temp solution
+const liveEvent = computed(() => {
+  if (urgency.value?.value === "now") {
+    const firstRadio = liveEvents.value.find((e: Event) => e.radioUrl);
+    console.log(firstRadio);
+    return firstRadio || event.value;
+  } else {
+    return event.value;
+  }
+});
 </script>
 
 <template>
-  <template v-if="event && event.radioUrl">
+  <template v-if="liveEvent && liveEvent.radioUrl">
     <button
       class="NavLive menuItem"
       :class="{ isLive: urgency?.value === 'now' }"
@@ -35,27 +49,27 @@ watch(playerState, (playerState) => {
     >
       <Icon :name="!playerState ? 'radix-icons:play' : 'radix-icons:stop'" />
       <span>Radio: </span>
-      <span class="eventTitle">{{ event.titles[lang] }}</span>
+      <span class="eventTitle">{{ liveEvent.titles[lang] }}</span>
     </button>
     <audio class="AudioPlayer" ref="audio" controls preload="none" />
   </template>
   <NuxtLink
-    v-else-if="event"
+    v-else-if="liveEvent"
     class="NavLive menuItem"
-    :to="event.eventLiveLink || event.eventLink"
-    :class="{ isLive: urgency?.value === 'now' && event.haslive }"
+    :to="liveEvent.eventLiveLink || liveEvent.eventLink"
+    :class="{ isLive: urgency?.value === 'now' && liveEvent.haslive }"
   >
     <a>
       <span v-if="formattedStartAtDistance?.value && urgency?.value !== 'now'">
         {{ formattedStartAtDistance.value }}:
       </span>
-      <span v-else-if="urgency?.value === 'now' && !event.haslive">
+      <span v-else-if="urgency?.value === 'now' && !liveEvent.haslive">
         {{ ["Happening now", "Praegu käimas"][lang] }}:
       </span>
       <span v-else-if="urgency?.value === 'now'">
         {{ ["Live now", "Live"][lang] }}:
       </span>
-      <span class="eventTitle">{{ event.titles[lang] }}</span>
+      <span class="eventTitle">{{ liveEvent.titles[lang] }}</span>
     </a>
   </NuxtLink>
 </template>

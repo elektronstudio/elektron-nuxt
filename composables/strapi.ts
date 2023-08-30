@@ -53,6 +53,20 @@ export const useEventBySlug = (
   );
 };
 
+export const useLiveEvents = async () => {
+  const { data: upcomingEvents, error } = await useEvents({
+    filters: { end_at: { $gt: today() } },
+  });
+  const data = computed(() => {
+    return upcomingEvents?.value?.filter((event) => {
+      const { urgency } = useDatetime(event.start_at, event.end_at);
+      return urgency.value === "now";
+    });
+  });
+
+  return { data, error };
+};
+
 export const useUpcomingEvent = async () => {
   const { data: upcomingEvents, error } = await useEvents({
     filters: { end_at: { $gt: today() } },

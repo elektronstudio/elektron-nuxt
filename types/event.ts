@@ -37,6 +37,8 @@ export type Event = {
   streamkey: string | null;
   streamUrl?: string | null;
   haslive?: boolean | null;
+  radioUrl: string | null;
+  vimeoUrl: string | null;
 };
 
 interface Project {
