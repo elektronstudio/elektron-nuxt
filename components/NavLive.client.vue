@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Urgency } from "~~/types";
+import { Event, Urgency } from "~~/types";
 
 const {
   data: event,
@@ -7,90 +7,119 @@ const {
   urgency,
   error,
 } = await useUpcomingEvent();
+
+const { data: liveEvents } = await useLiveEvents();
+
 const { lang } = useLang();
-watch(urgency, (urgency) => {
-  if (urgency && urgency.value === ("now" as Urgency)) {
-    isLive.value = true;
+
+const playerState = ref<boolean>(false);
+const audio = ref<HTMLAudioElement>();
+
+// TODO: Temp solution
+const liveEvent = computed(() => {
+  if (urgency.value === "now") {
+    const firstRadio = liveEvents.value.find((e: Event) => e.radioUrl);
+    return firstRadio || event.value;
+  } else {
+    return event.value;
+  }
+});
+
+watch(playerState, (playerState) => {
+  const audioElement = audio.value;
+  if (!audioElement) return;
+
+  if (!playerState) {
+    audioElement.src = "";
+  } else {
+    audioElement.src = liveEvent.value.radioUrl;
+    audioElement.load();
+    audioElement.play();
   }
 });
 </script>
 
 <template>
+  <div v-if="liveEvent && liveEvent.radioUrl" class="nav-live">
+    <AudioPlayer :event="liveEvent" :urgency="urgency" />
+  </div>
   <NuxtLink
-    class="NavLive menuItem"
-    :to="event.eventLiveLink || event.eventLink"
-    :class="{ isLive: urgency?.value === 'now' && event.haslive }"
-    v-if="event"
+    v-else-if="liveEvent"
+    class="nav-live menu-item"
+    :to="liveEvent.eventLiveLink || liveEvent.eventLink"
+    :class="{ isLive: urgency === 'now' && liveEvent.haslive }"
   >
     <a>
-      <span v-if="formattedStartAtDistance?.value && urgency?.value !== 'now'">
+      <span v-if="formattedStartAtDistance?.value && urgency !== 'now'">
         {{ formattedStartAtDistance.value }}:
       </span>
-      <span v-else-if="urgency?.value === 'now' && !event.haslive">
+      <span v-else-if="urgency === 'now' && !liveEvent.haslive">
         {{ ["Happening now", "Praegu käimas"][lang] }}:
       </span>
-      <span v-else-if="urgency?.value === 'now'">
+      <span v-else-if="urgency === 'now'">
         {{ ["Live now", "Live"][lang] }}:
       </span>
-      <span class="eventTitle">{{ event.titles[lang] }}</span>
+      <span class="event-title">{{ liveEvent.titles[lang] }}</span>
     </a>
   </NuxtLink>
 </template>
 
 <style scoped>
-.NavLive {
+.nav-live {
   display: inline;
   overflow: hidden;
   background-color: var(--bg);
   margin-top: calc(var(--border-DEFAULT) * -1);
+  text-align: left;
 }
-.NavLive a {
+.nav-live {
   display: flex;
   gap: 0.2em;
 }
-.NavLive a > span:first-child {
+.nav-live > span:not(.event-title) {
   flex-shrink: 0;
 }
 
-.eventTitle {
+.event-title {
   color: var(--fg);
 }
-.NavLive.isLive {
+.nav-live.isLive {
   color: var(--bg);
   background-color: var(--gray-200);
 }
-.NavLive.isLive:hover {
+.nav-live.isLive:hover {
   background-color: var(--gray-100);
 }
-.NavLive.isLive .eventTitle {
+.nav-live.isLive .event-title {
   color: var(--bg);
 }
 @media only screen and (max-width: 599px) {
-  .NavLive {
+  .nav-live {
     border-top: none;
     width: 100%;
     order: 99;
   }
 }
 @media only screen and (min-width: 600px) {
-  .NavLive {
+  .nav-live {
     width: 20rem;
     padding: var(--p-1);
     margin-top: 0;
   }
 }
 @media only screen and (min-width: 1000px) {
-  .NavLive {
+  .nav-live {
     margin-left: calc(var(--border-DEFAULT) * -1);
   }
 }
 @media only screen and (min-width: 1240px) {
-  .NavLive {
+  .nav-live {
     width: 26rem;
   }
 }
+
 /* TODO: how to inherit this from Nav */
-.menuItem {
+.menu-item {
   display: inline-flex;
   height: var(--h-9);
   padding: var(--p-1);
@@ -100,5 +129,14 @@ watch(urgency, (urgency) => {
   text-transform: uppercase;
   color: var(--gray-300);
   border: var(--border-DEFAULT) solid var(--gray-500);
+}
+
+.menu-item svg {
+  width: 1em;
+  height: 1em;
+}
+
+.AudioPlayer {
+  display: none;
 }
 </style>

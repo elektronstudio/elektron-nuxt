@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { Urgency } from "~~/types";
-
 const { lang } = useLang();
 const { data: frontpage, error: frontpageError } = await useFrontPage();
 const muted = ref<boolean | undefined>(true);
@@ -11,7 +9,6 @@ const handleMute = () => {
 };
 
 const dialogState = ref<boolean>(true);
-// const { projects, firstUpcomingLiveEvent } = useProjects();
 
 const event = computed(() => {
   return frontpage.value?.events?.length ? frontpage.value.events[0] : null;
@@ -20,25 +17,6 @@ const event = computed(() => {
 const project = computed(() => {
   return frontpage.value?.projects?.length ? frontpage.value.projects[0] : null;
 });
-
-// const {
-//   data: event,
-//   formattedStartAtDistance,
-//   urgency,
-//   error,
-// } = await useUpcomingEvent();
-
-// TODO Add this filter to project/event loader
-// const upcomingEventSoon = computed(() => {
-//   if (
-//     firstUpcomingLiveEvent?.value?.urgency === "soon" ||
-//     firstUpcomingLiveEvent?.value?.urgency === "now"
-//   ) {
-//     return firstUpcomingLiveEvent.value;
-//   } else {
-//     return null;
-//   }
-// });
 </script>
 <template>
   <div>
