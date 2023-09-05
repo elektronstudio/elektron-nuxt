@@ -17,12 +17,11 @@ const { data: liveEvents } = await useLiveEvents();
 // TODO: Temp solution
 const liveEvent = computed(() => {
   if (urgency.value === "now") {
-    const firstRadio = liveEvents.value.find((e: Event) => e.radioUrl);
-    return firstRadio || event.value;
-  } else {
-    return event.value;
+    return liveEvents.value.find((e: Event) => e.radioUrl);
   }
 });
+
+console.log("liveEvent", liveEvent.value);
 </script>
 
 <template>
@@ -79,5 +78,17 @@ const liveEvent = computed(() => {
   .homeButton {
     min-width: 10rem;
   }
+}
+
+.event-title {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--gray-300);
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>
