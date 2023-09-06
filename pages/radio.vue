@@ -56,6 +56,7 @@ console.log("liveEvent", liveEvent.value);
   padding-right: calc(var(--h-9) + var(--p-2));
   min-width: 0;
   flex: 1 1 0;
+  position: relative;
 }
 
 .homeButton {

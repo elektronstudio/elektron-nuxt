@@ -61,15 +61,22 @@ watch(playerState, (playerState) => {
   position: absolute;
   top: 0;
   right: 0;
-  width: var(--h-9);
-  height: var(--h-9);
+  width: calc(var(--h-9) - 2px);
+  height: calc(var(--h-9) - 2px);
   color: var(--gray-100);
+  background-color: red;
   background: url("/images/bg-texture-xs.gif");
   color: var(--bg);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  z-index: 1;
+}
+
+.play-button svg {
+  width: 1rem;
+  height: 1rem;
 }
 
 .play-button.is-active {
