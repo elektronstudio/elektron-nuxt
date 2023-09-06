@@ -31,7 +31,7 @@ console.log("liveEvent", liveEvent.value);
     </a>
     <div class="player">
       <AudioPlayer v-if="liveEvent" :event="liveEvent" :urgency="urgency" />
-      <h2 v-else class="event-title">No live radio</h2>
+      <h6 v-else class="event-title">No live radio</h6>
     </div>
   </div>
 </template>
@@ -40,7 +40,6 @@ console.log("liveEvent", liveEvent.value);
 .wrapper {
   position: relative;
   display: flex;
-  flex-wrap: nowrap;
   width: 100vw;
   max-width: 700px;
 }
@@ -55,7 +54,6 @@ console.log("liveEvent", liveEvent.value);
   height: var(--h-9);
   padding-right: calc(var(--h-9) + var(--p-2));
   min-width: 0;
-  flex: 1 1 0;
   position: relative;
 }
 
@@ -69,9 +67,29 @@ console.log("liveEvent", liveEvent.value);
   height: var(--h-9);
 }
 
+@media only screen and (max-width: 599px) {
+  .homeButton {
+    width: 100%;
+  }
+  .wrapper {
+    flex-wrap: wrap;
+  }
+  .player {
+    width: 100%;
+    margin-top: -1px;
+    flex-direction: column;
+  }
+}
+
 @media only screen and (min-width: 600px) {
   .homeButton {
     min-width: 8rem;
+  }
+  .wrapper {
+    flex-wrap: nowrap;
+  }
+  .player {
+    flex: 1 1 0;
   }
 }
 
