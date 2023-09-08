@@ -40,7 +40,7 @@ watch(playerState, (playerState) => {
 </script>
 
 <template>
-  <div v-if="liveEvent && liveEvent.radioUrl" class="nav-live is-radio">
+  <div v-if="liveEvent && liveEvent.radioUrl" class="nav-live">
     <AudioPlayer :event="liveEvent" :urgency="urgency" />
   </div>
   <NuxtLink
@@ -94,9 +94,7 @@ watch(playerState, (playerState) => {
 .nav-live.isLive .event-title {
   color: var(--bg);
 }
-.nav-live.is-radio {
-  padding-right: calc(var(--h-9) + var(--p-2));
-}
+
 @media only screen and (max-width: 599px) {
   .nav-live {
     border-top: none;

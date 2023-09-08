@@ -27,21 +27,28 @@ watch(playerState, (playerState) => {
 </script>
 
 <template>
-  <template v-if="urgency === 'now' && event?.radioUrl">
+  <div
+    v-if="urgency === 'now' && event?.radioUrl"
+    class="audio-player"
+    @click="playerState = !playerState"
+  >
     <h6 class="event-title">{{ event.titles[lang] }}</h6>
-    <button
-      class="play-button"
-      :class="{ 'is-active': playerState }"
-      @click="playerState = !playerState"
-    >
+    <button class="play-button" :class="{ 'is-active': playerState }">
       <Icon :name="!playerState ? 'radix-icons:play' : 'radix-icons:stop'" />
     </button>
-  </template>
-  <audio class="audio-player" ref="audio" controls preload="none" />
+  </div>
+  <audio class="audio-player-audio" ref="audio" controls preload="none" />
 </template>
 
 <style scoped>
 .audio-player {
+  position: absolute;
+  inset: 0;
+  padding: var(--p-1) var(--p-3);
+  padding-right: calc(var(--h-9) + var(--p-2));
+  cursor: pointer;
+}
+.audio-player-audio {
   display: none;
 }
 
@@ -81,5 +88,12 @@ watch(playerState, (playerState) => {
 
 .play-button.is-active {
   background: var(--accent);
+}
+
+@media only screen and (min-width: 600px) {
+  .audio-player {
+    padding: var(--p-1);
+    padding-right: calc(var(--h-9) + var(--p-2));
+  }
 }
 </style>

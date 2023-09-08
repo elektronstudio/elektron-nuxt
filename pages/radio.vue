@@ -48,11 +48,9 @@ console.log("liveEvent", liveEvent.value);
   display: flex;
   gap: var(--p-2);
   background-color: var(--bg);
-  padding: var(--p-1);
   border: var(--border-DEFAULT) solid var(--gray-500);
   border-left: none;
   height: var(--h-9);
-  padding-right: calc(var(--h-9) + var(--p-2));
   min-width: 0;
   position: relative;
 }
