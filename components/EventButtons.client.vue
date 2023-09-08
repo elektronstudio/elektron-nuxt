@@ -7,6 +7,7 @@ type Props = {
 };
 
 const { event, size = "xs" } = defineProps<Props>();
+console.log(event.liveExternalUrl);
 const { urgency } = useDatetime(event.start_at, event.end_at);
 const formattedStartAtDistance = event.start_at
   ? useFormattedDistance(event.start_at)
@@ -21,8 +22,18 @@ const processEvent = processEventFienta(event);
 </script>
 
 <template>
+  <EButton
+    v-if="event.liveExternalUrl"
+    :href="event.liveExternalUrl"
+    el="a"
+    :size="size"
+    color="accent"
+  >
+    <Icon name="radix-icons:external-link" />
+    {{ ["Visit event", "Vaata üritust"][lang] }}
+  </EButton>
   <NuxtLink
-    v-if="
+    v-else-if="
       processEvent.status === 'FREE' || processEvent.status === 'HAS_TICKET'
     "
     v-slot="{ href }"

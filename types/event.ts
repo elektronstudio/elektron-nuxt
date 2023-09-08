@@ -37,7 +37,8 @@ export type Event = {
   streamkey: string | null;
   streamUrl?: string | null;
   haslive?: boolean | null;
-  radioUrl: string | null;
+  radioUrl?: string | null;
+  liveExternalUrl?: string | null;
   vimeoUrl: string | null;
 };
 
