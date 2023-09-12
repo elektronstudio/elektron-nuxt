@@ -32,6 +32,9 @@
   }
 }
 @media only screen and (min-width: 600px) {
+  .main {
+    padding-top: var(--h-9);
+  }
   .main.breadCumbs {
     padding-top: calc(var(--h-9) + var(--h-6));
   }
