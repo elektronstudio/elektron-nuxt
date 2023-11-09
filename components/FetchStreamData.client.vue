@@ -6,6 +6,10 @@ let interval: ReturnType<typeof setInterval>;
 
 const emit = defineEmits(["update-stream"]);
 
+onUnmounted(() => {
+  clearInterval(interval);
+});
+
 onMounted(() => {
   interval = setInterval(async () => {
     const slug = route.params.event_slug as string;
@@ -15,8 +19,6 @@ onMounted(() => {
     emit("update-stream", event.value.live);
   }, 30000);
 });
-
-onUnmounted(() => {
-  clearInterval(interval);
-});
 </script>
+
+<template></template>

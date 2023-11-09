@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import { Breadcrumb } from "~~/types";
+import type { Breadcrumb } from "~~/types";
 
 export const newMessages = ref<number>(0);
 export const draggableChatState = ref<boolean>(false);

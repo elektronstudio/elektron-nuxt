@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Event, Urgency } from "~~/types";
+import type { Event } from "~~/types";
 
 const {
   data: event,

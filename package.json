@@ -9,8 +9,9 @@
   },
   "dependencies": {
     "@nuxtjs/strapi": "^1.9.3",
-    "@vueuse/core": "^10.2.0",
-    "@vueuse/nuxt": "^10.2.0",
+    "@vimeo/player": "^2.20.1",
+    "@vueuse/core": "^10.5.0",
+    "@vueuse/nuxt": "^10.5.0",
     "columnify": "^1.6.0",
     "d3": "^7.6.1",
     "date-fns": "^2.29.3",
@@ -26,7 +27,9 @@
     "@types/lodash-es": "^4.17.6",
     "@types/marked": "^4.0.7",
     "@types/node": "^18.11.4",
-    "nuxt": "^3.7.0",
-    "nuxt-icon": "^0.1.6"
+    "@types/vimeo__player": "^2.18.3",
+    "nuxt": "^3.8.1",
+    "nuxt-icon": "^0.1.6",
+    "typescript": "^5.2.2"
   }
 }

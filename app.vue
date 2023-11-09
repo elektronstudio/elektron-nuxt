@@ -14,7 +14,7 @@ const titleTemplate = (title = undefined) =>
 
 useHead({
   title: titleTemplate(route.meta.title),
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
+  // viewport: "width=device-width, initial-scale=1, maximum-scale=1",
   link: [{ rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
   meta: [{ name: "og:title", content: titleTemplate(route.meta.title) }],
 });

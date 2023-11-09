@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Urgency } from "~~/types";
+import type { Urgency } from "~~/types";
 
 const route = useRoute();
 const slug = route.params.project_slug as string;

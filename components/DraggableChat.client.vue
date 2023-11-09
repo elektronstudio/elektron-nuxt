@@ -6,8 +6,8 @@ import {
   useWindowSize,
 } from "@vueuse/core";
 import { differenceInSeconds } from "date-fns";
-import { Ref } from "vue";
-import { Message, DraggableChatUser } from "~~/types";
+import { type Ref } from "vue";
+import type { Message, DraggableChatUser } from "~~/types";
 
 const route = useRoute();
 // const userId = useUserId();
@@ -34,13 +34,13 @@ function useDraggableChat(
     // Latest message
     const message = newValue[newValue.length - 1];
     if (message.channel === channel && message.type === "DRAGGABLECHAT") {
-      const user = {
+      const user: DraggableChatUser = {
         userId: message.userId,
         userName: message.userName,
         x: message.value.x,
         y: message.value.y,
         chat: message.value.chat,
-        datetime: message.datetime,
+        datetime: message.datetime as Date,
       };
       const existingUserIndex = users.value?.findIndex((u) => {
         return u.userId === user.userId;

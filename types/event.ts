@@ -1,4 +1,4 @@
-import { MediaItem } from "./media";
+import { type MediaItem } from "./media";
 
 export type Event = {
   id: number;

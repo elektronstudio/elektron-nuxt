@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Urgency } from "~~/types";
+import type { Urgency } from "~~/types";
 
 const route = useRoute();
 const slug = route.params.event_slug as string;
@@ -80,7 +80,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <FetchStreamData @update-stream="(r) => (live = r)" />
+  <!-- <FetchStreamData @update-stream="(r) => (live = r)" /> -->
   <div>
     <BackToEvent :link="event.eventLink" />
     <EBreadBoard v-if="!hasTicket">
@@ -94,8 +94,8 @@ onMounted(() => {
       <DraggablesDock :draggables="noTicketDraggables" />
     </EBreadBoard>
     <EBreadBoard v-else>
-      <DraggableHoc v-bind="draggables.video" v-if="live">
-        <Videostream :key="live" :url="live" />
+      <DraggableHoc v-bind="draggables.video">
+        <VimeoIframe />
       </DraggableHoc>
       <DraggableHoc v-bind="draggables.chat">
         <Chat :channel="slug" />

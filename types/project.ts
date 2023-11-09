@@ -1,5 +1,5 @@
-import { Event } from "./event";
-import { MediaItem } from "./media";
+import { type Event } from "./event";
+import { type MediaItem } from "./media";
 
 export type Project = {
   id: number;

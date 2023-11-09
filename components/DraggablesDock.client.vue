@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { Draggables } from "~~/composables/draggables";
+import type { DraggablesList } from "~~/types";
 
 type Props = {
-  draggables: Draggables;
+  draggables: DraggablesList;
 };
 
 const { draggables } = defineProps<Props>();

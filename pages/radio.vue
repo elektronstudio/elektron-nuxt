@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Event, Urgency } from "~~/types";
+import type { Event } from "~~/types";
 
 definePageMeta({
   layout: "radio",
