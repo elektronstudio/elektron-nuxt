@@ -2,20 +2,24 @@
 import { onMounted, ref } from "vue";
 import Player from "@vimeo/player";
 
-const vimeoVideo = ref<HTMLDivElement | null>(null);
+type Props = {
+  id: number;
+};
 
-var options01 = {
-  id: 881185201,
+const { id } = defineProps<Props>();
+
+var options = {
+  id,
 };
 
 onMounted(() => {
-  var video01Player = new Player("vimeo-video", options01);
+  var video01Player = new Player("vimeo-video", options);
 });
 </script>
 
 <template>
   <div class="VideoStream">
-    <div id="vimeo-video" ref="vimeoVideo"></div>
+    <div id="vimeo-video"></div>
   </div>
 </template>
 

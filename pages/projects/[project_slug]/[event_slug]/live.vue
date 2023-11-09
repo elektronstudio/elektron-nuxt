@@ -44,7 +44,6 @@ const draggables = useDraggables({
 const controls = parseControls(event.value.controls);
 const hasTicket = ref<boolean>(false);
 const dialogState = ref<boolean>(true);
-const live = ref<string>(event.value.live);
 
 // @TODO: Move this to processing level
 const { urgency } = useDatetime(event.value.start_at, event.value.end_at);
@@ -80,7 +79,6 @@ onMounted(() => {
 </script>
 
 <template>
-  <!-- <FetchStreamData @update-stream="(r) => (live = r)" /> -->
   <div>
     <BackToEvent :link="event.eventLink" />
     <EBreadBoard v-if="!hasTicket">
@@ -94,8 +92,8 @@ onMounted(() => {
       <DraggablesDock :draggables="noTicketDraggables" />
     </EBreadBoard>
     <EBreadBoard v-else>
-      <DraggableHoc v-bind="draggables.video">
-        <VimeoIframe />
+      <DraggableHoc v-bind="draggables.video" v-if="event.vimeoId">
+        <VimeoIframe v-if="event.vimeoId" :id="event.vimeoId" />
       </DraggableHoc>
       <DraggableHoc v-bind="draggables.chat">
         <Chat :channel="slug" />

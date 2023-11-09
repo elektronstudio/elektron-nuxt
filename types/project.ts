@@ -32,6 +32,7 @@ export type Project = {
   fienta_id: any;
   haslive?: boolean | null;
   eventLiveLink: string | null;
+  vimeoId: number | null;
 };
 
 export interface Localization {

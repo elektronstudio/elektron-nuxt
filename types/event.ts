@@ -39,7 +39,7 @@ export type Event = {
   haslive?: boolean | null;
   radioUrl?: string | null;
   liveExternalUrl?: string | null;
-  vimeoUrl: string | null;
+  vimeoId: number | null;
 };
 
 interface Project {
