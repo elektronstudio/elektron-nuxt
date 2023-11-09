@@ -1,12 +1,12 @@
 <script setup lang="ts">
+import type { DraggableProps } from "~~/types";
 import EDraggable from "~~/components/e/Draggable.client.vue";
 import EDraggableMobile from "~~/components/e/DraggableMobile.client.vue";
 
-const props = defineProps();
+const props = defineProps<DraggableProps>();
 </script>
 
 <template>
-  <component :is="mobile ? EDraggableMobile : EDraggable" v-bind="props">
-    <slot />
-  </component>
+  <EDraggableMobile v-if="mobile" v-bind="props"><slot /></EDraggableMobile>
+  <EDraggable v-else v-bind="props"><slot /></EDraggable>
 </template>

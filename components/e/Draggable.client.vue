@@ -1,33 +1,6 @@
 <script setup lang="ts">
 import { useDraggable } from "@vueuse/core";
-import { Ref } from "vue";
-
-type ContentType = "chat" | "text" | "image" | "video" | "event";
-
-// TODO: How to import type here & make this dry
-type Draggable = {
-  titles: string[];
-  contentType?: ContentType;
-  initialX: number;
-  initialY: number;
-  tilesWidth?: number;
-  tilesHeight?: number;
-  maximisable?: boolean;
-  docked?: boolean;
-  maximised?: boolean;
-  hideTitleBarOnIdle?: boolean;
-  id: string;
-  x: Ref<number>;
-  y: Ref<number>;
-  updateXY: Function;
-  getDocked: Function;
-  setDocked: Function;
-  getIndex: Function;
-  getMaximised: Function;
-  toggleMaximised: Function;
-  updateIndex: Function;
-  getTop: Function;
-};
+import type { DraggableProps } from "~~/types";
 
 const {
   titles,
@@ -46,7 +19,7 @@ const {
   toggleMaximised,
   updateIndex,
   getTop,
-} = defineProps<Draggable>();
+} = defineProps<DraggableProps>();
 
 const { lang } = useLang();
 
@@ -138,7 +111,7 @@ function findCoordinates(el: Element, done: () => void) {
       </nav>
       <div class="titleBar" ref="draggableRef">
         <EDraggableTitlebar
-          :title="titles[lang]"
+          :title="titles?.[lang]"
           :style="{ cursor: isDragging ? 'grabbing' : 'grab' }"
         />
       </div>

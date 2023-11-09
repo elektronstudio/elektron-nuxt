@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MediaItem } from "~~/types";
+import type { MediaItem } from "~~/types";
 
 type Props = {
   layout?: "columns1" | "columns1-5" | "columns2" | "columns3" | "columns4";

@@ -1,5 +1,5 @@
-import { Event } from "./event";
-import { MediaItem } from "./media";
+import { type Event } from "./event";
+import { type MediaItem } from "./media";
 
 export type Project = {
   id: number;
@@ -32,6 +32,7 @@ export type Project = {
   fienta_id: any;
   haslive?: boolean | null;
   eventLiveLink: string | null;
+  vimeoId: number | null;
 };
 
 export interface Localization {

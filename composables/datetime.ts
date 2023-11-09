@@ -8,7 +8,7 @@ import {
   formatISO,
   isThisYear,
 } from "date-fns";
-import { Urgency } from "~~/types";
+import type { Urgency } from "~~/types";
 
 const now = useNow({ interval: 1000 });
 

@@ -1,50 +1,12 @@
-import { Ref } from "vue";
+import type { Ref } from "vue";
+import type { InitialDraggablesList, DraggablesList } from "~~/types";
 
-export type ContentType = "chat" | "text" | "image" | "video" | "event";
-
-export type InitialDraggable = {
-  titles?: string[];
-  contentType?: ContentType;
-  initialX: number;
-  initialY: number;
-  tilesWidth?: number;
-  tilesHeight?: number;
-  maximisable?: boolean;
-  docked?: boolean;
-  maximised?: boolean;
-  hideTitleBarOnIdle?: boolean;
-};
-
-export type Draggable = InitialDraggable & {
-  // New draggable functions
-  id: string;
-  x: Ref<number>;
-  y: Ref<number>;
-  updateXY: Function;
-  getDocked: Function;
-  setDocked: Function;
-  setDockedSilent: Function;
-  getIndex: Function;
-  getMaximised: Function;
-  toggleMaximised: Function;
-  updateIndex: Function;
-  getTop: Function;
-};
-
-export type InitialDraggables = {
-  [key: string]: InitialDraggable;
-};
-
-export type Draggables = {
-  [key: string]: Draggable;
-};
-
-export const useDraggables = (initialDraggables: InitialDraggables) => {
+export const useDraggables = (initialDraggables: InitialDraggablesList) => {
   const keys = Object.keys(initialDraggables);
-  const indexes = ref(keys);
+  const indexes: Ref<string[]> = ref(keys);
   const draggables = keys.map((key, index) => {
-    const x = ref(initialDraggables[key].initialX);
-    const y = ref(initialDraggables[key].initialY);
+    const x: Ref<number> = ref(initialDraggables[key].initialX);
+    const y: Ref<number> = ref(initialDraggables[key].initialY);
     const updateIndex = () =>
       (indexes.value = unique([...indexes.value, key].reverse()).reverse());
     const updateXY = ({ x: newX, y: newY }: { x: number; y: number }) => {
@@ -52,8 +14,10 @@ export const useDraggables = (initialDraggables: InitialDraggables) => {
       y.value = newY;
       updateIndex();
     };
-    const docked = ref(initialDraggables[key].docked || false);
-    const maximised = ref(initialDraggables[key].maximised || false);
+    const docked: Ref<boolean> = ref(initialDraggables[key].docked || false);
+    const maximised: Ref<boolean> = ref(
+      initialDraggables[key].maximised || false,
+    );
     const setDocked = () => {
       docked.value = !docked.value;
       updateIndex();
@@ -98,5 +62,5 @@ export const useDraggables = (initialDraggables: InitialDraggables) => {
 
   return Object.fromEntries(
     keys.map((key, i) => [key, draggables[i]]),
-  ) as Draggables;
+  ) as DraggablesList;
 };

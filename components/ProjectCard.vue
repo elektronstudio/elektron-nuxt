@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MediaItem } from "~~/types";
+import type { MediaItem } from "~~/types";
 
 type Props = {
   title: string;

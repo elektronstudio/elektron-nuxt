@@ -1,4 +1,4 @@
-import { MediaItem } from "./media";
+import { type MediaItem } from "./media";
 
 export type Event = {
   id: number;
@@ -39,7 +39,7 @@ export type Event = {
   haslive?: boolean | null;
   radioUrl?: string | null;
   liveExternalUrl?: string | null;
-  vimeoUrl: string | null;
+  vimeoId: number | null;
 };
 
 interface Project {

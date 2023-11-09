@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Urgency } from "~~/types";
+import type { Urgency } from "~~/types";
 
 const route = useRoute();
 const slug = route.params.project_slug as string;
@@ -42,7 +42,6 @@ const draggables = useDraggables({
 });
 
 const hasTicket = ref<boolean>(false);
-const live = ref<string>(project.value.live);
 
 // @TODO: Move this to processing level
 const { urgency } = useDatetime(project.value.start_at, project.value.end_at);
@@ -76,25 +75,9 @@ onMounted(() => {
     hasTicket.value = true;
   }
 });
-
-onMounted(() => {
-  interval = setInterval(async () => {
-    const slug = route.params.event_slug as string;
-    const { data: project, error } = await useProjectBySlug(slug as string, {
-      fields: ["live"],
-    });
-    live.value = project.value.live;
-  }, 30000);
-});
-
-onUnmounted(() => {
-  clearInterval(interval);
-});
 </script>
 
 <template>
-  <!-- TODO: how to use with project -->
-  <!-- <FetchStreamData @update-stream="(r) => (live = r)" /> -->
   <div>
     <BackToEvent :link="project.projectLink" />
     <EBreadBoard v-if="!hasTicket">
@@ -104,8 +87,8 @@ onUnmounted(() => {
       <DraggablesDock :draggables="noTicketDraggables" />
     </EBreadBoard>
     <EBreadBoard v-else>
-      <DraggableHoc v-bind="draggables.video" v-if="live">
-        <Videostream :key="live" :url="live" />
+      <DraggableHoc v-bind="draggables.video" v-if="project.vimeoId">
+        <VimeoIframe v-if="project.vimeoId" :id="project.vimeoId" />
       </DraggableHoc>
       <DraggableHoc v-bind="draggables.chat">
         <Chat :channel="slug" />

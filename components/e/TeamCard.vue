@@ -1,6 +1,6 @@
 <!-- TODO: Should this be added to components page -->
 <script setup lang="ts">
-import { MediaItem } from "~~/types";
+import type { MediaItem } from "~~/types";
 
 type Props = {
   name?: string;

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Event } from "~~/types";
+import type { Event } from "~~/types";
 
 type Props = {
   event: Event;
