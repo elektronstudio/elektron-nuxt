@@ -7,7 +7,6 @@ type Props = {
 };
 
 const { event, size = "xs" } = defineProps<Props>();
-console.log(event.liveExternalUrl);
 const { urgency } = useDatetime(event.start_at, event.end_at);
 const formattedStartAtDistance = event.start_at
   ? useFormattedDistance(event.start_at)
