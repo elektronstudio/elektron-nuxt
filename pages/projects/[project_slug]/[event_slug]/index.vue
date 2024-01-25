@@ -3,7 +3,6 @@ const route = useRoute();
 const slug = route.params.event_slug;
 
 const { data: event, error } = await useEventBySlug(slug as string);
-console.log("event", event.value);
 // TODO: Make this more dynamic
 useHead({
   title: `${event.value.title} – elektron.art`,
