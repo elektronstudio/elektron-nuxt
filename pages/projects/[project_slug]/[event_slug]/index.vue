@@ -3,6 +3,7 @@ const route = useRoute();
 const slug = route.params.event_slug;
 
 const { data: event, error } = await useEventBySlug(slug as string);
+console.log("event", event.value);
 // TODO: Make this more dynamic
 useHead({
   title: `${event.value.title} – elektron.art`,
@@ -41,10 +42,7 @@ const { lang } = useLang();
         :content="event.intros[lang]"
       />
       <div class="buttons">
-        <EventButtons
-          size="md"
-          :event="event.projects[0]?.online ? event.projects[0] : event"
-        />
+        <EventButtons size="md" :event="event" />
       </div>
     </header>
     <ImageSlider v-if="event.images" :images="event.images" />
