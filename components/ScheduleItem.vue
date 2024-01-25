@@ -37,7 +37,7 @@ const { lang } = useLang();
       <footer>
         <EventButtons
           v-if="event.eventLiveLink || event.projects?.[0]?.eventLiveLink"
-          :event="event.projects?.[0]?.eventLiveLink ? event.projects[0] as any : event"
+          :event="event"
         />
       </footer>
     </div>
