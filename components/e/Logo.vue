@@ -8,7 +8,7 @@ const { el = "span", size = "md" } = defineProps<Props>();
 </script>
 
 <template>
-  <component :is="el" :class="size" class="ELogo">eˉlektron</component>
+  <component :is="el" :class="size" class="ELogo">elektron.art</component>
 </template>
 
 <style scoped>

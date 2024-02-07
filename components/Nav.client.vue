@@ -176,7 +176,7 @@ const { isLive } = route.meta;
 }
 @media only screen and (min-width: 600px) {
   .homeButton {
-    min-width: 8rem;
+    min-width: 10rem;
   }
   .menuItem {
     padding: var(--p-1);
