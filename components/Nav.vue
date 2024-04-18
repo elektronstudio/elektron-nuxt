@@ -1,22 +1,23 @@
 <script setup lang="ts">
-const { lang } = useLang();
+import { useMagicKeys } from "@vueuse/core";
+const { locale, setLocale, t } = useI18n();
 
 const route: any = useRoute();
 const navItems = [
   {
-    label: ["Schedule", "Kava"],
+    label: t("schedule"),
     path: "/schedule",
   },
   {
-    label: ["Projects", "Projektid"],
+    label: t("projects"),
     path: "/projects",
   },
   {
-    label: ["WTF elektron", "Meist"],
+    label: t("about"),
     path: "/about",
   },
   {
-    label: ["Podcast", "Podcast"],
+    label: t("podcast"),
     path: "/signal",
   },
 ];
@@ -24,6 +25,14 @@ const navItems = [
 const { theme, changeTheme } = useTheme();
 const navState = ref(false);
 const { isLive } = route.meta;
+
+const keys = useMagicKeys();
+const shiftL = keys["Shift+l"];
+watch(shiftL, (v) => {
+  if (v) {
+    setLocale(locale.value === "en" ? "et" : "en");
+  }
+});
 </script>
 
 <template>
@@ -33,15 +42,27 @@ const { isLive } = route.meta;
         <ELogo el="span" />
       </NuxtLink>
       <nav class="menu" :class="{ navActive: navState }">
-        <NuxtLink
-          v-for="item in navItems"
+        <NuxtLinkLocale
           class="menuItem"
-          :key="item.path"
-          :to="item.path"
+          to="/schedule"
           @click="navState = false"
         >
-          {{ item.label[lang] }}
-        </NuxtLink>
+          {{ $t("schedule") }}
+        </NuxtLinkLocale>
+        <NuxtLinkLocale
+          class="menuItem"
+          to="/projects"
+          @click="navState = false"
+        >
+          {{ $t("projects") }}
+        </NuxtLinkLocale>
+        <NuxtLinkLocale class="menuItem" to="/about" @click="navState = false">
+          {{ $t("about") }}
+        </NuxtLinkLocale>
+        <NuxtLinkLocale class="menuItem" to="/signal" @click="navState = false">
+          {{ $t("podcast") }}
+        </NuxtLinkLocale>
+
         <a href="https://lab.elektron.art" class="menuItem">
           <Icon name="radix-icons:external-link" />
           Lab

@@ -24,7 +24,7 @@ const { project } = defineProps<Props>();
         <NuxtLink v-slot="{ href }" :to="project.projectLink" custom>
           <EButton size="xs" el="a" color="accent" :href="href">
             <Icon name="radix-icons:arrow-right" />
-            {{ ["View project", "Vaata projekti"][lang] }}
+            {{ $t("view_project") }}
           </EButton>
         </NuxtLink>
         <div class="eventButtons">

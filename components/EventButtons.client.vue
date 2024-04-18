@@ -48,7 +48,7 @@ const processEvent = processEventFienta(event);
       :size="size"
       color="accent"
     >
-      {{ ["Live now!", "Vaata laivis!"][lang] }}
+      {{ $t("live_now") }}
     </EButton>
     <EButton
       v-else-if="urgency === 'future' || urgency === 'soon'"

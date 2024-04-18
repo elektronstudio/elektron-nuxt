@@ -10,8 +10,8 @@
   "dependencies": {
     "@nuxtjs/strapi": "^1.9.3",
     "@vimeo/player": "^2.20.1",
-    "@vueuse/core": "^10.5.0",
-    "@vueuse/nuxt": "^10.5.0",
+    "@vueuse/core": "^10.9.0",
+    "@vueuse/nuxt": "^10.9.0",
     "columnify": "^1.6.0",
     "d3": "^7.6.1",
     "date-fns": "^2.29.3",
@@ -22,6 +22,7 @@
     "rss-parser": "^3.12.0"
   },
   "devDependencies": {
+    "@nuxtjs/i18n": "^8.3.0",
     "@nuxtjs/plausible": "^1.0.0",
     "@types/columnify": "^1.5.1",
     "@types/d3": "^7.4.0",
