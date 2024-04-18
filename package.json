@@ -28,8 +28,8 @@
     "@types/marked": "^4.0.7",
     "@types/node": "^18.11.4",
     "@types/vimeo__player": "^2.18.3",
-    "nuxt": "^3.8.1",
-    "nuxt-icon": "^0.1.6",
+    "nuxt": "^3.11.2",
+    "nuxt-icon": "^0.6.10",
     "typescript": "^5.2.2"
   }
 }

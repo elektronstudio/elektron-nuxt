@@ -3,7 +3,9 @@ type Props = {
   variant?: "outline" | "transparent";
 };
 
-const { variant = "transparent" } = defineProps<Props>();
+const { variant } = withDefaults(defineProps<Props>(), {
+  variant: "transparent",
+});
 </script>
 
 <template>

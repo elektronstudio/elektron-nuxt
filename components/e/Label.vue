@@ -5,7 +5,14 @@ type Props = {
   disabled?: boolean;
 };
 
-const { fieldId, layout = "vertical", disabled = false } = defineProps<Props>();
+const {
+  fieldId,
+  layout = "vertical",
+  disabled = false,
+} = withDefaults(defineProps<Props>(), {
+  layout: "vertical",
+  disabled: false,
+});
 </script>
 
 <template>

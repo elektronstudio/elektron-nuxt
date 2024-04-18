@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import EInput from "./EInput.vue";
 
 type Props = {
   placeholder?: string;

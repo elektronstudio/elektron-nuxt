@@ -15,8 +15,10 @@ type Props = {
   // TODO: Rethink how to pass colors to components
   color?: "accent" | "gray";
 };
-
-const { el = "div", color, ratio = "auto", layout } = defineProps<Props>();
+const { el, color, ratio, layout } = withDefaults(defineProps<Props>(), {
+  el: "div",
+  ratio: "auto",
+});
 </script>
 
 <template>

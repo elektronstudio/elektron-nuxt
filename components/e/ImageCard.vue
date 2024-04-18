@@ -6,7 +6,9 @@ type Props = {
   media: MediaItem;
 };
 
-const { layout = "columns1", media } = defineProps<Props>();
+const { layout, media } = withDefaults(defineProps<Props>(), {
+  layout: "columns1",
+});
 </script>
 
 <template>

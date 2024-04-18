@@ -4,7 +4,10 @@ type Props = {
   size?: "sm" | "md" | "lg";
 };
 
-const { el = "span", size = "md" } = defineProps<Props>();
+const { el, size } = withDefaults(defineProps<Props>(), {
+  el: "span",
+  size: "md",
+});
 </script>
 
 <template>

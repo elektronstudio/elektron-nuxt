@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { randomString } from "../utils/string";
-import ELabel from "./ELabel.vue";
+import { randomString } from "@/composables/string";
+
 type Props = {
   modelValue?: boolean;
   disabled?: boolean;
   label?: string;
 };
 
-const { modelValue = false } = defineProps<Props>();
+const { modelValue } = withDefaults(defineProps<Props>(), {
+  modelValue: false,
+});
 
 const fieldId = randomString();
 

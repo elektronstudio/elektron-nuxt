@@ -6,7 +6,9 @@ type Props = {
   size?: "xs" | "sm" | "md" | "lg";
 };
 
-const { event, size = "xs" } = defineProps<Props>();
+const { event, size } = withDefaults(defineProps<Props>(), {
+  size: "xs",
+});
 const { urgency } = useDatetime(event.start_at, event.end_at);
 const formattedStartAtDistance = event.start_at
   ? useFormattedDistance(event.start_at)
