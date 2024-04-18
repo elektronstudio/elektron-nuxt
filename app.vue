@@ -28,11 +28,6 @@ watch(height, (newHeight) => (appHeight.value = `${newHeight}px`), {
 
 <template>
   <NuxtLayout :class="{ idle: idle }">
-    <Script
-      defer
-      data-domain="elektron.art"
-      src="https://plausible.io/js/plausible.local.js"
-    />
     <NuxtPage />
   </NuxtLayout>
 </template>
