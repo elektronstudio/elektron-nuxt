@@ -19,9 +19,9 @@ const { data: upcomingEvents, error } = await useEvents({
       <ETitle size="lg" style="margin-bottom: var(--m-3)">
         {{ ["Upcoming events", "Tulevased sündmused"][lang] }}
       </ETitle>
-      <NuxtLink to="/schedule/past" class="EButton xs anime">
+      <NuxtLinkLocale to="/schedule/past" class="EButton xs anime">
         {{ ["See the past events", "Vaata toimunud sündmusi"][lang] }}
-      </NuxtLink>
+      </NuxtLinkLocale>
     </aside>
     <section>
       <ScheduleItem

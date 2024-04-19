@@ -7,6 +7,10 @@ export default defineNuxtConfig({
     defaultLocale: "en",
     vueI18n: "./i18n.config.ts", // if you are using custom path, default
   },
+  strapi: {
+    version: "v4",
+    prefix: "/api",
+  },
   plausible: {
     // Prevent tracking on localhost
     ignoredHostnames: ["localhost"],

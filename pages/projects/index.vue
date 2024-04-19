@@ -23,14 +23,17 @@ const { lang } = useLang();
     <br />
     <div v-if="currentProjects.length > 0" class="projects">
       <template v-for="project in currentProjects">
-        <NuxtLink v-if="!project.archived" :to="'/projects/' + project.slug">
+        <NuxtLinkLocale
+          v-if="!project.archived"
+          :to="'/projects/' + project.slug"
+        >
           <!-- TODO: Format this, and show only future dates, needs order by event time -->
           <ProjectCard
             :title="project.titles[lang]"
             :media="project.thumbnail"
             :next-event="project.events?.length && project.events[0]"
           />
-        </NuxtLink>
+        </NuxtLinkLocale>
       </template>
     </div>
     <ETitle size="lg" v-if="pastProjects.length > 0">
@@ -40,12 +43,12 @@ const { lang } = useLang();
 
     <div v-if="pastProjects.length > 0" class="projects">
       <template v-for="project in pastProjects">
-        <NuxtLink :to="'/projects/' + project.slug">
+        <NuxtLinkLocale :to="'/projects/' + project.slug">
           <ProjectCard
             :title="project.titles[lang]"
             :media="project.thumbnail"
           />
-        </NuxtLink>
+        </NuxtLinkLocale>
       </template>
     </div>
   </div>

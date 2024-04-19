@@ -83,14 +83,15 @@ useIntervalFn(() => {
   refreshCaptures();
   refreshChat();
 }, REFRESH_INTERVAL);
-const { lang, changeLang } = useLang();
+// TODO:
+const switchLocalePath = useSwitchLocalePath();
+const { lang } = useLang();
 
 const wallpapers = [
   "https://elektron.fra1.cdn.digitaloceanspaces.com/assets/wallpaper.jpg",
 ];
 
 onMounted(() => {
-  changeLang();
   changeTheme();
 });
 </script>
@@ -123,7 +124,7 @@ onMounted(() => {
         <div class="flex items-center space-x-4">
           <Button
             small
-            @click="changeLang"
+            @click="switchLocalePath(lang === 0 ? 'et' : 'en')"
             class="cursor-pointer !text-gray-300"
           >
             {{ ["Eesti keeles", "In english"][lang] }}

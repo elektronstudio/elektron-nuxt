@@ -28,11 +28,11 @@ const { lang } = useLang();
           {{ event.authors }}
         </ETitle>
 
-        <NuxtLink :to="event.eventLink">
+        <NuxtLinkLocale :to="event.eventLink">
           <ETitle el="h4" size="xs" class="eventTitle">
             {{ event.title }}
           </ETitle>
-        </NuxtLink>
+        </NuxtLinkLocale>
       </header>
       <footer>
         <EventButtons

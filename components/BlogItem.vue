@@ -12,7 +12,7 @@ const { lang } = useLang();
 </script>
 
 <template>
-  <NuxtLink :href="slug" class="blogItem EBox">
+  <NuxtLinkLocale :href="slug" class="blogItem EBox">
     <img v-if="thumbnail" class="postThumbnail" :src="thumbnail.url" />
     <ETitle v-if="titles" el="h3" size="lg">
       {{ titles[lang] }}
@@ -20,7 +20,7 @@ const { lang } = useLang();
     <EButton color="accent" size="xs">
       {{ ["Read more", "Loe postitust"][lang] }}
     </EButton>
-  </NuxtLink>
+  </NuxtLinkLocale>
 </template>
 
 <style scoped>

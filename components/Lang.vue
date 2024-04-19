@@ -5,7 +5,7 @@ const switchLocalePath = useSwitchLocalePath();
 
 <template>
   <NuxtLink v-if="locale === 'et'" :to="switchLocalePath('en')">ENG</NuxtLink>
-  <NuxtLink v-else-if="locale === 'en'" :to="switchLocalePath('et')"
-    >EST</NuxtLink
-  >
+  <NuxtLink v-else-if="locale === 'en'" :to="switchLocalePath('et')">
+    EST
+  </NuxtLink>
 </template>

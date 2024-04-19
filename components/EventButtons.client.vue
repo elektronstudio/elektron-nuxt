@@ -33,7 +33,7 @@ const processEvent = processEventFienta(event);
     <Icon name="radix-icons:external-link" />
     {{ ["Visit event", "Vaata üritust"][lang] }}
   </EButton>
-  <NuxtLink
+  <NuxtLinkLocale
     v-else-if="
       processEvent.status === 'FREE' || processEvent.status === 'HAS_TICKET'
     "
@@ -72,7 +72,7 @@ const processEvent = processEventFienta(event);
     >
       {{ ["Revisit event", "Meenuta üritust"][lang] }}
     </EButton>
-  </NuxtLink>
+  </NuxtLinkLocale>
   <EButton
     v-else-if="processEvent.status === 'REQUIRES_TICKET' && urgency !== 'past'"
     v-for="ticketLink in processEvent.ticketLinks"

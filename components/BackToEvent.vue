@@ -6,10 +6,10 @@ const { lang } = useLang();
 const { link } = defineProps<Props>();
 </script>
 <template>
-  <NuxtLink v-if="link" :to="link" class="backToEvent">
+  <NuxtLinkLocale v-if="link" :to="link" class="backToEvent">
     <Icon name="radix-icons:arrow-left" />
     {{ ["Back to event", "Tagasi sündmuse juurde"][lang] }}
-  </NuxtLink>
+  </NuxtLinkLocale>
 </template>
 <style scoped>
 .backToEvent {

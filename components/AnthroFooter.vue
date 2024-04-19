@@ -7,6 +7,7 @@ type Props = {
 
 const { events } = defineProps<Props>();
 const { lang } = useLang();
+const { locale } = useI18n();
 </script>
 
 <template>
@@ -16,7 +17,7 @@ const { lang } = useLang();
     </div>
 
     <div class="eventItems">
-      <NuxtLink
+      <NuxtLinkLocale
         v-for="event in events"
         :href="`/projects/ruumiantropoloogiad/${event.slug}`"
         class="eventItem EBox accent"
@@ -28,7 +29,7 @@ const { lang } = useLang();
           <h4 v-if="event.authors">{{ event.authors }}</h4>
         </header>
         <span> {{ ["Read more", "Loe postitust"][lang] }}</span>
-      </NuxtLink>
+      </NuxtLinkLocale>
     </div>
   </footer>
 </template>

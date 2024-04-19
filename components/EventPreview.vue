@@ -14,11 +14,11 @@ const { event } = defineProps<Props>();
     <aside>
       <EStack is="header">
         <EventDatetime :event="event" />
-        <NuxtLink :to="event.eventLink">
+        <NuxtLinkLocale :to="event.eventLink">
           <ETitle el="h3">
             {{ event.titles[0] }}
           </ETitle>
-        </NuxtLink>
+        </NuxtLinkLocale>
         <EContent :content="event.intros[lang]" />
       </EStack>
       <footer>

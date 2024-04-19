@@ -2,13 +2,13 @@
   <Transition appear>
     <nav v-if="breadcrumbs.length" class="Breadcrumbs">
       <template v-for="breadcrumb in breadcrumbs">
-        <NuxtLink
+        <NuxtLinkLocale
           v-if="breadcrumb.link"
           :to="breadcrumb.link"
           class="breadcrumbItem"
         >
           {{ breadcrumb.title }}
-        </NuxtLink>
+        </NuxtLinkLocale>
         <span v-else class="breadcrumbItem">
           {{ breadcrumb.title }}
         </span>

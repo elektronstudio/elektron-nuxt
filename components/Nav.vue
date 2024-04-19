@@ -38,9 +38,13 @@ watch(shiftL, (v) => {
 <template>
   <Transition appear>
     <header v-if="!$route.fullPath.endsWith('/live') && !isLive" class="Nav">
-      <NuxtLink to="/" class="menuItem homeButton" @click="navState = false">
+      <NuxtLinkLocale
+        to="/"
+        class="menuItem homeButton"
+        @click="navState = false"
+      >
         <ELogo el="span" />
-      </NuxtLink>
+      </NuxtLinkLocale>
       <nav class="menu" :class="{ navActive: navState }">
         <NuxtLinkLocale
           class="menuItem"

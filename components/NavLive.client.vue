@@ -43,7 +43,7 @@ watch(playerState, (playerState) => {
   <div v-if="liveEvent && liveEvent.radioUrl" class="nav-live">
     <AudioPlayer :event="liveEvent" :urgency="urgency" />
   </div>
-  <NuxtLink
+  <NuxtLinkLocale
     v-else-if="liveEvent"
     class="nav-live menu-item"
     :to="liveEvent.eventLiveLink || liveEvent.eventLink"
@@ -61,7 +61,7 @@ watch(playerState, (playerState) => {
       </span>
       <span class="event-title">{{ liveEvent.titles[lang] }}</span>
     </a>
-  </NuxtLink>
+  </NuxtLinkLocale>
 </template>
 
 <style scoped>

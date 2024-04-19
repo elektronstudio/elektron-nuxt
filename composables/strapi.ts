@@ -1,7 +1,8 @@
-import type { Strapi4RequestParams } from "@nuxtjs/strapi/dist/runtime/types";
 import { merge, has, isArray, head, forEach, isObject } from "lodash-es";
 import { compareAsc, compareDesc } from "date-fns";
-import type { Event } from "~~/types";
+import type { Event, Urgency } from "~~/types";
+import type { Strapi4RequestParams } from "@nuxtjs/strapi";
+
 // Events
 export const useEvents = (params: Strapi4RequestParams = {}) => {
   return useFind(
