@@ -42,7 +42,7 @@ Kunstnikud Daria Khrystych, Liis Vares, Bohdana Korohod ja Inga Salurand keskend
     <slot />
     <AnthroFooter :events="events">
       <ETitle el="h3" size="lg">
-        {{ ["Anthropologies of space", "Ruumiantropoloogiad"][lang] }}
+        {{ $t("anthropologies_of_space") }}
       </ETitle>
       <p>
         {{ intro[lang] }}

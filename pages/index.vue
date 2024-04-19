@@ -51,11 +51,7 @@ const project = computed(() => {
         </Transition>
         <EDialog
           v-if="dialogState && (event || project)"
-          :title="
-            event?.urgencyLabel
-              ? event.urgencyLabel[lang]
-              : ['Pinned', 'Pinned'][lang]
-          "
+          :title="event?.urgencyLabel ? event.urgencyLabel[lang] : $t('pinned')"
           :dialog-state="dialogState"
           @close-dialog="dialogState = false"
         >

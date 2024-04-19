@@ -54,11 +54,9 @@ watch(playerState, (playerState) => {
         {{ formattedStartAtDistance.value }}:
       </span>
       <span v-else-if="urgency === 'now' && !liveEvent.haslive">
-        {{ ["Happening now", "Praegu käimas"][lang] }}:
+        {{ $t("happening_now") }}:
       </span>
-      <span v-else-if="urgency === 'now'">
-        {{ ["Live now", "Live"][lang] }}:
-      </span>
+      <span v-else-if="urgency === 'now'"> {{ $t("live_now") }}: </span>
       <span class="event-title">{{ liveEvent.titles[lang] }}</span>
     </a>
   </NuxtLinkLocale>

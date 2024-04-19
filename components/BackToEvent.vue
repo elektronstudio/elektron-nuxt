@@ -2,13 +2,12 @@
 type Props = {
   link: string;
 };
-const { lang } = useLang();
 const { link } = defineProps<Props>();
 </script>
 <template>
   <NuxtLinkLocale v-if="link" :to="link" class="backToEvent">
     <Icon name="radix-icons:arrow-left" />
-    {{ ["Back to event", "Tagasi sündmuse juurde"][lang] }}
+    {{ $t("back_to_event") }}
   </NuxtLinkLocale>
 </template>
 <style scoped>

@@ -18,7 +18,7 @@ const { lang } = useLang();
   <ErrorCard v-if="currentError || pastError" />
   <div v-else class="Page">
     <ETitle size="lg" v-if="currentProjects.length > 0">
-      {{ ["Projects", "Projektid"][lang] }}
+      {{ $t("projects") }}
     </ETitle>
     <br />
     <div v-if="currentProjects.length > 0" class="projects">
@@ -37,7 +37,7 @@ const { lang } = useLang();
       </template>
     </div>
     <ETitle size="lg" v-if="pastProjects.length > 0">
-      {{ ["Archive", "Arhiiv"][lang] }}
+      {{ $t("archive") }}
     </ETitle>
     <br />
 

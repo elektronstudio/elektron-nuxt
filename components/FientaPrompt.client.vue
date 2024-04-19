@@ -2,7 +2,6 @@
 const router = useRouter();
 const route = useRoute();
 const code = ref<string>((route.query.code as string) || "");
-const { lang } = useLang();
 
 onMounted(() => {
   onValidate();
@@ -20,20 +19,11 @@ const onValidate = async () => {
 </script>
 
 <template>
-  <ETitle>{{ ["Validate your ticket", "Piletikontroll"][lang] }}</ETitle>
-  <EContent
-    :content="
-      parseMarkdown(
-        [
-          `There is a **ticket code** in your Fienta email, just below big blue button. Copy-paste the code into the box below:`,
-          `Fienta piletil on piletikood emaili lõpus, sinise sisenemisnupu all. Kopeeri see kood siia:`,
-        ][lang],
-      )
-    "
-  />
+  <ETitle>{{ $t("validate_your_ticket") }}</ETitle>
+  <EContent :content="parseMarkdown($t('fienta_copy'))" />
   <ETextArea class="ETextarea" v-model="code" placeholder="Code" />
   <EButton color="accent" size="sm" @click="onValidate">
-    {{ ["Submit ticket code", "Kontrolli pileti koodi"][lang] }}
+    {{ $t("submit_ticket_code") }}
   </EButton>
 </template>
 

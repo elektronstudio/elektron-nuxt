@@ -28,7 +28,7 @@ const { locale } = useI18n();
           </ETitle>
           <h4 v-if="event.authors">{{ event.authors }}</h4>
         </header>
-        <span> {{ ["Read more", "Loe postitust"][lang] }}</span>
+        <span> {{ $t("read_more") }}</span>
       </NuxtLinkLocale>
     </div>
   </footer>

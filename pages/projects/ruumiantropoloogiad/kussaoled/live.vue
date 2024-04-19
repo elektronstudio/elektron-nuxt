@@ -86,6 +86,7 @@ useIntervalFn(() => {
 // TODO:
 const switchLocalePath = useSwitchLocalePath();
 const { lang } = useLang();
+const { locale } = useI18n();
 
 const wallpapers = [
   "https://elektron.fra1.cdn.digitaloceanspaces.com/assets/wallpaper.jpg",
@@ -119,7 +120,7 @@ onMounted(() => {
         class="z-10 flex items-center justify-between md:absolute md:top-6 md:left-6 md:right-6"
       >
         <Button small left :to="event?.eventLink">
-          {{ ["Event info", "Ürituse info"][lang] }}
+          {{ $t("event_info") }}
         </Button>
         <div class="flex items-center space-x-4">
           <Button
@@ -127,7 +128,7 @@ onMounted(() => {
             @click="switchLocalePath(lang === 0 ? 'et' : 'en')"
             class="cursor-pointer !text-gray-300"
           >
-            {{ ["Eesti keeles", "In english"][lang] }}
+            {{ locale === "en" ? "Eesti keeles" : "In english" }}
           </Button>
           <Icon
             name="radix-iconsh.alf-2"
@@ -142,7 +143,7 @@ onMounted(() => {
           <Videostream :url="live">
             <RechargingButton @click="capture">
               <Icon name="radix-icons:camera" />
-              {{ ["Capture", "Pildista"][lang] }}
+              {{ $t("capture") }}
             </RechargingButton>
           </Videostream>
         </div>
@@ -157,15 +158,10 @@ onMounted(() => {
               class="shrink-0"
             >
               <Icon name="radix-icons:camera" />
-              {{ ["Capture", "Pildista"][lang] }}
+              {{ $t("capture") }}
             </RechargingButton>
             <div class="font-sm text-gray-500">
-              {{
-                [
-                  "When you use all your captures, you can capture again in",
-                  "Kui sul film otsa saab, pead ootama",
-                ][lang]
-              }}
+              {{ $t("captures_copy") }}
               {{ remaining }}s
             </div>
           </EStack>

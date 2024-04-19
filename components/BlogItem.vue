@@ -18,7 +18,7 @@ const { lang } = useLang();
       {{ titles[lang] }}
     </ETitle>
     <EButton color="accent" size="xs">
-      {{ ["Read more", "Loe postitust"][lang] }}
+      {{ $t("read_more") }}
     </EButton>
   </NuxtLinkLocale>
 </template>

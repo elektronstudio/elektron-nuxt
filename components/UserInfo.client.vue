@@ -19,7 +19,7 @@ const handleToggle = () => {
     <EDialog
       v-if="draggableChatState"
       class="UserInfo"
-      :title="['Chat', 'Chat'][lang]"
+      :title="$t('chat')"
       :dialog-state="draggableChatState"
       @close-dialog="handleClose"
     >

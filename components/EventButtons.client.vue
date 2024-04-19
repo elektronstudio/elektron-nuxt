@@ -31,7 +31,7 @@ const processEvent = processEventFienta(event);
     color="accent"
   >
     <Icon name="radix-icons:external-link" />
-    {{ ["Visit event", "Vaata üritust"][lang] }}
+    {{ $t("visit_event") }}
   </EButton>
   <NuxtLinkLocale
     v-else-if="
@@ -48,7 +48,7 @@ const processEvent = processEventFienta(event);
       :size="size"
       color="accent"
     >
-      {{ $t("live_now") }}
+      {{ $t("see_live_now") }}
     </EButton>
     <EButton
       v-else-if="urgency === 'future' || urgency === 'soon'"
@@ -57,11 +57,7 @@ const processEvent = processEventFienta(event);
       :size="size"
       color="anime"
     >
-      {{
-        `${
-          ["Event starts: ", "Üritus algab: "][lang]
-        } ${formattedStartAtDistance}`
-      }}
+      {{ `${$t("event_starts")} ${formattedStartAtDistance}` }}
     </EButton>
     <EButton
       v-else-if="urgency === 'past'"
@@ -70,7 +66,7 @@ const processEvent = processEventFienta(event);
       :size="size"
       color="anime"
     >
-      {{ ["Revisit event", "Meenuta üritust"][lang] }}
+      {{ $t("revisit_event") }}
     </EButton>
   </NuxtLinkLocale>
   <EButton
@@ -83,10 +79,10 @@ const processEvent = processEventFienta(event);
     color="accent"
   >
     <Icon name="radix-icons:arrow-right" />
-    {{ ["Get a ticket", "Osta pilet"][lang] }}
+    {{ $t("get_a_ticket") }}
   </EButton>
   <p class="hasTicket" v-if="processEvent.status === 'HAS_TICKET'">
-    {{ ["You have a ticket", "Sul on ürituse pilet"][lang] }}
+    {{ $t("you_have_a_ticket") }}
   </p>
 </template>
 
