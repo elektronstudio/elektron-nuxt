@@ -1,17 +1,17 @@
 <script setup lang="ts">
+const { t } = useI18n();
+
 definePageMeta({
   title: "Past events",
 });
 
-const { lang } = useLang();
-
 breadcrumbs.value = [
   {
-    title: "Schedule",
-    link: "/schedule",
+    title: t("schedule"),
+    link: "schedule",
   },
   {
-    title: "Past",
+    title: t("past"),
   },
 ];
 
@@ -26,10 +26,10 @@ const { data: pastEvents, error } = await useEvents({
   <ScheduleWrapper v-else key="past">
     <aside>
       <ETitle size="lg" style="margin-bottom: var(--m-3)">
-        {{ ["Past events", "Toimunud sündmused"][lang] }}
+        {{ $t("past_events") }}
       </ETitle>
-      <NuxtLinkLocale to="/schedule/past" class="EButton xs anime">
-        {{ ["Upcoming events", "Tulevased sündmused"][lang] }}
+      <NuxtLinkLocale to="/schedule" class="EButton xs anime">
+        {{ $t("upcoming_events") }}
       </NuxtLinkLocale>
     </aside>
     <section>

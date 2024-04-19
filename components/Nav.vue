@@ -48,22 +48,22 @@ watch(shiftL, (v) => {
       <nav class="menu" :class="{ navActive: navState }">
         <NuxtLinkLocale
           class="menuItem"
-          to="/schedule"
+          to="schedule"
           @click="navState = false"
         >
           {{ $t("schedule") }}
         </NuxtLinkLocale>
         <NuxtLinkLocale
           class="menuItem"
-          to="/projects"
+          to="projects"
           @click="navState = false"
         >
           {{ $t("projects") }}
         </NuxtLinkLocale>
-        <NuxtLinkLocale class="menuItem" to="/about" @click="navState = false">
+        <NuxtLinkLocale class="menuItem" to="about" @click="navState = false">
           {{ $t("about") }}
         </NuxtLinkLocale>
-        <NuxtLinkLocale class="menuItem" to="/signal" @click="navState = false">
+        <NuxtLinkLocale class="menuItem" to="signal" @click="navState = false">
           {{ $t("podcast") }}
         </NuxtLinkLocale>
 
