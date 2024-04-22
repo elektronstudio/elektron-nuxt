@@ -1,33 +1,5 @@
-<script setup lang="ts">
-import "./styles/vars.css";
-import "./styles/reset.css";
-import "./styles/fonts.css";
-import "./styles/styles.css";
-import { useCssVar, useIdle, useWindowSize } from "@vueuse/core";
-const { idle } = useIdle(3000); // 3 seconds idle
-
-const route: any = useRoute();
-const siteName = "elektron.art";
-
-const titleTemplate = (title = undefined) =>
-  title ? `${title} – ${siteName}` : siteName;
-
-useHead({
-  title: titleTemplate(route.meta.title),
-  // viewport: "width=device-width, initial-scale=1, maximum-scale=1",
-  link: [{ rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
-  meta: [{ name: "og:title", content: titleTemplate(route.meta.title) }],
-});
-
-const { height } = useWindowSize();
-const appHeight = useCssVar("--app-height");
-watch(height, (newHeight) => (appHeight.value = `${newHeight}px`), {
-  immediate: true,
-});
-</script>
-
 <template>
-  <NuxtLayout :class="{ idle: idle }">
+  <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
 </template>

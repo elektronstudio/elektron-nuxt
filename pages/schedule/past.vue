@@ -2,7 +2,7 @@
 const { t } = useI18n();
 
 definePageMeta({
-  title: "Past events",
+  title: "pages.past_events",
 });
 
 breadcrumbs.value = [
@@ -26,7 +26,7 @@ const { data: pastEvents, error } = await useEvents({
   <ScheduleWrapper v-else key="past">
     <aside>
       <ETitle size="lg" style="margin-bottom: var(--m-3)">
-        {{ $t("past_events") }}
+        {{ $t("pages.past_events") }}
       </ETitle>
       <NuxtLinkLocale to="/schedule" class="EButton xs anime">
         {{ $t("upcoming_events") }}

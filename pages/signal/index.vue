@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
-  title: "Podcast",
+  title: "pages.podcast",
   ttl: 60 * 30,
 });
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
-  title: "Projects",
+  title: "pages.projects",
 });
 
 breadcrumbs.value = [];
@@ -37,7 +37,7 @@ const { lang } = useLang();
       </template>
     </div>
     <ETitle size="lg" v-if="pastProjects.length > 0">
-      {{ $t("archive") }}
+      {{ $t("pages.archive") }}
     </ETitle>
     <br />
 

@@ -23,7 +23,7 @@ const { lang } = useLang();
 
 breadcrumbs.value = [
   {
-    title: t("projects"),
+    title: t("pages.projects"),
     link: "/projects",
   },
   {

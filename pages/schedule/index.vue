@@ -2,7 +2,7 @@
 const { t } = useI18n();
 
 definePageMeta({
-  title: "Schedule",
+  title: "pages.schedule",
 });
 
 breadcrumbs.value = [];

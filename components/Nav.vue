@@ -5,19 +5,19 @@ const { locale, setLocale, t } = useI18n();
 const route: any = useRoute();
 const navItems = [
   {
-    label: t("schedule"),
+    label: t("pages.schedule"),
     path: "/schedule",
   },
   {
-    label: t("projects"),
+    label: t("pages.projects"),
     path: "/projects",
   },
   {
-    label: t("about"),
+    label: t("pages.about"),
     path: "/about",
   },
   {
-    label: t("podcast"),
+    label: t("pages.podcast"),
     path: "/signal",
   },
 ];
@@ -51,20 +51,20 @@ watch(shiftL, (v) => {
           to="schedule"
           @click="navState = false"
         >
-          {{ $t("schedule") }}
+          {{ $t("pages.schedule") }}
         </NuxtLinkLocale>
         <NuxtLinkLocale
           class="menuItem"
           to="projects"
           @click="navState = false"
         >
-          {{ $t("projects") }}
+          {{ $t("pages.projects") }}
         </NuxtLinkLocale>
         <NuxtLinkLocale class="menuItem" to="about" @click="navState = false">
-          {{ $t("about") }}
+          {{ $t("pages.about") }}
         </NuxtLinkLocale>
         <NuxtLinkLocale class="menuItem" to="signal" @click="navState = false">
-          {{ $t("podcast") }}
+          {{ $t("pages.podcast") }}
         </NuxtLinkLocale>
 
         <a href="https://lab.elektron.art" class="menuItem">
