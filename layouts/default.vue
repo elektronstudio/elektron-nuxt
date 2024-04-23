@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import "@/styles/vars.css";
-import "@/styles/reset.css";
-import "@/styles/fonts.css";
-import "@/styles/styles.css";
 import { useCssVar, useIdle, useWindowSize } from "@vueuse/core";
 
 const route: any = useRoute();
@@ -34,7 +30,6 @@ const titleTemplate = (title: string | undefined) =>
 const title = computed(() =>
   titleTemplate(t(route.meta.title ?? "elektron.art")),
 );
-console.log("title", route.meta.title);
 </script>
 <template>
   <Html :lang="head.htmlAttrs.lang" :dir="head.htmlAttrs.dir">
