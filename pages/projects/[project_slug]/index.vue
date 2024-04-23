@@ -7,11 +7,11 @@ const { data: project, error } = await useProjectBySlug(slug as string);
 useHead({
   title: `${project.value.title} – elektron.art`,
 });
-
+const { t } = useI18n();
 const { lang } = useLang();
 breadcrumbs.value = [
   {
-    title: "Projects",
+    title: t("projects"),
     link: "/projects",
   },
   {

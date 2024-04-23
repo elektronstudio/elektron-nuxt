@@ -7,10 +7,11 @@ const { data: event, error } = await useEventBySlug(slug as string);
 useHead({
   title: `${event.value.title} – elektron.art`,
 });
+const { t } = useI18n();
 
 breadcrumbs.value = [
   {
-    title: "Projects",
+    title: t("projects"),
     link: "/projects",
   },
   {
