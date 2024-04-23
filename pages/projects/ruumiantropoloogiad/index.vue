@@ -27,7 +27,7 @@ breadcrumbs.value = [
     link: "/projects",
   },
   {
-    title: project.value.title,
+    title: project.value.titles[lang],
     link: `/projects/${project.value.slug}`,
   },
 ];

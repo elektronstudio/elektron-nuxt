@@ -19,6 +19,7 @@ useHead({
   title: `${event.value.title} – elektron.art`,
 });
 const { t } = useI18n();
+const { lang } = useLang();
 
 breadcrumbs.value = [
   {
@@ -30,7 +31,7 @@ breadcrumbs.value = [
     link: `/projects/ruumiantropoloogiad`,
   },
   {
-    title: event.value.title,
+    title: event.value.titles[lang],
     link: `/projects/ruumiantropoloogiad/${event.value.slug}`,
   },
 ];

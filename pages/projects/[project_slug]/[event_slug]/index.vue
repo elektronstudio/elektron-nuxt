@@ -8,6 +8,9 @@ useHead({
   title: `${event.value.title} – elektron.art`,
 });
 const { t } = useI18n();
+const { lang } = useLang();
+
+console.log(event.value.projects[0]);
 
 breadcrumbs.value = [
   {
@@ -15,16 +18,14 @@ breadcrumbs.value = [
     link: "/projects",
   },
   {
-    title: event.value.projects[0].title,
+    title: event.value.projects[0].titles[lang],
     link: `/projects/${event.value.projects[0].slug}`,
   },
   {
-    title: event.value.title,
+    title: event.value.titles[lang],
     link: `/projects/${event.value.projects[0].slug}/${event.value.slug}`,
   },
 ];
-
-const { lang } = useLang();
 </script>
 
 <template>

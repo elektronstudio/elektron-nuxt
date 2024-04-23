@@ -39,6 +39,7 @@ export const useEventBySlug = (
           "images",
           "thumbnail",
           "projects",
+          "projects.localizations",
           "projects.thumbnail",
           "backgroundImage",
           "wallpaper",
