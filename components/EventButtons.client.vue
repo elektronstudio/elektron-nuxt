@@ -9,11 +9,14 @@ type Props = {
 const { event, size } = withDefaults(defineProps<Props>(), {
   size: "xs",
 });
+const { locale } = useI18n();
 const { urgency } = useDatetime(event.start_at, event.end_at);
-const formattedStartAtDistance = event.start_at
-  ? useFormattedDistance(event.start_at)
-  : null;
-const { lang } = useLang();
+
+const formattedStartAtDistance = computed(() =>
+  event?.start_at
+    ? useFormattedDistance(new Date(event.start_at), locale.value)
+    : null,
+);
 
 const processEventFienta = (event: Event) => {
   // TODO Add [event,event.project] support

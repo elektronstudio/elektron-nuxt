@@ -10,8 +10,6 @@ useHead({
 const { t } = useI18n();
 const { lang } = useLang();
 
-console.log(event.value.projects[0]);
-
 breadcrumbs.value = [
   {
     title: t("pages.projects"),

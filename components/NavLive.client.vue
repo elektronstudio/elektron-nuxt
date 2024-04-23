@@ -1,16 +1,18 @@
 <script setup lang="ts">
 import type { Event } from "~~/types";
 
-const {
-  data: event,
-  formattedStartAtDistance,
-  urgency,
-  error,
-} = await useUpcomingEvent();
+const { locale } = useI18n();
+const { lang } = useLang();
+
+const { data: event, urgency, error } = await useUpcomingEvent();
 
 const { data: liveEvents } = await useLiveEvents();
 
-const { lang } = useLang();
+const formattedStartAtDistance = computed(() =>
+  event.value?.start_at
+    ? useFormattedDistance(new Date(event.value.start_at), locale.value)
+    : null,
+);
 
 const playerState = ref<boolean>(false);
 const audio = ref<HTMLAudioElement>();
