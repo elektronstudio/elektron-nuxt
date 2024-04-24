@@ -16,7 +16,9 @@ const {
   placeholder,
   label,
   disabled,
-} = defineProps<Props>();
+} = withDefaults(defineProps<Props>(), {
+  modelValue: "",
+});
 
 const emit = defineEmits<{
   (e: "update:modelValue", value: ModelValue): void;

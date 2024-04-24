@@ -6,12 +6,14 @@ type Props = {
   breakall?: boolean;
 };
 
-const {
-  size = "md",
-  content,
-  nolinks = false,
-  breakall = false,
-} = defineProps<Props>();
+const { size, content, nolinks, breakall } = withDefaults(
+  defineProps<Props>(),
+  {
+    size: "md",
+    nolinks: false,
+    breakall: false,
+  },
+);
 
 const html = computed(() => {
   return nolinks ? content.replace(/<a[^>]*>(.*?)<\/a>/gi, "$1") : content;

@@ -6,12 +6,17 @@ type Props = {
   size?: "xs" | "sm" | "md" | "lg";
 };
 
-const { event, size = "xs" } = defineProps<Props>();
+const { event, size } = withDefaults(defineProps<Props>(), {
+  size: "xs",
+});
+const { locale } = useI18n();
 const { urgency } = useDatetime(event.start_at, event.end_at);
-const formattedStartAtDistance = event.start_at
-  ? useFormattedDistance(event.start_at)
-  : null;
-const { lang } = useLang();
+
+const formattedStartAtDistance = computed(() =>
+  event?.start_at
+    ? useFormattedDistance(new Date(event.start_at), locale.value)
+    : null,
+);
 
 const processEventFienta = (event: Event) => {
   // TODO Add [event,event.project] support
@@ -29,9 +34,9 @@ const processEvent = processEventFienta(event);
     color="accent"
   >
     <Icon name="radix-icons:external-link" />
-    {{ ["Visit event", "Vaata üritust"][lang] }}
+    {{ $t("visit_event") }}
   </EButton>
-  <NuxtLink
+  <NuxtLinkLocale
     v-else-if="
       processEvent.status === 'FREE' || processEvent.status === 'HAS_TICKET'
     "
@@ -46,7 +51,7 @@ const processEvent = processEventFienta(event);
       :size="size"
       color="accent"
     >
-      {{ ["Live now!", "Vaata laivis!"][lang] }}
+      {{ $t("see_live_now") }}
     </EButton>
     <EButton
       v-else-if="urgency === 'future' || urgency === 'soon'"
@@ -55,11 +60,7 @@ const processEvent = processEventFienta(event);
       :size="size"
       color="anime"
     >
-      {{
-        `${
-          ["Event starts: ", "Üritus algab: "][lang]
-        } ${formattedStartAtDistance}`
-      }}
+      {{ `${$t("event_starts")} ${formattedStartAtDistance}` }}
     </EButton>
     <EButton
       v-else-if="urgency === 'past'"
@@ -68,9 +69,9 @@ const processEvent = processEventFienta(event);
       :size="size"
       color="anime"
     >
-      {{ ["Revisit event", "Meenuta üritust"][lang] }}
+      {{ $t("revisit_event") }}
     </EButton>
-  </NuxtLink>
+  </NuxtLinkLocale>
   <EButton
     v-else-if="processEvent.status === 'REQUIRES_TICKET' && urgency !== 'past'"
     v-for="ticketLink in processEvent.ticketLinks"
@@ -81,10 +82,10 @@ const processEvent = processEventFienta(event);
     color="accent"
   >
     <Icon name="radix-icons:arrow-right" />
-    {{ ["Get a ticket", "Osta pilet"][lang] }}
+    {{ $t("get_a_ticket") }}
   </EButton>
   <p class="hasTicket" v-if="processEvent.status === 'HAS_TICKET'">
-    {{ ["You have a ticket", "Sul on ürituse pilet"][lang] }}
+    {{ $t("you_have_a_ticket") }}
   </p>
 </template>
 

@@ -10,14 +10,12 @@ type Props = {
   type?: "number" | "text" | "email";
 };
 
-const {
-  modelValue = "",
-  name,
-  placeholder,
-  label,
-  disabled,
-  type,
-} = defineProps<Props>();
+const { modelValue, name, placeholder, label, disabled, type } = withDefaults(
+  defineProps<Props>(),
+  {
+    modelValue: "",
+  },
+);
 
 const fieldId = randomString();
 

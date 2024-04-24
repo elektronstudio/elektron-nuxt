@@ -7,7 +7,9 @@ import {
   formatDistanceStrict,
   formatISO,
   isThisYear,
+  type Locale,
 } from "date-fns";
+import { et } from "date-fns/locale";
 import type { Urgency } from "~~/types";
 
 const now = useNow({ interval: 1000 });
@@ -35,12 +37,16 @@ export const formatDatetime = (datetime: Date | string | null) => {
     : null;
 };
 
-export const useFormattedDistance = (datetime: Date | string) => {
+export const useFormattedDistance = (
+  datetime: Date | string,
+  locale: string,
+) => {
   return computed(() => {
     const distance = sentenceCase(
       formatDistanceStrict(new Date(datetime), now.value, {
         roundingMethod: "round",
         addSuffix: true,
+        locale: locale === "et" ? et : undefined,
       }),
     );
     return distance;
@@ -77,7 +83,6 @@ export const useDatetime = (
   const formattedStartAtTime = formatTime(startAtDatetime);
   const formattedEndAtDate = formatDate(endAtDatetime);
   const formattedEndAtTime = formatTime(endAtDatetime);
-  const formattedStartAtDistance = useFormattedDistance(startAtDatetime);
   const urgency = useUrgency(startAtDatetime, endAtDatetime);
 
   const isSameDay = formattedStartAtDate === formattedEndAtDate;
@@ -93,7 +98,6 @@ export const useDatetime = (
     formattedStartAtTime,
     formattedEndAtDate,
     formattedEndAtTime,
-    formattedStartAtDistance,
     urgency,
     formattedDatetimeFirst,
     formattedDatetimeSecond,

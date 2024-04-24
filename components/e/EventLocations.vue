@@ -12,7 +12,8 @@ const { isOnline, isOnlocation } = defineProps<Props>();
     <span v-if="isOnline"> <Icon name="radix-icons:globe" />Online </span>
 
     <span v-if="isOnlocation">
-      <Icon name="radix-icons:sewing-pin" />Onsite
+      <Icon name="radix-icons:sewing-pin" />
+      {{ $t("onsite") }}
     </span>
   </div>
 </template>

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-const { lang } = useLang();
+const { t } = useI18n();
 
 definePageMeta({
-  title: "Schedule",
+  title: "pages.schedule",
 });
 
 breadcrumbs.value = [];
@@ -17,11 +17,11 @@ const { data: upcomingEvents, error } = await useEvents({
   <ScheduleWrapper v-else key="future">
     <aside>
       <ETitle size="lg" style="margin-bottom: var(--m-3)">
-        {{ ["Upcoming events", "Tulevased sündmused"][lang] }}
+        {{ $t("upcoming_events") }}
       </ETitle>
-      <NuxtLink to="/schedule/past" class="EButton xs anime">
-        {{ ["See the past events", "Vaata toimunud sündmusi"][lang] }}
-      </NuxtLink>
+      <NuxtLinkLocale to="/schedule/past" class="EButton xs anime">
+        {{ $t("see_past_events") }}
+      </NuxtLinkLocale>
     </aside>
     <section>
       <ScheduleItem
@@ -33,11 +33,7 @@ const { data: upcomingEvents, error } = await useEvents({
         v-else-if="!upcomingEvents || upcomingEvents?.length === 0"
         size="lg"
       >
-        {{
-          ["Currently no upcoming events", "Hetkel ei ole sündmusi tulemas"][
-            lang
-          ]
-        }}
+        {{ $t("no_upcoming_events") }}
       </ETitle>
     </section>
   </ScheduleWrapper>

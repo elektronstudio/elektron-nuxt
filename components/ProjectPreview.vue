@@ -13,20 +13,20 @@ const { project } = defineProps<Props>();
   <PinnedItem>
     <aside>
       <EStack is="header">
-        <NuxtLink :to="project.projectLink">
+        <NuxtLinkLocale :to="project.projectLink">
           <ETitle el="h3">
             {{ project.titles[lang] }}
           </ETitle>
-        </NuxtLink>
+        </NuxtLinkLocale>
         <EContent :content="project.intros[lang]" />
       </EStack>
       <footer>
-        <NuxtLink v-slot="{ href }" :to="project.projectLink" custom>
+        <NuxtLinkLocale v-slot="{ href }" :to="project.projectLink" custom>
           <EButton size="xs" el="a" color="accent" :href="href">
             <Icon name="radix-icons:arrow-right" />
-            {{ ["View project", "Vaata projekti"][lang] }}
+            {{ $t("view_project") }}
           </EButton>
-        </NuxtLink>
+        </NuxtLinkLocale>
         <div class="eventButtons">
           <EventButtons :event="project" />
         </div>

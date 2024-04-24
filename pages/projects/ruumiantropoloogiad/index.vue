@@ -18,19 +18,21 @@ useHead({
   title: `${project.value.title} – elektron.art`,
 });
 
+const { t } = useI18n();
+const { lang } = useLang();
+
 breadcrumbs.value = [
   {
-    title: "Projects",
+    title: t("pages.projects"),
     link: "/projects",
   },
   {
-    title: project.value.title,
+    title: project.value.titles[lang],
     link: `/projects/${project.value.slug}`,
   },
 ];
 
 // const project = data.value as Project;
-const { lang } = useLang();
 </script>
 
 <template>

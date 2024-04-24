@@ -18,19 +18,20 @@ const { data: events } = await useEvents({
 useHead({
   title: `${event.value.title} – elektron.art`,
 });
+const { t } = useI18n();
 const { lang } = useLang();
 
 breadcrumbs.value = [
   {
-    title: "Projects",
+    title: t("pages.projects"),
     link: "/projects",
   },
   {
-    title: ["Anthropologies of space", "Ruumiantropoloogiad"][lang.value],
+    title: t("anthropologies_of_space"),
     link: `/projects/ruumiantropoloogiad`,
   },
   {
-    title: event.value.title,
+    title: event.value.titles[lang],
     link: `/projects/ruumiantropoloogiad/${event.value.slug}`,
   },
 ];
@@ -47,7 +48,7 @@ breadcrumbs.value = [
         size="xs"
         color="accent"
       >
-        {{ ["Play", "Play"][lang] }}
+        {{ $t("play") }}
       </EButton>
     </template>
   </AnthroPage>

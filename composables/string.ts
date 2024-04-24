@@ -14,7 +14,7 @@ export function randomString(length = 8): string {
     .join("");
 }
 
-export const randomFilename = (ext) => {
+export const randomFilename = (ext: string) => {
   const date = format(new Date(), "dd-MM-yyyy-HH-mm-ss-SSS");
   return `${date}.${randomString(4)}.${ext}`;
 };
@@ -27,7 +27,7 @@ export const split = (str = "", separator = ",") =>
 
 const replacer = () => {
   const seen = new WeakSet();
-  return (_key, value) => {
+  return (_key: string, value: WeakKey) => {
     if (typeof value === "object" && value !== null) {
       if (seen.has(value)) {
         return;
@@ -41,7 +41,7 @@ const replacer = () => {
 export const stringify = (obj: object, _ = undefined, space = 2) =>
   JSON.stringify(obj, replacer(), space);
 
-export const truncate = (str, length = 100) =>
+export const truncate = (str: string, length = 100) =>
   str.length <= length ? str : str.slice(0, length) + "...";
 
 export function safeJsonParse(str: any) {

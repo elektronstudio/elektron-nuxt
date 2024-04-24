@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
-  title: "About us",
+  title: "pages.about",
 });
 breadcrumbs.value = [];
 const { data, error } = await useAboutPage();

@@ -5,7 +5,9 @@ type Props = {
   content?: string;
 };
 
-const { layout = "columns1", title, content } = defineProps<Props>();
+const { layout, title, content } = withDefaults(defineProps<Props>(), {
+  layout: "columns1",
+});
 </script>
 <template>
   <!-- TODO: minimum aspect ratio is probably needed -->

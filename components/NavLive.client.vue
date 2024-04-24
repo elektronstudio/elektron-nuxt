@@ -1,16 +1,18 @@
 <script setup lang="ts">
 import type { Event } from "~~/types";
 
-const {
-  data: event,
-  formattedStartAtDistance,
-  urgency,
-  error,
-} = await useUpcomingEvent();
+const { locale } = useI18n();
+const { lang } = useLang();
+
+const { data: event, urgency, error } = await useUpcomingEvent();
 
 const { data: liveEvents } = await useLiveEvents();
 
-const { lang } = useLang();
+const formattedStartAtDistance = computed(() =>
+  event.value?.start_at
+    ? useFormattedDistance(new Date(event.value.start_at), locale.value)
+    : null,
+);
 
 const playerState = ref<boolean>(false);
 const audio = ref<HTMLAudioElement>();
@@ -43,7 +45,7 @@ watch(playerState, (playerState) => {
   <div v-if="liveEvent && liveEvent.radioUrl" class="nav-live">
     <AudioPlayer :event="liveEvent" :urgency="urgency" />
   </div>
-  <NuxtLink
+  <NuxtLinkLocale
     v-else-if="liveEvent"
     class="nav-live menu-item"
     :to="liveEvent.eventLiveLink || liveEvent.eventLink"
@@ -54,14 +56,12 @@ watch(playerState, (playerState) => {
         {{ formattedStartAtDistance.value }}:
       </span>
       <span v-else-if="urgency === 'now' && !liveEvent.haslive">
-        {{ ["Happening now", "Praegu käimas"][lang] }}:
+        {{ $t("happening_now") }}:
       </span>
-      <span v-else-if="urgency === 'now'">
-        {{ ["Live now", "Live"][lang] }}:
-      </span>
+      <span v-else-if="urgency === 'now'"> {{ $t("live_now") }}: </span>
       <span class="event-title">{{ liveEvent.titles[lang] }}</span>
     </a>
-  </NuxtLink>
+  </NuxtLinkLocale>
 </template>
 
 <style scoped>

@@ -7,7 +7,12 @@ type Props = {
   media: any;
 };
 
-const { layout = "columns1", title, description, media } = defineProps<Props>();
+const { layout, title, description, media } = withDefaults(
+  defineProps<Props>(),
+  {
+    layout: "columns1",
+  },
+);
 </script>
 <template>
   <!-- TODO: minimum aspect ratio is probably needed -->

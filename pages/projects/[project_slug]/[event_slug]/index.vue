@@ -7,23 +7,23 @@ const { data: event, error } = await useEventBySlug(slug as string);
 useHead({
   title: `${event.value.title} – elektron.art`,
 });
+const { t } = useI18n();
+const { lang } = useLang();
 
 breadcrumbs.value = [
   {
-    title: "Projects",
+    title: t("pages.projects"),
     link: "/projects",
   },
   {
-    title: event.value.projects[0].title,
+    title: event.value.projects[0].titles[lang],
     link: `/projects/${event.value.projects[0].slug}`,
   },
   {
-    title: event.value.title,
+    title: event.value.titles[lang],
     link: `/projects/${event.value.projects[0].slug}/${event.value.slug}`,
   },
 ];
-
-const { lang } = useLang();
 </script>
 
 <template>

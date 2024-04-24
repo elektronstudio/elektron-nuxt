@@ -18,19 +18,20 @@ const { data: events } = await useEvents({
 useHead({
   title: `${event.value.title} – elektron.art`,
 });
+const { t } = useI18n();
 const { lang } = useLang();
 
 breadcrumbs.value = [
   {
-    title: "Projects",
+    title: t("pages.projects"),
     link: "/projects",
   },
   {
-    title: ["Anthropologies of space", "Ruumiantropoloogiad"][lang.value],
+    title: t("anthropologies_of_space"),
     link: `/projects/ruumiantropoloogiad`,
   },
   {
-    title: event.value.title,
+    title: event.value.titles[lang],
     link: `/projects/ruumiantropoloogiad/${event.value.slug}`,
   },
 ];
@@ -40,12 +41,12 @@ breadcrumbs.value = [
   <ErrorCard v-if="error" />
   <AnthroPage v-else :event="event" :events="events">
     <template #header>
-      <NuxtLink
+      <NuxtLinkLocale
         class="EButton xs accent"
         to="/projects/ruumiantropoloogiad/kussaoled/live"
       >
-        {{ ["Live archive", "Laivi arhiiv"][lang] }}
-      </NuxtLink>
+        {{ $t("live_archive") }}
+      </NuxtLinkLocale>
     </template>
   </AnthroPage>
 </template>

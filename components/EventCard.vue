@@ -29,11 +29,11 @@ const {
             :is-onlocation="!!event.onlocation"
           />
         </div>
-        <NuxtLink :to="event.eventLink">
+        <NuxtLinkLocale :to="event.eventLink">
           <ETitle el="h4" size="xs" class="eventTitle">
             {{ event.title }}
           </ETitle>
-        </NuxtLink>
+        </NuxtLinkLocale>
       </header>
       <section v-if="!noButtons">
         <EventButtons :event="event" />

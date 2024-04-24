@@ -1,7 +1,8 @@
-import type { Strapi4RequestParams } from "@nuxtjs/strapi/dist/runtime/types";
 import { merge, has, isArray, head, forEach, isObject } from "lodash-es";
 import { compareAsc, compareDesc } from "date-fns";
-import type { Event } from "~~/types";
+import type { Event, Urgency } from "~~/types";
+import type { Strapi4RequestParams } from "@nuxtjs/strapi";
+
 // Events
 export const useEvents = (params: Strapi4RequestParams = {}) => {
   return useFind(
@@ -38,6 +39,7 @@ export const useEventBySlug = (
           "images",
           "thumbnail",
           "projects",
+          "projects.localizations",
           "projects.thumbnail",
           "backgroundImage",
           "wallpaper",
@@ -81,12 +83,6 @@ export const useUpcomingEvent = async () => {
       );
     })[0];
   });
-  // TODO Avoid duplication of useDatetime()
-  const formattedStartAtDistance = computed(() =>
-    data.value?.start_at
-      ? useFormattedDistance(new Date(data.value.start_at))
-      : null,
-  );
   const urgency = computed(() =>
     data.value?.start_at && data.value?.start_at
       ? useUrgency(new Date(data.value.start_at), new Date(data.value.end_at))
@@ -94,7 +90,7 @@ export const useUpcomingEvent = async () => {
       : null,
   );
 
-  return { data, error, formattedStartAtDistance, urgency };
+  return { data, error, urgency };
 };
 
 // Projects
@@ -146,29 +142,26 @@ export const useProjectBySlug = (
 };
 
 // Pages
-export const useFrontPage = (params: Strapi4RequestParams = {}) => {
+export const useFrontPage = () => {
   return useFind(
     "frontpage",
-    merge(
-      {
-        populate: [
-          "localizations",
-          "background",
-          "events",
-          "events.thumbnail",
-          "events.images",
-          "events.projects",
-          "events.localizations",
-          "events",
-          "projects",
-          "projects.thumbnail",
-          "projects.images",
-          "projects.projects",
-          "projects.localizations",
-        ],
-      },
-      params,
-    ),
+    {
+      populate: [
+        "localizations",
+        "background",
+        "events",
+        "events.thumbnail",
+        "events.images",
+        "events.projects",
+        "events.localizations",
+        "events",
+        "projects",
+        "projects.thumbnail",
+        "projects.images",
+        "projects.projects",
+        "projects.localizations",
+      ],
+    },
     processFrontPage,
   );
 };
@@ -277,7 +270,7 @@ export const useBlogPostBySlug = (
 export const useFind = (
   contentType: string,
   params?: Strapi4RequestParams,
-  process = (data) => data,
+  process = (data: any) => data,
 ) => {
   const { find } = useStrapi4();
   // We create an unique cache key based on function arguments

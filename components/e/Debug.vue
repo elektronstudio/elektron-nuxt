@@ -21,9 +21,9 @@ watchEffect(() => {
 <template>
   <div class="Debug" v-show="showDebug">
     <ETitle>Routes</ETitle>
-    <NuxtLink v-for="r in rs" :to="r">
+    <NuxtLinkLocale v-for="r in rs" :to="r">
       <pre>{{ r }}</pre>
-    </NuxtLink>
+    </NuxtLinkLocale>
   </div>
 </template>
 

@@ -6,11 +6,20 @@ type Props = {
   disabled?: boolean;
 };
 
-const { size = "md", el = "button", disabled = false } = defineProps<Props>();
+const { size, el, disabled } = withDefaults(defineProps<Props>(), {
+  size: "md",
+  el: "button",
+  disabled: false,
+});
 </script>
 
 <template>
-  <component :is="el" class="EButton" :class="`${size} ${color}`">
+  <component
+    :is="el"
+    class="EButton"
+    :class="`${size} ${color}`"
+    :disabled="disabled"
+  >
     <slot />
   </component>
 </template>

@@ -4,13 +4,9 @@ import type { Event } from "~~/types";
 definePageMeta({
   layout: "radio",
 });
+const { locale } = useI18n();
 
-const {
-  data: event,
-  formattedStartAtDistance,
-  urgency,
-  error,
-} = await useUpcomingEvent();
+const { data: event, urgency, error } = await useUpcomingEvent();
 
 const { data: liveEvents } = await useLiveEvents();
 
@@ -20,8 +16,6 @@ const liveEvent = computed(() => {
     return liveEvents.value.find((e: Event) => e.radioUrl);
   }
 });
-
-console.log("liveEvent", liveEvent.value);
 </script>
 
 <template>

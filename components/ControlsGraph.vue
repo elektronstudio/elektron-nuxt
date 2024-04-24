@@ -4,9 +4,11 @@ import { scaleLinear, scaleTime } from "d3";
 
 type Props = {
   data: any;
-  username?: string;
+  username?: string | null;
 };
-const { data, username = null } = defineProps<Props>();
+const { data, username } = withDefaults(defineProps<Props>(), {
+  username: null,
+});
 
 const useScrubber = (container, svg) => {
   const currentXTime = inject("currentXTime", ref(null));

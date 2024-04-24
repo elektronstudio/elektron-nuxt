@@ -1,6 +1,6 @@
 <!-- TODO consider renaming -->
 <script setup lang="ts">
-import EButton from "./EButton.vue";
+// import EButton from "./EButton.vue";
 
 type Props = {
   title?: string;
@@ -9,7 +9,9 @@ type Props = {
   layout?: "vertical" | "horizontal";
 };
 
-const { startAt, ticketUrl, layout = "horizontal" } = defineProps<Props>();
+const { startAt, ticketUrl, layout } = withDefaults(defineProps<Props>(), {
+  layout: "horizontal",
+});
 </script>
 
 <template>

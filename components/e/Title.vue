@@ -13,7 +13,13 @@ type Props = {
   title?: string;
 };
 
-const { size = "md", el, title } = defineProps<Props>();
+const {
+  size = "md",
+  el,
+  title,
+} = withDefaults(defineProps<Props>(), {
+  size: "md",
+});
 </script>
 
 <template>

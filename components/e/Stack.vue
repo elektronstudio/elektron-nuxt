@@ -5,7 +5,11 @@ type Props = {
   is?: string;
 };
 
-const { layout = "vertical", cols = 2, is = "div" } = defineProps<Props>();
+const { layout, cols, is } = withDefaults(defineProps<Props>(), {
+  layout: "vertical",
+  cols: 2,
+  is: "div",
+});
 </script>
 
 <template>
