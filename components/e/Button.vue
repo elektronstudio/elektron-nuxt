@@ -18,7 +18,7 @@ const { size, el, disabled } = withDefaults(defineProps<Props>(), {
     :is="el"
     class="EButton"
     :class="`${size} ${color}`"
-    :disabled="disabled"
+    :disabled="disabled ? true : undefined"
   >
     <slot />
   </component>

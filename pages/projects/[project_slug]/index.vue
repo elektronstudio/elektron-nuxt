@@ -129,7 +129,6 @@ breadcrumbs.value = [
 
 .buttons {
   position: fixed;
-  bottom: var(--m-2);
   left: var(--m-2);
   display: flex;
   flex-direction: column;
@@ -141,6 +140,9 @@ breadcrumbs.value = [
 @media only screen and (max-width: 599px) {
   .EContent.Description :deep(p) {
     font-size: var(--text-xl);
+  }
+  .buttons {
+    bottom: var(--m-2);
   }
 }
 @media only screen and (min-width: 600px) {
