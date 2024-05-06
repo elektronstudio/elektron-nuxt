@@ -77,7 +77,7 @@ const title = computed(() =>
 }
 
 .main.indexPage {
-  min-height: calc(100vh + var(--h-9));
+  min-height: calc(100vh + var(--h-20));
 }
 @media only screen and (max-width: 599px) {
   .main.isLive {
@@ -90,6 +90,9 @@ const title = computed(() =>
   }
   .main.breadCumbs {
     padding-top: calc(var(--h-9) + var(--h-6));
+  }
+  .main.indexPage {
+    min-height: calc(100vh + var(--h-9));
   }
 }
 </style>

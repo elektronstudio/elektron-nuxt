@@ -57,11 +57,12 @@ const { isLive } = route.meta;
 .footer {
   position: relative;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 1rem;
   /* align-items: center; */
   margin-top: auto;
-  height: var(--h-9);
   padding: var(--p-1) var(--p-3);
+  height: var(--h-20);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   line-height: 1;
@@ -69,6 +70,7 @@ const { isLive } = route.meta;
   color: var(--gray-300);
   border-top: var(--border-DEFAULT) solid var(--gray-500);
   z-index: 10;
+  background-color: var(--bg);
 }
 
 .info {
@@ -87,7 +89,11 @@ const { isLive } = route.meta;
 
 @media only screen and (min-width: 600px) {
   .footer {
+    height: var(--h-9);
     padding: var(--p-1);
+    flex-direction: row;
+    justify-content: space-between;
+    padding: var(--p-1) var(--p-3);
   }
 }
 </style>
