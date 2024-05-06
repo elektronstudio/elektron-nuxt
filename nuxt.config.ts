@@ -90,6 +90,14 @@ export default defineNuxtConfig({
     ignoredHostnames: ["localhost"],
     domain: "elektron.art",
   },
+  icon: {
+    customCollections: [
+      {
+        prefix: "socials",
+        dir: "./icons/socials",
+      },
+    ],
+  },
   runtimeConfig: {
     strapiUrl: "",
     public: { wsUrl: "", fientaUrl: "", fientaToken: "" },

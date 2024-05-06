@@ -51,7 +51,7 @@ const title = computed(() =>
       <main
         class="main"
         :class="{
-          indexPage: $route.fullPath === '/',
+          indexPage: $route.fullPath === '/' || $route.fullPath === '/et',
           isLive: isLive,
           breadCumbs: breadcrumbs.length > 0,
         }"
@@ -62,6 +62,7 @@ const title = computed(() =>
         <UserInfo />
         <EWindowBorder />
         <DraggableChat />
+        <Footer />
       </main>
     </Body>
   </Html>
@@ -69,14 +70,15 @@ const title = computed(() =>
 
 <style scoped>
 .main {
-  /* position: relative; */
   display: flex;
   min-height: 100vh;
-  /* height: 100vh; */
   flex-direction: column;
   padding-top: calc(var(--h-9) * 2);
 }
 
+.main.indexPage {
+  min-height: calc(100vh + var(--h-20));
+}
 @media only screen and (max-width: 599px) {
   .main.isLive {
     padding-top: calc(var(--h-9) * 2);
@@ -88,6 +90,9 @@ const title = computed(() =>
   }
   .main.breadCumbs {
     padding-top: calc(var(--h-9) + var(--h-6));
+  }
+  .main.indexPage {
+    min-height: calc(100vh + var(--h-9));
   }
 }
 </style>
