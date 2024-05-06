@@ -51,7 +51,7 @@ const title = computed(() =>
       <main
         class="main"
         :class="{
-          indexPage: $route.fullPath === '/',
+          indexPage: $route.fullPath === '/' || $route.fullPath === '/et',
           isLive: isLive,
           breadCumbs: breadcrumbs.length > 0,
         }"
@@ -59,7 +59,7 @@ const title = computed(() =>
         <Nav />
         <Breadcrumbs />
         <slot />
-        <!-- <UserInfo /> -->
+        <UserInfo />
         <EWindowBorder />
         <DraggableChat />
         <Footer />
@@ -70,14 +70,15 @@ const title = computed(() =>
 
 <style scoped>
 .main {
-  /* position: relative; */
   display: flex;
   min-height: 100vh;
-  /* height: 100vh; */
   flex-direction: column;
   padding-top: calc(var(--h-9) * 2);
 }
 
+.main.indexPage {
+  min-height: calc(100vh + var(--h-9));
+}
 @media only screen and (max-width: 599px) {
   .main.isLive {
     padding-top: calc(var(--h-9) * 2);

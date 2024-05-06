@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { userName, userMessage } from "~~/composables/user";
 const { lang } = useLang();
+const route: any = useRoute();
+const { isLive } = route.meta;
+
 // const userName = useUserName();
 // const userMessage = useUserMessage();
 // const draggableChatState = useDraggableChatState();
@@ -12,6 +15,7 @@ const handleClose = () => {
 const handleToggle = () => {
   draggableChatState.value = !draggableChatState.value;
 };
+console.log("isLive", isLive, route.fullPath.endsWith("/live"));
 </script>
 
 <template>
@@ -29,7 +33,12 @@ const handleToggle = () => {
       <EInput v-model="userMessage" />
     </EDialog>
   </Transition>
-  <EDraggableTitlebar :title="userName" class="userTab" @click="handleToggle">
+  <EDraggableTitlebar
+    v-if="$route.fullPath.endsWith('/live')"
+    :title="userName"
+    class="userTab"
+    @click="handleToggle"
+  >
     <span class="userIndicator" />
   </EDraggableTitlebar>
 </template>
