@@ -59,9 +59,10 @@ const title = computed(() =>
         <Nav />
         <Breadcrumbs />
         <slot />
-        <UserInfo />
+        <!-- <UserInfo /> -->
         <EWindowBorder />
         <DraggableChat />
+        <Footer />
       </main>
     </Body>
   </Html>

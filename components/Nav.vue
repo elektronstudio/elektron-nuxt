@@ -3,24 +3,6 @@ import { useMagicKeys } from "@vueuse/core";
 const { locale, setLocale, t } = useI18n();
 
 const route: any = useRoute();
-const navItems = [
-  {
-    label: t("pages.schedule"),
-    path: "/schedule",
-  },
-  {
-    label: t("pages.projects"),
-    path: "/projects",
-  },
-  {
-    label: t("pages.about"),
-    path: "/about",
-  },
-  {
-    label: t("pages.podcast"),
-    path: "/signal",
-  },
-];
 
 const { theme, changeTheme } = useTheme();
 const navState = ref(false);
