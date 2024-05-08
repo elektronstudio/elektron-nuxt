@@ -14,7 +14,7 @@ const { urgency } = useDatetime(event.start_at, event.end_at);
 
 const formattedStartAtDistance = computed(() =>
   event?.start_at
-    ? useFormattedDistance(new Date(event.start_at), locale.value)
+    ? useFormattedDistance(new Date(event.start_at), locale.value).value
     : null,
 );
 
