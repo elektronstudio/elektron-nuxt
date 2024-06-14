@@ -28,9 +28,9 @@ console.log("isLive", isLive, route.fullPath.endsWith("/live"));
       @close-dialog="handleClose"
     >
       <p style="font-size: 0.8em">Your name</p>
-      <EInput v-model="userName" />
+      <input class="EInput" v-model="userName" />
       <p style="font-size: 0.8em; margin-top: 0.5em">Your message</p>
-      <EInput v-model="userMessage" />
+      <input class="EInput" v-model="userMessage" />
     </EDialog>
   </Transition>
   <EDraggableTitlebar

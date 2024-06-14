@@ -26,6 +26,7 @@ const emit = defineEmits<{
 const inputValue = computed({
   get: () => modelValue,
   set: (value) => {
+    console.log(value);
     emit("update:modelValue", value);
   },
 });
@@ -47,7 +48,7 @@ const inputValue = computed({
   />
 </template>
 
-<style>
+<style global>
 .EInput {
   display: flex;
   flex-direction: column;
