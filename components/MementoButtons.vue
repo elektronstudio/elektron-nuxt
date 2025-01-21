@@ -21,18 +21,19 @@ const buttons = ref<
 watch(buttonUpdates, () => {
   const updatedButtonData = buttonUpdates.value.pop()?.value.split(" ");
   const updatedButton = {
-    type: updatedButtonData[0],
+    index: updatedButtonData[0],
     label: updatedButtonData[1],
     color: updatedButtonData[2],
   };
   const initialButtons = parseControls(initialControls);
 
   buttons.value =
-    initialButtons?.map((button) => {
-      if (button.type === updatedButton.type) {
+    initialButtons?.map((button, index) => {
+      if (index === updatedButton.index) {
         return {
-          ...updatedButton,
-          channel: button.channel,
+          ...button,
+          label: updatedButton.label,
+          color: updatedButton.color,
         };
       }
       return button;
