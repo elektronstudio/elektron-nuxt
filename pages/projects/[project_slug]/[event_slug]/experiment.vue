@@ -163,6 +163,7 @@ const video = ref<HTMLVideoElement | null>(null);
 .rawdata pre {
   flex: 1;
   overflow: auto;
+  text-wrap: nowrap;
 }
 .delete-button {
   display: flex;
