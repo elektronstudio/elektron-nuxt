@@ -7,11 +7,16 @@ type Props = {
 
 const { initialControls } = defineProps<Props>();
 const { sendMessage, messages } = useMessages();
+
 const commands = computed(() => {
   return messages.value.filter(
     (m) => m.type === "COMMAND" && m.channel === "experiment",
   );
 });
+
+console.log(commands.value);
+
+// use controls sent from websocket
 const controls = computed(() => {
   return parseControls(
     commands.value.length > 0
@@ -19,22 +24,31 @@ const controls = computed(() => {
       : initialControls,
   );
 });
+
 const handleClick = useThrottleFn((channel: string, type: string) => {
   sendMessage.value({
-    channel: channel,
-    type: type,
+    channel,
+    type,
     value: 10,
     userid: userId.value,
     username: userName.value,
   });
   sendMessage.value({
-    channel: channel,
-    type: type,
+    channel,
+    type,
     value: 0,
     userid: userId.value,
     username: userName.value,
   });
 }, 3000);
+
+function isEmoji(string: string) {
+  // Regex pattern to match emoji characters
+  const emojiPattern =
+    /[\u{1F000}-\u{1F6FF}\u{1F900}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E6}-\u{1F1FF}\u{1F191}-\u{1F251}\u{1F004}\u{1F0CF}\u{1F170}-\u{1F171}\u{1F17E}-\u{1F17F}\u{1F18E}\u{3030}\u{2B50}\u{2B55}\u{2934}-\u{2935}\u{2B05}-\u{2B07}\u{2B1B}-\u{2B1C}\u{3297}\u{3299}\u{303D}\u{00A9}\u{00AE}\u{2122}\u{23F3}\u{24C2}\u{23E9}-\u{23EF}\u{25B6}\u{23F8}-\u{23FA}\u{200D}]/u;
+
+  return emojiPattern.test(string);
+}
 </script>
 
 <template>
@@ -42,15 +56,17 @@ const handleClick = useThrottleFn((channel: string, type: string) => {
     <button
       v-if="controls"
       v-for="control in controls"
-      className="MementoButton"
+      class="MementoButton"
+      :class="{ ['m-text']: !isEmoji(control.label) }"
       @click="handleClick(control.channel, control.type)"
       :style="{ backgroundColor: control.color }"
     >
-      <svg>
+      <svg v-if="isEmoji(control.label)">
         <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle">
           {{ control.label }}
         </text>
       </svg>
+      <span v-else>{{ control.label }}</span>
     </button>
   </div>
 </template>
@@ -69,6 +85,21 @@ const handleClick = useThrottleFn((channel: string, type: string) => {
   border-radius: var(--rounded-DEFAULT);
   width: 30%;
   aspect-ratio: 1 / 1;
+}
+.MementoButton.m-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+
+  span {
+    text-align: center;
+    color: black;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    /* font-size: var(--text-xs); */
+    line-height: 1.1;
+  }
 }
 .MementoButton svg {
   /* position: absolute; */
