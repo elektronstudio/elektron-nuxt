@@ -22,7 +22,7 @@ watch(buttonUpdates, () => {
   const updatedButtonData = buttonUpdates.value.pop()?.value.split(" ");
   const updatedButton = {
     index: Number(updatedButtonData[0]),
-    label: updatedButtonData[1],
+    label: updatedButtonData[1].replace(/'/g, " "),
     color: updatedButtonData[2],
   };
   const initialButtons = parseControls(initialControls);
@@ -30,7 +30,7 @@ watch(buttonUpdates, () => {
   console.log("updatedButton", updatedButton);
 
   buttons.value =
-    initialButtons?.map((button, index) => {
+    buttons.value?.map((button, index) => {
       if (index === updatedButton.index) {
         return {
           ...button,
