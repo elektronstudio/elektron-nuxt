@@ -96,8 +96,8 @@ onMounted(() => {
       <DraggablesDock :draggables="noTicketDraggables" />
     </EBreadBoard>
     <EBreadBoard v-else :wallpaper="event.wallpaper?.url">
-      <DraggableHoc v-bind="draggables.video" v-if="event.live">
-        <Videostream :url="event.live" />
+      <DraggableHoc v-bind="draggables.video" v-if="event.vimeoId">
+        <VimeoIframe v-if="event.vimeoId" :id="event.vimeoId" />
       </DraggableHoc>
       <DraggableHoc v-bind="draggables.video" v-else-if="live">
         <Videostream :url="live" />
