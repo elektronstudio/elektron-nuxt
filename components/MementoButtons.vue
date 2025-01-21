@@ -8,21 +8,35 @@ type Props = {
 const { initialControls } = defineProps<Props>();
 const { sendMessage, messages } = useMessages();
 
-const commands = computed(() => {
+const buttonUpdates = computed(() => {
   return messages.value.filter(
-    (m) => m.type === "COMMAND" && m.channel === "experiment",
+    (m) => m.type === "UPDATE_BUTTON" && m.channel === "experiment",
   );
 });
 
-console.log(commands.value);
+const buttons = ref<
+  { type: string; label: string; color: string; channel: string }[]
+>(parseControls(initialControls) || []);
 
-// use controls sent from websocket
-const controls = computed(() => {
-  return parseControls(
-    commands.value.length > 0
-      ? commands.value[commands.value.length - 1].value
-      : initialControls,
-  );
+watch(buttonUpdates, () => {
+  const updatedButtonData = buttonUpdates.value.pop()?.value.split(" ");
+  const updatedButton = {
+    type: updatedButtonData[0],
+    label: updatedButtonData[1],
+    color: updatedButtonData[2],
+  };
+  const initialButtons = parseControls(initialControls);
+
+  buttons.value =
+    initialButtons?.map((button) => {
+      if (button.type === updatedButton.type) {
+        return {
+          ...updatedButton,
+          channel: button.channel,
+        };
+      }
+      return button;
+    }) || [];
 });
 
 const handleClick = useThrottleFn((channel: string, type: string) => {
@@ -54,8 +68,8 @@ function isEmoji(string: string) {
 <template>
   <div class="MementoButtons">
     <button
-      v-if="controls"
-      v-for="control in controls"
+      v-if="buttons"
+      v-for="control in buttons"
       class="MementoButton"
       :class="{ ['m-text']: !isEmoji(control.label) }"
       @click="handleClick(control.channel, control.type)"
