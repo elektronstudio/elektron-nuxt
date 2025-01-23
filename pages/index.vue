@@ -179,17 +179,17 @@ function closeDialog(index: number) {
   transition: all 0.3s ease-in-out;
 
   &.order-1 {
-    transform: translate(-50%, calc(-50% - var(--p-6)));
+    transform: translate(-50%, calc(-50% + var(--p-6)));
     z-index: 2;
   }
 
   &.order-2 {
-    transform: translate(-50%, calc(-50% - var(--p-12)));
+    transform: translate(-50%, calc(-50% + var(--p-12)));
     z-index: 3;
   }
 
   &.order-3 {
-    transform: translate(-50%, calc(-50% - var(--p-18)));
+    transform: translate(-50%, calc(-50% + var(--p-18)));
     z-index: 4;
   }
 }
