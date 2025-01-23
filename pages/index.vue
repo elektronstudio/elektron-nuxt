@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import _ from "lodash";
 const { lang } = useLang();
 const { data: frontpage, error: frontpageError } = await useFrontPage();
 const muted = ref<boolean | undefined>(true);
@@ -10,13 +11,32 @@ const handleMute = () => {
 
 const dialogState = ref<boolean>(true);
 
+const events = frontpage.value.events;
+const projects = frontpage.value.projects;
+const pinnedItems = ref([
+  ...events?.map((e: any) => ({ ...e, isEvent: true })),
+  ...projects?.map((p: any) => ({ ...p, isProject: true })),
+]);
+console.log(pinnedItems);
+
 const event = computed(() => {
+  console.log(frontpage.value?.events);
   return frontpage.value?.events?.length ? frontpage.value.events[0] : null;
 });
 
 const project = computed(() => {
   return frontpage.value?.projects?.length ? frontpage.value.projects[0] : null;
 });
+
+function moveToLast(item: any) {
+  _.pull(pinnedItems.value, item); // Removes all occurrences of the item
+  pinnedItems.value.push(item); // Adds the item to the end of the array
+  // pinnedItems.value = _.shuffle(pinnedItems.value);
+}
+
+function closeDialog(index: number) {
+  pinnedItems.value.splice(index, 1);
+}
 </script>
 <template>
   <div>
@@ -49,14 +69,23 @@ const project = computed(() => {
             <Icon name="radix-icons:speaker-loud" v-else />
           </button>
         </Transition>
+      </div>
+      <div class="pinnedItems">
         <EDialog
-          v-if="dialogState && (event || project)"
-          :title="event?.urgencyLabel ? event.urgencyLabel[lang] : $t('pinned')"
+          v-if="dialogState && pinnedItems.length > 0"
+          v-for="(item, index) in pinnedItems"
+          :title="
+            event?.urgencyLabel
+              ? event.urgencyLabel[lang]
+              : `${$t('pinned')}: ${item.title}`
+          "
+          :key="item.id"
           :dialog-state="dialogState"
-          @close-dialog="dialogState = false"
+          @click="moveToLast(item)"
+          @close-dialog="closeDialog(index)"
         >
-          <EventPreview v-if="event" :event="event" />
-          <ProjectPreview v-else-if="project" :project="project" />
+          <EventPreview v-if="item.isEvent" :event="item" />
+          <ProjectPreview v-if="item.isProject" :project="item" />
         </EDialog>
       </div>
     </div>
@@ -67,7 +96,8 @@ const project = computed(() => {
 .Page {
   position: relative;
 }
-.videoWrapper {
+.videoWrapper,
+.pinnedItems {
   position: fixed;
   top: var(--h-9);
   width: 100%;
@@ -130,11 +160,49 @@ const project = computed(() => {
   opacity: 0;
 }
 
+.pinnedItems {
+}
+
 .EDialog {
-  position: relative;
+  position: absolute;
   overflow: hidden;
   background-color: var(--bg);
   width: 100%;
   max-width: 40rem;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  &:nth-last-child(2) {
+    transform: translate(-50%, calc(-50% - var(--p-6)));
+  }
+
+  &:nth-last-child(3) {
+    transform: translate(-50%, calc(-50% - var(--p-12)));
+  }
+
+  &:nth-last-child(4) {
+    transform: translate(-50%, calc(-50% - var(--p-18)));
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .EDialog {
+    &:nth-last-child(2) {
+      transform: translate(calc(-50% - var(--p-6)), calc(-50% - var(--p-6)));
+    }
+
+    &:nth-last-child(3) {
+      transform: translate(calc(-50% - var(--p-12)), calc(-50% - var(--p-12)));
+    }
+
+    &:nth-last-child(4) {
+      transform: translate(calc(-50% - var(--p-18)), calc(-50% - var(--p-18)));
+    }
+  }
+}
+
+.items-move {
+  transition: all 1s cubic-bezier(0.55, 0, 0.1, 1);
 }
 </style>

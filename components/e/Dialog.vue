@@ -12,7 +12,7 @@ const emit = defineEmits<{
 <template>
   <dialog class="EDialog">
     <EDraggableTitlebar :title="title">
-      <ETitlebarButton icon="cross" @click="emit('close-dialog')" />
+      <ETitlebarButton icon="cross" @click.stop="emit('close-dialog')" />
     </EDraggableTitlebar>
     <article class="wrapper">
       <slot />
@@ -29,8 +29,9 @@ const emit = defineEmits<{
   padding: 0;
   left: auto;
   color: var(--fg);
-  border: 1px solid transparent;
+  border: 1px solid var(--gray-500);
 }
+
 .EDialog:hover {
   border: 1px solid var(--gray-500);
 }
