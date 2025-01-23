@@ -36,7 +36,11 @@ const { lang } = useLang();
       </header>
       <footer>
         <EventButtons
-          v-if="event.eventLiveLink || event.projects?.[0]?.eventLiveLink"
+          v-if="
+            event.eventLiveLink ||
+            event.projects?.[0]?.eventLiveLink ||
+            event.fienta_id
+          "
           :event="event"
         />
       </footer>
