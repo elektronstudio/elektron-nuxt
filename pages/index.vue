@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import _ from "lodash";
+import _, { findIndex } from "lodash";
 const { lang } = useLang();
 const { data: frontpage, error: frontpageError } = await useFrontPage();
 const muted = ref<boolean | undefined>(true);
@@ -17,7 +17,9 @@ const pinnedItems = ref([
   ...events?.map((e: any) => ({ ...e, isEvent: true })),
   ...projects?.map((p: any) => ({ ...p, isProject: true })),
 ]);
-console.log(pinnedItems);
+const pinnedItemsIds = ref(pinnedItems.value.map((item) => item.id));
+console.log([...pinnedItemsIds.value]);
+console.log(findIndex(pinnedItemsIds.value, 68));
 
 const event = computed(() => {
   console.log(frontpage.value?.events);
@@ -28,14 +30,14 @@ const project = computed(() => {
   return frontpage.value?.projects?.length ? frontpage.value.projects[0] : null;
 });
 
-function moveToLast(item: any) {
-  _.pull(pinnedItems.value, item); // Removes all occurrences of the item
-  pinnedItems.value.push(item); // Adds the item to the end of the array
+function moveToLast(id: string) {
+  _.pull(pinnedItemsIds.value, id); // Removes all occurrences of the item
+  pinnedItemsIds.value.push(id); // Adds the item to the end of the array
   // pinnedItems.value = _.shuffle(pinnedItems.value);
 }
 
 function closeDialog(index: number) {
-  pinnedItems.value.splice(index, 1);
+  pinnedItemsIds.value.splice(index, 1);
 }
 </script>
 <template>
@@ -70,7 +72,7 @@ function closeDialog(index: number) {
           </button>
         </Transition>
       </div>
-      <div class="pinnedItems">
+      <div class="pinnedItems" :data-ids="[...pinnedItemsIds]">
         <EDialog
           v-if="dialogState && pinnedItems.length > 0"
           v-for="(item, index) in pinnedItems"
@@ -81,8 +83,9 @@ function closeDialog(index: number) {
           "
           :key="item.id"
           :dialog-state="dialogState"
-          @click="moveToLast(item)"
+          @click="moveToLast(item.id)"
           @close-dialog="closeDialog(index)"
+          :class="`order-${pinnedItemsIds.findIndex((id) => id === item.id)}`"
         >
           <EventPreview v-if="item.isEvent" :event="item" />
           <ProjectPreview v-if="item.isProject" :project="item" />
@@ -172,32 +175,37 @@ function closeDialog(index: number) {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  z-index: 1;
+  transition: all 0.3s ease-in-out;
 
-  &:nth-last-child(2) {
+  &.order-1 {
     transform: translate(-50%, calc(-50% - var(--p-6)));
+    z-index: 2;
   }
 
-  &:nth-last-child(3) {
+  &.order-2 {
     transform: translate(-50%, calc(-50% - var(--p-12)));
+    z-index: 3;
   }
 
-  &:nth-last-child(4) {
+  &.order-3 {
     transform: translate(-50%, calc(-50% - var(--p-18)));
+    z-index: 4;
   }
 }
 
 @media only screen and (min-width: 600px) {
   .EDialog {
-    &:nth-last-child(2) {
-      transform: translate(calc(-50% - var(--p-6)), calc(-50% - var(--p-6)));
+    &.order-1 {
+      transform: translate(calc(-50% + var(--p-6)), calc(-50% + var(--p-6)));
     }
 
-    &:nth-last-child(3) {
-      transform: translate(calc(-50% - var(--p-12)), calc(-50% - var(--p-12)));
+    &.order-2 {
+      transform: translate(calc(-50% + var(--p-12)), calc(-50% + var(--p-12)));
     }
 
-    &:nth-last-child(4) {
-      transform: translate(calc(-50% - var(--p-18)), calc(-50% - var(--p-18)));
+    &.order-3 {
+      transform: translate(calc(-50% + var(--p-18)), calc(-50% + var(--p-18)));
     }
   }
 }
