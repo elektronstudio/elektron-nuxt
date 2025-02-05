@@ -6,12 +6,23 @@ type Props = {
 };
 
 const { initialControls } = defineProps<Props>();
-const { sendMessage, messages } = useMessages();
+const { sendMessage, messages, ws } = useMessages();
 
 const buttonUpdates = computed(() => {
   return messages.value.filter(
     (m) => m.type === "UPDATE_BUTTON" && m.channel === "experiment",
   );
+});
+
+const question = computed(() => {
+  const q = messages.value.filter(
+    (m) => m.type === "UPDATE_QUESTION" && m.channel === "experiment",
+  );
+  if (q.length > 0 && q[0].value !== "") {
+    return q[0].value;
+  } else {
+    return null;
+  }
 });
 
 const buttons = ref<
@@ -20,14 +31,14 @@ const buttons = ref<
 
 watch(buttonUpdates, () => {
   const updatedButtonData = buttonUpdates.value.pop()?.value.split(" ");
-  const updatedButton = {
-    index: Number(updatedButtonData[0]),
-    label: updatedButtonData[1].replace(/'/g, " "),
-    color: updatedButtonData[2],
-  };
-  const initialButtons = parseControls(initialControls);
 
-  console.log("updatedButton", updatedButton);
+  const updatedButton = updatedButtonData
+    ? {
+        index: Number(updatedButtonData[0]),
+        label: updatedButtonData[1].replace(/'/g, " "),
+        color: updatedButtonData[2],
+      }
+    : { index: 0, label: "", color: "" };
 
   buttons.value =
     buttons.value?.map((button, index) => {
@@ -66,35 +77,60 @@ function isEmoji(string: string) {
 
   return emojiPattern.test(string);
 }
+
+function handleDebug() {
+  sendMessage.value({
+    channel: "experiment",
+    type: "UPDATE_QUESTION",
+    value: "",
+    userid: userId.value,
+    username: userName.value,
+    store: false,
+  });
+}
 </script>
 
 <template>
-  <div class="MementoButtons">
-    <button
-      v-if="buttons"
-      v-for="control in buttons"
-      class="MementoButton"
-      :class="{ ['m-text']: !isEmoji(control.label) }"
-      @click="handleClick(control.channel, control.type)"
-      :style="{ backgroundColor: control.color }"
-    >
-      <svg v-if="isEmoji(control.label)">
-        <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle">
-          {{ control.label }}
-        </text>
-      </svg>
-      <span v-else>{{ control.label }}</span>
-    </button>
+  <div class="wrapper">
+    <h4 v-if="question">{{ question }}</h4>
+    <div class="MementoButtons">
+      <button
+        v-if="buttons"
+        v-for="control in buttons"
+        class="MementoButton"
+        :class="{ ['m-text']: !isEmoji(control.label) }"
+        @click="handleClick(control.channel, control.type)"
+        :style="{ backgroundColor: control.color }"
+      >
+        <svg v-if="isEmoji(control.label)">
+          <text
+            x="50%"
+            y="50%"
+            dominant-baseline="central"
+            text-anchor="middle"
+          >
+            {{ control.label }}
+          </text>
+        </svg>
+        <span v-else>{{ control.label }}</span>
+      </button>
+    </div>
+    <!-- <button @click="handleDebug">DEBUG</button> -->
   </div>
 </template>
 
 <style>
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: var(--p-5);
+  gap: var(--p-5);
+}
 .MementoButtons {
   display: flex;
-  /* gap: var(--p-5); */
+  gap: var(--p-5);
   justify-content: space-between;
-  padding: var(--p-5);
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
 }
 .MementoButton {
   position: relative;

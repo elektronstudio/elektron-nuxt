@@ -18,11 +18,8 @@ const pinnedItems = ref([
   ...projects?.map((p: any) => ({ ...p, isProject: true })),
 ]);
 const pinnedItemsIds = ref(pinnedItems.value.map((item) => item.id));
-console.log([...pinnedItemsIds.value]);
-console.log(findIndex(pinnedItemsIds.value, 68));
 
 const event = computed(() => {
-  console.log(frontpage.value?.events);
   return frontpage.value?.events?.length ? frontpage.value.events[0] : null;
 });
 

@@ -12,7 +12,7 @@ export const useMessages = () => {
 
     websocket.addEventListener("message", ({ data }) => {
       const message = JSON.parse(data);
-      console.log("message", message);
+      // console.log("message", message);
       messages.value.push(message);
     });
 
