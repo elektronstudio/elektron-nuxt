@@ -18,8 +18,14 @@ const question = computed(() => {
   const q = messages.value.filter(
     (m) => m.type === "UPDATE_QUESTION" && m.channel === "experiment",
   );
-  if (q.length > 0 && q[0].value !== "" && q[0].value !== "null") {
-    return q[0].value;
+  const latestQuestion = q[q.length - 1];
+  if (
+    latestQuestion &&
+    latestQuestion.value !== "" &&
+    latestQuestion.value !== "null" &&
+    latestQuestion.value !== "0"
+  ) {
+    return latestQuestion.value;
   } else {
     return null;
   }
@@ -115,7 +121,7 @@ function handleDebug() {
         <span v-else>{{ control.label }}</span>
       </button>
     </div>
-    <!-- <button @click="handleDebug">DEBUG</button> -->
+    <button @click="handleDebug">DEBUG</button>
   </div>
 </template>
 
