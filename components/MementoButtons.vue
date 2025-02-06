@@ -18,7 +18,7 @@ const question = computed(() => {
   const q = messages.value.filter(
     (m) => m.type === "UPDATE_QUESTION" && m.channel === "experiment",
   );
-  if (q.length > 0 && q[0].value !== "") {
+  if (q.length > 0 && q[0].value !== "" && q[0].value !== "null") {
     return q[0].value;
   } else {
     return null;
