@@ -18,7 +18,7 @@ const question = computed(() => {
   const q = messages.value.filter(
     (m) => m.type === "UPDATE_QUESTION" && m.channel === "experiment",
   );
-  const latestQuestion = q[q.length - 1];
+  const latestQuestion = q.pop();
   if (
     latestQuestion &&
     latestQuestion.value !== "" &&
@@ -118,7 +118,7 @@ function handleDebug() {
             {{ control.label }}
           </text>
         </svg>
-        <span v-else>{{ control.label }}</span>
+        <span v-else-if="control.label !== 'null'">{{ control.label }}</span>
       </button>
     </div>
     <!-- <button @click="handleDebug">DEBUG</button> -->
