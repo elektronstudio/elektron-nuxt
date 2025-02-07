@@ -66,9 +66,7 @@ const buttonNumbers = ref<Array<number | undefined>>([
 
 watch(messages.value, () => {
   const latestMessage = messages.value[messages.value.length - 1];
-  console.log(latestMessage);
   if (latestMessage.type === "UPDATE_BUTTON_NR") {
-    console.log(latestMessage.value);
     const latestMessageValue = latestMessage.value.split(" ");
     buttonNumbers.value.splice(
       Number(latestMessageValue[0]),
