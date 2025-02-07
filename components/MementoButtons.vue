@@ -120,7 +120,7 @@ function handleDebug() {
         <span v-else-if="control.label !== 'null'">{{ control.label }}</span>
       </button>
     </div>
-    <button @click="handleDebug">DEBUG</button>
+    <!-- <button @click="handleDebug">DEBUG</button> -->
   </div>
 </template>
 
