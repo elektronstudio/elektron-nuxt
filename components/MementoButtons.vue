@@ -58,13 +58,11 @@ watch(buttonUpdates, () => {
     }) || [];
 });
 
-const buttonNumbers = ref<{
-  [key: string]: number | undefined;
-}>({
-  DATA_1: undefined,
-  DATA_2: undefined,
-  DATA_3: undefined,
-});
+const buttonNumbers = ref<Array<number | undefined>>([
+  undefined,
+  undefined,
+  undefined,
+]);
 
 watch(messages.value, () => {
   const latestMessage = messages.value[messages.value.length - 1];
@@ -72,11 +70,11 @@ watch(messages.value, () => {
   if (latestMessage.type === "UPDATE_BUTTON_NR") {
     console.log(latestMessage.value);
     const latestMessageValue = latestMessage.value.split(" ");
-    buttonNumbers.value = {
-      ...buttonNumbers.value,
-      [latestMessageValue[0]]: Number(latestMessageValue[1]),
-    };
-    console.log(buttonNumbers.value);
+    buttonNumbers.value.splice(
+      Number(latestMessageValue[0]),
+      1,
+      Number(latestMessageValue[1]),
+    );
   }
 });
 
@@ -109,7 +107,7 @@ function handleDebug() {
   sendMessage.value({
     channel: "experiment",
     type: "UPDATE_BUTTON_NR",
-    value: "DATA_2 212",
+    value: "2 212",
     userid: userId.value,
     username: userName.value,
     store: false,
@@ -123,7 +121,7 @@ function handleDebug() {
     <div class="MementoButtons">
       <button
         v-if="buttons"
-        v-for="control in buttons"
+        v-for="(control, index) in buttons"
         class="MementoButton"
         :class="{ ['m-text']: !isEmoji(control.label) }"
         @click="handleClick(control.channel, control.type)"
@@ -142,8 +140,8 @@ function handleDebug() {
         <span v-else-if="control.label !== 'null'" class="button-text">{{
           control.label
         }}</span>
-        <span v-if="buttonNumbers[control.type]" class="button-nr">
-          {{ buttonNumbers[control.type] }}
+        <span v-if="buttonNumbers[index]" class="button-nr">
+          {{ buttonNumbers[index] }}
         </span>
       </button>
     </div>
