@@ -37,18 +37,17 @@ const buttons = ref<
 
 watch(buttonUpdates, () => {
   const updatedButtonData = buttonUpdates.value.pop()?.value.split(" ");
-
   const updatedButton = updatedButtonData
     ? {
         index: Number(updatedButtonData[0]),
         label: updatedButtonData[1].replace(/'/g, " "),
         color: updatedButtonData[2],
       }
-    : { index: 0, label: "", color: "" };
+    : undefined;
 
   buttons.value =
     buttons.value?.map((button, index) => {
-      if (index === updatedButton.index) {
+      if (updatedButton && index === updatedButton.index) {
         return {
           ...button,
           label: updatedButton.label,
@@ -88,7 +87,7 @@ function handleDebug() {
   sendMessage.value({
     channel: "experiment",
     type: "UPDATE_QUESTION",
-    value: "",
+    value: "Küssar",
     userid: userId.value,
     username: userName.value,
     store: false,
@@ -121,7 +120,7 @@ function handleDebug() {
         <span v-else-if="control.label !== 'null'">{{ control.label }}</span>
       </button>
     </div>
-    <!-- <button @click="handleDebug">DEBUG</button> -->
+    <button @click="handleDebug">DEBUG</button>
   </div>
 </template>
 
