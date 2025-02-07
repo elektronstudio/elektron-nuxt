@@ -58,6 +58,28 @@ watch(buttonUpdates, () => {
     }) || [];
 });
 
+const buttonNumbers = ref<{
+  [key: string]: number | undefined;
+}>({
+  DATA_1: undefined,
+  DATA_2: undefined,
+  DATA_3: undefined,
+});
+
+watch(messages.value, () => {
+  const latestMessage = messages.value[messages.value.length - 1];
+  console.log(latestMessage);
+  if (latestMessage.type === "UPDATE_BUTTON_NR") {
+    console.log(latestMessage.value);
+    const latestMessageValue = latestMessage.value.split(" ");
+    buttonNumbers.value = {
+      ...buttonNumbers.value,
+      [latestMessageValue[0]]: Number(latestMessageValue[1]),
+    };
+    console.log(buttonNumbers.value);
+  }
+});
+
 const handleClick = useThrottleFn((channel: string, type: string) => {
   sendMessage.value({
     channel,
@@ -86,8 +108,8 @@ function isEmoji(string: string) {
 function handleDebug() {
   sendMessage.value({
     channel: "experiment",
-    type: "UPDATE_QUESTION",
-    value: "Küssar",
+    type: "UPDATE_BUTTON_NR",
+    value: "DATA_2 212",
     userid: userId.value,
     username: userName.value,
     store: false,
@@ -117,7 +139,12 @@ function handleDebug() {
             {{ control.label }}
           </text>
         </svg>
-        <span v-else-if="control.label !== 'null'">{{ control.label }}</span>
+        <span v-else-if="control.label !== 'null'" class="button-text">{{
+          control.label
+        }}</span>
+        <span v-if="buttonNumbers[control.type]" class="button-nr">
+          {{ buttonNumbers[control.type] }}
+        </span>
       </button>
     </div>
     <!-- <button @click="handleDebug">DEBUG</button> -->
@@ -149,15 +176,25 @@ function handleDebug() {
   justify-content: center;
   align-items: center;
   padding: 0.5rem;
+}
 
-  span {
-    text-align: center;
-    color: black;
-    font-family: var(--font-mono);
-    text-transform: uppercase;
-    /* font-size: var(--text-xs); */
-    line-height: 1.1;
-  }
+.button-text {
+  text-align: center;
+  color: black;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  /* font-size: var(--text-xs); */
+  line-height: 1.1;
+}
+.button-nr {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  font-size: 0.8rem;
+  color: black;
+  font-family: var(--font-mono);
+
+  text-transform: uppercase;
 }
 .MementoButton svg {
   /* position: absolute; */
