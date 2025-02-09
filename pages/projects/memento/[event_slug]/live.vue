@@ -22,7 +22,6 @@ const draggables = useDraggables({
     hideTitleBarOnIdle: true,
   },
   controls: {
-    titles: ["", ""],
     tilesWidth: 5,
     // tilesHeight: 2,
     initialX: 10,
