@@ -11,9 +11,9 @@ const route = useRoute();
 const slug = route.params.event_slug as string;
 const { data: event, error } = await useEventBySlug(slug);
 // TODO: Make this more dynamic
-useHead({
-  title: `${event.value.title} – elektron.art`,
-});
+// useHead({
+//   title: `${event.value.title} – elektron.art`,
+// });
 
 const draggables = useDraggables({
   stream: {
@@ -75,6 +75,7 @@ const onDownloadCsv = () => {
 const { copy } = useClipboard();
 
 const onCopyAndDownloadCsv = () => {
+  console.log("poop");
   copy(formatCSV(experimentMessages.value));
   onDownloadCsv();
 };
@@ -142,21 +143,10 @@ const fetchControls = async () => {
             "
           >
             <div style="display: flex; gap: var(--p-4)">
-              <EButton
-                color="accent"
-                @click="onCopyAndDownloadCsv"
-                size="xs"
-                :disabled="!experimentMessages.length"
-              >
+              <EButton color="accent" @click="onCopyAndDownloadCsv" size="xs">
                 Copy & download
               </EButton>
-              <EButton
-                @click="onDownloadCsv"
-                size="xs"
-                :disabled="!experimentMessages.length"
-              >
-                Download
-              </EButton>
+              <EButton @click="onDownloadCsv" size="xs">Download </EButton>
             </div>
 
             <button class="delete-button" @click="onClear">

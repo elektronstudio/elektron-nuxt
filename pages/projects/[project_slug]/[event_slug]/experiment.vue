@@ -118,21 +118,10 @@ const video = ref<HTMLVideoElement | null>(null);
             "
           >
             <div style="display: flex; gap: var(--p-4)">
-              <EButton
-                color="accent"
-                @click="onCopyAndDownloadCsv"
-                size="xs"
-                :disabled="!experimentMessages.length"
-              >
+              <EButton color="accent" @click="onCopyAndDownloadCsv" size="xs">
                 Copy & download
               </EButton>
-              <EButton
-                @click="onDownloadCsv"
-                size="xs"
-                :disabled="!experimentMessages.length"
-              >
-                Download
-              </EButton>
+              <EButton @click="onDownloadCsv" size="xs"> Download </EButton>
             </div>
 
             <button class="delete-button" @click="onClear">
