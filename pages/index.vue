@@ -34,7 +34,9 @@ function moveToLast(id: string) {
 }
 
 function closeDialog(index: number) {
+  const id = pinnedItemsIds.value[index];
   pinnedItemsIds.value.splice(index, 1);
+  pinnedItems.value = pinnedItems.value.filter((item) => item.id !== id);
 }
 </script>
 <template>
