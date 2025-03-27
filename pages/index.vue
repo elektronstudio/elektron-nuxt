@@ -23,6 +23,8 @@ const event = computed(() => {
   return frontpage.value?.events?.length ? frontpage.value.events[0] : null;
 });
 
+console.log(event.value);
+
 const project = computed(() => {
   return frontpage.value?.projects?.length ? frontpage.value.projects[0] : null;
 });
@@ -86,7 +88,7 @@ function closeDialog(index: number) {
           @close-dialog="closeDialog(index)"
           :class="`order-${pinnedItemsIds.findIndex((id) => id === item.id)}`"
         >
-          <EventPreview v-if="item.isEvent" :event="item" />
+          <EventStream v-if="item.isEvent" :event="item" />
           <ProjectPreview v-if="item.isProject" :project="item" />
         </EDialog>
       </div>
@@ -170,7 +172,7 @@ function closeDialog(index: number) {
   overflow: hidden;
   background-color: var(--bg);
   width: 100%;
-  max-width: 40rem;
+  max-width: 70rem;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
