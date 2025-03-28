@@ -88,7 +88,7 @@ function closeDialog(index: number) {
           @close-dialog="closeDialog(index)"
           :class="`order-${pinnedItemsIds.findIndex((id) => id === item.id)}`"
         >
-          <EventStream v-if="item.isEvent" :event="item" />
+          <EventPreview v-if="item.isEvent" :event="item" />
           <ProjectPreview v-if="item.isProject" :project="item" />
         </EDialog>
       </div>
