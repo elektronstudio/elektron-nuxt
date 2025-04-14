@@ -110,7 +110,8 @@ export const useProjects = (params: Strapi4RequestParams = {}) => {
       },
       params,
     ),
-    (projects) => projects.map(processProject).sort(sortProjects),
+    (projects) => projects.map(processProject),
+    // .sort(sortProjects),
   );
 };
 

@@ -9,8 +9,10 @@ const { data: currentProjects, error: currentError } = await useProjects({
   filters: { slug: { $notIn: ["signal", "kohe2022"] }, pinned: { $eq: true } },
   sort: "rank:asc",
 });
+console.log(currentProjects.value);
 const { data: pastProjects, error: pastError } = await useProjects({
   filters: { slug: { $notIn: ["signal", "kohe2022"] }, pinned: { $eq: false } },
+  sort: "rank:asc",
 });
 const { lang } = useLang();
 </script>
