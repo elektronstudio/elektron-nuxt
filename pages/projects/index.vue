@@ -7,6 +7,7 @@ breadcrumbs.value = [];
 
 const { data: currentProjects, error: currentError } = await useProjects({
   filters: { slug: { $notIn: ["signal", "kohe2022"] }, pinned: { $eq: true } },
+  sort: "rank:asc",
 });
 const { data: pastProjects, error: pastError } = await useProjects({
   filters: { slug: { $notIn: ["signal", "kohe2022"] }, pinned: { $eq: false } },
