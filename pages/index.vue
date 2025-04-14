@@ -9,8 +9,6 @@ const handleMute = () => {
   muted.value = !muted.value;
 };
 
-const dialogState = ref<boolean>(true);
-
 const events = frontpage.value.events;
 const projects = frontpage.value.projects;
 const pinnedItems = ref([
@@ -40,6 +38,10 @@ function closeDialog(index: number) {
   pinnedItemsIds.value.splice(index, 1);
   pinnedItems.value = pinnedItems.value.filter((item) => item.id !== id);
 }
+
+const dialogState = computed(() => {
+  return pinnedItems.value.length > 0;
+});
 </script>
 <template>
   <div>
@@ -172,7 +174,7 @@ function closeDialog(index: number) {
   overflow: hidden;
   background-color: var(--bg);
   width: 100%;
-  max-width: 70rem;
+  max-width: 40rem;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
