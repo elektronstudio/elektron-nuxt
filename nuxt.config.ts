@@ -12,7 +12,7 @@ export default defineNuxtConfig({
     // TODO: Get from env.variables
     baseUrl: "https://elektron.art",
     strategy: "prefix_except_default",
-    defaultLocale: "et",
+    defaultLocale: "en",
     vueI18n: "./i18n.config.ts", // if you are using custom path, default
     customRoutes: "config",
     pages: {
