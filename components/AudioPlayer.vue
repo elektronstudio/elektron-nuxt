@@ -19,7 +19,7 @@ watch(playerState, (playerState) => {
   if (!playerState) {
     audioElement.src = "";
   } else if (typeof event?.radioUrl === "string") {
-    audioElement.src = event?.radioUrl;
+    audioElement.src = event?.radioUrl + "?v=" + Date.now();
     audioElement.load();
     audioElement.play();
   }
