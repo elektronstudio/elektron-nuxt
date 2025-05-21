@@ -6,7 +6,7 @@ const { isLive } = route.meta;
 <template>
   <footer v-if="!$route.fullPath.endsWith('/live') && !isLive" class="footer">
     <div class="info">
-      <p>elektron.art, Kopli 27 Tallinn.</p>
+      <p>elektron.art, Telliskivi tn 60a/9, 10412 Tallinn</p>
       <a href="mailto:kaos@elektron.art">kaos@elektron.art</a>
     </div>
 
