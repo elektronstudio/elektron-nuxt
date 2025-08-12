@@ -45,9 +45,6 @@ watch(shiftL, (v) => {
         <NuxtLinkLocale class="menuItem" to="about" @click="navState = false">
           {{ $t("pages.about") }}
         </NuxtLinkLocale>
-        <NuxtLinkLocale class="menuItem" to="signal" @click="navState = false">
-          {{ $t("pages.podcast") }}
-        </NuxtLinkLocale>
 
         <a href="https://lab.elektron.art" class="menuItem">
           <Icon name="radix-icons:external-link" />
