@@ -12,7 +12,7 @@ const { name, media, content } = defineProps<Props>();
 </script>
 
 <template>
-  <ECard :media="media">
+  <ECard v-if="media" :media="media">
     <template #header>
       <ETitle v-if="name" el="h3" size="lg">
         {{ name }}
@@ -22,4 +22,10 @@ const { name, media, content } = defineProps<Props>();
       <EContent :content="content" />
     </template>
   </ECard>
+  <EBox v-else class="columns1" style="aspect-ratio: 1/1">
+    <ETitle v-if="name" el="h3" size="lg">
+      {{ name }}
+    </ETitle>
+    <EContent v-if="content" :content="content" />
+  </EBox>
 </template>
