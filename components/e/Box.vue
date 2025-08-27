@@ -74,7 +74,7 @@ const { el, color, ratio, layout } = withDefaults(defineProps<Props>(), {
     display: grid;
     grid-template-columns: 2fr 4fr;
     grid-gap: var(--gap-5);
-    grid-column: span 8;
+    grid-column: span 9;
   }
   .EBox.columns4 {
     display: grid;

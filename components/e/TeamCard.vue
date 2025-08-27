@@ -22,7 +22,7 @@ const { name, media, content } = defineProps<Props>();
       <EContent :content="content" />
     </template>
   </ECard>
-  <EBox v-else class="columns1" style="aspect-ratio: 1/1">
+  <EBox v-else class="columns1" color="accent" style="aspect-ratio: 1/1">
     <ETitle v-if="name" el="h3" size="lg">
       {{ name }}
     </ETitle>

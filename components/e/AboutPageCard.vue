@@ -15,7 +15,7 @@ const { layout, title, content } = withDefaults(defineProps<Props>(), {
     <ETitle v-if="title" el="h3" size="lg">
       {{ title }}
     </ETitle>
-    <EContent v-if="content" :content="content" />
+    <EContent v-if="content" :content="parseMarkdown(content)" />
   </EBox>
 </template>
 
