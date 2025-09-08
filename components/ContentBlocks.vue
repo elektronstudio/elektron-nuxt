@@ -66,6 +66,12 @@ const { cards } = defineProps<Props>();
         :name="item.name"
         :content="item.content"
       />
+      <EArtistCard
+        v-else-if="item.__component === 'content.artist-card'"
+        :media="item?.image"
+        :name="item.name"
+        :project-path="item.projectPath"
+      />
       <EImageCard
         v-else-if="item.__component === 'content.image-card'"
         :media="item.image"

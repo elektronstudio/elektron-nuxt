@@ -168,7 +168,7 @@ export const useFrontPage = () => {
 };
 
 export const useAboutPage = (params: Strapi4RequestParams = {}) => {
-  return useFind(
+  const { data, error } = useFind(
     "about",
     merge(
       {
@@ -185,6 +185,9 @@ export const useAboutPage = (params: Strapi4RequestParams = {}) => {
     ),
     (data) => data,
   );
+  console.log(data.value);
+
+  return { data, error };
 };
 
 export const usePageBySlug = (
