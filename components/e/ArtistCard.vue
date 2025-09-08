@@ -10,10 +10,18 @@ type Props = {
 };
 
 const { name, media, content, projectPath } = defineProps<Props>();
+const { locale } = useI18n();
 </script>
 
 <template>
-  <NuxtLinkLocale class="ArtistCard" :to="projectPath ? projectPath : ''">
+  <NuxtLinkLocale
+    class="ArtistCard"
+    :to="
+      projectPath
+        ? `/${locale === 'et' ? 'projektid' : 'projects'}/${projectPath}`
+        : ''
+    "
+  >
     <ECard :media="media">
       <template #header>
         <ETitle v-if="name" el="h3" size="lg">
