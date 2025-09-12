@@ -79,6 +79,9 @@ export default defineNuxtConfig({
       signal: {
         et: "/signal",
       },
+      artists: {
+        et: "/kunstnikud",
+      },
     },
   },
   strapi: {

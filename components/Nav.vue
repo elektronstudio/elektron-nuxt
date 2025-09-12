@@ -42,6 +42,11 @@ watch(shiftL, (v) => {
         >
           {{ $t("pages.projects") }}
         </NuxtLinkLocale>
+
+        <NuxtLinkLocale class="menuItem" to="artists" @click="navState = false">
+          {{ $t("pages.artists") }}
+        </NuxtLinkLocale>
+
         <NuxtLinkLocale class="menuItem" to="about" @click="navState = false">
           {{ $t("pages.about") }}
         </NuxtLinkLocale>

@@ -185,8 +185,23 @@ export const useAboutPage = (params: Strapi4RequestParams = {}) => {
     ),
     (data) => data,
   );
-  console.log(data.value);
 
+  return { data, error };
+};
+
+export const useArtistsPage = (params: Strapi4RequestParams = {}) => {
+  const { data, error } = useFind(
+    "artist",
+    merge(
+      {
+        populate: ["artists.image"],
+      },
+      params,
+    ),
+    (data) => data,
+  );
+  console.log("data", data.value);
+  console.log("error", error);
   return { data, error };
 };
 

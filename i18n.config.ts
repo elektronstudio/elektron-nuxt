@@ -12,6 +12,7 @@ export default defineI18nConfig(() => ({
         podcast: "Podcast",
         archive: "Archive",
         past_events: "Past events",
+        artists: "Artists",
       },
       layouts: {
         title: "elektron.art",
@@ -52,6 +53,7 @@ export default defineI18nConfig(() => ({
         podcast: "Podcast",
         archive: "Arhiiv",
         past_events: "Toimunud sündmused",
+        artists: "Kunstnikud",
       },
       see_live_now: "Vaata laivis!",
       live_now: "Laivis",
